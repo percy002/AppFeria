@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('numberId', 11)->unique();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->boolean('approved')->default(false); 
             $table->timestamps();
         });
     }

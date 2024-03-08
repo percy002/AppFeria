@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente; 
+use App\Models\User; 
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+
 
 class ClienteController extends Controller
 {
@@ -52,11 +56,25 @@ class ClienteController extends Controller
         'email' => $validatedData['email'],
         'password' => bcrypt($validatedData['password']),
     ]);
-    // Asignar otros campos según sea necesario
+    
     $cliente->save();
 
+    $user = User::create([
+        'name' => $validatedData['name'],
+        'email' => $validatedData['email'],
+        'password' => Hash::make($validatedData['password']),
+    ]);
+
+    $user->assignRole('client');
+
+    event(new Registered($user));
+
+    // Auth::login($user);
+
+    // return redirect(RouteServiceProvider::HOME);
+
     // Redirigir o devolver una respuesta según sea necesario
-    return redirect()->route('/');
+    return redirect()->route('client.login');
     }
 
     /**
@@ -102,5 +120,16 @@ class ClienteController extends Controller
     public function destroy(Cliente $cliente)
     {
         //
+    }
+
+    public function aprobar($id)
+    {
+        $cliente = Cliente::find($id);
+        dd($cliente);
+        // Alternar el estado de aprobación del cliente
+        $cliente->update(['approved' => !$cliente->approved]);
+
+        // Devolver el estado actualizado del cliente
+        return response()->json(['approved' => $cliente->approved]);
     }
 }

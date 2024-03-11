@@ -41,8 +41,11 @@ class ClienteController extends Controller
     {
       // Validar los datos del formulario
       $validatedData = $request->validate([
-        'numberId' => 'required|string|max:11',
+        'ruc' => 'required|string|max:11|unique:clientes',
+        'company_name' => 'required|string|max:255',
+        'dni' => 'required|string|max:8|unique:clientes',
         'name' => 'required|string|max:255',
+        'last_name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:clientes',
         'password' => 'required|string|max:255'
         // Agrega más reglas de validación según tus necesidades
@@ -51,10 +54,12 @@ class ClienteController extends Controller
 
     // Crear un nuevo cliente
     $cliente = Cliente::create([
-        'numberId' => $validatedData['numberId'],
+        'ruc' => $validatedData['ruc'],
+        'company_name' => $validatedData['company_name'],
+        'dni' => $validatedData['dni'],
         'name' => $validatedData['name'],
+        'last_name' => $validatedData['last_name'],
         'email' => $validatedData['email'],
-        'password' => bcrypt($validatedData['password']),
     ]);
     
     $cliente->save();
@@ -74,7 +79,7 @@ class ClienteController extends Controller
     // return redirect(RouteServiceProvider::HOME);
 
     // Redirigir o devolver una respuesta según sea necesario
-    return redirect()->route('client.login');
+    return redirect()->route('login');
     }
 
     /**
@@ -125,7 +130,7 @@ class ClienteController extends Controller
     public function aprobar($id)
     {
         $cliente = Cliente::find($id);
-        dd($cliente);
+        // dd($cliente);
         // Alternar el estado de aprobación del cliente
         $cliente->update(['approved' => !$cliente->approved]);
 

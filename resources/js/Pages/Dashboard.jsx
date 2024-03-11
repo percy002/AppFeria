@@ -1,24 +1,24 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import axios from 'axios';
 
 export default function Dashboard({ auth, userRoles, clientes }) {
 
     const toggleAprobacion = async (clienteId) => {
         try {
-
-            const response = await fetch(`/cliente/${clienteId}/aprobar`, {
-                method: 'PUT',
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                // Actualizar el estado del cliente en el estado local
-                setClientesData(clientesData.map(cliente => {
-                    if (cliente.id === clienteId) {
-                        return { ...cliente, approved: data.approved };
-                    }
-                    return cliente;
-                }));
+    
+            // Realizar la solicitud PUT utilizando Axios
+            const response = await axios.put(`/cliente/${clienteId}/aprobar`, null);
+    
+            if (response.status === 200) {
+                const data = response.data;
+                // // Actualizar el estado del cliente en el estado local
+                // setClientesData(clientesData.map(cliente => {
+                //     if (cliente.id === clienteId) {
+                //         return { ...cliente, approved: data.approved };
+                //     }
+                //     return cliente;
+                // }));
             } else {
                 console.error('Error al cambiar el estado de aprobación del cliente:', response.statusText);
             }
@@ -31,11 +31,11 @@ export default function Dashboard({ auth, userRoles, clientes }) {
             user={auth.user}
             header={
                 <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Dashboard
+                    Panel de Control
                 </h2>
             }
         >
-            <Head title="Dashboard" />
+            <Head title="Panel de Control" />
             {userRoles != "client" && (
                 <div className="mt-4 container mx-auto">
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
@@ -48,13 +48,25 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
-                                    ID
+                                    RUC
                                 </th>
                                 <th
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
-                                    Nombre / Razón Social
+                                    Razón Social
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Nombre
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    DNI
                                 </th>
                                 <th
                                     scope="col"
@@ -62,6 +74,7 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                                 >
                                     Email
                                 </th>
+                                
                                 <th
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -74,13 +87,19 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                             {clientes.map((cliente) => (
                                 <tr key={cliente.id}>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        {cliente.id}
+                                        {cliente.ruc}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        {cliente.name}
+                                        {cliente.company_name}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        {cliente.email}
+                                        {cliente.name} {cliente.last_name }
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {cliente.dni }
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {cliente.email }
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <input
@@ -97,15 +116,6 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                     </table>
                 </div>
             )}
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            You're logged in!
-                        </div>
-                    </div>
-                </div>
-            </div>
         </AuthenticatedLayout>
     );
 }

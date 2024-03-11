@@ -10,5 +10,5 @@ class Cliente extends Model
     use HasFactory;
 
 
-    protected $fillable = ['numberId', 'name', 'email', 'approved'];
+    protected $fillable = ['ruc', 'company_name', 'dni', 'name', 'last_name', 'email', 'approved', 'evaluated'];
 }

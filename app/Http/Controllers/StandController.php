@@ -3,13 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Cliente; 
-use App\Models\User; 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
+use App\Models\Stand; 
 
-
-class ClienteController extends Controller
+class StandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +14,7 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -141,25 +137,10 @@ class ClienteController extends Controller
         //
     }
 
-    public function aprobar($id)
-    {
-        $cliente = Cliente::find($id);
-        // Alternar el estado de aprobación del cliente
-        $cliente->update(['approved' => !$cliente->approved]);
-
-        // Devolver el estado actualizado del cliente
-        $clientes = Cliente::all();
-        return response()->json(['approved' => $cliente->approved]);
+    public function allStands(){
+        $stands = Stand::all();
+        return response()->json(['stands' => $stands]);
     }
 
-    public function evaluar($id)
-    {
-        $cliente = Cliente::find($id);
-        // Alternar el estado de aprobación del cliente
-        $cliente->update(['evaluated' => !$cliente->evaluated]);
-
-        // Devolver el estado actualizado del cliente
-        $clientes = Cliente::all();
-        return response()->json(['approved' => $cliente->evaluated]);
-    }
+    
 }

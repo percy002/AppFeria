@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->string('ruc', 11)->unique(); 
-            $table->string('company_name')->unique(); 
+            $table->string('ruc', 11)->unique()->nullable(); 
+            $table->string('company_name')->unique()->nullable(); 
             $table->string('dni', 8)->unique(); 
             $table->string('name');
             $table->string('last_name');
+            $table->string('position')->nullable();
             $table->string('email')->unique(); 
             $table->boolean('approved')->default(false); 
             $table->boolean('evaluated')->default(false);

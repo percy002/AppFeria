@@ -45,7 +45,6 @@ export default function ClientRegister() {
             password_confirmation: "",
         });
         // setData("selectedType", value);
-        
     };
 
     return (
@@ -64,7 +63,9 @@ export default function ClientRegister() {
                             onChange={handleTypeChange}
                             className="mx-1"
                         />
-                        <label htmlFor="personaJuridica">Persona Juridica</label>
+                        <label htmlFor="personaJuridica">
+                            Persona Juridica
+                        </label>
                     </div>
                     <div className="">
                         <input
@@ -89,7 +90,6 @@ export default function ClientRegister() {
                                 name="ruc"
                                 value={data.ruc}
                                 className="mt-1 block w-full"
-                                
                                 autoComplete="ruc"
                                 isFocused={true}
                                 onChange={(e) => setData("ruc", e.target.value)}
@@ -178,6 +178,28 @@ export default function ClientRegister() {
 
                     <InputError message={errors.dni} className="mt-2" />
                 </div>
+                {data.selectedType == "personaJuridica" && (
+                    <div className="mt-4">
+                        <InputLabel htmlFor="position" value="Cargo" />
+
+                        <TextInput
+                            id="position"
+                            name="position"
+                            value={data.position}
+                            className="mt-1 block w-full"
+                            autoComplete="position"
+                            onChange={(e) =>
+                                setData("position", e.target.value)
+                            }
+                            required
+                        />
+
+                        <InputError
+                            message={errors.position}
+                            className="mt-2"
+                        />
+                    </div>
+                )}
 
                 <div className="mt-4">
                     <InputLabel htmlFor="email" value="Correo Electronico" />
@@ -188,7 +210,7 @@ export default function ClientRegister() {
                         name="email"
                         value={data.email}
                         className="mt-1 block w-full"
-                        autoComplete="username"
+                        autoComplete="email"
                         onChange={(e) => setData("email", e.target.value)}
                         required
                     />

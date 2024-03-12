@@ -1,31 +1,12 @@
+import RowClient from "@/Components/RowClient";
+import TableStands from "@/Components/stands/TableStands";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import axios from 'axios';
+import { useEffect, useState } from "react";
 
-export default function Dashboard({ auth, userRoles, clientes }) {
-
-    const toggleAprobacion = async (clienteId) => {
-        try {
+export default function Dashboard({ auth, userRoles, clientes }) {   
     
-            // Realizar la solicitud PUT utilizando Axios
-            const response = await axios.put(`/cliente/${clienteId}/aprobar`, null);
-    
-            if (response.status === 200) {
-                const data = response.data;
-                // // Actualizar el estado del cliente en el estado local
-                // setClientesData(clientesData.map(cliente => {
-                //     if (cliente.id === clienteId) {
-                //         return { ...cliente, approved: data.approved };
-                //     }
-                //     return cliente;
-                // }));
-            } else {
-                console.error('Error al cambiar el estado de aprobación del cliente:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error al cambiar el estado de aprobación del cliente:', error);
-        }
-    };
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -72,9 +53,20 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
+                                    Cargo
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
                                     Email
                                 </th>
-                                
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    Revisado
+                                </th>
                                 <th
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -85,37 +77,20 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
                             {clientes.map((cliente) => (
-                                <tr key={cliente.id}>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {cliente.ruc}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {cliente.company_name}
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {cliente.name} {cliente.last_name }
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {cliente.dni }
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        {cliente.email }
-                                    </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <input
-                                            type="checkbox"
-                                            checked={cliente.approved}
-                                            onChange={() => {
-                                                toggleAprobacion(cliente.id)
-                                            }}
-                                        />
-                                    </td>
-                                </tr>
+                                <RowClient cliente={cliente} key={cliente.id}/>                                
                             ))}
                         </tbody>
                     </table>
                 </div>
             )}
+            {
+                userRoles == "client" && (
+                    <TableStands/>
+                )
+            }
+            <p>{
+                auth.user.roles.name
+            }</p>
         </AuthenticatedLayout>
     );
 }

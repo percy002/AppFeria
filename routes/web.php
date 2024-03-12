@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StandController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -47,9 +48,17 @@ Route::group(['prefix' => 'cliente'], function () {
 
     Route::post('registro', [ClienteController::class, 'store']);
 
-
     Route::put('/{cliente}/aprobar', [ClienteController::class, 'aprobar'])->name('clientes.aprobar');
+    
+    Route::put('/{cliente}/evaluar', [ClienteController::class, 'evaluar'])->name('clientes.evaluar');
+});
 
+Route::group(['prefix' => 'stands'], function(){
+    Route::get('getStands', [StandController::class, 'allStands'])->name('stands.all');
+});
+
+Route::group(['prefix' => 'reservaciones'], function(){
+    Route::get('/reservar/{clienteId}', [StandController::class, 'create'])->name('reservaciones.crear');
 });
 
 

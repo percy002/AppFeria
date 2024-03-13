@@ -46,9 +46,9 @@ class ClienteController extends Controller
         'dni' => 'required|string|max:8|unique:clientes',
         'name' => 'required|string|max:255',
         'last_name' => 'required|string|max:255',
-        'position' => 'string|max:255',
         'email' => 'required|string|email|max:255|unique:clientes',
-        'password' => 'required|string|max:255'
+        'password' => 'required|string|max:255',
+        'category_id' => 'required|exists:categories,id',
         // Agrega más reglas de validación según tus necesidades
     ]);
 
@@ -74,6 +74,7 @@ class ClienteController extends Controller
         'last_name' => $validatedData['last_name'],
         'position' => $request->position,
         'email' => $validatedData['email'],
+        'category_id' => $validatedData['category_id'],
     ]);
     
     $cliente->save();
@@ -82,6 +83,7 @@ class ClienteController extends Controller
         'name' => $validatedData['name'],
         'email' => $validatedData['email'],
         'password' => Hash::make($validatedData['password']),
+        'cliente_id' => $cliente->id
     ]);
 
     $user->assignRole('client');

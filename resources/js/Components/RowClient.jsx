@@ -63,6 +63,7 @@ function RowClient({ cliente }) {
     };
     return (
         <tr key={cliente.id}>
+            <td className="px-6 py-4 whitespace-nowrap">{cliente.category.name}</td>
             <td className="px-6 py-4 whitespace-nowrap">{cliente.ruc}</td>
             <td className="px-6 py-4 whitespace-nowrap">
                 {cliente.company_name}
@@ -81,6 +82,7 @@ function RowClient({ cliente }) {
                         toggleEvaluacion(cliente.id);
                     }}
                 />
+                {evaluated ? (<span className="ml-2">Revisado</span>) : ""}
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <input
@@ -90,6 +92,7 @@ function RowClient({ cliente }) {
                         toggleAprobacion(cliente.id);
                     }}
                 />
+                {approved ? (<span className="ml-2">Aprobado</span>) : ""}
             </td>
         </tr>
     );

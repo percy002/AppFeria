@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use App\Models\User; 
+use App\Models\Cliente; 
 
 class HandleInertiaRequests extends Middleware
 {
@@ -29,10 +31,23 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+
+        // $uuser = User::find($request->user()->id);
+
+ 
+        if ($request->user()) {
+            # code...
+            $user = User::with('client')->find($request->user()->id);
+        }
+
+        // dd($user->client);
+        // $cliente = $user->client;
+
         return [
             ...parent::share($request),
             'auth' => [
                 'user' => $request->user(),
+                'cliente' => $user->client ?? ''
             ],
         ];
     }

@@ -16,7 +16,9 @@ class DashboardController extends Controller
         // Verificar si el usuario tiene el rol "cliente"
         if (!in_array('cliente', $userRoles)) {
             // Obtener todos los clientes si el usuario no tiene el rol "cliente"
-            $clientes = Cliente::all();
+            $clientes = Cliente::with('category')->get();
+
+            // dd($clientes);
         }
 
         return Inertia::render('Dashboard', ['userRoles' => $userRoles,'clientes' => $clientes]);

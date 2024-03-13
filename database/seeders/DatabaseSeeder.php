@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesAndPermissionsSeeder::class);
         $this->createAdmin();
         $this->createClientes();
+        $this->createCategories();
+        $this->call(StandSeeder::class);
     }
 
     private function createAdmin()
@@ -36,4 +39,22 @@ class DatabaseSeeder extends Seeder
         //     $user->assignRole('cliente');
         // });
     }
+
+    
+    private function createCategories()
+    {
+        $categories = [
+            ['name' => 'Municipios'],
+            ['name' => 'Gastronomia'],
+            ['name' => 'Ganaderia'],
+            ['name' => 'Textil'],
+            ['name' => 'Agro'],
+            ['name' => 'Apicultura'],
+        ];
+
+        foreach ($categories as $category) {
+            Category::create($category);
+        }
+    }
+    
 }

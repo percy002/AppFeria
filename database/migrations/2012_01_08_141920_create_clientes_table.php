@@ -22,6 +22,10 @@ return new class extends Migration
             $table->string('email')->unique(); 
             $table->boolean('approved')->default(false); 
             $table->boolean('evaluated')->default(false);
+            $table->unsignedBigInteger('category_id');
+ 
+            $table->foreign('category_id')->references('id')->on('categories');
+            
             $table->timestamps();
         });
     }

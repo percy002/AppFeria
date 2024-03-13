@@ -22,9 +22,19 @@ class StandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($standId)
     {
         //
+        $userRoles = Auth::user()->roles->pluck('name')->toArray();
+
+        // Verificar si el usuario tiene el rol "cliente"
+        if (!in_array('cliente', $userRoles)) {
+            // Obtener todos los clientes si el usuario no tiene el rol "cliente"
+            $stands = Stan::find($standId)->get();
+        }
+
+        return Inertia::render('Reservar', ['stands' => $stands]);
+    
     }
 
     /**
@@ -35,61 +45,8 @@ class StandController extends Controller
      */
     public function store(Request $request)
     {
-      // Validar los datos del formulario
-    //   dd($request->selectedType);
       
-      $validatedData = $request->validate([
-        'dni' => 'required|string|max:8|unique:clientes',
-        'name' => 'required|string|max:255',
-        'last_name' => 'required|string|max:255',
-        'position' => 'string|max:255',
-        'email' => 'required|string|email|max:255|unique:clientes',
-        'password' => 'required|string|max:255'
-        // Agrega más reglas de validación según tus necesidades
-    ]);
-
-    // if ($request->selectedType == "personaNatural") {
-    //     $validatedData = $request->validate([
-    //         'ruc' => 'max:11|unique:clientes',
-    //         'company_name' => 'string|max:255',
-    //         'dni' => 'required|string|max:8|unique:clientes',
-    //         'name' => 'required|string|max:255',
-    //         'last_name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:clientes',
-    //         'password' => 'required|string|max:255'
-    //     ]);
-    //   }
-    // dd($validatedData);
-
-    // Crear un nuevo cliente
-    $cliente = Cliente::create([
-        'ruc' => $request->ruc,
-        'company_name' => $request->company_name,
-        'dni' => $validatedData['dni'],
-        'name' => $validatedData['name'],
-        'last_name' => $validatedData['last_name'],
-        'position' => $request->position,
-        'email' => $validatedData['email'],
-    ]);
     
-    $cliente->save();
-
-    $user = User::create([
-        'name' => $validatedData['name'],
-        'email' => $validatedData['email'],
-        'password' => Hash::make($validatedData['password']),
-    ]);
-
-    $user->assignRole('client');
-
-    event(new Registered($user));
-
-    // Auth::login($user);
-
-    // return redirect(RouteServiceProvider::HOME);
-
-    // Redirigir o devolver una respuesta según sea necesario
-    return redirect()->route('login');
     }
 
     /**

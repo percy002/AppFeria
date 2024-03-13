@@ -29,6 +29,12 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
+                                    Categoria
+                                </th>
+                                <th
+                                    scope="col"
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
                                     RUC
                                 </th>
                                 <th
@@ -65,7 +71,7 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
-                                    Revisado
+                                    En Evaluacion
                                 </th>
                                 <th
                                     scope="col"
@@ -85,7 +91,7 @@ export default function Dashboard({ auth, userRoles, clientes }) {
             )}
             {
                 userRoles == "client" && (
-                    <TableStands/>
+                    <TableStands clientId = {auth.cliente.id}/>
                 )
             }
             <p>{

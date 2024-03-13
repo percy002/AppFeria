@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Cliente; 
 
 class User extends Authenticatable
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'cliente_id',
         'password',
     ];
 
@@ -43,4 +45,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get the client associated with the user.
+     */
+    public function client()
+    {
+        return $this->belongsTo(Cliente::class,'cliente_id');
+    }
+
+
 }

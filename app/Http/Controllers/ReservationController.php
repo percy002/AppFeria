@@ -1,8 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth; // Agrega esta línea
+use Inertia\Inertia; 
+use App\Models\Stand;
+use App\Models\ReservedStand;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReservationController extends Controller
 {
@@ -21,7 +26,7 @@ class ReservationController extends Controller
     {
         //
         $stand = Stand::find($standId);
-        return Inertia::render('Reservations/Reservation', [
+        return Inertia::render('Reservar', [
             'status' => session('status'),
             'stand' => $stand
         ]);
@@ -34,6 +39,46 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         //
+        // dd($request);
+        DB::beginTransaction();
+
+        try {
+            // dd($request['clientId']);
+            $reservation = new Reservation();
+            $reservation->date = date('Y-m-d H:i:s');
+            $reservation->total = 0;
+            $reservation->cliente_id = $request['clientId'];
+            $reservation->save();
+
+            $reservationDetail = new ReservedStand();
+            $reservationDetail->stand_id = $request['stand']['id'];
+            $reservationDetail->reservation_id = $reservation->id;
+            $reservationDetail->price = $request['stand']['price'];
+            $reservationDetail->save();
+
+            DB::commit();
+
+            return response()->json(['message' => 'Reservacion creada satisfactoriamente'], 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['message' => 'Error al crear la reservacion'.$e], 500);
+        }
+
+
+        // dd($request->stand);
+        // $reservation = new Reservation();
+        // $reservation->date = date('Y-m-d H:i:s');
+        // $reservation->total = 0;
+        // $reservation->cliente_id = $request->cliente_id;
+        // $reservation->save();
+        
+        // $reservationDetail = new ReservationDetail();
+        // $reservationDetail->stand_id = $request->stand->id;
+        // $reservationDetail->reservation_id = $reservation->id;
+        // $reservationDetail->precio = $request->stand->precio;
+
+
+        return response()->json(['message' => 'Reservacion creada satisfactoriamente'], 201);
     }
 
     /**

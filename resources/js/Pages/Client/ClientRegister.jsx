@@ -5,19 +5,42 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm, usePage } from "@inertiajs/react";
+import { useState } from "react";
+import { Select } from "flowbite-react";
 
 export default function ClientRegister() {
+    const [categories, setCategories] = useState();
     const { data, setData, post, processing, errors, reset } = useForm({
         selectedType: "personaJuridica",
         ruc: "",
         company_name: "",
+        category_id: "",
         name: "",
         last_name: "",
         dni: "",
+        position: "",
         email: "",
         password: "",
         password_confirmation: "",
     });
+
+    useEffect(() => {
+        const getCategories = () => {
+            axios
+                .get(route("categorias.all"))
+                .then((response) => {
+                    const responseData = response.data;
+                    setCategories(responseData.categorias);
+                    console.log(responseData.categorias);
+                    console.log(categories);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
+
+        getCategories();
+    }, []);
 
     useEffect(() => {
         return () => {
@@ -37,9 +60,11 @@ export default function ClientRegister() {
             selectedType: value,
             ruc: "",
             company_name: "",
+            category_id: "",
             name: "",
             last_name: "",
             dni: "",
+            position: "",
             email: "",
             password: "",
             password_confirmation: "",
@@ -80,9 +105,35 @@ export default function ClientRegister() {
                         <label htmlFor="personaNatural">Persona Natural</label>
                     </div>
                 </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="category_id" value="Categoria" />
+                    <div className="max-w-md">
+                        <Select
+                            id="category_id"
+                            name="category_id"
+                            value={data.category}
+                            onChange={(e) =>
+                                setData("category_id", e.target.value)
+                            }
+                            className="mt-1 block w-full"
+                            required
+                        >
+                            <option value="">Selecciona una categoria</option>
+                            {categories &&
+                                categories.map((cat, index) => (
+                                    <option key={index} value={cat.id}>
+                                        {cat.name}
+                                    </option>
+                                ))}
+                        </Select>
+                    </div>
+
+                    <InputError message={errors.category_id} className="mt-2" />
+                </div>
                 {data.selectedType == "personaJuridica" && (
                     <>
-                        <div>
+                        <div className="mt-4">
                             <InputLabel htmlFor="ruc" value="RUC" />
 
                             <TextInput
@@ -130,7 +181,7 @@ export default function ClientRegister() {
                     </>
                 )}
 
-                <div className="">
+                <div className="mt-4">
                     <InputLabel htmlFor="name" value="Nombre(s)" />
 
                     <TextInput

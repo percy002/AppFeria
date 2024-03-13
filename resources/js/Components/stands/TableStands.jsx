@@ -1,7 +1,8 @@
 import { Table,Button } from "flowbite-react";
 import axios from 'axios';
 import { useEffect, useState } from "react";
-function TableStands({}) {
+import ModalReserva from "../reservas/ModalReserva";
+function TableStands({clientId}) {
 
     const [stands,setStands]= useState();
     useEffect(()=>{
@@ -35,11 +36,13 @@ function TableStands({}) {
 
     return (
         <div className="overflow-x-auto container mx-auto">
+            <p></p>
             <Table striped>
                 <Table.Head>
                     <Table.HeadCell>Bloque</Table.HeadCell>
                     <Table.HeadCell>Stand</Table.HeadCell>
                     <Table.HeadCell>Precio</Table.HeadCell>
+                    <Table.HeadCell>Reservar</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {
@@ -49,7 +52,7 @@ function TableStands({}) {
                                 <Table.Cell>{stand.name}</Table.Cell>
                                 <Table.Cell>{stand.price}</Table.Cell>
                                 <Table.Cell>
-                                    <Button href={route('reservaciones.crear',1)}>Reservar</Button>
+                                    <ModalReserva stand = {stand} clientId={clientId} />
                                 </Table.Cell>
                             </Table.Row>
                         ))

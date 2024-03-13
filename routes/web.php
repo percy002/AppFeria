@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StandController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ReservationController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -58,7 +60,11 @@ Route::group(['prefix' => 'stands'], function(){
 });
 
 Route::group(['prefix' => 'reservaciones'], function(){
-    Route::get('/reservar/{clienteId}', [StandController::class, 'create'])->name('reservaciones.crear');
+    Route::post('/reservar', [ReservationController::class, 'store'])->name('reservaciones.crear');
+});
+
+Route::group(['prefix' => 'categorias'], function(){
+    Route::get('/getCategories', [CategoryController::class, 'getCategories'])->name('categorias.all');
 });
 
 

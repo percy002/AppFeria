@@ -73,7 +73,7 @@ function RowClient({ cliente }) {
             </td>
             <td className="px-6 py-4 whitespace-nowrap">{cliente.dni}</td>
             <td className="px-6 py-4 whitespace-nowrap">{cliente.position}</td>
-            <td className="px-6 py-4 whitespace-nowrap">{cliente.email}</td>
+            <td className="px-6 py-4 whitespace-nowrap md:hidden">{cliente.email}</td>
             <td className="px-6 py-4 whitespace-nowrap">
                 <input
                     type="checkbox"

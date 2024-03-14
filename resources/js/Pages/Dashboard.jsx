@@ -1,5 +1,5 @@
 import RowClient from "@/Components/RowClient";
-import MapStandsAnimals from "@/Components/stands/MapStandsAnimals";
+import MapStandsAnimals from "@/Components/stands/AnimalsStands/MapStandsAnimals";
 import TableStands from "@/Components/stands/TableStands";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
@@ -48,7 +48,7 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
-                                    Nombre
+                                    Nombres y apellidos
                                 </th>
                                 <th
                                     scope="col"
@@ -64,7 +64,7 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                                 </th>
                                 <th
                                     scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:hidden"
                                 >
                                     Email
                                 </th>
@@ -78,7 +78,7 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                                     scope="col"
                                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                 >
-                                    Aprobado
+                                    Estado
                                 </th>
                             </tr>
                         </thead>
@@ -95,7 +95,7 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                     <div className="">
 
                         <MapStandsAnimals/>
-                        <TableStands clientId = {auth.cliente.id}/>
+                        {/* <TableStands clientId = {auth.cliente.id}/> */}
                     </div>
                 )
             }

@@ -49,6 +49,10 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
                 'cliente' => $user->client ?? ''
             ],
+            'reservedStands' => function () {
+                // Aquí puedes retornar los datos que deseas compartir.
+                return [];
+            },
         ];
     }
 }

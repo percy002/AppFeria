@@ -1,4 +1,5 @@
 import RowClient from "@/Components/RowClient";
+import MapStandsAnimals from "@/Components/stands/MapStandsAnimals";
 import TableStands from "@/Components/stands/TableStands";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
@@ -91,7 +92,11 @@ export default function Dashboard({ auth, userRoles, clientes }) {
             )}
             {
                 userRoles == "client" && (
-                    <TableStands clientId = {auth.cliente.id}/>
+                    <div className="">
+
+                        <MapStandsAnimals/>
+                        <TableStands clientId = {auth.cliente.id}/>
+                    </div>
                 )
             }
             <p>{

@@ -1,3 +1,18 @@
 los nombres de los bloques deben estar en circulo
 
 crear columnas en diferente orden para los mapas
+
+crear botones llamativos para mover el mapa
+
+
+borrar updated at y created at de la respuesta que envia dashboard controller
+
+****
+
+
+
+color de los botones 
+color de los botones seleccionados
+color de los botones reservados
+
+color de los bordes de los bloques

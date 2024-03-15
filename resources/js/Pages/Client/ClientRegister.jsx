@@ -31,8 +31,6 @@ export default function ClientRegister() {
                 .then((response) => {
                     const responseData = response.data;
                     setCategories(responseData.categorias);
-                    console.log(responseData.categorias);
-                    console.log(categories);
                 })
                 .catch((error) => {
                     console.error(error);

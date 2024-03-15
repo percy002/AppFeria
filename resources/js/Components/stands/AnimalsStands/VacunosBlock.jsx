@@ -1,16 +1,30 @@
-import { Button } from "flowbite-react";
-import ColumnaStands from "../ColumnaStands";
+import { usePage } from "@inertiajs/react";
+import GroupStands from "../GroupStands";
 export default function VacunosBlock() {
+    const { props } = usePage();
+
+    const { standsBloques } = props;
+    const standsBloqueA = standsBloques["A"];
+
+    // console.log(standsBloques["A"]);
     return (
         <div className="col-span-1 flex items-center">
-            <div className="flex flex-col">
-                <p className="text-center font-bold text-xl">A</p>
+            <div className="flex flex-col gap-1">
+                <p className="text-center font-bold text-xl border-4 border-blue-600 rounded-full">
+                    A
+                </p>
 
                 <div className="flex items-center">
                     <div className="">
-                        <Button.Group className="flex flex-col">
-                            <ColumnaStands cantidad={6} inicio={6} orden={"desc"}/>
-                        </Button.Group>
+                        <GroupStands
+                            stands={standsBloqueA.slice(0, 6)}
+                            cantidad={6}
+                            inicio={6}
+                            orden={"desc"}
+                            direction={"col"}
+                            color={"bg-orange-500"}
+                            borderColor={"border-blue-600"}
+                        />
                     </div>
                     <div
                         style={{
@@ -20,44 +34,15 @@ export default function VacunosBlock() {
                         <p className="font-bold text-xl">VACUNOS</p>
                     </div>
                     <div className="">
-                        <div className="flex flex-col">
-                            <Button
-                                color="warning"
-                                className="rounded-none border-2 border-gray-500"
-                            >
-                                6
-                            </Button>
-                            <Button
-                                color="warning"
-                                className="rounded-none border-2 border-gray-500"
-                            >
-                                5
-                            </Button>
-                            <Button
-                                color="warning"
-                                className="rounded-none border-2 border-gray-500"
-                            >
-                                4
-                            </Button>
-                            <Button
-                                color="warning"
-                                className="rounded-none border-2 border-gray-500"
-                            >
-                                3
-                            </Button>
-                            <Button
-                                color="warning"
-                                className="rounded-none border-2 border-gray-500"
-                            >
-                                2
-                            </Button>
-                            <Button
-                                color="warning"
-                                className="rounded-none border-2 border-gray-500"
-                            >
-                                1
-                            </Button>
-                        </div>
+                        <GroupStands
+                            stands={standsBloqueA.slice(6, 12)}
+                            cantidad={6}
+                            inicio={12}
+                            orden={"desc"}
+                            direction={"col"}
+                            color={"bg-orange-500"}
+                            borderColor={"border-blue-600"}
+                        />
                     </div>
                 </div>
             </div>

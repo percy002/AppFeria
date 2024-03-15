@@ -15,8 +15,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('block');
+            $table->unsignedBigInteger('category_id');
             $table->float('price')->default(0);
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories');
+
         });
     }
 

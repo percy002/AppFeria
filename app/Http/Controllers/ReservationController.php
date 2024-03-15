@@ -39,7 +39,8 @@ class ReservationController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request);
+        $stands = $request->stands;
+        // dd($stands);
         DB::beginTransaction();
 
         try {
@@ -50,11 +51,19 @@ class ReservationController extends Controller
             $reservation->cliente_id = $request['clientId'];
             $reservation->save();
 
-            $reservationDetail = new ReservedStand();
-            $reservationDetail->stand_id = $request['stand']['id'];
-            $reservationDetail->reservation_id = $reservation->id;
-            $reservationDetail->price = $request['stand']['price'];
-            $reservationDetail->save();
+            foreach ($stands as $stand) {
+                $reservationDetail = new ReservedStand();
+                $reservationDetail->stand_id = $stand->id;
+                $reservationDetail->reservation_id = $reservation->id;
+                $reservationDetail->price = $stand->price;
+                $reservationDetail->save();
+            }
+
+            // $reservationDetail = new ReservedStand();
+            // $reservationDetail->stand_id = $request['stand']['id'];
+            // $reservationDetail->reservation_id = $reservation->id;
+            // $reservationDetail->price = $request['stand']['price'];
+            // $reservationDetail->save();
 
             DB::commit();
 

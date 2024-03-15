@@ -84,11 +84,12 @@ class DatabaseSeeder extends Seeder
     private function createCategories()
     {
         $categories = [
-            ['name' => 'Municipios'],
-            ['name' => 'Gastronomia'],
+            ['name' => 'Gobiernos Locales'],
             ['name' => 'Ganaderia'],
+            ['name' => 'Gastronomia'],
+            ['name' => 'Agricultura'],
+            ['name' => 'Artesania'],
             ['name' => 'Textil'],
-            ['name' => 'Agro'],
             ['name' => 'Apicultura'],
         ];
 

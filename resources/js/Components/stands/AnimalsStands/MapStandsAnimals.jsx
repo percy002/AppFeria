@@ -22,7 +22,7 @@ function MapStandsAnimals() {
         <StandsContext.Provider value={{ reservedStands, setReservedStands }}>
             <div className="flex flex-col lg:flex-row">
                 <div className="overflow-x-scroll lg:w-10/12">
-                    <div className="p-2 mx-auto w-[1100px] h-[450px]">
+                    <div className="p-2 mx-auto w-[1100px] h-[480px]">
                         {/* BLOQUE ANIMALES */}
                         <div className="grid grid-cols-6 h-full gap-10">
                             {/* BLOQUE VACUNOS */}
@@ -35,7 +35,7 @@ function MapStandsAnimals() {
                                         CAMELIDOS
                                     </p>
                                     <div className="flex items-center gap-1">
-                                        <p className="text-center font-bold text-xl border-4 border-red-600 rounded-full px-2">
+                                        <p className="text-center font-bold text-xl border-4 border-red-600 rounded-full px-2 h-fit w-fit">
                                             B
                                         </p>
 
@@ -43,8 +43,7 @@ function MapStandsAnimals() {
                                             cantidad={6}
                                             inicio={1}
                                             stands={standsBloqueB}
-                                            color={"bg-orange-500"}
-                                            borderColor={"border-red-600"}
+                                            color={"red"}
                                         />
                                     </div>
                                 </div>
@@ -53,22 +52,21 @@ function MapStandsAnimals() {
                                         OVINOS
                                     </p>
                                     <div className="flex items-center gap-1">
-                                        <p className="text-center font-bold text-xl border-4 border-purple-600 rounded-full px-2">
+                                        <p className="text-center font-bold text-xl border-4 border-purple-600 rounded-full px-2 h-fit w-fit">
                                             C
                                         </p>
                                         <GroupStands
                                             cantidad={6}
                                             inicio={1}
                                             stands={standsBloqueC}
-                                            color={"bg-orange-500"}
-                                            borderColor={"border-purple-600"}
+                                            color={"purple"}
                                         />
                                     </div>
                                 </div>
                                 {/* BLOQUE VACUNOS */}
                                 <div className="">
                                     <div className="flex items-center gap-1">
-                                        <p className="text-center font-bold text-xl border-4 border-green-600 rounded-full px-2">
+                                        <p className="text-center font-bold text-xl border-4 border-green-600 rounded-full px-2 h-fit w-fit">
                                             D
                                         </p>
                                         <div className="flex flex-col">
@@ -79,8 +77,7 @@ function MapStandsAnimals() {
                                                     0,
                                                     6
                                                 )}
-                                                color={"bg-orange-500"}
-                                                borderColor={"border-green-600"}
+                                                color={"green"}
                                             />
                                             <p className="font-bold text-xl text-center">
                                                 VACUNOS
@@ -92,8 +89,7 @@ function MapStandsAnimals() {
                                                     6,
                                                     12
                                                 )}
-                                                color={"bg-orange-500"}
-                                                borderColor={"border-green-600"}
+                                                color={"green"}
                                             />
                                         </div>
                                     </div>
@@ -104,8 +100,8 @@ function MapStandsAnimals() {
                             <div className="col-span-3">
                                 <div className="flex flex-col justify-between h-full items-center">
                                     {/* BLOQUE STANDS PEQUEÑOS */}
-                                    <div className="flex gap-1">
-                                        <p className="text-center font-bold text-xl border-4 border-yellow-600 rounded-full px-2">
+                                    <div className="flex gap-1 w-full">
+                                        <p className=" text-center w-fit font-bold text-xl border-4 border-pink-600 rounded-full px-2">
                                             F
                                         </p>
                                         <GroupStands
@@ -113,15 +109,13 @@ function MapStandsAnimals() {
                                             inicio={1}
                                             stands={standsBloqueF}
                                             small
-                                            color={"bg-orange-500"}
-                                            borderColor={"border-yellow-600"}
+                                            color={"pink"}
                                         />
                                     </div>
                                     {/* BLOQUE ZONA DE ANIMALES */}
                                     <AnimalsBlock
                                         stands={standsBloqueE}
-                                        color={"bg-white"}
-                                        borderColor={"border-yellow-600"}
+                                        color={"yellow"}
                                     />
                                 </div>
                             </div>

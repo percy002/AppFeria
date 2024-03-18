@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Stand;
 
 class Reservation extends Model
 {
@@ -14,6 +15,11 @@ class Reservation extends Model
     public function client()
     {
         return $this->belongsTo(Cliente::class,'cliente_id');
+    }
+
+    public function stands()
+    {
+        return $this->belongsTo(Stand::class);
     }
 
 }

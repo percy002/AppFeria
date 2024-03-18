@@ -7,7 +7,6 @@ export default function GroupStands({
     orden,
     direction,
     color,
-    borderColor,
     stands,
     small
 }) {
@@ -30,7 +29,6 @@ export default function GroupStands({
                                         : index + inicio
                                 }
                                 color={color}
-                                borderColor={borderColor}
                                 stand={stands && stands[index]}
                                 key={index + inicio}
                                 small={small}

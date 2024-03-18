@@ -1,6 +1,6 @@
 import GroupStands from "../GroupStands";
 import React from "react";
-export default function AnimalsBlock({ stands, color, borderColor }) {
+export default function AnimalsBlock({ stands, color }) {
     return (
         <div className="flex flex-col gap-1">
             <div className="flex gap-5">
@@ -17,7 +17,6 @@ export default function AnimalsBlock({ stands, color, borderColor }) {
                                     (index + 1) * 8
                                 )}
                                 color={color}
-                                borderColor={borderColor}
                             />
                             {index == 3 && (
                                 <div
@@ -32,10 +31,13 @@ export default function AnimalsBlock({ stands, color, borderColor }) {
                                 </div>
                             )}
                         </React.Fragment>
-                    ))}                
+                    ))}
             </div>
-
-            <p className="font-bold text-xl text-center border-4 border-yellow-600 rounded-full">E</p>
+            <div className="flex justify-center">
+                <p className="font-bold text-xl text-center border-4 border-yellow-600 rounded-full px-2 w-fit">
+                    E
+                </p>
+            </div>
         </div>
     );
 }

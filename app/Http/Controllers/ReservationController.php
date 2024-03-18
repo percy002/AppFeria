@@ -38,32 +38,23 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
         $stands = $request->stands;
-        // dd($stands);
         DB::beginTransaction();
-
         try {
-            // dd($request['clientId']);
             $reservation = new Reservation();
             $reservation->date = date('Y-m-d H:i:s');
             $reservation->total = 0;
-            $reservation->cliente_id = $request['clientId'];
+            $reservation->cliente_id = $request->idCliente;
             $reservation->save();
 
             foreach ($stands as $stand) {
                 $reservationDetail = new ReservedStand();
-                $reservationDetail->stand_id = $stand->id;
+                $reservationDetail->stand_id = $stand["id"];
                 $reservationDetail->reservation_id = $reservation->id;
-                $reservationDetail->price = $stand->price;
+                $reservationDetail->price = $stand["price"];
                 $reservationDetail->save();
             }
-
-            // $reservationDetail = new ReservedStand();
-            // $reservationDetail->stand_id = $request['stand']['id'];
-            // $reservationDetail->reservation_id = $reservation->id;
-            // $reservationDetail->price = $request['stand']['price'];
-            // $reservationDetail->save();
 
             DB::commit();
 
@@ -73,21 +64,6 @@ class ReservationController extends Controller
             return response()->json(['message' => 'Error al crear la reservacion'.$e], 500);
         }
 
-
-        // dd($request->stand);
-        // $reservation = new Reservation();
-        // $reservation->date = date('Y-m-d H:i:s');
-        // $reservation->total = 0;
-        // $reservation->cliente_id = $request->cliente_id;
-        // $reservation->save();
-        
-        // $reservationDetail = new ReservationDetail();
-        // $reservationDetail->stand_id = $request->stand->id;
-        // $reservationDetail->reservation_id = $reservation->id;
-        // $reservationDetail->precio = $request->stand->precio;
-
-
-        return response()->json(['message' => 'Reservacion creada satisfactoriamente'], 201);
     }
 
     /**

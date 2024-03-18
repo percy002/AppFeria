@@ -10,9 +10,11 @@ export default function VacunosBlock() {
     return (
         <div className="col-span-1 flex items-center">
             <div className="flex flex-col gap-1">
-                <p className="text-center font-bold text-xl border-4 border-blue-600 rounded-full">
-                    A
-                </p>
+                <div className="flex justify-center">
+                    <p className="text-center font-bold text-xl border-4 border-blue-600 rounded-full px-2 w-fit">
+                        A
+                    </p>
+                </div>
 
                 <div className="flex items-center">
                     <div className="">
@@ -22,8 +24,7 @@ export default function VacunosBlock() {
                             inicio={6}
                             orden={"desc"}
                             direction={"col"}
-                            color={"bg-orange-500"}
-                            borderColor={"border-blue-600"}
+                            color={"blue"}
                         />
                     </div>
                     <div
@@ -40,8 +41,7 @@ export default function VacunosBlock() {
                             inicio={12}
                             orden={"desc"}
                             direction={"col"}
-                            color={"bg-orange-500"}
-                            borderColor={"border-blue-600"}
+                            color={"blue"}
                         />
                     </div>
                 </div>

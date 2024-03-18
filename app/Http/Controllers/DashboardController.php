@@ -24,7 +24,9 @@ class DashboardController extends Controller
         $standsBloques = [];
         if (in_array('client', $userRoles)) {
 
-            $stands = Stand::where('category_id',$user->client->category_id)->get();
+            $stands = Stand::where('category_id',$user->client->category_id)->with('reservations')
+            ->get();
+            // dd($stands);
             $standsBloqueA = $stands->where('block','A')->values()->all();
             $standsBloqueB = $stands->where('block','B')->values()->all();
             $standsBloqueC = $stands->where('block','C')->values()->all();

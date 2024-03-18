@@ -5,8 +5,13 @@ import { useState } from "react";
 import StandsContext from "@/Contexts/StandContext";
 import { useContext } from "react";
 import { useEffect } from "react";
-export default function Stand({ numero, stand, color, borderColor, small }) {
-    const [colorButton, setcolorButton] = useState(color);
+
+const ButtonCustom = {
+    color: {}
+}
+export default function Stand({ numero, stand, color, small }) {
+    const [colorStand, setColorStand] = useState("white");
+    const [colorBorder, setColorBorder] = useState(color);
     const [stateReservado, setStateReservado] = useState(false);
     const [stateSelected, setStateSelected] = useState(false);
 
@@ -16,15 +21,23 @@ export default function Stand({ numero, stand, color, borderColor, small }) {
         const reservado = reservedStands.find((s) => s.id === stand.id);
         if (reservado) {
             setStateSelected(true);
-            setcolorButton("failure");
-        } else {
+        } else { 
+            !stateReservado && setColorStand("white");
             setStateSelected(false);
-            setcolorButton(color);
         }
+        console.log(stand.reservations);
     }, [reservedStands]);
 
+    useEffect(() => {
+        if (stand.reservations.length > 0) {
+            setStateReservado(true);
+            setColorBorder("gray");
+            setColorStand("gray");
+        }
+    }, [stateReservado]);
+
     const handleClick = () => {
-        if (!stateSelected) {
+        if (!stateSelected && !stateReservado) {
             const reservedStand = {
                 id: stand.id,
                 category: stand.category_id,
@@ -34,24 +47,42 @@ export default function Stand({ numero, stand, color, borderColor, small }) {
                 seleccionado: true,
             };
             setReservedStands((prevStands) => [...prevStands, reservedStand]);
-            setcolorButton("failure");
+            setColorStand(color);
         }
     };
+    const handleMouseEnter = () => {
+        if (!stateSelected && !stateReservado) {
+            setColorStand(color);
+        }
+        
+    };
+
+    const handleMouseLeave = () => {
+        if (!stateSelected && !stateReservado) {
+            setColorStand("white");
+        }
+        
+    }
     return (
         <div className={`w-12 ${small && "w-full"}`}>
             {stand && (
                 <Button
-                    className={`rounded-none w-full border-2 ${
-                        borderColor || "border-gray-500"
-                    }
+                    className={`rounded-none w-full border-2
+                    border-${colorBorder}-600
                     ${small && "button_padding_cero"}
-                    ${colorButton || "bg-black"}
                     text-black
+                    font-bold text-xl
+                    bg-${colorStand}-600
+                    hover:bg-${colorStand}-600
+                    ${stateReservado && "text-gray-200"}
                     `}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                     onClick={handleClick}
+                    disabled={stateReservado}
+                    color=""
                 >
                     {numero}
-                    {/* {reservedStands[reservedStands.length - 1]} */}
                 </Button>
             )}
         </div>

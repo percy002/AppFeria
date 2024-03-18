@@ -17,16 +17,4 @@ class ReservedStand extends Model
         'reservation_id',
         'stand_id',
     ];
-
-    // Ejemplo de relación con el modelo Stand
-    public function stand()
-    {
-        return $this->belongsTo(Stand::class);
-    }
-
-    // Ejemplo de relación con el modelo Event
-    public function reservation()
-    {
-        return $this->belongsTo(Reservation::class);
-    }
 }

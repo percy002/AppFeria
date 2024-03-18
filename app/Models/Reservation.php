@@ -19,7 +19,7 @@ class Reservation extends Model
 
     public function stands()
     {
-        return $this->belongsTo(Stand::class);
+        return $this->belongsToMany(Stand::class,'reserved_stand');
     }
 
 }

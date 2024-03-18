@@ -45,9 +45,16 @@ export default function Stand({ numero, stand, color, small }) {
                 block: stand.block,
                 price: stand.price,
                 seleccionado: true,
+                color
             };
             setReservedStands((prevStands) => [...prevStands, reservedStand]);
             setColorStand(color);
+        }
+        if (stateSelected) {
+            setReservedStands((prevStands) =>
+                prevStands.filter((s) => s.id !== stand.id)
+            );
+            setColorStand("white");
         }
     };
     const handleMouseEnter = () => {

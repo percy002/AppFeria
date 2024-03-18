@@ -1,18 +1,36 @@
-los nombres de los bloques deben estar en circulo
 
-crear columnas en diferente orden para los mapas
 
 crear botones llamativos para mover el mapa
 
 
 borrar updated at y created at de la respuesta que envia dashboard controller
 
+hacer las validaciones de rutas
 ****
+una persona puede tener varias reservaciones ?
 
 
+cuantos stands puede reservar un cliente
+cuantas veces puede hacer reservaciones un cliente
 
-color de los botones 
-color de los botones seleccionados
-color de los botones reservados
+cuantos intentos de reservaciones tiene un cliente
 
-color de los bordes de los bloques
+un cliente puede eliminar su reservacion ?
+
+que es la zona e-h al costado de helados y comida
+QUE es el bloque al costado del auditorio
+
+***bloques feria
+animales x
+gobiernos locales 
+
+mypes globales
+mypes juguetes 
+
+gastronomia
+gastronomia regional
+gastronomia helados,postres, mates
+
+mypes miscelanea
+
+GORE CUSCO

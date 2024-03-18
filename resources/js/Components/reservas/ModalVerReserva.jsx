@@ -1,49 +1,24 @@
 import { usePage,router } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
 import { useState } from "react";
-function ModalReserva({ stands }) {
+function ModalVerReserva({ stands }) {
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
     const [message, setMessage] = useState(null);
 
-    const idCliente = auth.user.client.id;
-    const handleClickReserva = () => {
-        axios
-            .post(route("reservaciones.crear"), { stands, idCliente })
-            .then((response) => {
-                if (response.status == 201) {
-                    setMessage("Reservado con éxito");
-                    setTimeout(() => {
-                        setOpenModal(false);
-                        setMessage("");
-                        router.get(`/reservaciones/`+idCliente);
-                    }, 1500);
-                } else {
-                    console.error(
-                        "No se recibió ninguna respuesta:",
-                        error.request
-                    );
-                }
-            })
-            .catch((error) => {
-                console.error(
-                    "No se recibió ninguna respuesta:",
-                    error.request
-                );
-            });
-    };
+    // const idCliente = auth.user.client.id;
+    
 
     return (
         <>
-            <Button onClick={() => setOpenModal(true)}>Reservar</Button>
+            <Button onClick={() => setOpenModal(true)}>Ver</Button>
             <Modal
                 dismissible
                 show={openModal}
                 onClose={() => setOpenModal(false)}
             >
                 <Modal.Header>
-                    Estás a punto de reservar este stand Por favor, confirma que
-                    todos los detalles son correctos antes de proceder.{" "}
+                    Stands Rservados
                 </Modal.Header>
                 <Modal.Body>
                     {message && <p>{message}</p>}
@@ -89,12 +64,11 @@ function ModalReserva({ stands }) {
                 </Modal.Body>
                 {!message && (
                     <Modal.Footer className="">
-                        <Button onClick={handleClickReserva}>Aceptar</Button>
                         <Button
                             color="gray"
                             onClick={() => setOpenModal(false)}
                         >
-                            Cancelar
+                            cerrar
                         </Button>
                     </Modal.Footer>
                 )}
@@ -103,4 +77,4 @@ function ModalReserva({ stands }) {
     );
 }
 
-export default ModalReserva;
+export default ModalVerReserva;

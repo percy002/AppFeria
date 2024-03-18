@@ -53,19 +53,24 @@ Route::group(['prefix' => 'cliente'], function () {
     Route::put('/{cliente}/aprobar', [ClienteController::class, 'aprobar'])->name('clientes.aprobar');
     
     Route::put('/{cliente}/evaluar', [ClienteController::class, 'evaluar'])->name('clientes.evaluar');
-});
+})->middleware(['auth', 'verified'])
+;
 
 Route::group(['prefix' => 'stands'], function(){
     Route::get('getStands', [StandController::class, 'allStands'])->name('stands.all');
-});
+})->middleware(['auth', 'verified'])
+;
 
 Route::group(['prefix' => 'reservaciones'], function(){
+    Route::get('/{id}', [ReservationController::class, 'index'])->name('reservaciones.index');
     Route::post('/reservar', [ReservationController::class, 'store'])->name('reservaciones.crear');
-});
+})->middleware(['auth', 'verified'])
+;
 
 Route::group(['prefix' => 'categorias'], function(){
     Route::get('/getCategories', [CategoryController::class, 'getCategories'])->name('categorias.all');
-});
+})->middleware(['auth', 'verified'])
+;
 
 
 require __DIR__.'/auth.php';

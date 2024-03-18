@@ -17,7 +17,7 @@ export default function ReservedStands({ stands }) {
         <div className="flex flex-col w-3/4 lg:w-full mx-auto">
             {stands.length > 0 &&
                 stands.map((stand, index) => (
-                    <Card className="m-1 card_padding px-8" key={index}>
+                    <Card className={`m-1 card_padding px-1 border-4 border-${stand.color}-600`} key={index}>
                         <div className="p-1" key={index}>
                             <div className="flex justify-between">
                                 <p>Stand : {stand.name}</p>

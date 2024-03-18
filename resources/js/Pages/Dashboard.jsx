@@ -2,20 +2,20 @@ import RowClient from "@/Components/RowClient";
 import MapStandsAnimals from "@/Components/stands/AnimalsStands/MapStandsAnimals";
 import TableStands from "@/Components/stands/TableStands";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head } from "@inertiajs/react";
+import { Head  } from "@inertiajs/react";
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import Reservation from "./Reservations/Reservation";
+import TableClients from "@/Components/Clients/TableClients";
 
 export default function Dashboard({ auth, userRoles, clientes }) {   
-    
+
+    // console.log(clientes);
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Panel de Control
-                </h2>
-            }
+            
+            client={auth.cliente}
         >
             <Head title="Panel de Control" />
             {userRoles != "client" && (
@@ -23,71 +23,7 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
                         Todos los clientes
                     </h2>
-                    <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                >
-                                    Categoria
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                >
-                                    RUC
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                >
-                                    Razón Social
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                >
-                                    Nombres y apellidos
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                >
-                                    DNI
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                >
-                                    Cargo
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider md:hidden"
-                                >
-                                    Email
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                >
-                                    En Evaluacion
-                                </th>
-                                <th
-                                    scope="col"
-                                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                >
-                                    Estado
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
-                            {clientes.map((cliente) => (
-                                <RowClient cliente={cliente} key={cliente.id}/>                                
-                            ))}
-                        </tbody>
-                    </table>
+                    <TableClients clientes={clientes} />
                 </div>
             )}
             {
@@ -95,13 +31,10 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                     <div className="">
 
                         <MapStandsAnimals/>
-                        {/* <TableStands clientId = {auth.cliente.id}/> */}
                     </div>
                 )
             }
-            <p>{
-                auth.user.roles.name
-            }</p>
+
         </AuthenticatedLayout>
     );
 }

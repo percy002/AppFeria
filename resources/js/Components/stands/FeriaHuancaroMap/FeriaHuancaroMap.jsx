@@ -2,14 +2,17 @@ import StandsContext from "@/Contexts/StandContext";
 import { useState, useRef, useEffect } from "react";
 import ReservedStands from "../ReservedStands";
 import MapStandsAnimals from "../AnimalsStands/MapStandsAnimals";
-
-export const FeriaHuancaroMap = ({auth,cliente}) => {
+import { usePage } from "@inertiajs/react";
+import { MapStandsGobiernosLocales } from "../GobiernosLocales/MapStandsGobiernosLocales";
+export const FeriaHuancaroMap = () => {
     const [reservedStands, setReservedStands] = useState([]);
     const divRef = useRef(null);
     const [isMouseOver, setIsMouseOver] = useState(false);
-    const category = auth.user.category_id;
+    const { props } = usePage();
+    
+    const category = props.auth.user.client.category_id;
 
-
+    // console.log(props.auth.user.client.category_id);
 
     useEffect(() => {
         const handleScroll = (e) => {
@@ -38,7 +41,10 @@ export const FeriaHuancaroMap = ({auth,cliente}) => {
                     onMouseLeave={() => setIsMouseOver(false)}
                 >
                     {
-                        category === 2 && <MapStandsAnimals />
+                        category === 2 && <MapStandsGobiernosLocales />
+                    }
+                    {
+                        category === 1 && <MapStandsAnimals />
                     }
                 </div>
 

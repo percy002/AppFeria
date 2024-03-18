@@ -36,14 +36,7 @@ function MapStandsAnimals() {
     const standsBloqueF = standsBloques["F"];
 
     return (
-        <StandsContext.Provider value={{ reservedStands, setReservedStands }}>
-            <div className="flex flex-col lg:flex-row">
-                <div
-                    className="overflow-x-scroll lg:w-10/12"
-                    ref={divRef}
-                    onMouseEnter={() => setIsMouseOver(true)}
-                    onMouseLeave={() => setIsMouseOver(false)}
-                >
+                
                     <div className="p-2 mx-auto w-[1100px] h-[480px]">
                         {/* BLOQUE ANIMALES */}
                         <div className="grid grid-cols-6 h-full gap-10">
@@ -143,18 +136,8 @@ function MapStandsAnimals() {
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="w-full lg:w-3/12 bg-gray-300 xl:h-[70vh]">
-                    <div className="flex flex-col overflow-y-scroll h-full justify-between">
-                        <h3 className="text-center text-xl font-bold">
-                            Reservas
-                        </h3>
-                        <ReservedStands stands={reservedStands} />
-                    </div>
-                </div>
-            </div>
-        </StandsContext.Provider>
+                
     );
 }
 export default MapStandsAnimals;

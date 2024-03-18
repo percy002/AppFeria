@@ -7,6 +7,8 @@ import axios from 'axios';
 import { useEffect, useState } from "react";
 import Reservation from "./Reservations/Reservation";
 import TableClients from "@/Components/Clients/TableClients";
+import { MapStandsGobiernosLocales } from "@/Components/stands/GobiernosLocales/MapStandsGobiernosLocales";
+import { FeriaHuancaroMap } from "@/Components/stands/FeriaHuancaroMap/FeriaHuancaroMap";
 
 export default function Dashboard({ auth, userRoles, clientes }) {   
 
@@ -30,7 +32,7 @@ export default function Dashboard({ auth, userRoles, clientes }) {
                 userRoles == "client" && (
                     <div className="">
 
-                        <MapStandsAnimals/>
+                        <FeriaHuancaroMap/>
                     </div>
                 )
             }

@@ -30,7 +30,7 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(13,1,'F',110);
         $this->createMultipleStands(13,1,'G',110);
         $this->createMultipleStands(13,1,'H',110);
-        $this->createMultipleStands(15,1,'I',110);
+        $this->createMultipleStands(14,1,'I',110);
         $this->createMultipleStands(15,1,'J',110);
         $this->createMultipleStands(15,1,'K',110);
         $this->createMultipleStands(15,1,'L',110);

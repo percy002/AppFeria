@@ -8,7 +8,7 @@ export default function GroupStands({
     direction,
     color,
     stands,
-    small
+    size
 }) {
     if (orden === "desc") {
         stands = stands.reverse();
@@ -31,7 +31,7 @@ export default function GroupStands({
                                 color={color}
                                 stand={stands && stands[index]}
                                 key={index + inicio}
-                                small={small}
+                                size={size}
                             />
                         ))}
                 </Button.Group>

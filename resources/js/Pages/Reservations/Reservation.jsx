@@ -2,7 +2,6 @@ import ModalVerReserva from "@/Components/reservas/ModalVerReserva";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Table } from "flowbite-react";
 function Reservation({ auth, reservations }) {
-  console.log(reservations);
     return (
         <AuthenticatedLayout user={auth.user} client={auth.cliente}>
             <div className="overflow-x-auto container mx-auto">

@@ -12,8 +12,6 @@ export const FeriaHuancaroMap = () => {
     
     const category = props.auth.user.client.category_id;
 
-    // console.log(props.auth.user.client.category_id);
-
     useEffect(() => {
         const handleScroll = (e) => {
             if (isMouseOver) {
@@ -35,7 +33,7 @@ export const FeriaHuancaroMap = () => {
         <StandsContext.Provider value={{ reservedStands, setReservedStands }}>
             <div className="flex flex-col lg:flex-row">
                 <div
-                    className="overflow-x-scroll lg:w-10/12"
+                    className="overflow-x-scroll lg:w-9/12"
                     ref={divRef}
                     onMouseEnter={() => setIsMouseOver(true)}
                     onMouseLeave={() => setIsMouseOver(false)}
@@ -45,6 +43,9 @@ export const FeriaHuancaroMap = () => {
                     }
                     {
                         category === 2 && <MapStandsAnimals />
+                    }
+                    {
+                        category === 3 && <MapStandsAnimals />
                     }
                 </div>
 

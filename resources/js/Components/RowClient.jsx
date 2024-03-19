@@ -4,7 +4,6 @@ function RowClient({ cliente }) {
     const [approved, setApproved] = useState(false);
     const [evaluated, setevaluated] = useState(false);
 
-    console.log(cliente);
     useEffect(() => {
         setApproved(cliente.approved);
     }, [cliente]);

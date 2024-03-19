@@ -15,11 +15,13 @@ cuantas veces puede hacer reservaciones un cliente
 
 cuantos intentos de reservaciones tiene un cliente
 
-un cliente puede eliminar su reservacion ?
+un cliente puede eliminar su reservacion ?s
 
 que es la zona e-h al costado de helados y comida
 QUE es el bloque al costado del auditorio
 
+actualizar el mapa al terminar la reserva
+hacer la validacion de no reservar stands reservados
 ***bloques feria
 animales x
 gobiernos locales 

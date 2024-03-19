@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const ButtonCustom = {
     color: {}
 }
-export default function Stand({ numero, stand, color, small }) {
+export default function Stand({ numero, stand, color, size }) {
     const [colorStand, setColorStand] = useState("white");
     const [colorBorder, setColorBorder] = useState(color);
     const [stateReservado, setStateReservado] = useState(false);
@@ -70,17 +70,20 @@ export default function Stand({ numero, stand, color, small }) {
         
     }
     return (
-        <div className={`w-12 ${small && "w-full"}`}>
+        <div className={`w-12 ${size !== "" && "w-full"}`}>
             {stand && (
                 <Button
                     className={`rounded-none w-full border-2
                     border-${colorBorder}-600
-                    ${small && "button_padding_cero"}
+                    ${size == "small" && "button_padding_cero"}                    
+                    ${size == "high" && "button_high_padding"}
+                    ${size == "wide" && "button_wide_padding"}
                     text-black
                     font-bold text-xl
                     bg-${colorStand}-600
                     hover:bg-${colorStand}-600
                     ${stateReservado && "text-gray-200"}
+                    p-0
                     `}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}

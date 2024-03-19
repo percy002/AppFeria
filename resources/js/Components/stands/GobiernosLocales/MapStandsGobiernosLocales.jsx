@@ -1,25 +1,38 @@
 import { useState, useRef, useEffect } from "react";
 import { usePage } from "@inertiajs/react";
+import GroupStands from "../GroupStands";
+import { GobLocalGroupStandDouble } from "./GobLocalGroupStandDouble";
 
 export const MapStandsGobiernosLocales = () => {
-  const [reservedStands, setReservedStands] = useState([]);
     const { props } = usePage();
-    const divRef = useRef(null);
-    const [isMouseOver, setIsMouseOver] = useState(false);
-
-    
 
     const { standsBloques } = props;
-  return (
-    <div>
-        <div className="grid grid-cols-50 h-screen w-[1100px]">
-          <div className="col-span-1">
-            <div className="flex flex-col">
+    const standsBloqueA = standsBloques["A"];
+    const standsBloqueB = standsBloques["B"];
+    const standsBloqueC = standsBloques["C"];
+    const standsBloqueD = standsBloques["D"];
+    const standsBloqueE = standsBloques["E"];
+    const standsBloqueF = standsBloques["F"];
+    // console.log(props);
 
+    return (
+        <div>
+            <div className="flex justify-between h-[70vh] w-[1100px] container mx-auto">
+                <div className="flex items-center">
+                    <GroupStands
+                        cantidad={15}
+                        inicio={15}
+                        direction={"col"}
+                        stands={standsBloqueA}
+                        color={"green"}
+                        small={"true"}
+                        orden={"desc"}
+                    />
+                </div>
+                <div className="flex items-center">
+                        <GobLocalGroupStandDouble stands={standsBloqueB} color={"purple"}/>
+                </div>
             </div>
-          </div>
-
         </div>
-    </div>
-  )
-}
+    );
+};

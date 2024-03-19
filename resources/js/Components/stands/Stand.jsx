@@ -25,7 +25,6 @@ export default function Stand({ numero, stand, color, small }) {
             !stateReservado && setColorStand("white");
             setStateSelected(false);
         }
-        console.log(stand.reservations);
     }, [reservedStands]);
 
     useEffect(() => {

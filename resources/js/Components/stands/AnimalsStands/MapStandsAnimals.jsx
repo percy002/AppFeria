@@ -6,27 +6,7 @@ import VacunosBlock from "./VacunosBlock";
 import { usePage } from "@inertiajs/react";
 import AnimalsBlock from "./AnimalsBlock";
 function MapStandsAnimals() {
-    const [reservedStands, setReservedStands] = useState([]);
     const { props } = usePage();
-    const divRef = useRef(null);
-    const [isMouseOver, setIsMouseOver] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = (e) => {
-            if (isMouseOver) {
-                if (divRef.current) {
-                    divRef.current.scrollLeft += e.deltaY;
-                }
-                e.preventDefault();
-            }
-        };
-    
-        window.addEventListener('wheel', handleScroll,{passive: false});
-    
-        return () => {
-            window.removeEventListener('wheel', handleScroll);
-        };
-    }, [isMouseOver]);
 
     const { standsBloques } = props;
     const standsBloqueB = standsBloques["B"];

@@ -20,6 +20,31 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(12,2,'D',100);
         $this->createMultipleStands(56,2,'E',50);
         $this->createMultipleStands(11,2,'F',50);
+
+        //CREAR STANDS DE ZONA DE GOBIERNOS LOCALES
+        $this->createMultipleStands(15,1,'A',110);
+        $this->createMultipleStands(13,1,'B',110);
+        $this->createMultipleStands(13,1,'C',110);
+        $this->createMultipleStands(13,1,'D',110);
+        $this->createMultipleStands(13,1,'E',110);
+        $this->createMultipleStands(13,1,'F',110);
+        $this->createMultipleStands(13,1,'G',110);
+        $this->createMultipleStands(13,1,'H',110);
+        $this->createMultipleStands(15,1,'I',110);
+        $this->createMultipleStands(15,1,'J',110);
+        $this->createMultipleStands(15,1,'K',110);
+        $this->createMultipleStands(15,1,'L',110);
+        $this->createMultipleStands(15,1,'M',110);
+        $this->createMultipleStands(15,1,'N',110);
+        $this->createMultipleStands(15,1,'O',110);
+        $this->createMultipleStands(15,1,'P',110);
+        $this->createMultipleStands(15,1,'Q',110);
+        $this->createMultipleStands(15,1,'R',110);
+        $this->createMultipleStands(15,1,'S',110);
+        $this->createMultipleStands(15,1,'T',110);
+        $this->createMultipleStands(15,1,'U',110);
+
+        //CREAR STANDS DE ZONA DE MYPES
     }
 
     private function createStand($name,$category,$block,$price)

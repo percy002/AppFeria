@@ -41,10 +41,10 @@ export const FeriaHuancaroMap = () => {
                     onMouseLeave={() => setIsMouseOver(false)}
                 >
                     {
-                        category === 2 && <MapStandsGobiernosLocales />
+                        category === 1 && <MapStandsGobiernosLocales />
                     }
                     {
-                        category === 1 && <MapStandsAnimals />
+                        category === 2 && <MapStandsAnimals />
                     }
                 </div>
 

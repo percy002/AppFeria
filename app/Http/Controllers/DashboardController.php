@@ -26,24 +26,40 @@ class DashboardController extends Controller
 
             $stands = Stand::where('category_id',$user->client->category_id)->with('reservations')
             ->get();
-            // dd($stands);
-            $standsBloqueA = $stands->where('block','A')->values()->all();
-            $standsBloqueB = $stands->where('block','B')->values()->all();
-            $standsBloqueC = $stands->where('block','C')->values()->all();
-            $standsBloqueD = $stands->where('block','D')->values()->all();
-            $standsBloqueE = $stands->where('block','E')->values()->all();
-            $standsBloqueF = $stands->where('block','F')->values()->all();
-            // dd($standsBloqueA);
-            $standsBloques = [
-                'A' => $standsBloqueA,
-                'B' => $standsBloqueB,
-                'C' => $standsBloqueC,
-                'D' => $standsBloqueD,
-                'E' => $standsBloqueE,
-                'F' => $standsBloqueF,
-            ];
+
+            $standsBloques = $this->getStandsGobiernosLocales($stands,$user->client->category_id);
+            // dd($standsBloques);
+            // $standsBloqueA = $stands->where('block','A')->values()->all();
+            // $standsBloqueB = $stands->where('block','B')->values()->all();
+            // $standsBloqueC = $stands->where('block','C')->values()->all();
+            // $standsBloqueD = $stands->where('block','D')->values()->all();
+            // $standsBloqueE = $stands->where('block','E')->values()->all();
+            // $standsBloqueF = $stands->where('block','F')->values()->all();
+            // $standsBloques = [
+            //     'A' => $standsBloqueA,
+            //     'B' => $standsBloqueB,
+            //     'C' => $standsBloqueC,
+            //     'D' => $standsBloqueD,
+            //     'E' => $standsBloqueE,
+            //     'F' => $standsBloqueF,
+            // ];
         }        
         return Inertia::render('Dashboard', ['userRoles' => $userRoles,'clientes' => $clientes,'standsBloques' => $standsBloques,
     ]);
+    }
+
+    private function getStandsGobiernosLocales($stands,$category_id){
+        $standsBloques = [];
+        $blocks=[];
+        if($category_id == 1){
+            $blocks = range('A', 'U');
+        }
+        if($category_id == 2){
+            $blocks = range('A', 'F');
+        }
+        foreach ($blocks as $block) {
+            $standsBloques[$block] = $stands->where('block', $block)->values()->all();
+        }
+        return $standsBloques;
     }
 }

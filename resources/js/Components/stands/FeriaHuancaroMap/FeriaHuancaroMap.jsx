@@ -4,6 +4,7 @@ import ReservedStands from "../ReservedStands";
 import MapStandsAnimals from "../AnimalsStands/MapStandsAnimals";
 import { usePage } from "@inertiajs/react";
 import { MapStandsGobiernosLocales } from "../GobiernosLocales/MapStandsGobiernosLocales";
+import { MapStandsMypes } from "../Mypes/MapStandsMypes";
 export const FeriaHuancaroMap = () => {
     const [reservedStands, setReservedStands] = useState([]);
     const divRef = useRef(null);
@@ -45,7 +46,7 @@ export const FeriaHuancaroMap = () => {
                         category === 2 && <MapStandsAnimals />
                     }
                     {
-                        category === 3 && <MapStandsAnimals />
+                        category === 3 && <MapStandsMypes />
                     }
                 </div>
 

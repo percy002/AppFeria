@@ -28,21 +28,7 @@ class DashboardController extends Controller
             ->get();
 
             $standsBloques = $this->getStandsGobiernosLocales($stands,$user->client->category_id);
-            // dd($standsBloques);
-            // $standsBloqueA = $stands->where('block','A')->values()->all();
-            // $standsBloqueB = $stands->where('block','B')->values()->all();
-            // $standsBloqueC = $stands->where('block','C')->values()->all();
-            // $standsBloqueD = $stands->where('block','D')->values()->all();
-            // $standsBloqueE = $stands->where('block','E')->values()->all();
-            // $standsBloqueF = $stands->where('block','F')->values()->all();
-            // $standsBloques = [
-            //     'A' => $standsBloqueA,
-            //     'B' => $standsBloqueB,
-            //     'C' => $standsBloqueC,
-            //     'D' => $standsBloqueD,
-            //     'E' => $standsBloqueE,
-            //     'F' => $standsBloqueF,
-            // ];
+
         }        
         return Inertia::render('Dashboard', ['userRoles' => $userRoles,'clientes' => $clientes,'standsBloques' => $standsBloques,
     ]);
@@ -56,6 +42,14 @@ class DashboardController extends Controller
         }
         if($category_id == 2){
             $blocks = range('A', 'F');
+        }
+        if($category_id == 3){
+            $blocks = range('W', 'Z');
+            $block[] = 'a';
+            $block[] = 'e';
+            $block[] = 'f';
+            $block[] = 'g';
+            $block[] = 'h';
         }
         foreach ($blocks as $block) {
             $standsBloques[$block] = $stands->where('block', $block)->values()->all();

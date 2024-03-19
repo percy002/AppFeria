@@ -31,8 +31,6 @@ export const MapStandsGobiernosLocales = () => {
 
     const standsBloqueU = standsBloques["U"];
 
-    console.log(standsBloqueU.slice(8, 15));
-
     return (
         <div className="p-4">
             <div className="flex gap-x-16 h-[480px] w-[1500px]">

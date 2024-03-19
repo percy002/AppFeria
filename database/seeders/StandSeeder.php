@@ -45,6 +45,22 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(15,1,'U',110);
 
         //CREAR STANDS DE ZONA DE MYPES
+        $this->createMultipleStands(15,3,'X',75);
+        $this->createMultipleStands(17,3,'Y',75);
+        $this->createMultipleStands(13,3,'W',75);
+
+        //CREAR STANDS DE ARTESANIA
+        $this->createMultipleStands(16,3,'Z',75);
+
+        //CREAR STANDS DE ZONA DE MYPES MISCELANEAS
+        $this->createMultipleStands(32,3,'a',75);
+        $this->createMultipleStands(10,3,'e',75);
+        $this->createMultipleStands(14,3,'f',75);
+        $this->createMultipleStands(14,3,'g',75);
+        $this->createMultipleStands(13,3,'h',75);
+
+        //CREAR STANDS DE ZONA DE GASTRONOMIA
+
     }
 
     private function createStand($name,$category,$block,$price)

@@ -82,12 +82,8 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(12,5,'oo',7);
 
         //CREAR STANDS CATEGORIA OTROS
-        $this->createMultipleStands(12,6,'A',13);
-        $this->createMultipleStands(12,6,'B',13);
-
-
-
-
+        $this->createMultipleStands(13,6,'A',50);
+        $this->createMultipleStands(13,6,'B',50);
     }
 
     private function createStand($name,$category,$block,$price)

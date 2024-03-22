@@ -9,10 +9,10 @@
 }
 
 .button_high_padding span{
-    padding-left: 0.1rem;
-    padding-right: 0.1rem;
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 .button_wide_padding span{
     padding-left: 1rem;

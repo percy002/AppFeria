@@ -8,6 +8,7 @@ import { MapStandsMypes } from "../Mypes/MapStandsMypes";
 import MapStandsMypesZonaInf from "../Mypes/MapStandsMypesZonaInf";
 import { MapStandsGastronomia } from "../Gastronomia/MapStandsGastronomia";
 import { MapStandsGobiernoRegional } from "../GobiernoRegional/MapStandsGobiernoRegional";
+import { MapStandsOtros } from "../Otros/MapStandsOtros";
 export const FeriaHuancaroMap = () => {
     const [reservedStands, setReservedStands] = useState([]);
     const divRef = useRef(null);
@@ -60,6 +61,9 @@ export const FeriaHuancaroMap = () => {
                         }
                         {
                             category == 5 && <MapStandsGobiernoRegional/>
+                        }
+                        {
+                            category == 6 && <MapStandsOtros/>
                         }
                     </div>
 

@@ -68,6 +68,12 @@ class DashboardController extends Controller
             }                  
 
         }
+        if($category_id == 6){
+            $blocks[] = 'A';       
+            $blocks[] = 'B';       
+
+        }
+
         foreach ($blocks as $block) {
             $standsBloques[$block] = $stands->where('block', $block)->values()->all();
         }

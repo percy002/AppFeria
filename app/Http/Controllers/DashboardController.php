@@ -56,8 +56,16 @@ class DashboardController extends Controller
             $blocks[] = 'b';
             $blocks[] = 'd';
             $blocks[] = 'CR';
-            $blocks[] = 'CV';
-        
+            $blocks[] = 'CV';       
+
+        }
+        if($category_id == 5){
+            $letters = range('a', 'o');
+            for ($i = 0; $i < count($letters); $i ++) {
+                if ($letters[$i] != "kk") {
+                    $blocks[] = $letters[$i] . $letters[$i];
+                }
+            }                  
 
         }
         foreach ($blocks as $block) {

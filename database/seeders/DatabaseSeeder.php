@@ -88,9 +88,8 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Ganaderia'],
             ['name' => 'Mypes o Artesania'],
             ['name' => 'Gastronomia'],
-            ['name' => 'Agricultura'],
-            ['name' => 'Textil'],
-            ['name' => 'Apicultura'],
+            ['name' => 'Gobierno Regional'],
+            ['name' => 'Otros'],
         ];
 
         foreach ($categories as $category) {

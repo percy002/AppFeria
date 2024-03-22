@@ -65,6 +65,29 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(25,4,'d',15);
         $this->createMultipleStands(38,4,'CR',15);
 
+        //CREAR STANDS DE GOBIERNO REGIONAL
+        $this->createMultipleStands(7,5,'aa',7);
+        $this->createMultipleStands(7,5,'bb',7);
+        $this->createMultipleStands(7,5,'cc',7);
+        $this->createMultipleStands(14,5,'dd',7);
+        $this->createMultipleStands(7,5,'ee',7);
+        $this->createMultipleStands(7,5,'ff',7);
+        $this->createMultipleStands(7,5,'gg',7);
+        $this->createMultipleStands(7,5,'hh',7);
+        $this->createMultipleStands(6,5,'ii',7);
+        $this->createMultipleStands(6,5,'jj',7);
+        $this->createMultipleStands(6,5,'ll',7);
+        $this->createMultipleStands(6,5,'mm',7);
+        $this->createMultipleStands(6,5,'nn',7);
+        $this->createMultipleStands(12,5,'oo',7);
+
+        //CREAR STANDS CATEGORIA OTROS
+        $this->createMultipleStands(12,6,'A',13);
+        $this->createMultipleStands(12,6,'B',13);
+
+
+
+
     }
 
     private function createStand($name,$category,$block,$price)

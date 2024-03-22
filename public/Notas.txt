@@ -17,6 +17,8 @@ el boque al costado del auditorio es de categoria otros
 
 actualizar el mapa al terminar la reserva
 
+modificar el seeder de stands para crear en intervalos
+
 hacer la validacion de no reservar stands reservados
 ***bloques feria
 

@@ -53,13 +53,17 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(16,3,'Z',75);
 
         //CREAR STANDS DE ZONA DE MYPES MISCELANEAS
-        $this->createMultipleStands(32,3,'a',75);
+        $this->createMultipleStands(35,3,'a',75);
         $this->createMultipleStands(10,3,'e',75);
         $this->createMultipleStands(14,3,'f',75);
         $this->createMultipleStands(14,3,'g',75);
         $this->createMultipleStands(13,3,'h',75);
 
         //CREAR STANDS DE ZONA DE GASTRONOMIA
+        $this->createMultipleStands(32,4,'CV',15);
+        $this->createMultipleStands(20,4,'b',15);
+        $this->createMultipleStands(25,4,'d',15);
+        $this->createMultipleStands(38,4,'CR',15);
 
     }
 

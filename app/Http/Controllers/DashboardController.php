@@ -45,11 +45,20 @@ class DashboardController extends Controller
         }
         if($category_id == 3){
             $blocks = range('W', 'Z');
-            $block[] = 'a';
-            $block[] = 'e';
-            $block[] = 'f';
-            $block[] = 'g';
-            $block[] = 'h';
+            $blocks[] = 'a';
+            $blocks[] = 'e';
+            $blocks[] = 'f';
+            $blocks[] = 'g';
+            $blocks[] = 'h';
+
+        }
+        if($category_id == 4){
+            $blocks[] = 'b';
+            $blocks[] = 'd';
+            $blocks[] = 'CR';
+            $blocks[] = 'CV';
+        
+
         }
         foreach ($blocks as $block) {
             $standsBloques[$block] = $stands->where('block', $block)->values()->all();

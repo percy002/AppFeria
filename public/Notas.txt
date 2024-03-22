@@ -1,38 +1,35 @@
 
 
-crear botones llamativos para mover el mapa
+crear botones llamativos para mover el mapa y hacer zoom
 
 
 borrar updated at y created at de la respuesta que envia dashboard controller
 
 hacer las validaciones de rutas
 ****
-una persona puede tener varias reservaciones ?
+un cliente solo puede realizar una reservacion
+un cliente no puede eliminar su reservacion
 
 
-cuantos stands puede reservar un cliente
-cuantas veces puede hacer reservaciones un cliente
+un cliente de gobiernos locales puede reservar muchos locales , pero otro usuario solo puede reservar 3
 
-cuantos intentos de reservaciones tiene un cliente
-
-un cliente puede eliminar su reservacion ?s
-
-que es la zona e-h al costado de helados y comida
-QUE es el bloque al costado del auditorio
+el boque al costado del auditorio es de categoria otros
 
 actualizar el mapa al terminar la reserva
+
 hacer la validacion de no reservar stands reservados
 ***bloques feria
-animales x
-gobiernos locales 
 
-mypes globales
-mypes juguetes 
-
+patio de comidas 1
 gastronomia
+
+patio de comidas 2
 gastronomia regional
 gastronomia helados,postres, mates
 
-mypes miscelanea
-
 GORE CUSCO
+
+**** Errores en el mapa ****
+bloques f y g de mypes no tiene numero 3
+cuantos stands tiene comida regional ?
+el bloque "d" de comida continua del bloque "b" no tiene su propia numeracion

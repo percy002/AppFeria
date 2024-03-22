@@ -1,35 +1,35 @@
 
-
+****frontend
 crear botones llamativos para mover el mapa y hacer zoom
 
 
 borrar updated at y created at de la respuesta que envia dashboard controller
 
 hacer las validaciones de rutas
-****
+
+dividir el mapa de mypes
+
+agregar boton para mover el mapa
+
+stands pagados deben aparecer restringidos en el mapa
+
+
+**** backend
 un cliente solo puede realizar una reservacion
 un cliente no puede eliminar su reservacion
 
 
 un cliente de gobiernos locales puede reservar muchos locales , pero otro usuario solo puede reservar 3
 
-el boque al costado del auditorio es de categoria otros
-
-actualizar el mapa al terminar la reserva
 
 modificar el seeder de stands para crear en intervalos
 
 hacer la validacion de no reservar stands reservados
-***bloques feria
 
-patio de comidas 1
-gastronomia
+habra pagos en partes ?
 
-patio de comidas 2
-gastronomia regional
-gastronomia helados,postres, mates
-
-GORE CUSCO
+en
+***bloques feria X
 
 **** Errores en el mapa ****
 bloques f y g de mypes no tiene numero 3

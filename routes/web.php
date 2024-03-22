@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\StandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -71,6 +72,10 @@ Route::group(['prefix' => 'categorias'], function(){
     Route::get('/getCategories', [CategoryController::class, 'getCategories'])->name('categorias.all');
 })->middleware(['auth', 'verified'])
 ;
+
+Route::group(['prefix' => 'pagos'],function(){
+    Route::post('/pagar',[PaymentController::class, 'store'])->name("pagar");
+})->middleware(['auth', 'verified']);
 
 
 require __DIR__.'/auth.php';

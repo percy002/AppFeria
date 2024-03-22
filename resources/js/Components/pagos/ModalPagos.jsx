@@ -1,22 +1,32 @@
-import { usePage,router } from "@inertiajs/react";
+import { usePage, router } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
 import { useState } from "react";
+import { FileInput, Label } from 'flowbite-react';
+
 function ModalPagos({ stands }) {
+
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
     const [message, setMessage] = useState(null);
 
-    const idCliente = auth.user.client.id;
-    const handleClickReserva = () => {
+    // console.log(auth.cliente.id);
+    const idCliente = auth.cliente.id;
+    const handleClickPagar = () => {
+        const data = new FormData();
+        data.append('stands', stands);
+        data.append('idCliente', idCliente);
+
+        const file = fileInput.current.files[0];
+        data.append('file', file);
+
         axios
-            .post(route("reservaciones.crear"), { stands, idCliente })
+            .post(route("pagar"), data)
             .then((response) => {
                 if (response.status == 201) {
-                    setMessage("Reservado con éxito");
+                    setMessage("Pagado con éxito");
                     setTimeout(() => {
                         setOpenModal(false);
                         setMessage("");
-                        router.get(`/reservaciones/`+idCliente);
                     }, 1500);
                 } else {
                     console.error(
@@ -35,15 +45,15 @@ function ModalPagos({ stands }) {
 
     return (
         <>
-            <Button onClick={() => setOpenModal(true)}>Reservar</Button>
+            <Button onClick={() => setOpenModal(true)}>Pagar</Button>
             <Modal
                 dismissible
                 show={openModal}
                 onClose={() => setOpenModal(false)}
             >
                 <Modal.Header>
-                    Estás a punto de reservar este stand Por favor, confirma que
-                    todos los detalles son correctos antes de proceder.{" "}
+                    Estás a punto de pagar este stand Por favor, confirma que
+                    todos los detalles son correctos antes de proceder.
                 </Modal.Header>
                 <Modal.Body>
                     {message && <p>{message}</p>}
@@ -84,12 +94,22 @@ function ModalPagos({ stands }) {
                                     </p>
                                 </div>
                             </div>
+
+                            <div>
+                                <div className="mb-2 block">
+                                    <Label
+                                        htmlFor="file-upload"
+                                        value="Adjunte el voucher de pago"
+                                    />
+                                </div>
+                                <FileInput id="file-upload" />
+                            </div>
                         </>
                     )}
                 </Modal.Body>
                 {!message && (
                     <Modal.Footer className="">
-                        <Button onClick={handleClickReserva}>Aceptar</Button>
+                        <Button onClick={handleClickPagar}>Pagar</Button>
                         <Button
                             color="gray"
                             onClick={() => setOpenModal(false)}

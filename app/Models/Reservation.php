@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Stand;
+use App\Models\Payment;
 
 class Reservation extends Model
 {
@@ -21,5 +22,11 @@ class Reservation extends Model
     {
         return $this->belongsToMany(Stand::class,'reserved_stand');
     }
+
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
+
 
 }

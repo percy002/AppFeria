@@ -24,14 +24,19 @@ function Reservation({ auth, reservations }) {
                                     <Table.Cell>{reservation.date}</Table.Cell>
                                     <Table.Cell>{reservation.total}</Table.Cell>
                                     <Table.Cell>
-                                        <div className="flex justify-between">
+                                        <div className="flex justify-center gap-5">
                                             <ModalVerReserva
                                                 stands={reservation.stands}
+                                                payment = {reservation.payment}
                                             />
-                                            <ModalPagos
-                                                stands={reservation.stands}
-                                                reservationId={reservation.id}
-                                            />
+                                            {!reservation.payment && (
+                                                <ModalPagos
+                                                    stands={reservation.stands}
+                                                    reservationId={
+                                                        reservation.id
+                                                    }
+                                                />
+                                            )}
                                         </div>
                                     </Table.Cell>
                                 </Table.Row>

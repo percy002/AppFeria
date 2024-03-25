@@ -22,16 +22,13 @@ function ModalPagos({ stands,reservationId }) {
         axios
             .post(route("pagar"), data)
             .then((response) => {
-                if (response.status == 201) {
-                    setMessage("Pagado con éxito");
-                    setTimeout(() => {
-                        setOpenModal(false);
-                        setMessage("");
-                    }, 1500);
+                if (response.status == 200) {
+                    setMessage("Pagado con éxito"); 
+                    setOpenModal(false)                   
                 } else {
                     console.error(
-                        "No se recibió ninguna respuesta:",
-                        error.request
+                        "Ah ocurrido un error al pagar:",
+                        response
                     );
                 }
             })

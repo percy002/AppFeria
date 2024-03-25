@@ -1,24 +1,39 @@
 
 ****frontend
-crear botones llamativos para mover el mapa y hacer zoom
 
-borrar updated at y created at de la respuesta que envia dashboard controller
 
-hacer las validaciones de rutas
+
+dividir el mapa de mypes
 
 agregar boton para mover el mapa
 
 stands pagados deben aparecer restringidos en el mapa
 
+despues de hacer el pago un cliente puede ver el mapa con sus reservaciones ?
+
+los stand pagados y reservados deben aparecer en diferentes colores ?
+
 
 **** backend
+borrar updated at y created at de la respuesta que envia dashboard controller
+
+hacer las validaciones de rutas
+
 un cliente solo puede realizar una reservacion
 un cliente no puede eliminar su reservacion
+
+
 un cliente de gobiernos locales puede reservar muchos locales , pero otro usuario solo puede reservar 3
 
+
 modificar el seeder de stands para crear en intervalos
+
 hacer la validacion de no reservar stands reservados
+
 habra pagos en partes ?
+
+en
+***bloques feria X
 
 **** Errores en el mapa ****
 bloques f y g de mypes no tiene numero 3

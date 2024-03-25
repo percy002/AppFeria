@@ -50,7 +50,7 @@ class PaymentController extends Controller
     
         $payment->save();
         return response()->json([
-            'mensaje' => "pagado con exito",201
+            'mensaje' => "pagado con exito"
         ]);
     }
 

@@ -149,7 +149,6 @@ class ClienteController extends Controller
         // Alternar el estado de aprobación del cliente
         $cliente->update(['approved' => !$cliente->approved]);
 
-        // Devolver el estado actualizado del cliente
         $clientes = Cliente::all();
         return response()->json(['approved' => $cliente->approved]);
     }
@@ -160,7 +159,6 @@ class ClienteController extends Controller
         // Alternar el estado de aprobación del cliente
         $cliente->update(['evaluated' => !$cliente->evaluated]);
 
-        // Devolver el estado actualizado del cliente
         $clientes = Cliente::all();
         return response()->json(['approved' => $cliente->evaluated]);
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth; // Agrega esta línea
 use Inertia\Inertia; 
 use App\Models\Stand;
+use App\Models\Payment;
 use App\Models\ReservedStand;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
@@ -26,8 +27,7 @@ class ReservationController extends Controller
             $query->where('cliente_id', $clientId);
         })->get();
 
-        $reservations = Reservation::where('cliente_id', $clientId)->with('stands')->get();
-
+        $reservations = Reservation::where('cliente_id', $clientId)->with(['stands','payment'])->get();
 
         // dd($reservations);
         return Inertia::render('Reservations/Reservation', [

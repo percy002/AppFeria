@@ -1,13 +1,9 @@
-import { usePage,router } from "@inertiajs/react";
+import { usePage, router } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
 import { useState } from "react";
-function ModalVerReserva({ stands }) {
+function ModalVerReserva({ stands, payment }) {
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
-    const [message, setMessage] = useState(null);
-
-    // const idCliente = auth.user.client.id;
-    
 
     return (
         <>
@@ -17,61 +13,87 @@ function ModalVerReserva({ stands }) {
                 show={openModal}
                 onClose={() => setOpenModal(false)}
             >
-                <Modal.Header>
-                    Stands Rservados
-                </Modal.Header>
+                <Modal.Header>Stands Rservados</Modal.Header>
                 <Modal.Body>
-                    {message && <p>{message}</p>}
-                    {!message && (
-                        <>
-                            <div className="space-y-6">
-                                <p>
-                                    usuario: {auth.cliente.name}{" "}
-                                    {auth.cliente.last_name}
-                                </p>
-                                <p>Categoria: ganaderia</p>
-                            </div>
-                            {stands &&
-                                stands.map((stand) => (
-                                    <Card
-                                        className="m-1 card_padding px-8"
-                                        key={stand.id}
-                                    >
-                                        <div className="flex justify-between">
-                                            <p>bloque : {stand.block}</p>
-                                            <p>Stand : {stand.name}</p>
+                    <div className="space-y-6">
+                        <p>
+                            usuario: {auth.cliente.name}{" "}
+                            {auth.cliente.last_name}
+                        </p>
+                        <p>Categoria: ganaderia</p>
+                    </div>
+                    {stands &&
+                        stands.map((stand) => (
+                            <Card
+                                className="m-1 card_padding px-8"
+                                key={stand.id}
+                            >
+                                <div className="flex justify-between">
+                                    <p>bloque : {stand.block}</p>
+                                    <p>Stand : {stand.name}</p>
 
-                                            <p>precio : {stand.price}</p>
-                                        </div>
-                                    </Card>
-                                ))}
-                            <div className="flex justify-between p-8">
-                                <div className="">
-                                    <p>Cantidad: {stands.length} </p>
+                                    <p>precio : {stand.price}</p>
                                 </div>
-                                <div className="">
-                                    <p>
-                                        Total:{" "}
-                                        {stands.reduce(
-                                            (sum, stand) => sum + stand.price,
-                                            0
-                                        )}
-                                    </p>
-                                </div>
-                            </div>
-                        </>
+                            </Card>
+                        ))}
+                    <div className="flex justify-between p-8">
+                        <div className="">
+                            <p>Cantidad: {stands.length} </p>
+                        </div>
+                        <div className="">
+                            <p>
+                                Total:{" "}
+                                {stands.reduce(
+                                    (sum, stand) => sum + stand.price,
+                                    0
+                                )}
+                            </p>
+                        </div>
+                    </div>
+                    {payment && (
+                        <div className="">
+                            <p>pagado</p>
+                            {(() => {
+                                const fileExtension = payment.file
+                                    .split(".")
+                                    .pop()
+                                    .toLowerCase();
+
+                                if (
+                                    ["jpg", "jpeg", "png", "gif"].includes(
+                                        fileExtension
+                                    )
+                                ) {
+                                    // Es una imagen
+                                    return (
+                                        <img
+                                            src={`http://localhost:8000/storage/${payment.file}`}
+                                            alt="Payment"
+                                        />
+                                    );
+                                } else if (fileExtension === "pdf") {
+                                    // Es un PDF
+                                    return (
+                                        <embed
+                                            src={`http://localhost:8000/storage/${payment.file}`}
+                                            type="application/pdf"
+                                            width="100%"
+                                            height="600px"
+                                        />
+                                    );
+                                } else {
+                                    // No es ni una imagen ni un PDF
+                                    return <p>Archivo no soportado</p>;
+                                }
+                            })()}
+                        </div>
                     )}
                 </Modal.Body>
-                {!message && (
-                    <Modal.Footer className="">
-                        <Button
-                            color="gray"
-                            onClick={() => setOpenModal(false)}
-                        >
-                            cerrar
-                        </Button>
-                    </Modal.Footer>
-                )}
+                <Modal.Footer className="">
+                    <Button color="gray" onClick={() => setOpenModal(false)}>
+                        cerrar
+                    </Button>
+                </Modal.Footer>
             </Modal>
         </>
     );

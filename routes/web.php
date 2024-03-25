@@ -49,6 +49,8 @@ Route::group(['prefix' => 'cliente'], function () {
         return Inertia::render('Client/ClientRegister');
     })->name('client.register');
 
+    Route::get('clientes', [ClienteController::class,'all'])->name('clientes');
+
     Route::post('registro', [ClienteController::class, 'store']);
 
     Route::put('/{cliente}/aprobar', [ClienteController::class, 'aprobar'])->name('clientes.aprobar');

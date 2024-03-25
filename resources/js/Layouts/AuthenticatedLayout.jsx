@@ -28,6 +28,15 @@ export default function Authenticated({ user, header, children, client }) {
                                 >
                                     Inicio
                                 </NavLink>
+                                {!client && (
+                                    <NavLink
+                                        href={route("clientes")}
+                                        active={route().current("clientes")}
+                                    >
+                                        Clientes
+                                    </NavLink>
+                                )}
+
                                 {client && client.id && (
                                     <NavLink
                                         href={route("reservaciones.index", {

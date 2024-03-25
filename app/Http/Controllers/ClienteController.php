@@ -7,6 +7,8 @@ use App\Models\Cliente;
 use App\Models\User; 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use Inertia\Inertia; 
+
 
 
 class ClienteController extends Controller
@@ -161,5 +163,11 @@ class ClienteController extends Controller
 
         $clientes = Cliente::all();
         return response()->json(['approved' => $cliente->evaluated]);
+    }
+
+    public function all(){
+        $clientes = Cliente::with('category')->get();
+
+        return Inertia::render('Clients/Clients', ['clientes' => $clientes]);
     }
 }

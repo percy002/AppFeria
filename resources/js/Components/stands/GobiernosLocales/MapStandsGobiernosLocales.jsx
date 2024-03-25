@@ -33,7 +33,7 @@ export const MapStandsGobiernosLocales = () => {
 
     return (
         <div className="p-4">
-            <div className="flex gap-x-16 h-[480px] w-[1500px]">
+            <div className="flex gap-x-16">
                 <div className="flex flex-col justify-end">
                     <GroupStands
                         cantidad={15}
@@ -150,7 +150,7 @@ export const MapStandsGobiernosLocales = () => {
                     />
                 </div>
 
-                <div className="flex flex-col justify-end gap-8">
+                <div className="flex flex-col justify-end gap-14">
                     <GroupStands
                         cantidad={8}
                         inicio={15}
@@ -172,7 +172,7 @@ export const MapStandsGobiernosLocales = () => {
                             orden={"desc"}
                         />
                         <p
-                            className={`text-center w-fit font-bold text-xl border-4 border-pink-600 rounded-full px-2 mt-1`}
+                            className={`text-center w-fit font-bold text-base border-4 border-pink-600 rounded-full px-2 mt-1`}
                         >
                             U
                         </p>

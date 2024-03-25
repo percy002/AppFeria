@@ -12,6 +12,11 @@ export const MapStandsGastronomiaZ2 = () => {
                 <div className="flex flex-col w-fit">
                     {/* BLOQUE B */}
                     <div className="flex">
+                        <div className="mx-1">
+                            <p className=" text-center w-fit font-bold text-base border-4 border-red-600 rounded-full px-2">
+                                b
+                            </p>
+                        </div>
                         {Array.from({ length: 10 }).map((_, i) => (
                             <>
                                 <GroupStands
@@ -37,7 +42,12 @@ export const MapStandsGastronomiaZ2 = () => {
                     <div className="flex justify-end">
                         <div className="bg-green-200 flex-grow flex justify-center items-center">
                             <p className="font-bold text-2xl">
-                                PATIO DE COMIDAS{" "}
+                                PATIO DE COMIDAS
+                            </p>
+                        </div>
+                        <div className="flex items-center">
+                            <p className=" text-center font-bold text-base border-4 border-purple-600 rounded-full px-2">
+                                d
                             </p>
                         </div>
                         <GroupStands
@@ -48,7 +58,6 @@ export const MapStandsGastronomiaZ2 = () => {
                             direction={"col"}
                             size={"wide"}
                         />
-                        
                     </div>
                 </div>
                 {/* BLOQUE CR */}
@@ -65,7 +74,12 @@ export const MapStandsGastronomiaZ2 = () => {
                         </div>
                     </div>
                     <div className="transform  origin-top-left  rotate-12 ml-4 ">
-                        <div className="border-t-2 border-gray-500">
+                        <div className="border-t-2 border-gray-500 relative">
+                            <div className="absolute left-16">
+                                <p className=" text-center w-fit font-bold text-base border-4 border-green-600 rounded-full px-2">
+                                    CR
+                                </p>
+                            </div>
                             <div className="mt-12">
                                 <GroupStands
                                     color={"green"}

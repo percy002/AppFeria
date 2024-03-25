@@ -8,7 +8,7 @@ export const MapStandsGastronomiaZ1 = () => {
     const standsBloqueCV = standsBloques["CV"];
 
     return (
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center origin-top transform  scale-70">
             <div className="p-2 mx-auto w-[600px] h-[480px]">
                 <div className="flex justify-center">
                     <GroupStands

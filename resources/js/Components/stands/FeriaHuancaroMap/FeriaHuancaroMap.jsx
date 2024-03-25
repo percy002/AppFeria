@@ -49,10 +49,7 @@ export const FeriaHuancaroMap = () => {
                         {category === 1 && <MapStandsGobiernosLocales />}
                         {category === 2 && <MapStandsAnimals />}
                         {category === 3 && (
-                            <div className="">
                                 <MapStandsMypes />
-                                <MapStandsMypesZonaInf />
-                            </div>
                         )}
                         {
                             category === 4 && (

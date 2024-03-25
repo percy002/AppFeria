@@ -78,6 +78,7 @@ export default function Stand({ numero, stand, color, size }) {
                     ${size == "small" && "button_padding_cero"}                    
                     ${size == "high" && "button_high_padding"}
                     ${size == "wide" && "button_wide_padding"}
+                    ${size == "very high" && "button_very_high_padding"}
                     text-black
                     font-bold text-xl
                     bg-${colorStand}-600

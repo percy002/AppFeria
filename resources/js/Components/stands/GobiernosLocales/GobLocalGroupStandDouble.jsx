@@ -50,9 +50,8 @@ export const GobLocalGroupStandDouble = ({
                 ))}
                 {
                 bloque == "E" && (
-                    <div className="">
-
-                        <p className="absolute font-bold text-xl">Gobiernos locales</p>
+                    <div className="relative">
+                        <p className="absolute font-bold text-xl whitespace-nowrap">Gobiernos locales</p>
                     </div>
 
                 )
@@ -82,7 +81,7 @@ export const GobLocalGroupStandDouble = ({
                 ))}
                 <div className="flex justify-center mt-1">
                     <p
-                        className={`text-center w-fit font-bold text-xl border-4 border-${color}-600 rounded-full px-2`}
+                        className={`text-center w-fit font-bold text-base border-4 border-${color}-600 rounded-full px-2`}
                     >
                         {bloque}
                     </p>

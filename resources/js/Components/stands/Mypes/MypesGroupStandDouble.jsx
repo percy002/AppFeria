@@ -18,6 +18,7 @@ const MypesGroupStandDouble = ({ color, stands }) => {
                                 stands={stands.slice(i * 2, i * 2 + 2)}
                                 color={color}
                                 direction={"col"}
+                                size={"small"}
                             />
                         </div>
                         {i == 10 && (

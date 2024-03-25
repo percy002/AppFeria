@@ -14,26 +14,23 @@ const MapStandsMypesZonaInf = () => {
 
     return (
         <div className="">
-            <div className="p-4  bg-cyan-100 w-[2000px] h-[700px]">
-                <p className="font-bold text-xl border border-gray-800 rounded-md p-1 absolute">
-                    ZONA INFERIOR
-                </p>
-
-                <div className="flex gap-x-16 h-[280px] mt-20">
+            <div className="p-4">
+                <div className="flex gap-x-16 xl:h-[65vh]">
                     <div className="flex h-fit">
                         <div className="flex justify-center mt-1 items-center mx-1">
                             <p className=" text-center w-fit font-bold text-xl border-4 border-red-600 rounded-full px-2 h-fit text-red-600">
                                 a
                             </p>
                         </div>
-                        <div className="flex items-center">
-                            <Stand color={"red"} stand={standsBloqueA[0]} numero={1}/>
-                            <Stand color={"red"} stand={standsBloqueA[1]} numero={2}/>
-                            <Stand color={"red"} stand={standsBloqueA[2]} numero={3}/>                            
+                        <div className="flex items-center mt-4">
+                            <Stand color={"red"} stand={standsBloqueA[0]} numero={1} size={"high"}/>
+                            <Stand color={"red"} stand={standsBloqueA[1]} numero={2} size={"high"}/>
+                            <Stand color={"red"} stand={standsBloqueA[2]} numero={3} size={"high"}/>                            
                         </div>
                         <MypesGroupStandDouble
                             color={"red"}
                             stands={standsBloqueA.slice(3, 35)}
+                            
                         />
                     </div>
                     {/* BLOQUE E - F - G*/}
@@ -45,7 +42,7 @@ const MapStandsMypesZonaInf = () => {
                                     color={"blue"}
                                     inicio={1}
                                     cantidad={2}
-                                    stands={standsBloqueF.slice(0, 2)}
+                                    stands={standsBloqueE.slice(0, 2)}
                                     size={"high"}
                                 />
                             </div>
@@ -59,7 +56,7 @@ const MapStandsMypesZonaInf = () => {
                                         color={"blue"}
                                         inicio={index * 2 + 3}
                                         cantidad={2}
-                                        stands={standsBloqueF.slice(
+                                        stands={standsBloqueE.slice(
                                             index * 2 + 2,
                                             index * 2 + 4
                                         )}
@@ -158,7 +155,7 @@ const MapStandsMypesZonaInf = () => {
                                     color={"green"}
                                     inicio={1}
                                     cantidad={2}
-                                    stands={standsBloqueF.slice(0, 2)}
+                                    stands={standsBloqueG.slice(0, 2)}
                                     size={"high"}
                                 />
                             </div>
@@ -175,7 +172,7 @@ const MapStandsMypesZonaInf = () => {
                                 color={"purple"}
                                 inicio={13}
                                 cantidad={13}
-                                stands={standsBloqueG}
+                                stands={standsBloqueH}
                                 direction={"col"}
                                 orden={"desc"}
                                 size={"wide"}

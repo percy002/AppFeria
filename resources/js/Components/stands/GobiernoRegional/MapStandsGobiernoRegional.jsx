@@ -150,7 +150,7 @@ export const MapStandsGobiernoRegional = () => {
                             </div>
                         </div>
                         {/* BLOQUE I - N */}
-                        <div className="flex gap-8">
+                        <div className="flex gap-8 mt-8">
                             {/* BLOQUE I */}
                             <div className="flex flex-col gap-1">
                                 <div className="flex flex-col">
@@ -166,7 +166,7 @@ export const MapStandsGobiernoRegional = () => {
                                                 i,
                                                 i + 2
                                             )}
-                                            size={"high"}
+                                            size={"very high"}
                                         />
                                     ))}
                                 </div>
@@ -191,7 +191,7 @@ export const MapStandsGobiernoRegional = () => {
                                                 i,
                                                 i + 2
                                             )}
-                                            size={"high"}
+                                            size={"very high"}
                                         />
                                     ))}
                                 </div>
@@ -216,7 +216,7 @@ export const MapStandsGobiernoRegional = () => {
                                                 i,
                                                 i + 2
                                             )}
-                                            size={"high"}
+                                            size={"very high"}
                                         />
                                     ))}
                                 </div>
@@ -241,7 +241,7 @@ export const MapStandsGobiernoRegional = () => {
                                                 i,
                                                 i + 2
                                             )}
-                                            size={"high"}
+                                            size={"very high"}
                                         />
                                     ))}
                                 </div>
@@ -266,7 +266,7 @@ export const MapStandsGobiernoRegional = () => {
                                                 i,
                                                 i + 2
                                             )}
-                                            size={"high"}
+                                            size={"very high"}
                                         />
                                     ))}
                                 </div>
@@ -283,9 +283,9 @@ export const MapStandsGobiernoRegional = () => {
                 {/* BLOQUE E Y BLOQUE O */}
                 <div className="flex mx-2">
                     <div className="flex">
-                        <div className="flex flex-col gap-1">
+                        <div className="flex flex-col gap-3">
                             <div className="">
-                                <p className="text-center">Salud y Seguridad</p>
+                                <p className="text-center font-bold">Salud y Seguridad</p>
                             </div>
                             <Button.Group>
                                 <Button color="dark" disabled>

@@ -29,7 +29,7 @@ export default function ReservedStands({ stands }) {
                             <Button
                                 onClick={() => handleDelete(index)}
                                 color="failure"
-                                className="button_padding_cero"
+                                className="p-0"
                             >
                                 <HiTrash className="text-white h-5 w-5" />
                                 <span className="text-base font-bold">

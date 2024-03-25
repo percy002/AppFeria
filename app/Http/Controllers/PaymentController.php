@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Payment;
+use App\Models\Reservation;
 
 use Illuminate\Http\Request;
 
@@ -28,7 +30,28 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         //
-        dd($request);
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+            $path = $file->store('uploads', 'public');
+    
+        }
+        
+        $stands = $request->input('stands');
+        $reservationId = $request->input('reservationId');
+
+        $reservation = Reservation::find($reservationId);
+    
+        $payment = new Payment;
+    
+        $payment->date = now();
+        $payment->total = $reservation->total;
+        $payment->file = $path ?? null;
+        $payment->reservation_id = $reservationId;
+    
+        $payment->save();
+        return response()->json([
+            'mensaje' => "pagado con exito",201
+        ]);
     }
 
     /**

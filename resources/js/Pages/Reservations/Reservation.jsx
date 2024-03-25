@@ -30,6 +30,7 @@ function Reservation({ auth, reservations }) {
                                             />
                                             <ModalPagos
                                                 stands={reservation.stands}
+                                                reservationId={reservation.id}
                                             />
                                         </div>
                                     </Table.Cell>

@@ -1,20 +1,20 @@
-import { usePage, router } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
 import { useState } from "react";
 import { FileInput, Label } from 'flowbite-react';
+import { useRef } from "react";
 
-function ModalPagos({ stands }) {
+function ModalPagos({ stands,reservationId }) {
 
+    const fileInput = useRef();
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
     const [message, setMessage] = useState(null);
 
-    // console.log(auth.cliente.id);
-    const idCliente = auth.cliente.id;
     const handleClickPagar = () => {
         const data = new FormData();
         data.append('stands', stands);
-        data.append('idCliente', idCliente);
+        data.append('reservationId', reservationId);
 
         const file = fileInput.current.files[0];
         data.append('file', file);
@@ -102,7 +102,7 @@ function ModalPagos({ stands }) {
                                         value="Adjunte el voucher de pago"
                                     />
                                 </div>
-                                <FileInput id="file-upload" />
+                                <FileInput id="file-upload" ref={fileInput} />
                             </div>
                         </>
                     )}

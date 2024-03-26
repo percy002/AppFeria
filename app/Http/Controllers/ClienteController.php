@@ -168,6 +168,6 @@ class ClienteController extends Controller
     public function all(){
         $clientes = Cliente::with('category')->get();
 
-        return Inertia::render('Clients/Clients', ['clientes' => $clientes]);
+        return Inertia::render('Clients', ['clientes' => $clientes]);
     }
 }

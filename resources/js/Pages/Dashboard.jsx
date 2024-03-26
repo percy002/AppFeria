@@ -1,13 +1,7 @@
-import RowClient from "@/Components/RowClient";
-import MapStandsAnimals from "@/Components/stands/AnimalsStands/MapStandsAnimals";
-import TableStands from "@/Components/stands/TableStands";
+
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head  } from "@inertiajs/react";
-import axios from 'axios';
-import { useEffect, useState } from "react";
-import Reservation from "./Reservations/Reservation";
 import TableClients from "@/Components/Clients/TableClients";
-import { MapStandsGobiernosLocales } from "@/Components/stands/GobiernosLocales/MapStandsGobiernosLocales";
 import { FeriaHuancaroMap } from "@/Components/stands/FeriaHuancaroMap/FeriaHuancaroMap";
 
 export default function Dashboard({ auth, userRoles, clientes }) {   

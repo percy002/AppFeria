@@ -12,7 +12,7 @@ export default function ReservedStands({ stands }) {
             prevStands.filter((_, i) => i != index)
         );
     };
-
+    console.log(stands);
     return (
         <div className="flex flex-col w-3/4 lg:w-full mx-auto">
             {stands.length > 0 &&
@@ -25,7 +25,7 @@ export default function ReservedStands({ stands }) {
                                 <p>precio : {stand.price}</p>
                             </div>
                             <p>bloque : {stand.block}</p>
-                            <p>Categoria : Animales</p>
+                            <p>Categoria : {stand.category}</p>
                             <Button
                                 onClick={() => handleDelete(index)}
                                 color="failure"

@@ -1,10 +1,9 @@
-import { usePage, router } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
 import { useState } from "react";
-function ModalVerReserva({ stands, payment }) {
+function ModalValidarPagos({ stands, payment }) {
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
-    // console.log(stands);
     return (
         <>
             <Button onClick={() => setOpenModal(true)}>Ver</Button>
@@ -90,7 +89,10 @@ function ModalVerReserva({ stands, payment }) {
                     )}
                 </Modal.Body>
                 <Modal.Footer className="">
-                    <Button color="gray" onClick={() => setOpenModal(false)}>
+                <Button color="blue" onClick={() => setOpenModal(false)}>
+                        Validar Pago
+                    </Button>
+                    <Button color="success" onClick={() => setOpenModal(false)}>
                         cerrar
                     </Button>
                 </Modal.Footer>
@@ -99,4 +101,4 @@ function ModalVerReserva({ stands, payment }) {
     );
 }
 
-export default ModalVerReserva;
+export default ModalValidarPagos;

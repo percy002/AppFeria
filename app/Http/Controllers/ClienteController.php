@@ -168,6 +168,9 @@ class ClienteController extends Controller
     public function all(){
         $clientes = Cliente::with('category')->get();
 
-        return Inertia::render('Clients', ['clientes' => $clientes]);
+        $clientesPagos = Cliente::with(['category','reservation.payment','reservation.stands'])->where('approved', 1)->has('reservation')->get();
+
+        // dd($clientesPagos);
+        return Inertia::render('Clients', ['clientes' => $clientes,'clientesPagos' => $clientesPagos]);
     }
 }

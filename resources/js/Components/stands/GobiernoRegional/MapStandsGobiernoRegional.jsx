@@ -20,7 +20,6 @@ export const MapStandsGobiernoRegional = () => {
     const standsBloqueNN = standsBloques["nn"];
     const standsBloqueOO = standsBloques["oo"];
 
-    console.log(standsBloques);
     return (
         <div className="h-[480px] w-[1000px]">
             <div className="flex flex-col gap-14">

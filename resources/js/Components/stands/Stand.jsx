@@ -16,7 +16,7 @@ export default function Stand({ numero, stand, color, size }) {
     const [stateSelected, setStateSelected] = useState(false);
 
     const { reservedStands, setReservedStands } = useContext(StandsContext);
-
+    console.log(stand);
     useEffect(() => {
         const reservado = reservedStands.find((s) => s.id === stand.id);
         if (reservado) {
@@ -39,10 +39,10 @@ export default function Stand({ numero, stand, color, size }) {
         if (!stateSelected && !stateReservado) {
             const reservedStand = {
                 id: stand.id,
-                category: stand.category_id,
+                category: stand.category.name,
                 name: stand.name,
                 block: stand.block,
-                price: stand.price,
+                price: stand.price,        
                 seleccionado: true,
                 color
             };

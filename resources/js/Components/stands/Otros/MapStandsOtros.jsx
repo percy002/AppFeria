@@ -8,7 +8,6 @@ export const MapStandsOtros = () => {
     const standsBloqueA = standsBloques["A"];
     const standsBloqueB = standsBloques["B"];
 
-    console.log(standsBloques);
     return (
         <div className="p-4 w-[1000px] h-[500px] flex justify-center items-center">
             <div className="flex gap-10">

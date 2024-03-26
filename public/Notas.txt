@@ -2,8 +2,17 @@
 ****frontend
 
 
-
+aumentar mensaje de confirmacion en reservas
 dividir el mapa de mypes
+agregar ver mapa
+
+3 estadso de pagos 
+- aceptado
+- en procesp
+-observado
+ - el pago no coincide
+ - no se abono a la cuenta - verifique con su banco
+ - 
 
 agregar boton para mover el mapa
 
@@ -13,16 +22,17 @@ despues de hacer el pago un cliente puede ver el mapa con sus reservaciones ?
 
 los stand pagados y reservados deben aparecer en diferentes colores ?
 
-mostrar lista de pagos
 crear buscador y paginacion para clientes
-
+mostrar todos los mapas al usuario
 **** backend
 borrar updated at y created at de la respuesta que envia dashboard controller
 
 hacer las validaciones de rutas
 
 un cliente solo puede realizar una reservacion
-un cliente no puede eliminar su reservacion
+un cliente puede eliminar su reservacion *
+
+el administrador puede eliminar el pago
 
 
 un cliente de gobiernos locales puede reservar muchos locales , pero otro usuario solo puede reservar 3
@@ -33,6 +43,12 @@ modificar el seeder de stands para crear en intervalos
 hacer la validacion de no reservar stands reservados
 
 habra pagos en partes ?
+
+como asegurarme de que es un gobierlo local o regional
+
+se debe saber que usuario aprueba a un cliente o su pago?
+
+
 
 en
 ***bloques feria X

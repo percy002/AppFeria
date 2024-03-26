@@ -10,6 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Cliente; 
+use App\Models\PaymentStatus; 
 
 class User extends Authenticatable
 {
@@ -52,6 +53,11 @@ class User extends Authenticatable
     public function client()
     {
         return $this->belongsTo(Cliente::class,'cliente_id');
+    }
+
+    public function userPaymentStatus()
+    {
+        return $this->hasMany(userPaymentStatus::class);
     }
 
 

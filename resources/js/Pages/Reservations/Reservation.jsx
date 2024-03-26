@@ -1,5 +1,6 @@
 import ModalPagos from "@/Components/pagos/ModalPagos";
 import ModalVerReserva from "@/Components/reservas/ModalVerReserva";
+import RowReserva from "@/Components/reservas/RowReserva";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Table } from "flowbite-react";
 function Reservation({ auth, reservations }) {
@@ -13,33 +14,12 @@ function Reservation({ auth, reservations }) {
                         <Table.HeadCell className="flex justify-center">
                             Opciones
                         </Table.HeadCell>
+                        <Table.HeadCell align="center">Estado del Pago</Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
                         {reservations &&
                             reservations.map((reservation, index) => (
-                                <Table.Row
-                                    key={reservation.id}
-                                    className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                                >
-                                    <Table.Cell>{reservation.date}</Table.Cell>
-                                    <Table.Cell>{reservation.total}</Table.Cell>
-                                    <Table.Cell>
-                                        <div className="flex justify-center gap-5">
-                                            <ModalVerReserva
-                                                stands={reservation.stands}
-                                                payment = {reservation.payment}
-                                            />
-                                            {!reservation.payment && (
-                                                <ModalPagos
-                                                    stands={reservation.stands}
-                                                    reservationId={
-                                                        reservation.id
-                                                    }
-                                                />
-                                            )}
-                                        </div>
-                                    </Table.Cell>
-                                </Table.Row>
+                                <RowReserva reservation={reservation} key={reservation.id}/>
                             ))}
                     </Table.Body>
                 </Table>

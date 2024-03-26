@@ -67,6 +67,7 @@ Route::group(['prefix' => 'stands'], function(){
 Route::group(['prefix' => 'reservaciones'], function(){
     Route::get('/{id}', [ReservationController::class, 'index'])->name('reservaciones.index');
     Route::post('/reservar', [ReservationController::class, 'store'])->name('reservaciones.crear');
+    Route::delete('/eliminar', [ReservationController::class, 'destroy'])->name('reservaciones.eliminar');
 })->middleware(['auth', 'verified'])
 ;
 

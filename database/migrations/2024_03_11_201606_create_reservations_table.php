@@ -16,6 +16,7 @@ return new class extends Migration
             $table->float('total');
             $table->datetime('date');
             $table->unsignedBigInteger('cliente_id');
+            $table->boolean('enable')->default(true);
             $table->timestamps();
  
             $table->foreign('cliente_id')->references('id')->on('clientes');

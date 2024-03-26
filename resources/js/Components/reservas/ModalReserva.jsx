@@ -54,7 +54,7 @@ function ModalReserva({ stands }) {
                                     usuario: {auth.cliente.name}{" "}
                                     {auth.cliente.last_name}
                                 </p>
-                                <p>Categoria: ganaderia</p>
+                                <p>Categoria: {stands[0].category}</p>
                             </div>
                             {stands &&
                                 stands.map((stand) => (

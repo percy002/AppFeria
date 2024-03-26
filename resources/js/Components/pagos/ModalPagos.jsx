@@ -1,11 +1,11 @@
 import { usePage } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
 import { useState } from "react";
-import { FileInput, Label } from 'flowbite-react';
+import { FileInput, Label } from "flowbite-react";
 import { useRef } from "react";
+import Countdown from "../Countdown";
 
-function ModalPagos({ stands,reservationId }) {
-
+function ModalPagos({ stands, reservationId, updatePaymentState }) {
     const fileInput = useRef();
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
@@ -13,23 +13,21 @@ function ModalPagos({ stands,reservationId }) {
 
     const handleClickPagar = () => {
         const data = new FormData();
-        data.append('stands', stands);
-        data.append('reservationId', reservationId);
+        data.append("stands", stands);
+        data.append("reservationId", reservationId);
 
         const file = fileInput.current.files[0];
-        data.append('file', file);
+        data.append("file", file);
 
         axios
             .post(route("pagar"), data)
             .then((response) => {
                 if (response.status == 200) {
-                    setMessage("Pagado con éxito"); 
-                    setOpenModal(false)                   
+                    setMessage("Pagado con éxito");
+                    updatePaymentState(true);
+                    setOpenModal(false);
                 } else {
-                    console.error(
-                        "Ah ocurrido un error al pagar:",
-                        response
-                    );
+                    console.error("Ah ocurrido un error al pagar:", response);
                 }
             })
             .catch((error) => {
@@ -47,10 +45,11 @@ function ModalPagos({ stands,reservationId }) {
                 dismissible
                 show={openModal}
                 onClose={() => setOpenModal(false)}
+                size="4xl"
             >
                 <Modal.Header>
-                    Estás a punto de pagar este stand Por favor, confirma que
-                    todos los detalles son correctos antes de proceder.
+                    Estás a punto de pagar por este stand. Por favor, confirma
+                    que todos los detalles son correctos antes de proceder.
                 </Modal.Header>
                 <Modal.Body>
                     {message && <p>{message}</p>}
@@ -61,7 +60,7 @@ function ModalPagos({ stands,reservationId }) {
                                     usuario: {auth.cliente.name}{" "}
                                     {auth.cliente.last_name}
                                 </p>
-                                <p>Categoria: ganaderia</p>
+                                <p>Categoria: {stands[0].category.name}</p>
                             </div>
                             {stands &&
                                 stands.map((stand) => (
@@ -91,9 +90,34 @@ function ModalPagos({ stands,reservationId }) {
                                     </p>
                                 </div>
                             </div>
+                            <div className="">
+                                <div>
+                                    <h2>Bancos</h2>
+                                    <ul className="flex justify-between">
+                                        <li>
+                                            Banco de la Nacion:
+                                            <ul>
+                                                <li>Número de cuenta: 1234567890</li>
+                                                <li>Código de cuenta interbancario (CCI): ABC123</li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            Banco Interbank:
+                                            <ul>
+                                                <li>Número de cuenta: 0987654321</li>
+                                                <li>Código de cuenta interbancario (CCI): XYZ456</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="">
+                                <Countdown time={2} />
+                                
+                            </div>
 
-                            <div>
-                                <div className="mb-2 block">
+                            <div className="mt-2">
+                                <div className="my-2 block">
                                     <Label
                                         htmlFor="file-upload"
                                         value="Adjunte el voucher de pago"

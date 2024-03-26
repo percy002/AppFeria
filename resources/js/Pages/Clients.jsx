@@ -5,8 +5,10 @@ import { Tabs } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { HiMiniCurrencyDollar } from "react-icons/hi2";
+import { TableClientPayments } from "@/Components/Clients/TableClientPayments";
 
-const Clients = ({ auth, clientes }) => {
+const Clients = ({ auth, clientes,clientesPagos }) => {
+    // console.log(clientesPagos);
     return (
         <AuthenticatedLayout user={auth.user} client={auth.cliente}>
             <Head title="Clientes" />
@@ -44,7 +46,7 @@ const Clients = ({ auth, clientes }) => {
                         <h2 className="font-semibold text-xl text-gray-800 leading-tight">
                             Todos los clientes
                         </h2>
-                        <TableClients clientes={clientes} />
+                        <TableClientPayments clientes={clientesPagos} />
                     </div>
                 </Tabs.Item>
             </Tabs>

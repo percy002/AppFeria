@@ -27,7 +27,7 @@ class ReservationController extends Controller
             $query->where('cliente_id', $clientId);
         })->get();
 
-        $reservations = Reservation::where('cliente_id', $clientId)->with(['stands','payment'])->get();
+        $reservations = Reservation::where('cliente_id', $clientId)->with(['stands.category','payment.PaymentStatus'])->get();
 
         // dd($reservations);
         return Inertia::render('Reservations/Reservation', [
@@ -113,8 +113,21 @@ class ReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
         //
+        
+        $reservation = Reservation::find($request->id);
+        // return response()->json(['message' => $reservation]);
+        if ($reservation) {
+            
+            $reservation->enable = false;
+            $reservation->save();
+            return response()->json(['message' => 'Reservacion eliminada satisfactoriamente']);
+
+        }
+        return response()->json(['error' => 'Reservacion no encontrada'], 404);
+
+
     }
 }

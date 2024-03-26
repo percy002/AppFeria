@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $standsBloques = [];
         if (in_array('client', $userRoles)) {
 
-            $stands = Stand::where('category_id',$user->client->category_id)->with('reservations')
+            $stands = Stand::where('category_id',$user->client->category_id)->with(['reservations','category'])
             ->get();
 
             $standsBloques = $this->getStandsGobiernosLocales($stands,$user->client->category_id);

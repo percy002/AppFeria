@@ -16,7 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('payment_id');
             $table->enum('status', ['aceptado','observado']);
-            $table->text('description')->nullable();
+            $table->text('observations')->nullable(); 
+            $table->text('observations_detail')->nullable(); 
+            $table->timestamp('date');
+
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

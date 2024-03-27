@@ -1,9 +1,11 @@
+import { useState } from "react";
 import ModalPagos from "../pagos/ModalPagos";
 import ModalValidarPagos from "../pagos/ModalValidarPagos";
 import ModalVerReserva from "../reservas/ModalVerReserva";
 import { Table } from "flowbite-react";
 
 const RowClientPayment = ({ cliente }) => {
+    const [paymentStatus,setPaymentStatus] = useState("")
     return (
         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
             {cliente ? (
@@ -24,12 +26,13 @@ const RowClientPayment = ({ cliente }) => {
                                 <ModalValidarPagos
                                     stands={cliente.reservation.stands}
                                     payment={cliente.reservation.payment}
+                                    updatePaymentStatus = {setPaymentStatus}
                                 />
                             )
                         }
                     </Table.Cell>
                     <Table.Cell>
-                        <input type="checkbox" />
+                        {cliente?.reservation?.payment?.payment_status?.pop()?.status}
                     </Table.Cell>
                 </>
             ) : (

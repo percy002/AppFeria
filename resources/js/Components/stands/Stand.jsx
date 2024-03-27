@@ -16,7 +16,6 @@ export default function Stand({ numero, stand, color, size }) {
     const [stateSelected, setStateSelected] = useState(false);
 
     const { reservedStands, setReservedStands } = useContext(StandsContext);
-    console.log(stand);
     useEffect(() => {
         const reservado = reservedStands.find((s) => s.id === stand.id);
         if (reservado) {

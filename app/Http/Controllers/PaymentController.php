@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Payment;
 use App\Models\Reservation;
+use App\Models\PaymentStatus;
 
 use Illuminate\Http\Request;
 
@@ -50,7 +51,7 @@ class PaymentController extends Controller
     
         $payment->save();
         return response()->json([
-            'mensaje' => "pagado con exito"
+            'mensaje' => "pagado con éxito"
         ]);
     }
 
@@ -84,5 +85,45 @@ class PaymentController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function validar(Request $request){
+        // return response()->json(['message' => ['payment' => $request->input('payment_id')]], 200);
+
+        $validatedData = $request->validate([
+            'payment_id' => 'required|integer|exists:payments,id',
+        ]);
+    
+        // Crea un nuevo PaymentStatus
+        $paymentStatus = new PaymentStatus;
+        $paymentStatus->payment_id = $validatedData['payment_id'];
+        $paymentStatus->user_id = auth()->user()->id;
+    
+        if ($paymentStatus->save()) {
+            return response()->json(['message' => 'Estado del pago creado con éxito'], 200);
+        } else {
+            return response()->json(['error' => 'Error al crear el estado del pago'], 500);
+        }
+    }
+
+    public function observar(Request $request){
+        $validatedData = $request->validate([
+            'payment_id' => 'required|integer|exists:payments,id',
+            'observaciones' => 'required'
+        ]);
+    
+        // Crea un nuevo PaymentStatus
+        $paymentStatus = new PaymentStatus;
+        $paymentStatus->payment_id = $validatedData['payment_id'];
+        $paymentStatus->observations = $validatedData['observaciones'];
+        $paymentStatus->observations_detail = $validatedData['detalleObservaciones'];
+        $paymentStatus->status = "observado";
+        $paymentStatus->user_id = auth()->user()->id;
+    
+        if ($paymentStatus->save()) {
+            return response()->json(['message' => 'Estado del pago observado creado con éxito'], 200);
+        } else {
+            return response()->json(['error' => 'Error al crear el estado observado del pago'], 500);
+        }
     }
 }

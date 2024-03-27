@@ -2,17 +2,25 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import TableClients from "@/Components/Clients/TableClients";
 import { Tabs } from "flowbite-react";
-import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
-import { MdDashboard } from "react-icons/md";
+import { HiUserCircle } from "react-icons/hi";
 import { HiMiniCurrencyDollar } from "react-icons/hi2";
 import { TableClientPayments } from "@/Components/Clients/TableClientPayments";
 
+const TabsCustom = {
+    
+        "tablist": {          
+          "tabitem": {
+            "base": "flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0  disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500",
+          }
+        },      
+      
+}
+
 const Clients = ({ auth, clientes,clientesPagos }) => {
-    // console.log(clientesPagos);
     return (
         <AuthenticatedLayout user={auth.user} client={auth.cliente}>
             <Head title="Clientes" />
-            <Tabs aria-label="Default tabs" style="underline">
+            <Tabs aria-label="Default tabs" style="underline" theme={TabsCustom}>
                 <Tabs.Item
                     active
                     title="Clientes Registrados"

@@ -78,6 +78,9 @@ Route::group(['prefix' => 'categorias'], function(){
 
 Route::group(['prefix' => 'pagos'],function(){
     Route::post('/pagar',[PaymentController::class, 'store'])->name("pagar");
+    Route::post('/validar',[PaymentController::class, 'validar'])->name("validarPago");
+    Route::post('/observar',[PaymentController::class, 'observar'])->name("observarPago");
+
 })->middleware(['auth', 'verified']);
 
 

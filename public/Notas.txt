@@ -1,59 +1,62 @@
 
 ****frontend
 
-
-aumentar mensaje de confirmacion en reservas
+aumentar mensaje de confirmación en reservas
 dividir el mapa de mypes
 agregar ver mapa
 
-3 estadso de pagos 
+3 estados de pagos 
 - aceptado
-- en procesp
+- en proceso
 -observado
  - el pago no coincide
  - no se abono a la cuenta - verifique con su banco
  - 
 
-agregar boton para mover el mapa
+agregar botón para mover el mapa
 
 stands pagados deben aparecer restringidos en el mapa
 
-despues de hacer el pago un cliente puede ver el mapa con sus reservaciones ?
+después de hacer el pago un cliente puede ver el mapa con sus reservaciones ?
 
 los stand pagados y reservados deben aparecer en diferentes colores ?
 
-crear buscador y paginacion para clientes
+crear buscador y pagination para clientes
 mostrar todos los mapas al usuario
 **** backend
-borrar updated at y created at de la respuesta que envia dashboard controller
+borrar updated at y created at de la respuesta que envía dashboard controller
 
 hacer las validaciones de rutas
 
-un cliente solo puede realizar una reservacion
-un cliente puede eliminar su reservacion *
+un cliente solo puede realizar una reservación
+un cliente puede eliminar su reservación *
+un cliente puede editar el voucher de pago
 
 el administrador puede eliminar el pago
-
 
 un cliente de gobiernos locales puede reservar muchos locales , pero otro usuario solo puede reservar 3
 
 
 modificar el seeder de stands para crear en intervalos
 
-hacer la validacion de no reservar stands reservados
+hacer la validación de no reservar stands reservados
 
-habra pagos en partes ?
+habrá pagos en partes ?
 
-como asegurarme de que es un gobierlo local o regional
+como asegurarme de que es un gobierno local o regional
 
-se debe saber que usuario aprueba a un cliente o su pago?
+se debe saber quien es el usuario que aprueba
 
-
-
+***bugs
+hay un caso en el que se agrega 2 stands a la reservación
+hay un caso en el que un cliente que realiza un pago, pero no se ve su pago
 en
-***bloques feria X
+
+***
+un cliente hace una reserva y lo paga , no puede volver a registrar un pago
+
 
 **** Errores en el mapa ****
 bloques f y g de mypes no tiene numero 3
 cuantos stands tiene comida regional ?
-el bloque "d" de comida continua del bloque "b" no tiene su propia numeracion
+el bloque "d" de comida continua del bloque "b" no tiene su propia numeración

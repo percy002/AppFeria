@@ -100,7 +100,7 @@ class PaymentController extends Controller
         $paymentStatus->user_id = auth()->user()->id;
     
         if ($paymentStatus->save()) {
-            return response()->json(['message' => 'Estado del pago creado con éxito'], 200);
+            return response()->json(['message' => 'aceptado'], 200);
         } else {
             return response()->json(['error' => 'Error al crear el estado del pago'], 500);
         }
@@ -109,14 +109,16 @@ class PaymentController extends Controller
     public function observar(Request $request){
         $validatedData = $request->validate([
             'payment_id' => 'required|integer|exists:payments,id',
-            'observaciones' => 'required'
+            'observaciones' => 'required',
+            // 'detalleObservaciones' => 'string'
         ]);
     
+        // return response()->json(['m' => $request])
         // Crea un nuevo PaymentStatus
         $paymentStatus = new PaymentStatus;
         $paymentStatus->payment_id = $validatedData['payment_id'];
         $paymentStatus->observations = $validatedData['observaciones'];
-        $paymentStatus->observations_detail = $validatedData['detalleObservaciones'];
+        $paymentStatus->observations_detail = $request->input('detalleObservaciones');
         $paymentStatus->status = "observado";
         $paymentStatus->user_id = auth()->user()->id;
     

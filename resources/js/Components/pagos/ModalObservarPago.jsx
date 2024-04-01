@@ -1,11 +1,28 @@
 import { Button, Modal, Label, Select, Textarea } from "flowbite-react";
-import { useEffect } from "react";
 import { useState } from "react";
-const ModalObservarPago = () => {
+const ModalObservarPago = ({payment,updateState,updatePaymentStatusObs}) => {
     const [openModal, setOpenModal] = useState(false);
-    const [observaciones, setObservaciones] = useState("");
+    const [observaciones, setObservaciones] = useState("El pago no coincide");
     const [detalleObservaciones, setDetalleObservaciones] = useState("");
 
+    console.log(updatePaymentStatusObs);
+    const handleObservarPago = () => {
+        const data = {
+            payment_id: payment.id,
+            observaciones,
+            detalleObservaciones
+        };
+        axios
+            .post(route("observarPago"), data)
+            .then((response) => {
+                updatePaymentStatusObs({status:"observado",observations:observaciones,observations_detail:detalleObservaciones});
+                setOpenModal(false);
+                updateState(false);
+            })
+            .catch((error) => {
+                // Handle error
+            });
+    };
    
     return (
         <>
@@ -57,7 +74,7 @@ const ModalObservarPago = () => {
                     )}
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => setOpenModal(false)}>
+                    <Button onClick={handleObservarPago}>
                         Agregar observación de pago
                     </Button>
                     <Button color="gray" onClick={() => setOpenModal(false)}>

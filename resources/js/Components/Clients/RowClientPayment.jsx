@@ -1,11 +1,20 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import ModalPagos from "../pagos/ModalPagos";
 import ModalValidarPagos from "../pagos/ModalValidarPagos";
 import ModalVerReserva from "../reservas/ModalVerReserva";
 import { Table } from "flowbite-react";
+import ModalObservacionesPago from "../pagos/ModalObservacionesPago";
 
 const RowClientPayment = ({ cliente }) => {
-    const [paymentStatus,setPaymentStatus] = useState("")
+    const lastPaymentStatus = cliente.reservation?.payment?.payment_status?.[cliente.reservation?.payment?.payment_status?.length - 1];
+
+    const [paymentStatus, setPaymentStatus] = useState(lastPaymentStatus);    
+    
+    function updatePaymentStatus(updates) {
+        setPaymentStatus(prevStatus => ({ ...prevStatus, ...updates }));
+    }
+
+    console.log(paymentStatus);
     return (
         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
             {cliente ? (
@@ -26,13 +35,18 @@ const RowClientPayment = ({ cliente }) => {
                                 <ModalValidarPagos
                                     stands={cliente.reservation.stands}
                                     payment={cliente.reservation.payment}
-                                    updatePaymentStatus = {setPaymentStatus}
+                                    updatePaymentStatus = {updatePaymentStatus}
                                 />
                             )
                         }
                     </Table.Cell>
                     <Table.Cell>
-                        {cliente?.reservation?.payment?.payment_status?.pop()?.status}
+                        {
+                        paymentStatus.status == 'observado' ? (
+                            <ModalObservacionesPago paymentStatus = {paymentStatus}/>
+                        ) : "Aceptado"
+                        
+                        }
                     </Table.Cell>
                 </>
             ) : (

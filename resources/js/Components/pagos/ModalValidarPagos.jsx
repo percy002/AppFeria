@@ -12,7 +12,7 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus }) {
     );
     const [observaciones, setObservaciones] = useState();
 
-    console.log(payment.payment_status[payment.payment_status.length - 1]);
+    // console.log(updatePaymentStatus);
 
     const handleValidarPago = () => {
         const data = {
@@ -24,27 +24,13 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus }) {
             .post(route("validarPago"), data)
             .then((response) => {
                 setOpenModal(false);
-                updatePaymentStatus("Aceptado");
+                updatePaymentStatus({status:"aceptado"});
             })
             .catch((error) => {
                 // Handle error
             });
     };
-    const handleObservarPago = () => {
-        const data = {
-            payment_id: payment.id,
-            observaciones,
-        };
-        axios
-            .post(route("observarPago"), data)
-            .then((response) => {
-                setOpenModal(false);
-                updatePaymentStatus("observado");
-            })
-            .catch((error) => {
-                // Handle error
-            });
-    };
+    
     return (
         <>
             <Button onClick={() => setOpenModal(true)}>Ver Pago</Button>
@@ -148,7 +134,7 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus }) {
                     <Button color="blue" onClick={handleValidarPago}>
                         Validar Pago
                     </Button>
-                    <ModalObservarPago/>
+                    <ModalObservarPago payment={payment} updateState={setOpenModal} updatePaymentStatusObs={updatePaymentStatus}/>
                     <Button color="success" onClick={() => setOpenModal(false)}>
                         cerrar
                     </Button>

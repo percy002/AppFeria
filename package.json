@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "flowbite-react": "^0.7.2",
-        "react-router-dom": "^6.22.3"
+        "react-router-dom": "^6.22.3",
+        "sweetalert2": "^11.10.7"
     }
 }

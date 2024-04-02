@@ -42,12 +42,12 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
       // Validar los datos del formulario
-    //   dd($request->selectedType);
       
       $validatedData = $request->validate([
         'dni' => 'required|string|max:8|unique:clientes',
         'name' => 'required|string|max:255',
         'last_name' => 'required|string|max:255',
+        'phone_number' => 'required|string|max:9',
         'email' => 'required|string|email|max:255|unique:clientes',
         'password' => 'required|string|max:255',
         'category_id' => 'required|exists:categories,id',
@@ -75,6 +75,7 @@ class ClienteController extends Controller
         'name' => $validatedData['name'],
         'last_name' => $validatedData['last_name'],
         'position' => $request->position,
+        'phone_number' => $validatedData['phone_number'],
         'email' => $validatedData['email'],
         'category_id' => $validatedData['category_id'],
     ]);
@@ -97,7 +98,8 @@ class ClienteController extends Controller
     // return redirect(RouteServiceProvider::HOME);
 
     // Redirigir o devolver una respuesta según sea necesario
-    return redirect()->route('login');
+    // return redirect()->route('login');
+    return response()->json(['message' => 'Registro exitoso']);
     }
 
     /**
@@ -168,7 +170,7 @@ class ClienteController extends Controller
     public function all(){
         $clientes = Cliente::with('category')->get();
 
-        $clientesPagos = Cliente::with(['category','reservation.payment.PaymentStatus','reservation.stands'])->where('approved', 1)->has('reservation')->has('reservation')->get();
+        $clientesPagos = Cliente::with(['category','reservation.payment.PaymentStatus','reservation.stands'])->where('approved', 1)->whereHas('reservation.payment')->get();
 
         // dd($clientesPagos);
         return Inertia::render('Clients', ['clientes' => $clientes,'clientesPagos' => $clientesPagos]);

@@ -1,10 +1,11 @@
 import { usePage, router } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
+import { useEffect } from "react";
 import { useState } from "react";
 function ModalVerReserva({ stands, payment }) {
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
-    // console.log(stands);
+    
     return (
         <>
             <Button onClick={() => setOpenModal(true)}>Ver</Button>
@@ -20,7 +21,7 @@ function ModalVerReserva({ stands, payment }) {
                             usuario: {auth.cliente.name}{" "}
                             {auth.cliente.last_name}
                         </p>
-                        <p>Categoria: {stands[0]?.category?.name}</p>
+                        <p>Categoría: {stands[0]?.category?.name}</p>
                     </div>
                     {stands &&
                         stands.map((stand) => (
@@ -50,7 +51,7 @@ function ModalVerReserva({ stands, payment }) {
                             </p>
                         </div>
                     </div>
-                    {payment && (
+                    {payment && payment.file && (
                         <div className="">
                             <p>pagado</p>
                             {(() => {

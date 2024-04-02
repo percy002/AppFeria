@@ -18,7 +18,7 @@ function MapStandsAnimals() {
     return (
         <div className="p-2 mx-auto w-[1100px] h-[480px]">
             {/* BLOQUE ANIMALES */}
-            <div className="grid grid-cols-6 h-full gap-10">
+            <div className="grid grid-cols-6 h-full gap-10 origin-top transform scale-90">
                 {/* BLOQUE VACUNOS */}
                 <VacunosBlock />
 
@@ -26,7 +26,7 @@ function MapStandsAnimals() {
                 <div className="col-span-2 h-full flex flex-col justify-around">
                     <div className="">
                         <p className="font-bold text-xl text-center">
-                            CAMELIDOS
+                            CAMÉLIDOS
                         </p>
                         <div className="flex items-center gap-1">
                             <p className="text-center font-bold text-xl border-4 border-red-600 rounded-full px-2 h-fit w-fit">

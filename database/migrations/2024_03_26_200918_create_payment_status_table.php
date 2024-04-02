@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('payment_id');
-            $table->enum('status', ['aceptado','observado']);
+            $table->enum('status', ['en proceso','aceptado','observado','corregido']);
             $table->text('observations')->nullable(); 
             $table->text('observations_detail')->nullable(); 
             $table->timestamp('date');

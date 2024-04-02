@@ -51,7 +51,7 @@ Route::group(['prefix' => 'cliente'], function () {
 
     Route::get('clientes', [ClienteController::class,'all'])->name('clientes');
 
-    Route::post('registro', [ClienteController::class, 'store']);
+    Route::post('registro', [ClienteController::class, 'store'])->name('client.register');
 
     Route::put('/{cliente}/aprobar', [ClienteController::class, 'aprobar'])->name('clientes.aprobar');
     
@@ -78,6 +78,7 @@ Route::group(['prefix' => 'categorias'], function(){
 
 Route::group(['prefix' => 'pagos'],function(){
     Route::post('/pagar',[PaymentController::class, 'store'])->name("pagar");
+    Route::post('/update',[PaymentController::class, 'update'])->name("payment.update");
     Route::post('/validar',[PaymentController::class, 'validar'])->name("validarPago");
     Route::post('/observar',[PaymentController::class, 'observar'])->name("observarPago");
 

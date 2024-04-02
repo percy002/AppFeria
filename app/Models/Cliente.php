@@ -10,7 +10,7 @@ class Cliente extends Model
     use HasFactory;
 
 
-    protected $fillable = ['ruc', 'company_name', 'dni', 'name', 'last_name', 'position', 'email', 'category_id', 'approved', 'evaluated'];
+    protected $fillable = ['ruc', 'company_name', 'dni', 'name', 'last_name', 'position', 'phone_number', 'email', 'category_id', 'approved', 'evaluated'];
 
     public function category()
     {

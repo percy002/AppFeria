@@ -4,9 +4,10 @@ import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
-import { Head, Link, useForm, usePage } from "@inertiajs/react";
+import { Head, Link, useForm, usePage, router } from "@inertiajs/react";
 import { useState } from "react";
 import { Select } from "flowbite-react";
+import Swal from "sweetalert2";
 
 export default function ClientRegister() {
     const [categories, setCategories] = useState();
@@ -19,6 +20,7 @@ export default function ClientRegister() {
         last_name: "",
         dni: "",
         position: "",
+        phone_number: "",
         email: "",
         password: "",
         password_confirmation: "",
@@ -49,7 +51,21 @@ export default function ClientRegister() {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route("client.register"));
+        axios
+            .post(route("client.register"),data)
+            .then((response) => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Registrado con éxito",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                router.get(`/`);
+            })
+            .catch((error) => {
+                Swal("Error", "Registration failed", "error");
+            });
     };
 
     const handleTypeChange = (event) => {
@@ -63,6 +79,7 @@ export default function ClientRegister() {
             last_name: "",
             dni: "",
             position: "",
+            phone_number: "",
             email: "",
             password: "",
             password_confirmation: "",
@@ -251,7 +268,28 @@ export default function ClientRegister() {
                 )}
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Correo Electronico" />
+                    <InputLabel htmlFor="phone_number" value="Celular" />
+
+                    <TextInput
+                        id="phone_number"
+                        name="phone_number"
+                        value={data.phone_number}
+                        className="mt-1 block w-full"
+                        autoComplete="phone_number"
+                        onChange={(e) =>
+                            setData("phone_number", e.target.value)
+                        }
+                        required
+                    />
+
+                    <InputError
+                        message={errors.phone_number}
+                        className="mt-2"
+                    />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="email" value="Correo Electrónico" />
 
                     <TextInput
                         id="email"

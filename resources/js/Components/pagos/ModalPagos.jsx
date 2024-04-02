@@ -97,23 +97,32 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                                         <li>
                                             Banco de la Nacion:
                                             <ul>
-                                                <li>Número de cuenta: 1234567890</li>
-                                                <li>Código de cuenta interbancario (CCI): ABC123</li>
+                                                <li>
+                                                    Número de cuenta: 1234567890
+                                                </li>
+                                                <li>
+                                                    Código de cuenta
+                                                    interbancario (CCI): ABC123
+                                                </li>
                                             </ul>
                                         </li>
                                         <li>
                                             Banco Interbank:
                                             <ul>
-                                                <li>Número de cuenta: 0987654321</li>
-                                                <li>Código de cuenta interbancario (CCI): XYZ456</li>
+                                                <li>
+                                                    Número de cuenta: 0987654321
+                                                </li>
+                                                <li>
+                                                    Código de cuenta
+                                                    interbancario (CCI): XYZ456
+                                                </li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
-                            <div className="">
+                            <div className="mt-2">
                                 <Countdown time={2} />
-                                
                             </div>
 
                             <div className="mt-2">
@@ -122,6 +131,9 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                                         htmlFor="file-upload"
                                         value="Adjunte el voucher de pago"
                                     />
+                                    <span className="text-red-600">
+                                        (Solo PDF y JPG permitidos)
+                                    </span>
                                 </div>
                                 <FileInput id="file-upload" ref={fileInput} />
                             </div>

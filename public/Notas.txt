@@ -49,14 +49,19 @@ se debe saber quien es el usuario que aprueba
 
 ***bugs
 hay un caso en el que se agrega 2 stands a la reservación
-hay un caso en el que un cliente que realiza un pago, pero no se ve su pago
-en
+
+hay un caso cuando se anula un reservación y se vuelve a reservar , solo aparece la venta anulada
+apareció un 404 al iniciar sesión con un nuevo usuario
 
 ***
-un cliente hace una reserva y lo paga , no puede volver a registrar un pago
+un cliente hace una reserva y lo paga, no puede volver a registrar un pago ni elegir stands
 
 
 **** Errores en el mapa ****
 bloques f y g de mypes no tiene numero 3
 cuantos stands tiene comida regional ?
 el bloque "d" de comida continua del bloque "b" no tiene su propia numeración
+
+***
+hacer validaciones en registro
+agregar modal de registro correcto

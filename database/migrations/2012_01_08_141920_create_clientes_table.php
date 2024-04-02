@@ -19,8 +19,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('last_name');
             $table->string('position')->nullable();
-            $table->string('email')->unique(); 
-            $table->boolean('approved')->default(false); 
+            $table->string('email')->unique();
+            $table->string('phone_number', 9)->unique();
+            $table->boolean('approved')->default(false);
             $table->boolean('evaluated')->default(false);
             $table->unsignedBigInteger('category_id');
  

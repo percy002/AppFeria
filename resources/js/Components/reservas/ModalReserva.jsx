@@ -42,8 +42,8 @@ function ModalReserva({ stands }) {
                 onClose={() => setOpenModal(false)}
             >
                 <Modal.Header>
-                    Estás a punto de reservar este stand Por favor, confirma que
-                    todos los detalles son correctos antes de proceder.{" "}
+                    Estás a punto de reservar Por favor, confirma que
+                    todos los detalles son correctos antes de proceder.
                 </Modal.Header>
                 <Modal.Body>
                     {message && <p>{message}</p>}
@@ -51,7 +51,7 @@ function ModalReserva({ stands }) {
                         <>
                             <div className="space-y-6">
                                 <p>
-                                    usuario: {auth.cliente.name}{" "}
+                                    usuario: {auth.cliente.name}
                                     {auth.cliente.last_name}
                                 </p>
                                 <p>Categoria: {stands[0].category}</p>

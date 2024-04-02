@@ -2,6 +2,8 @@ import { Table, Button } from "flowbite-react";
 import ModalVerReserva from "./ModalVerReserva";
 import ModalPagos from "../pagos/ModalPagos";
 import { useState } from "react";
+import ModalCorregirPago from "../pagos/ModalCorregirPago";
+import ModalObservacionesPago from "../pagos/ModalObservacionesPago";
 const RowReserva = ({ reservation }) => {
     const [reservationState, setReservationState] = useState(
         reservation.enable ? true : false
@@ -12,11 +14,18 @@ const RowReserva = ({ reservation }) => {
     );
 
     const [paymentVerified, setPaymentVerified] = useState(
-        reservation.payment?.paymentStatus?.status || false
+        reservation.payment?.payment_status?.[
+            reservation.payment.payment_status.length - 1
+        ]?.status || false
     );
 
-    //estado de la revision del pago
+    const [payment,setPayment] = useState(reservation.payment)
 
+    const updatePayment = (updates) => {
+        setPayment(prev => ({...prev,...updates}))
+    }
+    //estado de la revision del pago
+    console.log(payment);
     const HandleButtonAnularReserva = () => {
         axios
             .delete(route("reservaciones.eliminar"), {
@@ -44,7 +53,7 @@ const RowReserva = ({ reservation }) => {
                     {
                         <ModalVerReserva
                             stands={reservation.stands}
-                            payment={reservation.payment}
+                            payment={payment}
                         />
                     }
                     {!paymentState && reservationState && (
@@ -67,11 +76,21 @@ const RowReserva = ({ reservation }) => {
             <Table.Cell align="center">
                 {paymentState ? (
                     paymentVerified == "aceptado" ? (
-                        <span className="text-green-500">En proceso</span>
+                        <span className="text-green-500">Aceptado</span>
                     ) : paymentVerified == "observado" ? (
-                        <span className="text-green-500">Observado</span>
+                        <div className="">
+                            <span className="text-red-800">Observado</span>
+                            <ModalObservacionesPago paymentStatus={payment.payment_status[payment.payment_status.length - 1]}/>
+                            <ModalCorregirPago
+                                stands={reservation.stands}
+                                reservationId={reservation.id}
+                                updatePaymentState={setPaymentState}
+                                updatePayment={updatePayment}
+                                updatePaymentVerified = {setPaymentVerified}
+                            />
+                        </div>
                     ) : (
-                        <span className="text-green-500">En proceso</span>
+                        <span className="text-green-500">{paymentVerified}</span>
                     )
                 ) : !reservationState ? (
                     "Reserva Anulada"

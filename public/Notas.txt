@@ -2,16 +2,9 @@
 ****frontend
 
 aumentar mensaje de confirmación en reservas
-dividir el mapa de mypes
-agregar ver mapa
+agregar ver mapa al dentro del mapa
 
-3 estados de pagos 
-- aceptado
-- en proceso
--observado
- - el pago no coincide
- - no se abono a la cuenta - verifique con su banco
- - 
+
 
 agregar botón para mover el mapa
 
@@ -64,4 +57,3 @@ el bloque "d" de comida continua del bloque "b" no tiene su propia numeración
 
 ***
 hacer validaciones en registro
-agregar modal de registro correcto

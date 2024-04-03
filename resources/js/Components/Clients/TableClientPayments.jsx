@@ -6,15 +6,16 @@ export const TableClientPayments = ({clientes}) => {
     <div className="overflow-x-auto">
             <Table striped>
                 <Table.Head>
-                    <Table.HeadCell>Categoria</Table.HeadCell>
+                    <Table.HeadCell>Categoría</Table.HeadCell>
                     <Table.HeadCell>RUC</Table.HeadCell>
-                    <Table.HeadCell>Razon Social</Table.HeadCell>
+                    <Table.HeadCell>Razón Social</Table.HeadCell>
                     <Table.HeadCell>Nombres y Apellidos</Table.HeadCell>
                     <Table.HeadCell>DNI</Table.HeadCell>
                     <Table.HeadCell>Cargo</Table.HeadCell>
                     <Table.HeadCell>Email</Table.HeadCell>
                     <Table.HeadCell>Opciones</Table.HeadCell>
                     <Table.HeadCell>Revision de Pagos</Table.HeadCell>
+                    <Table.HeadCell>Documentos</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {

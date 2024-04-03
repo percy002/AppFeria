@@ -36,17 +36,31 @@ const RowClientPayment = ({ cliente }) => {
                                 stands={cliente.reservation.stands}
                                 payment={cliente.reservation.payment}
                                 updatePaymentStatus={updatePaymentStatus}
+                                clientId={cliente.id}
                             />
                         )}
                     </Table.Cell>
                     <Table.Cell>
-                        {paymentStatus && paymentStatus.status == "observado" ? (
+                        {paymentStatus &&
+                        paymentStatus.status == "observado" ? (
                             <ModalObservacionesPago
                                 paymentStatus={paymentStatus}
                             />
+                        ) : paymentStatus && paymentStatus.status ? (
+                            paymentStatus.status
                         ) : (
-                            paymentStatus && paymentStatus.status ? paymentStatus.status : "En Proceso"
+                            "En Proceso"
                         )}
+                    </Table.Cell>
+                    <Table.Cell>
+                        {paymentStatus &&
+                            paymentStatus.status == "aceptado" && (
+                                <div className="">
+                                    <div className="">fotocheck</div>
+                                    <div className="">factura</div>
+                                    <div className="">contrato</div>
+                                </div>
+                            )}
                     </Table.Cell>
                 </>
             ) : (

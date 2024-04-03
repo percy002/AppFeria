@@ -3,32 +3,52 @@ import { Button, Card, Modal, Label, Textarea, Select } from "flowbite-react";
 import { useEffect } from "react";
 import { useState } from "react";
 import ModalObservarPago from "./ModalObservarPago";
+import Swal from "sweetalert2";
 
-function ModalValidarPagos({ stands, payment, updatePaymentStatus }) {
+function ModalValidarPagos({ stands, payment, updatePaymentStatus,clientId }) {
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
-    const [detalleObservaciones, setDetalleObservaciones] = useState(
-        payment?.payment_status[payment.payment_status.length - 1]?.description
-    );
-    const [observaciones, setObservaciones] = useState();
-
-    // console.log(updatePaymentStatus);
-
+    
     const handleValidarPago = () => {
         const data = {
             payment_id: payment.id,
-            observaciones,
-            detalleObservaciones,
+            client_id: clientId,
         };
-        axios
-            .post(route("validarPago"), data)
-            .then((response) => {
-                setOpenModal(false);
-                updatePaymentStatus({status:"aceptado"});
-            })
-            .catch((error) => {
-                // Handle error
-            });
+
+        Swal.fire({
+            title: "¿Esta seguro de confirmar este pago?",
+            text: "Se Creara un credencial, factura y contrato para el usuario seleccionado!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Si, Confirmar!",
+            cancelButtonText: "Cancelar",
+
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axios
+                .post(route("validarPago"), data)
+                .then((response) => {
+                    setOpenModal(false);
+                    updatePaymentStatus({status:"aceptado"});
+                    Swal.fire({
+                        title: "Pago Aceptado",
+                        text: "El pago ha sido aceptado correctamente!",
+                        icon: "success"
+                    });
+                })
+                .catch((error) => {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Ha ocurrido un error al intentar validar el pago, por favor intente nuevamente.",
+                        icon: "error"
+                    });
+                });
+            }
+          });
+
+        
     };
     
     return (
@@ -131,6 +151,8 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus }) {
                     
                 </Modal.Body>
                 <Modal.Footer className="">
+                    {/* validar pago y observar pago solo si no se valido el pago previamente */}
+                    {/* solo se mostraran los botones si el pago es reciente o el pago es corregido */}
                     <Button color="blue" onClick={handleValidarPago}>
                         Validar Pago
                     </Button>

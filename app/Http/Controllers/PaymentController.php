@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use App\Models\Reservation;
 use App\Models\PaymentStatus;
+use App\Models\Invoice;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
@@ -127,25 +128,54 @@ class PaymentController extends Controller
     }
 
     public function validar(Request $request){
-        // return response()->json(['message' => ['payment' => $request->input('payment_id')]], 200);
 
-        $validatedData = $request->validate([
-            'payment_id' => 'required|integer|exists:payments,id',
-        ]);
-    
-        // Crea un nuevo PaymentStatus
-        $paymentStatus = new PaymentStatus;
-        $paymentStatus->payment_id = $validatedData['payment_id'];
-        $paymentStatus->user_id = auth()->user()->id;
-        $paymentStatus->date = now();
-        $paymentStatus->status = "aceptado";
+        DB::beginTransaction();
+        try{
+
+            $validatedData = $request->validate([
+                'payment_id' => 'required|integer|exists:payments,id',
+            ]);
+        
+            // Crea un nuevo PaymentStatus
+            $paymentStatus = new PaymentStatus;
+            $paymentStatus->payment_id = $validatedData['payment_id'];
+            $paymentStatus->user_id = auth()->user()->id;
+            $paymentStatus->date = now();
+            $paymentStatus->status = "aceptado";
+            $paymentStatus->save();
+
+            $payment = Payment::find($validatedData['payment_id']);
+            //crea una nueva factura
+
+            $lastInvoiceNumber = Invoice::max('number_invoice');
+            
+            // Si no hay ninguna boleta registrada, el último número será null
+            // En ese caso, comenzamos desde 'INT-0001'
+            if ($lastInvoiceNumber === null) {
+                $lastInvoiceNumber = 'INT-0000';
+            }
+
+            $prefix = 'INT-'; // Prefijo para la boleta
+            $newInvoiceNumber = $prefix . sprintf('%04d', substr($lastInvoiceNumber, 4) + 1);
+
+            while (Invoice::where('number_invoice', $newInvoiceNumber)->exists()) {
+                $newInvoiceNumber = $prefix . sprintf('%04d', substr($newInvoiceNumber, 4) + 1); // Incrementar el número de boleta hasta que se encuentre uno único
+            }
 
 
-    
-        if ($paymentStatus->save()) {
+            $invoice = new Invoice;
+            $invoice->number_invoice = $newInvoiceNumber;
+            $invoice->total = $payment->total;
+            $invoice->date = now();
+            $invoice->cliente_id = $request->input('client_id');
+            $invoice->save();
+
+            DB::commit();        
             return response()->json(['message' => 'aceptado'], 200);
-        } else {
-            return response()->json(['error' => 'Error al crear el estado del pago'], 500);
+             
+        }catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'Error al validar el pago: ' . $e->getMessage()], 500);
         }
     }
 

@@ -4,6 +4,10 @@ import ModalValidarPagos from "../pagos/ModalValidarPagos";
 import ModalVerReserva from "../reservas/ModalVerReserva";
 import { Table } from "flowbite-react";
 import ModalObservacionesPago from "../pagos/ModalObservacionesPago";
+import ModalVerPDF from "../UI/ModalVerPDF";
+import InvoicePdf from "../Pdf/InvoicePdf";
+import NavLink from "@/Components/NavLink";
+import { Button } from "flowbite-react";
 
 const RowClientPayment = ({ cliente }) => {
     const lastPaymentStatus =
@@ -55,10 +59,37 @@ const RowClientPayment = ({ cliente }) => {
                     <Table.Cell>
                         {paymentStatus &&
                             paymentStatus.status == "aceptado" && (
-                                <div className="">
-                                    <div className="">fotocheck</div>
-                                    <div className="">factura</div>
-                                    <div className="">contrato</div>
+                                <div className="flex flex-col">
+                                    <Button
+                                        as="a"
+                                        href={route("generateFotoCheckPDF")}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        variant="primary"
+                                    >
+                                        Ver Fotocheck
+                                    </Button>
+                                    <a
+                                        href={route("generateFotoCheckPDF")}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Ver Fotocheck
+                                    </a>
+                                    <a
+                                        href={route("generateInvoicePDF")}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Ver PDF
+                                    </a>
+                                    <a
+                                        href={route("generateContractPDF")}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Ver Contrato
+                                    </a>
                                 </div>
                             )}
                     </Table.Cell>

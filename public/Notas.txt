@@ -4,7 +4,7 @@
 aumentar mensaje de confirmación en reservas
 agregar ver mapa al dentro del mapa
 
-
+ 
 
 agregar botón para mover el mapa
 
@@ -25,7 +25,6 @@ un cliente solo puede realizar una reservación
 un cliente puede eliminar su reservación *
 un cliente puede editar el voucher de pago
 
-el administrador puede eliminar el pago
 
 un cliente de gobiernos locales puede reservar muchos locales , pero otro usuario solo puede reservar 3
 
@@ -57,3 +56,7 @@ el bloque "d" de comida continua del bloque "b" no tiene su propia numeración
 
 ***
 hacer validaciones en registro
+
+
+
+ahora los clientes pueden tener mas de una reserva porque puede anular las reservas hay que modificar el controlador para que solo mande al validador la reserva no anulada y pagada

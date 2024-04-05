@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
+use App\Models\Cliente;
+use App\Models\Reservation;
 
 use Illuminate\Http\Request;
 Use PDF;
@@ -65,17 +67,36 @@ class PdfController extends Controller
         //
     }
 
-    public function invoicePDF()
+    public function invoicePDF(Request $request)
     {
-        return Inertia::render('Pdf/InvoicePDF');
+        $clientId = $request->input('clientId');
+        $reservationId = $request->input('reservationId');
+
+        $cliente = Cliente::find($clientId);
+        $reservation = Reservation::with(['payment.paymentStatus','stands.category'])->find($reservationId);  
+        // $reservation = Reservation::find($reservationId);
+
+        // $acepted = $reservation->payment->paymentStatus;
+        
+        $acepted = $reservation->payment->paymentStatus()->where('status', 'aceptado')->get();
+
+        // dd($reservation);
+        if ($acepted) {
+            
+        }
+        // dd($reservation->stands);
+        return Inertia::render('Pdf/InvoicePDF',['client' => $cliente, 'stands' => $reservation->stands , 'payment' => $reservation->payment ]);
     }
 
-    public function fotocheckPDF()
+    public function fotocheckPDF($clientId)
     {
-        return Inertia::render('Pdf/FotocheckPDF');
+        $cliente = Cliente::find($clientId);
+        return Inertia::render('Pdf/FotocheckPDF',['client' => $cliente]);
     }
-    public function contractPDF()
+    public function contractPDF($clientId)
     {
-        return Inertia::render('Pdf/ContractPDF');
+        $cliente = Cliente::find($clientId);
+
+        return Inertia::render('Pdf/ContractPDF',['client' => $cliente]);
     }
 }

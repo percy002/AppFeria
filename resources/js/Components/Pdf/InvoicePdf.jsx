@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     },
     standsCell: {
         flex: 1,
+        marginTop: 5
     },
     sectionTitle: {
         fontWeight: "bold",
@@ -75,92 +76,137 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         color: "#E4E4E4",
     },
+    tableHeader: {
+        flexDirection: "row",
+    }
 });
 
 // Create Document Component
-const InvoicePdf = () => (
-    <Document>
-        <Page size="A4" style={styles.page}>
-            <View>
-                <Text style={styles.title}>Nota de Venta</Text>
-            </View>
-            <View style={styles.header}>
-                <Image src={"images/example.jpg"} style={styles.logo} />
+const InvoicePdf = ({ client, stands, payment }) => {
+    console.log(stands);
+    return (
+        <Document>
+            <Page size="A4" style={styles.page}>
                 <View>
-                    <Text style={styles.textBase}>
-                        Razón Social: Feria de Huancaro{" "}
-                    </Text>
-                    <Text style={styles.textBase}>RUC: 15165161</Text>
-                    <Text style={styles.textBase}>Teléfono: 957515966</Text>
+                    <Text style={styles.title}>Nota de Venta</Text>
                 </View>
-                <View style={styles.ticket}>
-                    <Text style={styles.textCenter}>Numero de Boleta</Text>
-                    <Text>758521256244</Text>
-                </View>
-            </View>
-            <View style={styles.body}>
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>
-                        Información de los locales
-                    </Text>
-                    <View style={styles.stands}>
-                        <View style={styles.standsCell}>
-                            <Text style={styles.tableTitle}>Categoría</Text>
-                            <Text style={styles.textCenter}>Animales</Text>
-                        </View>
-                        <View style={styles.standsCell}>
-                            <Text style={styles.tableTitle}>Bloque</Text>
-                            <Text style={styles.textCenter}>A</Text>
-                        </View>
-                        <View style={styles.standsCell}>
-                            <Text style={styles.tableTitle}>Nombre</Text>
-                            <Text style={styles.textCenter}>A-1</Text>
-                        </View>
-                        <View style={styles.standsCell}>
-                            <Text style={styles.tableTitle}>Precio</Text>
-                            <Text style={styles.textCenter}>s/. 155.00 </Text>
-                        </View>
+                <View style={styles.header}>
+                    <Image src={"images/example.jpg"} style={styles.logo} />
+                    <View>
+                        <Text style={styles.textBase}>
+                            Razón Social: Feria de Huancaro{" "}
+                        </Text>
+                        <Text style={styles.textBase}>RUC: 15165161</Text>
+                        <Text style={styles.textBase}>Teléfono: 957515966</Text>
+                    </View>
+                    <View style={styles.ticket}>
+                        <Text style={styles.textCenter}>Numero de Boleta</Text>
+                        <Text>758521256244</Text>
                     </View>
                 </View>
+                <View style={styles.body}>
+                    <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>
+                            Información de los locales
+                        </Text>  
+                        <View style={styles.tableHeader}>
+                            <View style={styles.standsCell}>
+                                <Text style={styles.tableTitle}>Categoría</Text>
+                            </View>
+                            <View style={styles.standsCell}>
+                                <Text style={styles.tableTitle}>Bloque</Text>
+                            </View>
+                            <View style={styles.standsCell}>
+                                <Text style={styles.tableTitle}>Nombre</Text>
+                            </View>
+                            <View style={styles.standsCell}>
+                                <Text style={styles.tableTitle}>Precio</Text>
+                            </View>
+                        </View>                      
+                        {stands &&
+                            stands.map((stand, index) => (
+                                <View style={styles.stands} key={stand.id}>
+                                    <View style={styles.standsCell}>
+                                        <Text style={styles.textCenter}>
+                                            {stand.category.name}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.standsCell}>
+                                        <Text style={styles.textCenter}>
+                                            {stand.block}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.standsCell}>
+                                        <Text style={styles.textCenter}>
+                                            {stand.name}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.standsCell}>
+                                        <Text style={styles.textCenter}>
+                                            s/. {stand.price}.00
+                                        </Text>
+                                    </View>
+                                </View>
+                            ))}
+                    </View>
 
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Detalles de pago</Text>
-                    <View style={styles.stands}>
-                        <View style={styles.standsCell}>
-                            <Text style={styles.tableTitle}>Tarifa</Text>
-                            <Text style={styles.textCenter}>s/. 155.00</Text>
-                        </View>
-                        <View style={styles.standsCell}>
-                            <Text style={styles.tableTitle}>IGV</Text>
-                            <Text style={styles.textCenter}>s/. 18.05</Text>
-                        </View>
-                        <View style={styles.standsCell}>
-                            <Text style={styles.tableTitle}>Total</Text>
-                            <Text style={styles.textCenter}>s/. 173.05</Text>
+                    <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>
+                            Detalles de pago
+                        </Text>
+                        <View style={styles.stands}>
+                            <View style={styles.standsCell}>
+                                <Text style={styles.tableTitle}>Tarifa</Text>
+                                <Text style={styles.textCenter}>
+                                    s./ {payment.total}.00
+                                </Text>
+                            </View>
+                            <View style={styles.standsCell}>
+                                <Text style={styles.tableTitle}>IGV</Text>
+                                <Text style={styles.textCenter}>s/. 18.05</Text>
+                            </View>
+                            <View style={styles.standsCell}>
+                                <Text style={styles.tableTitle}>Total</Text>
+                                <Text style={styles.textCenter}>
+                                    s./{payment.total}.00
+                                </Text>
+                            </View>
                         </View>
                     </View>
-                </View>
 
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Información del pago</Text>
-                    <View style={styles.stands}>
-                        <View style={styles.standsCell}>
-                            <Text style={styles.tableTitle}>Pagador</Text>
-                            <Text style={styles.textCenter}>Percy Bryan Jove Chirinos</Text>
-                        </View>
-                        <View style={styles.standsCell}>
-                            <Text style={styles.tableTitle}>Fecha de pago</Text>
-                            <Text style={styles.textCenter}>04/04/2024</Text>
-                        </View>
-                        <View style={styles.standsCell}>
-                            <Text style={styles.tableTitle}>Medio de pago</Text>
-                            <Text style={styles.textCenter}>Efectivo</Text>
+                    <View style={styles.section}>
+                        <Text style={styles.sectionTitle}>
+                            Información del pago
+                        </Text>
+                        <View style={styles.stands}>
+                            <View style={styles.standsCell}>
+                                <Text style={styles.tableTitle}>Pagador</Text>
+                                <Text style={styles.textCenter}>
+                                    {client.company_name
+                                        ? client.company_name
+                                        : client.name + " " + client.last_name}
+                                </Text>
+                            </View>
+                            <View style={styles.standsCell}>
+                                <Text style={styles.tableTitle}>
+                                    Fecha de pago
+                                </Text>
+                                <Text style={styles.textCenter}>
+                                    {payment.date}
+                                </Text>
+                            </View>
+                            <View style={styles.standsCell}>
+                                <Text style={styles.tableTitle}>
+                                    Medio de pago
+                                </Text>
+                                <Text style={styles.textCenter}>Efectivo</Text>
+                            </View>
                         </View>
                     </View>
                 </View>
-            </View>
-        </Page>
-    </Document>
-);
+            </Page>
+        </Document>
+    );
+};
 
 export default InvoicePdf;

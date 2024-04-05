@@ -23,4 +23,9 @@ class PaymentStatus extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function scopeAccepted($query)
+    {
+        return $query->where('status', 'aceptado');
+    }
+
 }

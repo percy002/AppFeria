@@ -86,7 +86,7 @@ Route::group(['prefix' => 'pagos'],function(){
 })->middleware(['auth', 'verified']);
 
 Route::get('invoicePDF', [PdfController::class, 'invoicePDF'])->name('generateInvoicePDF');
-Route::get('fotoCheckPDF', [PdfController::class, 'fotocheckPDF'])->name('generateFotoCheckPDF');
-Route::get('contractPDF', [PdfController::class, 'contractPDF'])->name('generateContractPDF');
+Route::get('fotoCheckPDF/{clientId}', [PdfController::class, 'fotocheckPDF'])->name('generateFotoCheckPDF');
+Route::get('contractPDF/{clientId}', [PdfController::class, 'contractPDF'])->name('generateContractPDF');
 
 require __DIR__.'/auth.php';

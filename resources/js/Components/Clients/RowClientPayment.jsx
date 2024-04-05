@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
-import ModalPagos from "../pagos/ModalPagos";
 import ModalValidarPagos from "../pagos/ModalValidarPagos";
-import ModalVerReserva from "../reservas/ModalVerReserva";
 import { Table } from "flowbite-react";
 import ModalObservacionesPago from "../pagos/ModalObservacionesPago";
-import ModalVerPDF from "../UI/ModalVerPDF";
-import InvoicePdf from "../Pdf/InvoicePdf";
-import NavLink from "@/Components/NavLink";
 import { Button } from "flowbite-react";
 
 const RowClientPayment = ({ cliente }) => {
@@ -20,6 +15,7 @@ const RowClientPayment = ({ cliente }) => {
     function updatePaymentStatus(updates) {
         setPaymentStatus((prevStatus) => ({ ...prevStatus, ...updates }));
     }
+    console.log(cliente.reservation[0].stands);
 
     return (
         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
@@ -58,38 +54,36 @@ const RowClientPayment = ({ cliente }) => {
                     </Table.Cell>
                     <Table.Cell>
                         {paymentStatus &&
-                            paymentStatus.status == "aceptado" && (
-                                <div className="flex flex-col">
+                            paymentStatus.status == "aceptado" &&(
+                                <div className="flex flex-col gap-2">
                                     <Button
                                         as="a"
-                                        href={route("generateFotoCheckPDF")}
+                                        href={route("generateInvoicePDF", { clientId: cliente.reservation.cliente_id })}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         variant="primary"
                                     >
-                                        Ver Fotocheck
+                                        Fotocheck
                                     </Button>
-                                    <a
-                                        href={route("generateFotoCheckPDF")}
+                                    <Button
+                                        as="a"
+                                        href={route("generateInvoicePDF", { clientId: cliente.reservation.cliente_id })}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        variant="primary"
                                     >
-                                        Ver Fotocheck
-                                    </a>
-                                    <a
-                                        href={route("generateInvoicePDF")}
+                                        Recibo
+                                    </Button>
+                                    <Button
+                                        as="a"
+                                        href={route("generateContractPDF", { clientId: cliente.reservation.cliente_id })}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        variant="primary"
                                     >
-                                        Ver PDF
-                                    </a>
-                                    <a
-                                        href={route("generateContractPDF")}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        Ver Contrato
-                                    </a>
+                                        Contrato
+                                    </Button>
+                                    
                                 </div>
                             )}
                     </Table.Cell>

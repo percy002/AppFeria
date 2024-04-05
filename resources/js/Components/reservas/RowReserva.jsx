@@ -8,7 +8,6 @@ const RowReserva = ({ reservation }) => {
     const [reservationState, setReservationState] = useState(
         reservation.enable ? true : false
     );
-    //estado pagado
     const [paymentState, setPaymentState] = useState(
         reservation.payment ? true : false
     );
@@ -19,13 +18,11 @@ const RowReserva = ({ reservation }) => {
         ]?.status || false
     );
 
-    const [payment,setPayment] = useState(reservation.payment)
+    const [payment, setPayment] = useState(reservation.payment);
 
     const updatePayment = (updates) => {
-        setPayment(prev => ({...prev,...updates}))
-    }
-    //estado de la revision del pago
-    console.log(payment);
+        setPayment((prev) => ({ ...prev, ...updates }));
+    };
     const HandleButtonAnularReserva = () => {
         axios
             .delete(route("reservaciones.eliminar"), {
@@ -35,11 +32,20 @@ const RowReserva = ({ reservation }) => {
                 if (response.status == 200) {
                     setReservationState(false);
                 }
-                // console.log(response.status);
             })
             .catch((error) => {
-                // Handle error
+                log(error);
             });
+    };
+    const HandleClickFotoCheck = async () => {
+        try {
+            const response = await axios.get(
+                route("generateFotoCheckPDF",{clientId : reservation.cliente_id}),
+                
+            );
+        } catch (error) {
+            console.log(error);
+        }
     };
     return (
         <Table.Row
@@ -80,22 +86,63 @@ const RowReserva = ({ reservation }) => {
                     ) : paymentVerified == "observado" ? (
                         <div className="">
                             <span className="text-red-800">Observado</span>
-                            <ModalObservacionesPago paymentStatus={payment.payment_status[payment.payment_status.length - 1]}/>
+                            <ModalObservacionesPago
+                                paymentStatus={
+                                    payment.payment_status[
+                                        payment.payment_status.length - 1
+                                    ]
+                                }
+                            />
                             <ModalCorregirPago
                                 stands={reservation.stands}
                                 reservationId={reservation.id}
                                 updatePaymentState={setPaymentState}
                                 updatePayment={updatePayment}
-                                updatePaymentVerified = {setPaymentVerified}
+                                updatePaymentVerified={setPaymentVerified}
                             />
                         </div>
                     ) : (
-                        <span className="text-green-500">{paymentVerified}</span>
+                        <span className="text-green-500">
+                            {paymentVerified}
+                        </span>
                     )
                 ) : !reservationState ? (
                     "Reserva Anulada"
                 ) : (
                     "pendiente de pago"
+                )}
+            </Table.Cell>
+            <Table.Cell align="center">
+                {paymentState && paymentVerified == "aceptado" && (
+                    <div className="flex flex-col gap-2">
+                        <Button
+                            as="a"
+                            href={route("generateFotoCheckPDF", { clientId: reservation.cliente_id })}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            variant="primary"
+                        >
+                            Fotocheck
+                        </Button>
+                        <Button
+                            as="a"
+                            href={route("generateInvoicePDF", { clientId: reservation.cliente_id, reservationId : reservation.id })}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            variant="primary"
+                        >
+                            Recibo
+                        </Button>
+                        <Button
+                            as="a"
+                            href={route("generateContractPDF", { clientId: reservation.cliente_id })}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            variant="primary"
+                        >
+                            Contrato
+                        </Button>
+                    </div>
                 )}
             </Table.Cell>
         </Table.Row>

@@ -24,16 +24,15 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: "white",
         width: "70%",
-       
     },
-    logo:{
+    logo: {
         width: "50%",
         padding: 15,
     },
     body: {
         flexDirection: "col",
     },
-    name:{
+    name: {
         marginTop: 15,
         color: "white",
     },
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
 });
 
 // Create Document Component
-const InvoicePdf = () => (
+const Fotocheck = ({ cliente }) => (
     <Document>
         <Page size="A4" style={styles.page}>
             <View style={styles.fotocheck}>
@@ -65,8 +64,11 @@ const InvoicePdf = () => (
                     <Image src={"images/example.jpg"} style={styles.logo} />
                 </View>
                 <View style={styles.body}>
-                    <Text style={styles.name}>Percy Bryan Jove Chirinos</Text>
-                    
+                    <Text style={styles.name}>
+                        {cliente.company_name
+                            ? cliente.company_name
+                            : cliente.name + " " + cliente.last_name}
+                    </Text>
                 </View>
             </View>
             <View style={styles.fotocheckRev}>
@@ -78,12 +80,10 @@ const InvoicePdf = () => (
                     <Text style={styles.name}>Feria Huancaro</Text>
                     <Text style={styles.name}>59 Edición</Text>
                     <Text style={styles.name}>Gore Gerepro Mypes</Text>
-                    
                 </View>
             </View>
-            
         </Page>
     </Document>
 );
 
-export default InvoicePdf;
+export default Fotocheck;

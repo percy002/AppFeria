@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->createCategories();
         $this->call(StandSeeder::class);
         $this->createClientes();
+        $this->createUsers('percy','percy@gmail.com');
+        $this->createUsers('elvis','elvis@gmail.com');
     }
 
     private function createAdmin()
@@ -31,6 +33,15 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $admin->assignRole('admin');
+    }
+
+    private function createUsers($name, $email){
+        $user = User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => bcrypt('12345678'),
+        ]);
+        $user->assignRole('user');        
     }
     
     private function createClientes()

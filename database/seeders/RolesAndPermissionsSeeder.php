@@ -24,7 +24,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'eliminar']);
         Permission::create(['name' => 'reservar']);
         Permission::create(['name' => 'comprar']);
-        Permission::create(['name' => 'aprovar']);
+        Permission::create(['name' => 'aprobar']);
 
         // create roles and assign created permissions
 
@@ -34,7 +34,13 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // or may be done by chaining
         $role = Role::create(['name' => 'user'])
-            ->givePermissionTo(['registrar','aprovar']);
+            ->givePermissionTo(['registrar','aprobar']);
+
+        $role = Role::create(['name' => 'caja'])
+            ->givePermissionTo(['registrar','eliminar','comprar']);
+
+        $role = Role::create(['name' => 'helpDesk'])
+            ->givePermissionTo(['registrar','eliminar','comprar','aprobar']);
 
         $role = Role::create(['name' => 'client']);
         $role->givePermissionTo(['reservar','comprar']);

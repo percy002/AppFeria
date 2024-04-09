@@ -16,12 +16,8 @@ borrar updated at y created at de la respuesta que envía dashboard controller
 
 hacer las validaciones de rutas
 
-un cliente solo puede realizar una reservación
-un cliente puede eliminar su reservación *
-un cliente puede editar el voucher de pago
 
 
-un cliente de gobiernos locales puede reservar muchos locales , pero otro usuario solo puede reservar 3
 
 
 modificar el seeder de stands para crear en intervalos
@@ -53,11 +49,9 @@ el bloque "d" de comida continua del bloque "b" no tiene su propia numeración
 hacer validaciones en registro
 
 
-
-ahora los clientes pueden tener mas de una reserva porque puede anular las reservas hay que modificar el controlador para que solo mande al validador la reserva no anulada y pagada
-
 ***modificaciones
 los stands probablemente tengan dimensiones
+
 agregar pasarela de pago a los métodos de pago
 
 si anulas una reserva sus stands deben quedar libres

@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,9 +28,15 @@ Route::get('/', function () {
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/dashboard', [DashboardController::class, 'index'])
-    ->middleware(['auth', 'verified'])
+// Route::get('/dashboard', [DashboardController::class, 'index'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('dashboard');
+
+Route::get('/dashboard/{any?}', [DashboardController::class, 'index'])
+->where('any', '.*')    
+->middleware(['auth', 'verified'])
     ->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -89,4 +96,8 @@ Route::get('invoicePDF', [PdfController::class, 'invoicePDF'])->name('generateIn
 Route::get('fotoCheckPDF/{clientId}', [PdfController::class, 'fotocheckPDF'])->name('generateFotoCheckPDF');
 Route::get('contractPDF/{clientId}', [PdfController::class, 'contractPDF'])->name('generateContractPDF');
 
+Route::group(['prefix' => 'usuarios'],function(){
+    Route::get('/',[UserController::class, 'listUsers'])->name("users.listUsers");
+
+});
 require __DIR__.'/auth.php';

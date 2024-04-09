@@ -1,18 +1,13 @@
 
 ****frontend
-
-aumentar mensaje de confirmación en reservas
 agregar ver mapa al dentro del mapa
 
  
 
 agregar botón para mover el mapa
 
-stands pagados deben aparecer restringidos en el mapa
+estands caducados deben ser liberados y aparecer disponibles en el mapa
 
-después de hacer el pago un cliente puede ver el mapa con sus reservaciones ?
-
-los stand pagados y reservados deben aparecer en diferentes colores ?
 
 crear buscador y pagination para clientes
 mostrar todos los mapas al usuario
@@ -60,3 +55,9 @@ hacer validaciones en registro
 
 
 ahora los clientes pueden tener mas de una reserva porque puede anular las reservas hay que modificar el controlador para que solo mande al validador la reserva no anulada y pagada
+
+***modificaciones
+los stands probablemente tengan dimensiones
+agregar pasarela de pago a los métodos de pago
+
+si anulas una reserva sus stands deben quedar libres

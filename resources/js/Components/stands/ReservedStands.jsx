@@ -12,7 +12,6 @@ export default function ReservedStands({ stands }) {
             prevStands.filter((_, i) => i != index)
         );
     };
-    console.log(stands);
     return (
         <div className="flex flex-col w-3/4 lg:w-full mx-auto">
             {stands.length > 0 &&

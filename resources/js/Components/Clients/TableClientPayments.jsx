@@ -1,7 +1,6 @@
 import RowClientPayment from "./RowClientPayment"
 import { Table } from "flowbite-react";
 export const TableClientPayments = ({clientes}) => {
-    // console.log(clientes.length);
   return (
     <div className="overflow-x-auto">
             <Table striped>

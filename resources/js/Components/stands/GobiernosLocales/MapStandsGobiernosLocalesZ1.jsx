@@ -25,7 +25,7 @@ const MapStandsGobiernosLocalesZ1 = () => {
                         cantidad={15}
                         inicio={15}
                         direction={"col"}
-                        stands={standsBloqueA}
+                        stands={standsBloqueA.slice(0,15)}
                         color={"purple"}
                         size={"wide"}
                         orden={"desc"}

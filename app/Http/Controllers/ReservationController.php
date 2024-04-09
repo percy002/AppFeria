@@ -7,6 +7,7 @@ use App\Models\Stand;
 use App\Models\Payment;
 use App\Models\ReservedStand;
 use App\Models\Reservation;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +30,6 @@ class ReservationController extends Controller
 
         $reservations = Reservation::where('cliente_id', $clientId)->with(['stands.category','payment.PaymentStatus'])->get();
 
-        // dd($reservations);
         return Inertia::render('Reservations/Reservation', [
             'reservations' => $reservations
         ]);
@@ -54,8 +54,23 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        
+        if (!$request->idCliente) {
+            return response()->json(['message' => 'Cliente no encontrado'], 404);
+        }
+
+        $findCliente = Cliente::with(['reservation' => function ($query) {
+            $query->where('enable', true); 
+        }])->where('id', $request->idCliente)->first();
+
+        if (isset($findCliente) && isset($findCliente->Reservation[count($findCliente->Reservation) -1]) && $findCliente->Reservation[count($findCliente->Reservation) - 1]->enable == 1) {
+
+            return response()->json(['message' => 'Ya tienes una reservación activa'], 409);
+        }
         $stands = $request->stands;
+
+        if (count($stands)>=5) {
+            return response()->json(['message' => 'Puedes reservar 5 locales como máximo'], 409);
+        }
         DB::beginTransaction();
         try {
             $total = 0;
@@ -78,10 +93,10 @@ class ReservationController extends Controller
 
             DB::commit();
 
-            return response()->json(['message' => 'Reservacion creada satisfactoriamente'], 201);
+            return response()->json(['message' => 'Reservación creada satisfactoriamente'], 201);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['message' => 'Error al crear la reservacion'.$e], 500);
+            return response()->json(['message' => 'Error al crear la reservación'.$e], 500);
         }
 
     }
@@ -123,10 +138,10 @@ class ReservationController extends Controller
             
             $reservation->enable = false;
             $reservation->save();
-            return response()->json(['message' => 'Reservacion eliminada satisfactoriamente']);
+            return response()->json(['message' => 'Reservación eliminada satisfactoriamente']);
 
         }
-        return response()->json(['error' => 'Reservacion no encontrada'], 404);
+        return response()->json(['error' => 'Reservación no encontrada'], 404);
 
 
     }

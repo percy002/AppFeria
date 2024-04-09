@@ -1,6 +1,7 @@
 import { usePage,router } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
 import { useState } from "react";
+import swal from "sweetalert2";
 function ModalReserva({ stands }) {
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
@@ -19,17 +20,19 @@ function ModalReserva({ stands }) {
                         router.get(`/reservaciones/`+idCliente);
                     }, 1500);
                 } else {
-                    console.error(
-                        "No se recibió ninguna respuesta:",
-                        error.request
-                    );
+                    swal.fire({
+                        title: "Error!",
+                        text: "Ha ocurrido un error al intentar reservar, por favor intente nuevamente.",
+                        icon: "error"
+                    })
                 }
             })
             .catch((error) => {
-                console.error(
-                    "No se recibió ninguna respuesta:",
-                    error.request
-                );
+                swal.fire({
+                    title: "Error!",
+                    text: error.response.data.message,
+                    icon: "error"
+                })
             });
     };
 

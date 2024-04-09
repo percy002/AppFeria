@@ -6,7 +6,6 @@ import { FeriaHuancaroMap } from "@/Components/stands/FeriaHuancaroMap/FeriaHuan
 
 export default function Dashboard({ auth, userRoles, clientes }) {   
 
-    // console.log(clientes);
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -25,7 +24,6 @@ export default function Dashboard({ auth, userRoles, clientes }) {
             {
                 userRoles == "client" && (
                     <div className="">
-
                         <FeriaHuancaroMap/>
                     </div>
                 )

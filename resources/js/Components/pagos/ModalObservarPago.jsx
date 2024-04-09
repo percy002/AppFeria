@@ -5,7 +5,6 @@ const ModalObservarPago = ({payment,updateState,updatePaymentStatusObs}) => {
     const [observaciones, setObservaciones] = useState("El pago no coincide");
     const [detalleObservaciones, setDetalleObservaciones] = useState("");
 
-    console.log(updatePaymentStatusObs);
     const handleObservarPago = () => {
         const data = {
             payment_id: payment.id,

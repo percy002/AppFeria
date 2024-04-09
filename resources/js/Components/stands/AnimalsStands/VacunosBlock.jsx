@@ -6,7 +6,6 @@ export default function VacunosBlock() {
     const { standsBloques } = props;
     const standsBloqueA = standsBloques["A"];
 
-    // console.log(standsBloques["A"]);
     return (
         <div className="col-span-1 flex items-center">
             <div className="flex flex-col gap-1">

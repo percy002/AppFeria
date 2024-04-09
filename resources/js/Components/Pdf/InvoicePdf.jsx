@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
 
 // Create Document Component
 const InvoicePdf = ({ client, stands, payment }) => {
-    console.log(stands);
     return (
         <Document>
             <Page size="A4" style={styles.page}>

@@ -30,6 +30,7 @@ class DashboardController extends Controller
             $standsBloques = $this->getStandsGobiernosLocales($stands,$user->client->category_id);
 
         }        
+        // dd($standsBloques);
         return Inertia::render('Dashboard', ['userRoles' => $userRoles,'clientes' => $clientes,'standsBloques' => $standsBloques,
     ]);
     }

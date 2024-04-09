@@ -31,7 +31,7 @@ export const GobLocalGroupStandDouble = ({
                         cantidad={1}
                         inicio={14}
                         color={color}
-                        stands={stands.slice(12, 13)}
+                        stands={stands.slice(13, 14)}
                         size={"small"}
                     />
                 )}

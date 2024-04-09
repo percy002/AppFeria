@@ -5,11 +5,9 @@ import MapStandsAnimals from "../AnimalsStands/MapStandsAnimals";
 import { usePage } from "@inertiajs/react";
 import { MapStandsGobiernosLocales } from "../GobiernosLocales/MapStandsGobiernosLocales";
 import { MapStandsMypes } from "../Mypes/MapStandsMypes";
-import MapStandsMypesZonaInf from "../Mypes/MapStandsMypesZonaInf";
 import { MapStandsGastronomia } from "../Gastronomia/MapStandsGastronomia";
 import { MapStandsGobiernoRegional } from "../GobiernoRegional/MapStandsGobiernoRegional";
 import { MapStandsOtros } from "../Otros/MapStandsOtros";
-import { Button } from "flowbite-react";
 import ModalMap from "./ModalMap";
 export const FeriaHuancaroMap = () => {
     const [reservedStands, setReservedStands] = useState([]);
@@ -18,7 +16,6 @@ export const FeriaHuancaroMap = () => {
     const { props } = usePage();
 
     const category = props.auth.user.client.category_id;
-    console.log(props.auth.user.client.approved);
 
     useEffect(() => {
         const handleScroll = (e) => {

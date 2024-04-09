@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import ModalValidarPagos from "../pagos/ModalValidarPagos";
-import { Table } from "flowbite-react";
+import { Table, Button } from "flowbite-react";
 import ModalObservacionesPago from "../pagos/ModalObservacionesPago";
-import { Button } from "flowbite-react";
 
 const RowClientPayment = ({ cliente }) => {
     const lastPaymentStatus =
@@ -15,7 +14,6 @@ const RowClientPayment = ({ cliente }) => {
     function updatePaymentStatus(updates) {
         setPaymentStatus((prevStatus) => ({ ...prevStatus, ...updates }));
     }
-    console.log(cliente.reservation[0].stands);
 
     return (
         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
@@ -33,8 +31,8 @@ const RowClientPayment = ({ cliente }) => {
                     <Table.Cell>
                         {cliente.reservation && (
                             <ModalValidarPagos
-                                stands={cliente.reservation.stands}
-                                payment={cliente.reservation.payment}
+                                stands={cliente.reservation[0].stands}
+                                payment={cliente.reservation[0].payment}
                                 updatePaymentStatus={updatePaymentStatus}
                                 clientId={cliente.id}
                             />
@@ -58,7 +56,7 @@ const RowClientPayment = ({ cliente }) => {
                                 <div className="flex flex-col gap-2">
                                     <Button
                                         as="a"
-                                        href={route("generateInvoicePDF", { clientId: cliente.reservation.cliente_id })}
+                                        href={route("generateInvoicePDF", { clientId: cliente.reservation[0].cliente_id, reservationId: cliente.reservation[0].id })}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         variant="primary"
@@ -67,7 +65,7 @@ const RowClientPayment = ({ cliente }) => {
                                     </Button>
                                     <Button
                                         as="a"
-                                        href={route("generateInvoicePDF", { clientId: cliente.reservation.cliente_id })}
+                                        href={route("generateInvoicePDF", { clientId: cliente.reservation[0].cliente_id, reservationId: cliente.reservation[0].id })}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         variant="primary"
@@ -76,7 +74,7 @@ const RowClientPayment = ({ cliente }) => {
                                     </Button>
                                     <Button
                                         as="a"
-                                        href={route("generateContractPDF", { clientId: cliente.reservation.cliente_id })}
+                                        href={route("generateContractPDF", { clientId: cliente.reservation[0].cliente_id })}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         variant="primary"

@@ -25,48 +25,54 @@ export default function Stand({ numero, stand, color, size }) {
             setStateSelected(false);
         }
     }, [reservedStands]);
-
     useEffect(() => {
-        if (stand.reservations.length > 0) {
-            setStateReservado(true);
-            setColorBorder("gray");
-            setColorStand("gray");
+        if (stand.reservations && stand.reservations.length > 0) {
+            const enable = stand.reservations.find((reservation) => reservation.enable);
+            if (enable) {
+                setStateReservado(true);
+                setColorBorder("gray");
+                setColorStand("gray");
+                
+            }
         }
     }, [stateReservado]);
 
     const handleClick = () => {
+        if (stateSelected || stateReservado) {
+            setColorStand("white");
+            setReservedStands((prevStands) =>
+                prevStands.filter((s) => s.id !== stand.id)
+            );
+            setStateSelected(false);
+        }
         if (!stateSelected && !stateReservado) {
             const reservedStand = {
                 id: stand.id,
                 category: stand.category.name,
                 name: stand.name,
                 block: stand.block,
-                price: stand.price,        
+                price: stand.price,
                 seleccionado: true,
                 color
             };
-            setReservedStands((prevStands) => [...prevStands, reservedStand]);
             setColorStand(color);
+            setReservedStands((prevStands) => [...prevStands, reservedStand]);
+            setStateSelected(true);
+
         }
-        if (stateSelected) {
-            setReservedStands((prevStands) =>
-                prevStands.filter((s) => s.id !== stand.id)
-            );
-            setColorStand("white");
-        }
+        
     };
+    
     const handleMouseEnter = () => {
         if (!stateSelected && !stateReservado) {
             setColorStand(color);
-        }
-        
+        }        
     };
 
     const handleMouseLeave = () => {
         if (!stateSelected && !stateReservado) {
             setColorStand("white");
-        }
-        
+        }        
     }
     return (
         <div className={`w-12 ${size !== "" && "w-full"}`}>

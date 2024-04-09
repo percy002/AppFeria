@@ -1,7 +1,6 @@
 import { Table } from "flowbite-react";
 import RowClient from "../RowClient";
 export default function TableClients({clientes}) {
-    // console.log(clientes);
     return (
         <div className="overflow-x-auto">
             <Table striped>

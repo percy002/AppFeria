@@ -37,16 +37,7 @@ const RowReserva = ({ reservation }) => {
                 log(error);
             });
     };
-    const HandleClickFotoCheck = async () => {
-        try {
-            const response = await axios.get(
-                route("generateFotoCheckPDF",{clientId : reservation.cliente_id}),
-                
-            );
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    
     return (
         <Table.Row
             key={reservation.id}
@@ -113,37 +104,48 @@ const RowReserva = ({ reservation }) => {
                 )}
             </Table.Cell>
             <Table.Cell align="center">
-                {paymentState && paymentVerified == "aceptado" && (
-                    <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2">
+                    {paymentState && paymentVerified == "aceptado" && (
+                        <>
+                            <Button
+                                as="a"
+                                href={route("generateFotoCheckPDF", {
+                                    clientId: reservation.cliente_id,
+                                })}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                variant="primary"
+                            >
+                                Credenciales
+                            </Button>
+                            <Button
+                                as="a"
+                                href={route("generateInvoicePDF", {
+                                    clientId: reservation.cliente_id,
+                                    reservationId: reservation.id,
+                                })}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                variant="primary"
+                            >
+                                Recibo
+                            </Button>
+                        </>
+                    )}
+                    {reservation && (
                         <Button
                             as="a"
-                            href={route("generateFotoCheckPDF", { clientId: reservation.cliente_id })}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            variant="primary"
-                        >
-                            Fotocheck
-                        </Button>
-                        <Button
-                            as="a"
-                            href={route("generateInvoicePDF", { clientId: reservation.cliente_id, reservationId : reservation.id })}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            variant="primary"
-                        >
-                            Recibo
-                        </Button>
-                        <Button
-                            as="a"
-                            href={route("generateContractPDF", { clientId: reservation.cliente_id })}
+                            href={route("generateContractPDF", {
+                                clientId: reservation.cliente_id,
+                            })}
                             target="_blank"
                             rel="noopener noreferrer"
                             variant="primary"
                         >
                             Contrato
                         </Button>
-                    </div>
-                )}
+                    )}
+                </div>
             </Table.Cell>
         </Table.Row>
     );

@@ -37,8 +37,13 @@ export default function Login({ status, canResetPassword }) {
             )}
 
             <form onSubmit={submit}>
+                <div className="text-sm my-10">
+                    <p>
+                        ¡Bienvenido! Por favor, Ingresa tus credenciales para continuar.
+                    </p>
+                </div>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value="Correo Electrónico" />
 
                     <TextInput
                         id="email"
@@ -55,7 +60,7 @@ export default function Login({ status, canResetPassword }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value="Contraseña" />
 
                     <TextInput
                         id="password"
@@ -70,7 +75,7 @@ export default function Login({ status, canResetPassword }) {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div className="block mt-4">
+                {/* <div className="block mt-4">
                     <label className="flex items-center">
                         <Checkbox
                             name="remember"
@@ -83,6 +88,12 @@ export default function Login({ status, canResetPassword }) {
                             Recordar
                         </span>
                     </label>
+                </div> */}
+                <div className="mt-8">
+                    <p className="text-sm">
+                        Inicia sesión si estás registrado. Si no, regístrate
+                        ahora
+                    </p>
                 </div>
 
                 <div className="flex items-center justify-end mt-4">

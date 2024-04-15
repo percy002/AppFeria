@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     },
     logo: {
         width: 100,
-        height: 100,
         marginRight: 20,
     },
     title: {
@@ -90,10 +89,10 @@ const InvoicePdf = ({ client, stands, payment }) => {
                     <Text style={styles.title}>Nota de Venta</Text>
                 </View>
                 <View style={styles.header}>
-                    <Image src={"images/example.jpg"} style={styles.logo} />
+                    <Image src={"images/logo_gerepro.png"} style={styles.logo} />
                     <View>
                         <Text style={styles.textBase}>
-                            Razón Social: Feria de Huancaro{" "}
+                            Razón Social: Feria
                         </Text>
                         <Text style={styles.textBase}>RUC: 15165161</Text>
                         <Text style={styles.textBase}>Teléfono: 957515966</Text>
@@ -157,12 +156,12 @@ const InvoicePdf = ({ client, stands, payment }) => {
                             <View style={styles.standsCell}>
                                 <Text style={styles.tableTitle}>Tarifa</Text>
                                 <Text style={styles.textCenter}>
-                                    s./ {payment.total}.00
+                                    s./ {payment.total - (0.18 * payment.total)}
                                 </Text>
                             </View>
                             <View style={styles.standsCell}>
                                 <Text style={styles.tableTitle}>IGV</Text>
-                                <Text style={styles.textCenter}>s/. 18.05</Text>
+                                <Text style={styles.textCenter}>{0.18 * payment.total}</Text>
                             </View>
                             <View style={styles.standsCell}>
                                 <Text style={styles.tableTitle}>Total</Text>

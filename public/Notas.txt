@@ -1,12 +1,10 @@
 
 ****frontend
-agregar ver mapa al dentro del mapa
-
- 
+agregar ver mapa al dentro del mapa 
 
 agregar botón para mover el mapa
 
-estands caducados deben ser liberados y aparecer disponibles en el mapa
+stands caducados deben ser liberados y aparecer disponibles en el mapa
 
 
 crear buscador y pagination para clientes
@@ -14,28 +12,21 @@ mostrar todos los mapas al usuario
 **** backend
 borrar updated at y created at de la respuesta que envía dashboard controller
 
-hacer las validaciones de rutas
-
-
-
-
+hacer las validaciones de rutas, solo autenticados y redirecciones
 
 modificar el seeder de stands para crear en intervalos
 
 hacer la validación de no reservar stands reservados
 
-habrá pagos en partes ?
-
 como asegurarme de que es un gobierno local o regional
 
 se debe saber quien es el usuario que aprueba
 
+¿un cliente puede tener mas de una reserva pagada, es decir tener 2 reservaciones diferentes?
+¿Cuando un cliente ah creado su cuenta, podrá subir imágenes de los productos que venderá?
+
 ***bugs
-hay un caso en el que se agrega 2 stands a la reservación
-
-hay un caso cuando se anula un reservación y se vuelve a reservar , solo aparece la venta anulada
-apareció un 404 al iniciar sesión con un nuevo usuario
-
+hay un bug cuando expira la sesión
 ***
 un cliente hace una reserva y lo paga, no puede volver a registrar un pago ni elegir stands
 
@@ -54,4 +45,10 @@ los stands probablemente tengan dimensiones
 
 agregar pasarela de pago a los métodos de pago
 
-si anulas una reserva sus stands deben quedar libres
+
+en el caso de que se desapurebe un cliente debe aparecer un mensaje con el motivo de su desaprobacion
+crear una lista de desaprobados y poder eliminar un cliente para poder registrarse otra vez
+
+separar artesanias de mypes
+
+agregar sweet alert a todos los mensajes

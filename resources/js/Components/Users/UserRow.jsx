@@ -1,5 +1,6 @@
 import { Table,Select } from "flowbite-react";
 const UserRow = ({ user }) => {
+    console.log(user);
     return (
         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
             <Table.Cell
@@ -10,14 +11,7 @@ const UserRow = ({ user }) => {
             </Table.Cell>
             <Table.Cell align="center">{user.email}</Table.Cell>
             <Table.Cell align="center">
-                <div className="max-w-md">                    
-                    <Select id="countries">
-                        <option>Administrador</option>
-                        <option>Aprobación</option>
-                        <option>Caja</option>
-                        <option>Help Desk</option>
-                    </Select>
-                </div>
+                {user.rol}
             </Table.Cell>
             <Table.Cell align="center">
                 <a

@@ -67,7 +67,9 @@ class UserController extends Controller
         $currentUserId = auth()->user()->id;
 
         $users = User::where('cliente_id', null)->where('id', '!=', $currentUserId)->get();
-
+        foreach ($users as $user) {
+            $user->rol = $user->getRoleNames()->first(); // Retorna una colección
+        }
         return response()->json(['users' => $users],200);
     }
 }

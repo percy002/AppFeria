@@ -70,7 +70,7 @@ export const FeriaHuancaroMap = () => {
             ) : (
                 <div className="">
                     <h3 className="my-4 text-4xl text-center font-bold text-gray-500">
-                        Tu cuenta no ha sido aprobada
+                        Su solicitud esta en proceso, por favor espere.
                     </h3>
                 </div>
             )}

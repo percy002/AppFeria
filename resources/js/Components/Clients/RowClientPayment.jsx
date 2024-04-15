@@ -5,8 +5,8 @@ import ModalObservacionesPago from "../pagos/ModalObservacionesPago";
 
 const RowClientPayment = ({ cliente }) => {
     const lastPaymentStatus =
-        cliente.reservation?.payment?.payment_status?.[
-            cliente.reservation?.payment?.payment_status?.length - 1
+        cliente.reservation[0]?.payment?.payment_status?.[
+            cliente.reservation[0]?.payment?.payment_status?.length - 1
         ];
 
     const [paymentStatus, setPaymentStatus] = useState(lastPaymentStatus);
@@ -14,7 +14,7 @@ const RowClientPayment = ({ cliente }) => {
     function updatePaymentStatus(updates) {
         setPaymentStatus((prevStatus) => ({ ...prevStatus, ...updates }));
     }
-
+    
     return (
         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
             {cliente ? (
@@ -56,12 +56,12 @@ const RowClientPayment = ({ cliente }) => {
                                 <div className="flex flex-col gap-2">
                                     <Button
                                         as="a"
-                                        href={route("generateInvoicePDF", { clientId: cliente.reservation[0].cliente_id, reservationId: cliente.reservation[0].id })}
+                                        href={route("generateFotoCheckPDF", { clientId: cliente.reservation[0].cliente_id, reservationId: cliente.reservation[0].id })}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         variant="primary"
                                     >
-                                        Fotocheck
+                                        Credenciales
                                     </Button>
                                     <Button
                                         as="a"

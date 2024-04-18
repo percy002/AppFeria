@@ -89,6 +89,7 @@ Route::group(['prefix' => 'pagos'],function(){
     Route::post('/update',[PaymentController::class, 'update'])->name("payment.update");
     Route::post('/validar',[PaymentController::class, 'validar'])->name("validarPago");
     Route::post('/observar',[PaymentController::class, 'observar'])->name("observarPago");
+    Route::post('/culqui',[PaymentController::class, 'culqui'])->name("culqui");
 
 })->middleware(['auth', 'verified']);
 
@@ -100,4 +101,5 @@ Route::group(['prefix' => 'usuarios'],function(){
     Route::get('/',[UserController::class, 'listUsers'])->name("users.listUsers");
 
 });
+
 require __DIR__.'/auth.php';

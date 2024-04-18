@@ -17,6 +17,37 @@
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
+        <script src="https://checkout.culqi.com/js/v4"></script>
+        <script>
+            Culqi.publicKey = 'pk_test_d31d0bc237c6f16f';
+
+            
+            // function culqi() {
+            //     if (Culqi.token) {  // ¡Objeto Token creado exitosamente!
+            //     const token = Culqi.token.id;
+            //     console.log('Se ha creado un Token: ', token);
+            //     //En esta linea de codigo debemos enviar el "Culqi.token.id"
+            //     //hacia tu servidor con Ajax
+            //     $.ajax({
+            //             url:"procesar_pago.php",
+            //             type:"POST",
+            //             data:{
+            //                 token:token
+            //             }
+            //         }).done(function(resp){
+            //             console.log(resp);
+            //     });
+            //     } else if (Culqi.order) {  // ¡Objeto Order creado exitosamente!
+            //     const order = Culqi.order;
+            //     console.log('Se ha creado el objeto Order: ', order);
+
+            //     } else {
+            //     // Mostramos JSON de objeto error en consola
+            //     console.log('Error : ',Culqi.error);
+            //     }
+            // }
+        </script>
+        
         @inertia
     </body>
 </html>

@@ -8,7 +8,7 @@ use App\Models\Invoice;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Http;
 class PaymentController extends Controller
 {
     /**
@@ -200,6 +200,37 @@ class PaymentController extends Controller
             return response()->json(['message' => 'Estado del pago observado creado con éxito'], 200);
         } else {
             return response()->json(['error' => 'Error al crear el estado observado del pago'], 500);
+        }
+    }
+    public function culqui(Request $request){
+        $token = $request->input('token');
+
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer sk_test_d9f597165cfcd825',
+                'Content-Type' => 'application/json',
+            ])->post('https://api.culqi.com/v2/charges', [
+                "amount" => 1000,
+                "currency_code" => "PEN",
+                "email" => "rogers@gerepro.com",
+                "source_id" => $token,
+                "capture" => false,
+                "description" => "Prueba",
+                "installments" => 2,
+                "metadata" => ["dni" => "70202170"],
+                "antifraud_details" => [
+                    "address" => "Avenida Lima 213",
+                    "address_city" => "Lima",
+                    "country_code" => "PE",
+                    "first_name" => "Rogers",
+                    "last_name" => "del mar",
+                    "phone_number" => "999999987"
+                ],
+            ]);
+            $body = $response->getBody();
+            return response()->json(['message' => 'Pago realizado con éxito', 'body' => $body, 'token' => $token], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['message' => 'Pago ', 'error' => $th->getMessage()], 500);  
         }
     }
 }

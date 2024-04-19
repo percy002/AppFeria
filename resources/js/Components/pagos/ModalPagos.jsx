@@ -1,17 +1,34 @@
 import { usePage } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
 import { useState } from "react";
-import { FileInput, Label, Table } from "flowbite-react";
+import { FileInput, Label, Table, Radio } from "flowbite-react";
 import { useRef } from "react";
 import Countdown from "../Countdown";
 import ModalPagoOnline from "./ModalPagoOnline";
+import { useEffect } from "react";
 
 function ModalPagos({ stands, reservationId, updatePaymentState }) {
     const fileInput = useRef();
-    const fileInputVoucher = useRef();
+    const contractFileUpload = useRef();
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
     const [message, setMessage] = useState(null);
+    const [selectedContractFile, setSelectedContractFile] = useState(null);
+
+    const handleFileChange = (event) => {
+        setSelectedContractFile(event.target.files[0]);
+        console.log(selectedContractFile);
+    };
+
+    useEffect(()=>{
+        if(selectedContractFile){
+            const fileExtension = selectedContractFile.name.split('.').pop();
+            if(fileExtension !== 'pdf' && fileExtension !== 'jpg'){
+                setSelectedContractFile(null);
+                alert('Solo se permiten archivos PDF y JPG');
+            }
+        }        
+    },[selectedContractFile])
 
     const handleClickPagar = () => {
         const data = new FormData();
@@ -39,14 +56,15 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                 );
             });
     };
-
+    useEffect(() => {   
+    }, []);
     return (
         <>
             <Button onClick={() => setOpenModal(true)}>Pagar</Button>
             <Modal
                 dismissible
                 show={openModal}
-                onClose={() => setOpenModal(false)}
+                onClose={() => {setOpenModal(false), setSelectedContractFile(null)}}
                 size="7xl"
             >
                 <Modal.Header>
@@ -57,13 +75,13 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                     <div className="mt-0">
                         <Countdown time={2} />
                     </div>
-                    <div className="flex gap-1">
+                    <div className="grid grid-cols-5 gap-1">
                         {/* DETALLE DE RESERVA */}
-                        <div className="flex-1 flex flex-col border-r-2 border-gray-500">
+                        <div className="col-span-2 flex flex-col border-r-2 border-gray-500">
                             <h4>Información de la Reserva</h4>
                             <div className="space-y-3">
                                 <p>
-                                    usuario: {auth.cliente.name}{" "}
+                                    usuario: {auth.cliente.name}
                                     {auth.cliente.last_name}
                                 </p>
                                 <p>Categoría: {stands[0].category.name}</p>
@@ -81,7 +99,7 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                                     <Table.Body className="divide-y">
                                         {stands &&
                                             stands.map((stand) => (
-                                                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" id={stand.name}>
                                                     <Table.Cell>
                                                         {stand.block}
                                                     </Table.Cell>
@@ -114,63 +132,83 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                         </div>
 
                         {/* CUENTAS DE BANCOS Y PAGOS ONLINE*/}
-                        <div className="flex-1 pl-2">
+                        <div className="col-span-3 flex-2 pl-2">
                             {/* ADJUNTAR PRUEBA PARA VER MÉTODOS DE PAGO */}
                             <div className="">
                                 <div className="mt-2">
                                     <div className="my-2 block">
                                         <Label
                                             htmlFor="file-voucher_upload"
-                                            value="Adjunte el voucher de pago"
+                                            value="Adjunte el contrato firmado "
                                         />
                                         <span className="text-red-600">
-                                             (Solo PDF y JPG permitidos)
+                                            (Solo PDF y JPG permitidos)
                                         </span>
                                     </div>
                                     <FileInput
-                                        id="file-voucher_upload"
-                                        ref={fileInputVoucher}
+                                        onChange={handleFileChange}
+                                        id="contract-file-upload"
+                                        ref={contractFileUpload}
+                                        accept=".pdf,.jpg"
                                     />
                                 </div>
                             </div>
-                            <h4 className="">Cuentas Bancarias</h4>
-                            <ul className="flex justify-between">
-                                <li>
-                                    Banco de la Nación:
-                                    <ul>
-                                        <li>Número de cuenta: 12345XXXX</li>
+                            {selectedContractFile && (
+                                <fieldset className="flex justify-around max-w-md gap-12 mt-4 p-8">
+                                    <legend className="mb-4">
+                                        Elija el método de pago
+                                    </legend>
+                                    <ModalPagoOnline />
+                                </fieldset>
+                            )}
+                            {selectedContractFile && (
+                                <div className="">
+                                    <h4 className="">Cuentas Bancarias</h4>
+                                    <ul className="flex justify-between">
                                         <li>
-                                            Código de cuenta interbancario
-                                            (CCI): ABC123
+                                            Banco de la Nación:
+                                            <ul>
+                                                <li>
+                                                    Número de cuenta: 12345XXXX
+                                                </li>
+                                                <li>
+                                                    Código de cuenta
+                                                    interbancario (CCI): ABC123
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            Banco Interbank:
+                                            <ul>
+                                                <li>
+                                                    Número de cuenta: 09876XXX
+                                                </li>
+                                                <li>
+                                                    Código de cuenta
+                                                    interbancario (CCI): XYZ456
+                                                </li>
+                                            </ul>
                                         </li>
                                     </ul>
-                                </li>
-                                <li>
-                                    Banco Interbank:
-                                    <ul>
-                                        <li>Número de cuenta: 09876XXX</li>
-                                        <li>
-                                            Código de cuenta interbancario
-                                            (CCI): XYZ456
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <div className="my-4">
-                                <ModalPagoOnline />
-                            </div>
-                            <div className="mt-2">
-                                <div className="my-2 block">
-                                    <Label
-                                        htmlFor="file-upload"
-                                        value="Adjunte el voucher de pago"
-                                    />
-                                    <span className="text-red-600">
-                                        (Solo PDF y JPG permitidos)
-                                    </span>
+                                    
+                                    <div className="mt-2">
+                                        <div className="my-2 block">
+                                            <Label
+                                                htmlFor="file-upload"
+                                                value="Adjunte el voucher de pago"
+                                            />
+                                            <span className="text-red-600">
+                                                (Solo PDF y JPG permitidos)
+                                            </span>
+                                        </div>
+                                        <FileInput
+                                            id="file-upload"
+                                            ref={fileInput}
+                                        />
+                                    </div>
                                 </div>
-                                <FileInput id="file-upload" ref={fileInput} />
-                            </div>
+                            )}
+                            
                         </div>
                     </div>
                 </Modal.Body>

@@ -27,6 +27,7 @@ se debe saber quien es el usuario que aprueba
 
 ***bugs
 hay un bug cuando expira la sesión
+cuando expira la sesion 
 ***
 un cliente hace una reserva y lo paga, no puede volver a registrar un pago ni elegir stands
 
@@ -43,12 +44,11 @@ hacer validaciones en registro
 ***modificaciones
 los stands probablemente tengan dimensiones
 
-agregar pasarela de pago a los métodos de pago
-
-
 en el caso de que se desapurebe un cliente debe aparecer un mensaje con el motivo de su desaprobacion
 crear una lista de desaprobados y poder eliminar un cliente para poder registrarse otra vez
 
 separar artesanias de mypes
 
 agregar sweet alert a todos los mensajes
+
+

@@ -17,13 +17,7 @@
         @inertiaHead
     </head>
     <body class="font-sans antialiased">
-        <script src="https://checkout.culqi.com/js/v4"></script>
-        <script>
-            Culqi.publicKey = 'pk_test_d31d0bc237c6f16f';
-
-            
-            
-        </script>
+        <script src="https://js.culqi.com/checkout-js"></script>
         
         @inertia
     </body>

@@ -6,6 +6,7 @@ import { useRef } from "react";
 import Countdown from "../Countdown";
 import ModalPagoOnline from "./ModalPagoOnline";
 import { useEffect } from "react";
+import ModalPaymentByTransfer from "./ModalPaymentByTransfer";
 
 function ModalPagos({ stands, reservationId, updatePaymentState }) {
     const fileInput = useRef();
@@ -15,20 +16,38 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
     const [message, setMessage] = useState(null);
     const [selectedContractFile, setSelectedContractFile] = useState(null);
 
+    const [dataPayment, setDataPayment] = useState({});
+
+    useEffect(() => {
+        // Inicializa dataPayment como un objeto vacío
+        // console.log(auth);
+        const cliente = auth.cliente;
+        const paymentAmount = stands.reduce(
+            (sum, stand) => sum + stand.price,
+            0
+        );
+        const dataPayment = {
+            amount: paymentAmount * 100,
+            email: cliente.email,
+            name: cliente.company_name
+                ? cliente.company_name
+                : cliente.name + " " + cliente.last_name,
+        };
+        setDataPayment(dataPayment);
+    }, []);
     const handleFileChange = (event) => {
         setSelectedContractFile(event.target.files[0]);
-        console.log(selectedContractFile);
     };
 
-    useEffect(()=>{
-        if(selectedContractFile){
-            const fileExtension = selectedContractFile.name.split('.').pop();
-            if(fileExtension !== 'pdf' && fileExtension !== 'jpg'){
+    useEffect(() => {
+        if (selectedContractFile) {
+            const fileExtension = selectedContractFile.name.split(".").pop();
+            if (fileExtension !== "pdf" && fileExtension !== "jpg") {
                 setSelectedContractFile(null);
-                alert('Solo se permiten archivos PDF y JPG');
+                alert("Solo se permiten archivos PDF y JPG");
             }
-        }        
-    },[selectedContractFile])
+        }
+    }, [selectedContractFile]);
 
     const handleClickPagar = () => {
         const data = new FormData();
@@ -56,15 +75,16 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                 );
             });
     };
-    useEffect(() => {   
-    }, []);
+    // useEffect(() => {}, []);
     return (
         <>
             <Button onClick={() => setOpenModal(true)}>Pagar</Button>
             <Modal
                 dismissible
                 show={openModal}
-                onClose={() => {setOpenModal(false), setSelectedContractFile(null)}}
+                onClose={() => {
+                    setOpenModal(false), setSelectedContractFile(null);
+                }}
                 size="7xl"
             >
                 <Modal.Header>
@@ -99,7 +119,11 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                                     <Table.Body className="divide-y">
                                         {stands &&
                                             stands.map((stand) => (
-                                                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800" id={stand.name}>
+                                                <Table.Row
+                                                    className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                                                    id={stand.name}
+                                                    key={stand.id}
+                                                >
                                                     <Table.Cell>
                                                         {stand.block}
                                                     </Table.Cell>
@@ -154,75 +178,31 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                                 </div>
                             </div>
                             {selectedContractFile && (
-                                <fieldset className="flex justify-around max-w-md gap-12 mt-4 p-8">
-                                    <legend className="mb-4">
+                                <div className="justify-around mt-4">
+                                    <p className="mb-4 font-bold text-xl">
                                         Elija el método de pago
-                                    </legend>
-                                    <ModalPagoOnline />
-                                </fieldset>
-                            )}
-                            {selectedContractFile && (
-                                <div className="">
-                                    <h4 className="">Cuentas Bancarias</h4>
-                                    <ul className="flex justify-between">
-                                        <li>
-                                            Banco de la Nación:
-                                            <ul>
-                                                <li>
-                                                    Número de cuenta: 12345XXXX
-                                                </li>
-                                                <li>
-                                                    Código de cuenta
-                                                    interbancario (CCI): ABC123
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            Banco Interbank:
-                                            <ul>
-                                                <li>
-                                                    Número de cuenta: 09876XXX
-                                                </li>
-                                                <li>
-                                                    Código de cuenta
-                                                    interbancario (CCI): XYZ456
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    
-                                    <div className="mt-2">
-                                        <div className="my-2 block">
-                                            <Label
-                                                htmlFor="file-upload"
-                                                value="Adjunte el voucher de pago"
+                                    </p>
+                                    <div className="w-full flex justify-center">
+                                        <div className="flex justify-center gap-8">
+                                            <ModalPagoOnline
+                                                data={dataPayment}
                                             />
-                                            <span className="text-red-600">
-                                                (Solo PDF y JPG permitidos)
-                                            </span>
+                                            <ModalPaymentByTransfer
+                                                contractFile={
+                                                    selectedContractFile
+                                                }
+                                                stands={stands}
+                                                reservationId={reservationId}
+                                                updatePaymentState = {updatePaymentState}
+                                                setOpenModalPayment = {setOpenModal}
+                                            />
                                         </div>
-                                        <FileInput
-                                            id="file-upload"
-                                            ref={fileInput}
-                                        />
                                     </div>
                                 </div>
                             )}
-                            
                         </div>
                     </div>
                 </Modal.Body>
-                {!message && (
-                    <Modal.Footer className="">
-                        <Button onClick={handleClickPagar}>Guardar</Button>
-                        <Button
-                            color="gray"
-                            onClick={() => setOpenModal(false)}
-                        >
-                            Cancelar
-                        </Button>
-                    </Modal.Footer>
-                )}
             </Modal>
         </>
     );

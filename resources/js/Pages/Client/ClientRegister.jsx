@@ -50,7 +50,7 @@ export default function ClientRegister() {
 
     const submit = (e) => {
         e.preventDefault();
-
+        
         axios
             .post(route("client.register"),data)
             .then((response) => {

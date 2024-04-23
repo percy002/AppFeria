@@ -16,6 +16,7 @@ return new class extends Migration
             $table->float('total');
             $table->timestamp('date');
             $table->string('file');
+            $table->string('contractFile');
             $table->unsignedBigInteger('reservation_id');
             $table->timestamps();
 

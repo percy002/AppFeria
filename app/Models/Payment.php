@@ -16,6 +16,7 @@ class Payment extends Model
         "total",
         "date",
         "file",
+        "contractFile",
         "reservation_id"
     ];
 

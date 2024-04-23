@@ -60,8 +60,15 @@ h5 {
     padding-bottom: 0.1rem;
 }
 
-
+.button_payment_by_transfer span{
+    height: 100%;
+    padding: 0rem;
+}
 
 .card_padding div{
     padding: 0.2rem;
+}
+
+.swal2-popup-custom {
+    z-index: 1000 !important;
 }

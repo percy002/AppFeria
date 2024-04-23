@@ -50,5 +50,5 @@ crear una lista de desaprobados y poder eliminar un cliente para poder registrar
 separar artesanias de mypes
 
 agregar sweet alert a todos los mensajes
-
+leer sobre el sistema antifraude y realizar las modificaciones
 

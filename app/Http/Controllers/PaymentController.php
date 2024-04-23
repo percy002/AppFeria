@@ -33,9 +33,14 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         //
+        
         if ($request->hasFile('file')) {
             $file = $request->file('file');
             $path = $file->store('uploads', 'public');
+        }
+        if ($request->hasFile('contractFile')) {
+            $file = $request->file('contractFile');
+            $pathContractFile = $file->store('contractFiles', 'public');
         }
         
         $stands = $request->input('stands');
@@ -48,12 +53,18 @@ class PaymentController extends Controller
         $payment->date = now();
         $payment->total = $reservation->total;
         $payment->file = $path ?? null;
+        $payment->contractFile = $pathContractFile ?? null;
         $payment->reservation_id = $reservationId;
     
-        $payment->save();
-        return response()->json([
-            'mensaje' => "pagado con éxito"
-        ]);
+        if ($payment->save()) {
+            return response()->json([
+                'mensaje' => "Pago registrado con éxito"
+            ]);
+        }else{
+            return response()->json([
+                'mensaje' => "ha ocurrido un error con el pago, inténtelo nuevamente"
+            ]);
+        }
     }
 
     /**
@@ -204,27 +215,30 @@ class PaymentController extends Controller
     }
     public function culqui(Request $request){
         $token = $request->input('token');
+        $amount = $request->input('amount');
+        $email = $request->input('email');
+
+        $currentUser = auth()->user();
+        $currentClient = $currentUser->client;
+
 
         try {
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer sk_test_d9f597165cfcd825',
                 'Content-Type' => 'application/json',
             ])->post('https://api.culqi.com/v2/charges', [
-                "amount" => 1000,
+                "amount" => $amount,
                 "currency_code" => "PEN",
-                "email" => "rogers@gerepro.com",
+                "email" => $email,
                 "source_id" => $token,
                 "capture" => false,
                 "description" => "Prueba",
                 "installments" => 2,
-                "metadata" => ["dni" => "70202170"],
+                "metadata" => ["dni" => $currentClient->dni],
                 "antifraud_details" => [
-                    "address" => "Avenida Lima 213",
-                    "address_city" => "Lima",
-                    "country_code" => "PE",
-                    "first_name" => "Rogers",
-                    "last_name" => "del mar",
-                    "phone_number" => "999999987"
+                    "first_name" => $currentClient->name,
+                    "last_name" => $currentClient->last_name,
+                    "phone_number" => $currentClient->phone_number,
                 ],
             ]);
             $body = $response->getBody();

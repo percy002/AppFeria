@@ -6,46 +6,53 @@ const ModalPagoOnline = ({ data }) => {
         if (Culqi?.token) {
             // ¡Objeto Token creado exitosamente!
             const token = Culqi.token.id;
+            // Culqi.close();
             const dataPayment = {
                 token,
                 amount: data.amount,
                 email: data.email,
             };
-            Swal.fire({
-                title: "Cargando...",
-                html: "Por favor espera mientras procesamos tu pago.",
-                allowOutsideClick: false,
-                willOpen: () => {
-                    Swal.showLoading();
-                },
-                customClass: {
-                    popup: "swal2-popup-custom",
-                },
-                showConfirmButton: false,
-            });
             Culqi.close();
+
             axios
                 .post(route("culqui"), dataPayment)
                 .then((response) => {
-                    if (response.data.body) {
-                        Swal.close();
+                    if (response.status == 201) {
+                        // Culqi.close();
+
+                        Swal.fire({
+                            icon: "success",
+                            title: "¡Éxito!",
+                            text: "El pago se realizó correctamente",
+                            timer: 1000
+                        });
+
+                        console.log(response);
                     } else {
+                        // Culqi.close();
+
                         Swal.fire({
                             icon: "error",
-                            title: "Oops...",
-                            text: "Algo salió mal 2!",
-                            footer: `<a href>${response.data.user_message}</a>`,
+                            title: "Error",
+                            text: response.data.message.user_message,
+                            timer: 1000
+
                         });
-                        console.log(response.data.error);
+                        Culqi.close();
+
+                        console.log(response);
                     }
                 })
                 .catch((error) => {
-                    Swal.close();
                     Swal.fire({
                         icon: "error",
-                        title: "Oops...",
-                        text: "Algo malio sal!",
-                        footer: `<a href>${error.data.user_message}</a>`,
+                        title: "Error",
+                        text: "Algo salió mal!",
+                        footer: `<a href>${
+                            error.response ? error.response.data.message : ""
+                        }</a>`,
+                        timer: 1000
+
                     });
                     console.log(error);
                 });
@@ -309,7 +316,6 @@ const ModalPagoOnline = ({ data }) => {
             appearance,
         };
         const Culqi = new CulqiCheckout(publicKey, config);
-        // console.log(Culqi);
         Culqi.culqi = () => handleCulqiAction(Culqi, data);
 
         // console.log(Culqi.settings);

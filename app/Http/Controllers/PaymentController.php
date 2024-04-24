@@ -233,7 +233,7 @@ class PaymentController extends Controller
                 "source_id" => $token,
                 "capture" => false,
                 "description" => "Prueba",
-                "installments" => 2,
+                "installments" => 1,
                 "metadata" => ["dni" => $currentClient->dni],
                 "antifraud_details" => [
                     "first_name" => $currentClient->name,
@@ -241,8 +241,10 @@ class PaymentController extends Controller
                     "phone_number" => $currentClient->phone_number,
                 ],
             ]);
-            $body = $response->getBody();
-            return response()->json(['message' => 'Pago realizado con éxito', 'body' => $body, 'token' => $token], 200);
+            $body = $response->json();
+
+            
+            return response()->json(['message' => $body, 'token' => $token]);
         } catch (\Throwable $th) {
             return response()->json(['message' => 'Pago ', 'error' => $th->getMessage()], 500);  
         }

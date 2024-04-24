@@ -221,32 +221,49 @@ class PaymentController extends Controller
         $currentUser = auth()->user();
         $currentClient = $currentUser->client;
 
+        $stands = $request->input('stands');
+        $reservationId = $request->input('reservationId');
 
-        try {
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer sk_test_d9f597165cfcd825',
-                'Content-Type' => 'application/json',
-            ])->post('https://api.culqi.com/v2/charges', [
-                "amount" => $amount,
-                "currency_code" => "PEN",
-                "email" => $email,
-                "source_id" => $token,
-                "capture" => false,
-                "description" => "Prueba",
-                "installments" => 1,
-                "metadata" => ["dni" => $currentClient->dni],
-                "antifraud_details" => [
-                    "first_name" => $currentClient->name,
-                    "last_name" => $currentClient->last_name,
-                    "phone_number" => $currentClient->phone_number,
-                ],
-            ]);
-            $body = $response->json();
+        $reservation = Reservation::with('payment')->find($reservationId);
+        // return response()->json(['message' => $reservation->payment, 'token' => $token]);
+
+        if ($reservation &&  !$reservation->payment) {
+            try {
+                $response = Http::withHeaders([
+                    'Authorization' => 'Bearer sk_test_d9f597165cfcd825',
+                    'Content-Type' => 'application/json',
+                ])->post('https://api.culqi.com/v2/charges', [
+                    "amount" => $amount,
+                    "currency_code" => "PEN",
+                    "email" => $email,
+                    "source_id" => $token,
+                    "capture" => false,
+                    "description" => "Prueba",
+                    "installments" => 1,
+                    "metadata" => ["dni" => $currentClient->dni],
+                    "antifraud_details" => [
+                        "first_name" => $currentClient->name,
+                        "last_name" => $currentClient->last_name,
+                        "phone_number" => $currentClient->phone_number,
+                    ],
+                ]);
+                $body = $response->json();
+
 
             
-            return response()->json(['message' => $body, 'token' => $token]);
-        } catch (\Throwable $th) {
-            return response()->json(['message' => 'Pago ', 'error' => $th->getMessage()], 500);  
+            $payment = new Payment;
+        
+            $payment->date = now();
+            $payment->total = $reservation->total;
+            $payment->reservation_id = $reservationId;
+        
+            if ($payment->save()) {
+                return response()->json(['message' => $body, 'token' => $token]);
+            }
+                
+            } catch (\Throwable $th) {
+                return response()->json(['message' => 'Pago ', 'error' => $th->getMessage()], 500);  
+            }
         }
     }
 }

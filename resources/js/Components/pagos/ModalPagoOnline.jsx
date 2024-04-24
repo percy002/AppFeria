@@ -11,6 +11,8 @@ const ModalPagoOnline = ({ data }) => {
                 token,
                 amount: data.amount,
                 email: data.email,
+                reservationId: data.reservationId,
+                stands: data.stands,
             };
             Culqi.close();
 
@@ -24,23 +26,23 @@ const ModalPagoOnline = ({ data }) => {
                             icon: "success",
                             title: "¡Éxito!",
                             text: "El pago se realizó correctamente",
-                            timer: 1000
                         });
 
                         console.log(response);
-                    } else {
+                    } 
+                    if (response.status == 200) {
                         // Culqi.close();
 
                         Swal.fire({
-                            icon: "error",
-                            title: "Error",
-                            text: response.data.message.user_message,
-                            timer: 1000
-
+                            icon: "success",
+                            title: "¡Éxito!",
+                            text: "El pago se realizó correctamente",
                         });
                         Culqi.close();
-
                         console.log(response);
+                        let formattedResponse = JSON.stringify(JSON.parse(response.config.data), null, 2);
+
+                        console.log(formattedResponse);
                     }
                 })
                 .catch((error) => {
@@ -51,7 +53,6 @@ const ModalPagoOnline = ({ data }) => {
                         footer: `<a href>${
                             error.response ? error.response.data.message : ""
                         }</a>`,
-                        timer: 1000
 
                     });
                     console.log(error);

@@ -32,6 +32,8 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
             name: cliente.company_name
                 ? cliente.company_name
                 : cliente.name + " " + cliente.last_name,
+            stands: stands,
+            reservationId: reservationId,
         };
         setDataPayment(dataPayment);
     }, []);
@@ -193,8 +195,12 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                                                 }
                                                 stands={stands}
                                                 reservationId={reservationId}
-                                                updatePaymentState = {updatePaymentState}
-                                                setOpenModalPayment = {setOpenModal}
+                                                updatePaymentState={
+                                                    updatePaymentState
+                                                }
+                                                setOpenModalPayment={
+                                                    setOpenModal
+                                                }
                                             />
                                         </div>
                                     </div>

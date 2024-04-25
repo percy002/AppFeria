@@ -1,7 +1,6 @@
 import { usePage } from "@inertiajs/react";
 import { Button } from "flowbite-react";
 import { useState } from "react";
-// import StandsContext from "./StandsContext";
 import StandsContext from "@/Contexts/StandContext";
 import { useContext } from "react";
 import { useEffect } from "react";

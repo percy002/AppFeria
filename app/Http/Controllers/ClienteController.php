@@ -175,4 +175,16 @@ class ClienteController extends Controller
         // dd($clientesPagos);
         return Inertia::render('Clients', ['clientes' => $clientes,'clientesPagos' => $clientesPagos]);
     }
+
+    public function evaluatedClients(){
+        $clientes = Cliente::with('category')->get();
+
+        $evaluatedClients = Cliente::with(['category'])->where('evaluated', 1)->get();
+
+        // dd($evaluatedClient);
+        // return response()->json(['evaluatedClients' => ["nada"]]);
+
+        
+        return response()->json(['evaluatedClients' => $evaluatedClients]);
+    }
 }

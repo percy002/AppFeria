@@ -2,17 +2,10 @@ import { useEffect, useState, useContext } from "react";
 import { Table } from "flowbite-react";
 import ClientsEvaluatedContext from "@/Contexts/ClientEvaluatedContext";
 
-function RowClient({ cliente }) {
+function RowEvaluatedClient({ cliente }) {
     const [approved, setApproved] = useState(cliente.approved);
     const [evaluated, setEvaluated] = useState(cliente.evaluated);
 
-    // useEffect(() => {
-    //     setApproved(cliente.approved);
-    // }, [cliente]);
-
-    // useEffect(() => {
-    //     setevaluated(cliente.evaluated);
-    // }, [cliente]);
     const { evaluatedClients, setEvaluatedClients } = useContext(ClientsEvaluatedContext);
 
     console.log(evaluatedClients);
@@ -26,6 +19,7 @@ function RowClient({ cliente }) {
 
             if (response.status === 200) {
                 const data = response.data;
+                setClientsEvaluated((prevClients) => [...prevClients,cliente]);
                 setApproved(data.approved);
             } else {
                 console.error(
@@ -51,7 +45,6 @@ function RowClient({ cliente }) {
 
             if (response.status === 200) {
                 const data = response.data;
-                setEvaluatedClients((prev) => [...prev,cliente])
                 setEvaluated(data.approved);
             } else {
                 console.error(
@@ -79,20 +72,7 @@ function RowClient({ cliente }) {
                     <Table.Cell>{cliente.dni}</Table.Cell>
                     <Table.Cell>{cliente.position}</Table.Cell>
                     <Table.Cell>{cliente.email}</Table.Cell>
-                    <Table.Cell>
-                        <input
-                            type="checkbox"
-                            checked={evaluated}
-                            onChange={() => {
-                                toggleEvaluacion(cliente.id);
-                            }}
-                        />
-                        {evaluated ? (
-                            <span className="ml-2">Revisado</span>
-                        ) : (
-                            ""
-                        )}
-                    </Table.Cell>
+                    
                     <Table.Cell>
                         <input
                             type="checkbox"
@@ -108,39 +88,7 @@ function RowClient({ cliente }) {
                 <Table.Cell colSpan="8">Cargando...</Table.Cell>
             )}
         </Table.Row>
-        // <tr key={cliente.id}>
-        //     <td className="px-6 py-4 whitespace-nowrap">{cliente.category.name}</td>
-        //     <td className="px-6 py-4 whitespace-nowrap">{cliente.ruc}</td>
-        //     <td className="px-6 py-4 whitespace-nowrap">
-        //         {cliente.company_name}
-        //     </td>
-        //     <td className="px-6 py-4 whitespace-nowrap">
-        //         {cliente.name} {cliente.last_name}
-        //     </td>
-        //     <td className="px-6 py-4 whitespace-nowrap">{cliente.dni}</td>
-        //     <td className="px-6 py-4 whitespace-nowrap">{cliente.position}</td>
-        //     <td className="px-6 py-4 whitespace-nowrap md:hidden">{cliente.email}</td>
-        //     <td className="px-6 py-4 whitespace-nowrap">
-        //         <input
-        //             type="checkbox"
-        //             checked={evaluated}
-        //             onChange={() => {
-        //                 toggleEvaluacion(cliente.id);
-        //             }}
-        //         />
-        //         {evaluated ? (<span className="ml-2">Revisado</span>) : ""}
-        //     </td>
-        //     <td className="px-6 py-4 whitespace-nowrap">
-        //         <input
-        //             type="checkbox"
-        //             checked={approved}
-        //             onChange={() => {
-        //                 toggleAprobacion(cliente.id);
-        //             }}
-        //         />
-        //         {approved ? (<span className="ml-2">Aprobado</span>) : ""}
-        //     </td>
-        // </tr>
+        
     );
 }
-export default RowClient;
+export default RowEvaluatedClient;

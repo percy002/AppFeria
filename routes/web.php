@@ -58,6 +58,7 @@ Route::group(['prefix' => 'cliente'], function () {
     })->name('client.register');
 
     Route::get('clientes', [ClienteController::class,'all'])->name('clientes');
+    Route::get('clientesEvaluados', [ClienteController::class,'evaluatedClients'])->name('clientes.evaluados');
 
     Route::post('registro', [ClienteController::class, 'store'])->name('client.register');
 

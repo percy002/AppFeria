@@ -103,6 +103,8 @@ Route::get('contractPDF/{clientId}', [PdfController::class, 'contractPDF'])->nam
 
 Route::group(['prefix' => 'usuarios'],function(){
     Route::get('/',[UserController::class, 'listUsers'])->name("users.listUsers");
+    Route::post('create',[UserController::class, 'store'])->name("user.create");
+    Route::post('update',[UserController::class, 'update'])->name("user.update");
 
 });
 

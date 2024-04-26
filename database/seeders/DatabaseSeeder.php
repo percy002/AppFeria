@@ -20,14 +20,17 @@ class DatabaseSeeder extends Seeder
         $this->createCategories();
         $this->call(StandSeeder::class);
         $this->createClientes();
-        $this->createUsers('percy','percy@gmail.com');
-        $this->createUsers('elvis','elvis@gmail.com');
+        $this->createUsers('percy','percy@gmail.com','11522252','151515155');
+        $this->createUsers('elvis','elvis@gmail.com','1233333','151515151');
     }
 
     private function createAdmin()
     {
         $admin = User::create([
             'name' => 'Admin',
+            'last_name' => 'admin',
+            'dni' => '11111111',
+            'phone_number' => '123456789',
             'email' => 'admin@example.com',
             'password' => bcrypt('12345678'),
         ]);
@@ -35,9 +38,12 @@ class DatabaseSeeder extends Seeder
         $admin->assignRole('admin');
     }
 
-    private function createUsers($name, $email){
+    private function createUsers($name, $email, $dni, $phoneNumber){
         $user = User::create([
             'name' => $name,
+            'last_name' => 'admin',
+            'dni' => $dni,
+            'phone_number' => $phoneNumber,
             'email' => $email,
             'password' => bcrypt('12345678'),
         ]);
@@ -53,7 +59,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Juan',
             'last_name' => 'Perez',
             'position' => 'Gerente',
-            'phone_number' => '958565896',
+            'phone_number' => '958565897',
             'email' => 'juan.perez@miempresa.com',
             'approved' => false,
             'evaluated' => false,
@@ -62,6 +68,9 @@ class DatabaseSeeder extends Seeder
 
         $user1 = User::create([
             'name' => 'Mi Empresa',
+            'last_name' => 'admin',
+            'dni' => '11111113',
+            'phone_number' => '123456786',
             'email' => 'juan.perez@miempresa.com',
             'cliente_id' => $Cliente->id,
             'password' => bcrypt('12345678'),
@@ -76,7 +85,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Maria',
             'last_name' => 'Lopez',
             'position' => 'Gerente',
-            'phone_number' => '958565895',
+            'phone_number' => '958565894',
             'email' => 'maria.lopez@otraempresa.com',
             'approved' => false,
             'evaluated' => false,
@@ -85,6 +94,9 @@ class DatabaseSeeder extends Seeder
 
         $user2 = User::create([
             'name' => 'Otra Empresa',
+            'last_name' => 'admin',
+            'dni' => '11111114',
+            'phone_number' => '123456783',
             'email' => 'maria.lopez@otraempresa.com',
             'cliente_id' => $cliente2->id,
             'password' => bcrypt('12345678'),

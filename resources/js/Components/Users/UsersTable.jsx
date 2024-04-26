@@ -1,8 +1,9 @@
-import { Table } from "flowbite-react";
+import { Button, Table } from "flowbite-react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import UserRow from "./UserRow";
+import ModalCreateUser from "./ModalCreateUser";
 const UserTable = () => {
     const [users, setUsers] = useState();
 
@@ -22,21 +23,18 @@ const UserTable = () => {
     }, []);
     return (
         <div className="overflow-x-auto w-full">
+            <ModalCreateUser updateUsers = {setUsers}/>
             <Table striped>
                 <Table.Head>
                     <Table.HeadCell align="center">Nombre</Table.HeadCell>
                     <Table.HeadCell align="center">Email</Table.HeadCell>
                     <Table.HeadCell align="center">Rol</Table.HeadCell>
-                    <Table.HeadCell align="center">Opciones
-                    </Table.HeadCell>
+                    <Table.HeadCell align="center">Opciones</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {users &&
                         users.length > 0 &&
-                        users.map((user) => (
-                            <UserRow user={user} />
-                        ))}
-                    
+                        users.map((user) => <UserRow user={user} key={user.id}/>)}
                 </Table.Body>
             </Table>
         </div>

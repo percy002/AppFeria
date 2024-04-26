@@ -84,6 +84,9 @@ class ClienteController extends Controller
 
     $user = User::create([
         'name' => $validatedData['name'],
+        'last_name' => $validatedData['last_name'],
+        'dni' => $validatedData['dni'],
+        'phone_number' => $validatedData['phone_number'],
         'email' => $validatedData['email'],
         'password' => Hash::make($validatedData['password']),
         'cliente_id' => $cliente->id

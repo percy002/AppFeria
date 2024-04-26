@@ -52,3 +52,10 @@ separar artesanias de mypes
 agregar sweet alert a todos los mensajes
 leer sobre el sistema antifraude y realizar las modificaciones
 
+--
+se debe evaluar y registrar a un cliente y su estado debe cambiar, tambien se registra la persona que evaluo y aprobo a esta persona
+se maneja 3 estados en la base de datos , en proceso, evaluado, aprobado , desaprobado, el estado desaprobado debe tener una descripcion
+
+
+
+---requisitos panel de administracion rol admin

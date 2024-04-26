@@ -179,12 +179,34 @@ class ClienteController extends Controller
     public function evaluatedClients(){
         $clientes = Cliente::with('category')->get();
 
-        $evaluatedClients = Cliente::with(['category'])->where('evaluated', 1)->get();
+        $evaluatedClients = Cliente::with(['category'])->where('evaluated', 1)->where('approved',0)->get();
 
         // dd($evaluatedClient);
         // return response()->json(['evaluatedClients' => ["nada"]]);
 
         
         return response()->json(['evaluatedClients' => $evaluatedClients]);
+    }
+    public function registeredClients(){
+        $clientes = Cliente::with('category')->get();
+
+        $registeredClients = Cliente::with(['category'])->where('evaluated', 0)->where('approved',0)->get();
+
+        // dd($evaluatedClient);
+        // return response()->json(['registeredClients' => ["nada"]]);
+
+        
+        return response()->json(['registeredClients' => $registeredClients]);
+    }
+    public function approvedClients(){
+        $clientes = Cliente::with('category')->get();
+
+        $approvedClients = Cliente::with(['category'])->where('evaluated', 1)->where('approved',1)->get();
+
+        // dd($evaluatedClient);
+        // return response()->json(['approvedClients' => ["nada"]]);
+
+        
+        return response()->json(['approvedClients' => $approvedClients]);
     }
 }

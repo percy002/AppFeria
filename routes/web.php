@@ -58,13 +58,16 @@ Route::group(['prefix' => 'cliente'], function () {
     })->name('client.register');
 
     Route::get('clientes', [ClienteController::class,'all'])->name('clientes');
-    Route::get('clientesEvaluados', [ClienteController::class,'evaluatedClients'])->name('clientes.evaluados');
-
+    
     Route::post('registro', [ClienteController::class, 'store'])->name('client.register');
-
+    
     Route::put('/{cliente}/aprobar', [ClienteController::class, 'aprobar'])->name('clientes.aprobar');
     
     Route::put('/{cliente}/evaluar', [ClienteController::class, 'evaluar'])->name('clientes.evaluar');
+
+    Route::get('registeredClients', [ClienteController::class,'registeredClients'])->name('clientes.registrados');
+    Route::get('evaluatedClients', [ClienteController::class,'evaluatedClients'])->name('clientes.evaluados');
+    Route::get('approvedClients', [ClienteController::class,'approvedClients'])->name('clientes.aprobados');
 })->middleware(['auth', 'verified'])
 ;
 

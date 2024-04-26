@@ -1,6 +1,9 @@
 import { Table } from "flowbite-react";
-import RowClient from "../RowClient";
-export default function TableClients({clientes}) {
+import { useContext } from "react";
+import approvedClientContext from "@/Contexts/approvedClientContext";
+import RowApprovedClient from "./RowApprovedClient";
+export default function TableApprovedClients() {
+    const { approvedClients, setApprovedClients } = useContext(approvedClientContext);
     return (
         <div className="overflow-x-auto">
             <Table striped>
@@ -12,12 +15,11 @@ export default function TableClients({clientes}) {
                     <Table.HeadCell>DNI</Table.HeadCell>
                     <Table.HeadCell>Cargo</Table.HeadCell>
                     <Table.HeadCell>Email</Table.HeadCell>
-                    <Table.HeadCell>En Evaluación</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {
-                        clientes.map((cliente) => (
-                            <RowClient cliente={cliente} key={cliente.id}/>
+                        approvedClients && approvedClients.map((cliente) => (
+                            <RowApprovedClient cliente={cliente} key={cliente.id}/>
                         ))
                     }
                     

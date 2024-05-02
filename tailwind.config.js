@@ -19,6 +19,10 @@ export default {
             scale: {
                 '70': '.70',
             },
+            colors:{
+                primary: '#9E0B26',
+                secondary: '#C9C4C0',
+            }
         },
     },
 

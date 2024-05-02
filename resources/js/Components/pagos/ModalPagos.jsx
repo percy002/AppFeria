@@ -188,6 +188,7 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                                         <div className="flex justify-center gap-8">
                                             <ModalPagoOnline
                                                 data={dataPayment}
+                                                updatePaymentState = {updatePaymentState}
                                             />
                                             <ModalPaymentByTransfer
                                                 contractFile={

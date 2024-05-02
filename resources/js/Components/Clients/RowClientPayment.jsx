@@ -35,6 +35,8 @@ const RowClientPayment = ({ cliente }) => {
                                 payment={cliente.reservation[0].payment}
                                 updatePaymentStatus={updatePaymentStatus}
                                 clientId={cliente.id}
+                                name = {cliente.name + ' ' +cliente.last_name}
+                                category = {cliente.category?.name}
                             />
                         )}
                     </Table.Cell>

@@ -42,30 +42,63 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
       // Validar los datos del formulario
-      
-      $validatedData = $request->validate([
-        'dni' => 'required|string|max:8|unique:clientes',
+      $clientType = $request->selectedType;
+    //   dd($request->selectedType);
+      $rules = [
+        'dni' => 'required|string|size:8|unique:clientes',
         'name' => 'required|string|max:255',
         'last_name' => 'required|string|max:255',
-        'phone_number' => 'required|string|max:9',
+        'phone_number' => 'required|string|max:9|unique:clientes',
         'email' => 'required|string|email|max:255|unique:clientes',
         'password' => 'required|string|max:255',
         'category_id' => 'required|exists:categories,id',
-        // Agrega más reglas de validación según tus necesidades
-    ]);
+    ];
+    if($clientType == 'personaJuridica'){
+        $rules['ruc'] = 'required|string|max:11|unique:clientes';
+        $rules['company_name'] = 'required|string|max:255|unique:clientes';
+        $rules['position'] = 'required|string|max:255';
+    }
 
-    // if ($request->selectedType == "personaNatural") {
-    //     $validatedData = $request->validate([
-    //         'ruc' => 'max:11|unique:clientes',
-    //         'company_name' => 'string|max:255',
-    //         'dni' => 'required|string|max:8|unique:clientes',
-    //         'name' => 'required|string|max:255',
-    //         'last_name' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:clientes',
-    //         'password' => 'required|string|max:255'
-    //     ]);
-    //   }
-    // dd($validatedData);
+    $messages = [
+        'dni.required' => 'El campo DNI es obligatorio.',
+        'dni.string' => 'El campo DNI debe ser una cadena de texto.',
+        'dni.size' => 'El campo DNI debe tener 8 dígitos.',
+        'dni.unique' => 'El DNI ingresado ya está registrado.',
+        'name.required' => 'El campo nombre es obligatorio.',
+        'name.string' => 'El campo nombre debe ser una cadena de texto.',
+        'name.max' => 'El campo nombre no debe tener más de 255 caracteres.',
+        'last_name.required' => 'El campo apellido es obligatorio.',
+        'last_name.string' => 'El campo apellido debe ser una cadena de texto.',
+        'last_name.max' => 'El campo apellido no debe tener más de 255 caracteres.',
+        'phone_number.required' => 'El campo número de teléfono es obligatorio.',
+        'phone_number.string' => 'El campo número de teléfono debe ser una cadena de texto.',
+        'phone_number.max' => 'El campo número de teléfono no debe tener más de 9 dígitos.',
+        'phone_number.unique' => 'El número ingresado ya está registrado.',
+        'email.required' => 'El campo email es obligatorio.',
+        'email.string' => 'El campo email debe ser una cadena de texto.',
+        'email.email' => 'El campo email debe ser una dirección de correo electrónico válida.',
+        'email.max' => 'El campo email no debe tener más de 255 caracteres.',
+        'email.unique' => 'El email ingresado ya está registrado.',
+        'password.required' => 'El campo contraseña es obligatorio.',
+        'password.string' => 'El campo contraseña debe ser una cadena de texto.',
+        'password.max' => 'El campo contraseña no debe tener más de 255 caracteres.',
+        'category_id.required' => 'El campo categoría es obligatorio.',
+        'category_id.exists' => 'La categoría seleccionada no existe.',
+    ];
+    if($clientType == 'personaJuridica'){
+        $messages['ruc.required'] = 'El campo RUC es obligatorio.';
+        $messages['ruc.string'] = 'El campo RUC debe ser una cadena de texto.';
+        $messages['ruc.max'] = 'El campo RUC no debe tener más de 11 dígitos.';
+        $messages['ruc.unique'] = 'El RUC ingresado ya está registrado.';
+        $messages['company_name.required'] = 'El campo nombre de la empresa es obligatorio.';
+        $messages['company_name.string'] = 'El campo nombre de la empresa debe ser una cadena de texto.';
+        $messages['company_name.max'] = 'El campo nombre de la empresa no debe tener más de 255 caracteres.';
+        $messages['company_name.unique'] = 'El nombre de la empresa ya está en uso.';
+        $messages['position.required'] = 'El campo cargo es obligatorio.';
+        $messages['position.string'] = 'El campo cargo debe ser una cadena de texto.';
+        $messages['position.max'] = 'El campo cargo no debe tener más de 255 caracteres.';
+    }
+    $validatedData = $request->validate($rules, $messages);
 
     // Crear un nuevo cliente
     $cliente = Cliente::create([
@@ -102,7 +135,7 @@ class ClienteController extends Controller
 
     // Redirigir o devolver una respuesta según sea necesario
     // return redirect()->route('login');
-    return response()->json(['message' => 'Registro exitoso']);
+    // return response()->json(['message' => 'Registro exitoso']);
     }
 
     /**

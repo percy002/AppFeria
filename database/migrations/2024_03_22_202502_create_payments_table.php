@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->float('total');
             $table->timestamp('date');
+            $table->string('payment_method');
             $table->string('file')->nullable();
-            $table->string('contractFile')->nullable();;
+            $table->string('contractFile')->nullable();
             $table->unsignedBigInteger('reservation_id');
             $table->timestamps();
 

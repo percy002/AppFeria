@@ -55,6 +55,7 @@ class PaymentController extends Controller
         $payment->file = $path ?? null;
         $payment->contractFile = $pathContractFile ?? null;
         $payment->reservation_id = $reservationId;
+        $payment->payment_method = 'bank_transfer';
     
         if ($payment->save()) {
             return response()->json([
@@ -194,10 +195,8 @@ class PaymentController extends Controller
         $validatedData = $request->validate([
             'payment_id' => 'required|integer|exists:payments,id',
             'observaciones' => 'required',
-            // 'detalleObservaciones' => 'string'
         ]);
     
-        // return response()->json(['m' => $request])
         // Crea un nuevo PaymentStatus
         $paymentStatus = new PaymentStatus;
         $paymentStatus->payment_id = $validatedData['payment_id'];
@@ -249,15 +248,22 @@ class PaymentController extends Controller
                 ]);
                 $body = $response->json();
 
-
-            
             $payment = new Payment;
         
             $payment->date = now();
             $payment->total = $reservation->total;
             $payment->reservation_id = $reservationId;
+            $payment->payment_method = 'culqi';
         
             if ($payment->save()) {
+                $paymentStatus = new PaymentStatus;
+                $paymentStatus->payment_id = $payment->id;
+                $paymentStatus->status = "aceptado";
+                $paymentStatus->date = now();
+
+                $paymentStatus->user_id = $currentClient->id;    
+                $paymentStatus->save();
+
                 return response()->json(['message' => $body, 'token' => $token]);
             }
                 

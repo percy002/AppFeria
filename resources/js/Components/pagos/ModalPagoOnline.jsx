@@ -1,6 +1,6 @@
 import { useEffect } from "react"; // Importa useEffect
 import Swal from "sweetalert2";
-const ModalPagoOnline = ({ data }) => {
+const ModalPagoOnline = ({ data, updatePaymentState }) => {
     // console.log(data);
     const handleCulqiAction = (Culqi, data) => {
         if (Culqi?.token) {
@@ -27,6 +27,7 @@ const ModalPagoOnline = ({ data }) => {
                             title: "¡Éxito!",
                             text: "El pago se realizó correctamente",
                         });
+                        updatePaymentState(true)
 
                         console.log(response);
                     } 
@@ -41,6 +42,7 @@ const ModalPagoOnline = ({ data }) => {
                         Culqi.close();
                         console.log(response);
                         let formattedResponse = JSON.stringify(JSON.parse(response.config.data), null, 2);
+                        updatePaymentState(true)
 
                         console.log(formattedResponse);
                     }

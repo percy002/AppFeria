@@ -5,10 +5,10 @@ import { useState } from "react";
 import ModalObservarPago from "./ModalObservarPago";
 import Swal from "sweetalert2";
 
-function ModalValidarPagos({ stands, payment, updatePaymentStatus,clientId }) {
+function ModalValidarPagos({ stands, payment, updatePaymentStatus, clientId,name,category }) {
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
-    
+
     const handleValidarPago = () => {
         const data = {
             payment_id: payment.id,
@@ -24,33 +24,30 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus,clientId }) {
             cancelButtonColor: "#d33",
             confirmButtonText: "Si, Confirmar!",
             cancelButtonText: "Cancelar",
-
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
                 axios
-                .post(route("validarPago"), data)
-                .then((response) => {
-                    setOpenModal(false);
-                    updatePaymentStatus({status:"aceptado"});
-                    Swal.fire({
-                        title: "Pago Aceptado",
-                        text: "El pago ha sido aceptado correctamente!",
-                        icon: "success"
+                    .post(route("validarPago"), data)
+                    .then((response) => {
+                        setOpenModal(false);
+                        updatePaymentStatus({ status: "aceptado" });
+                        Swal.fire({
+                            title: "Pago Aceptado",
+                            text: "El pago ha sido aceptado correctamente!",
+                            icon: "success",
+                        });
+                    })
+                    .catch((error) => {
+                        Swal.fire({
+                            title: "Error!",
+                            text: "Ha ocurrido un error al intentar validar el pago, por favor intente nuevamente.",
+                            icon: "error",
+                        });
                     });
-                })
-                .catch((error) => {
-                    Swal.fire({
-                        title: "Error!",
-                        text: "Ha ocurrido un error al intentar validar el pago, por favor intente nuevamente.",
-                        icon: "error"
-                    });
-                });
             }
-          });
-
-        
+        });
     };
-    
+    console.log(stands);
     return (
         <>
             <Button onClick={() => setOpenModal(true)}>Ver Pago</Button>
@@ -66,10 +63,9 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus,clientId }) {
                         <div className="flex-1">
                             <div className="space-y-6">
                                 <p>
-                                    usuario: {auth.cliente.name}{" "}
-                                    {auth.cliente.last_name}
+                                    usuario: {name}
                                 </p>
-                                <p>Categoría: {stands[0]?.category?.name}</p>
+                                <p>Categoría: {category}</p>
                             </div>
                             {stands &&
                                 stands.map((stand) => (
@@ -104,63 +100,73 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus,clientId }) {
                             {payment && (
                                 <div className="">
                                     <p>pagado</p>
-                                    {(() => {
-                                        const fileExtension = payment.file
-                                            .split(".")
-                                            .pop()
-                                            .toLowerCase();
+                                    {payment.payment_method != "culqi" &&
+                                        (() => {
+                                            const fileExtension = payment.file
+                                                .split(".")
+                                                .pop()
+                                                .toLowerCase();
 
-                                        if (
-                                            [
-                                                "jpg",
-                                                "jpeg",
-                                                "png",
-                                                "gif",
-                                            ].includes(fileExtension)
-                                        ) {
-                                            // Es una imagen
-                                            return (
-                                                <img
-                                                    src={`http://localhost:8000/storage/${payment.file}`}
-                                                    alt="Payment"
-                                                    className="w-[80%]"
-                                                />
-                                            );
-                                        } else if (fileExtension === "pdf") {
-                                            // Es un PDF
-                                            return (
-                                                <embed
-                                                    src={`http://localhost:8000/storage/${payment.file}`}
-                                                    type="application/pdf"
-                                                    width="100%"
-                                                    height="600px"
-                                                />
-                                            );
-                                        } else {
-                                            // No es ni una imagen ni un PDF
-                                            return <p>Archivo no soportado</p>;
-                                        }
-                                    })()}
+                                            if (
+                                                [
+                                                    "jpg",
+                                                    "jpeg",
+                                                    "png",
+                                                    "gif",
+                                                ].includes(fileExtension)
+                                            ) {
+                                                // Es una imagen
+                                                return (
+                                                    <img
+                                                        src={`http://localhost:8000/storage/${payment.file}`}
+                                                        alt="Payment"
+                                                        className="w-[80%]"
+                                                    />
+                                                );
+                                            } else if (
+                                                fileExtension === "pdf"
+                                            ) {
+                                                // Es un PDF
+                                                return (
+                                                    <embed
+                                                        src={`http://localhost:8000/storage/${payment.file}`}
+                                                        type="application/pdf"
+                                                        width="100%"
+                                                        height="600px"
+                                                    />
+                                                );
+                                            } else {
+                                                // No es ni una imagen ni un PDF
+                                                return (
+                                                    <p>Archivo no soportado</p>
+                                                );
+                                            }
+                                        })()}
                                 </div>
                             )}
                         </div>
                     </div>
-
-                    
-
-                    
                 </Modal.Body>
-                <Modal.Footer className="">
-                    {/* validar pago y observar pago solo si no se valido el pago previamente */}
-                    {/* solo se mostraran los botones si el pago es reciente o el pago es corregido */}
-                    <Button color="blue" onClick={handleValidarPago}>
-                        Validar Pago
-                    </Button>
-                    <ModalObservarPago payment={payment} updateState={setOpenModal} updatePaymentStatusObs={updatePaymentStatus}/>
-                    <Button color="success" onClick={() => setOpenModal(false)}>
-                        cerrar
-                    </Button>
-                </Modal.Footer>
+                {payment.payment_method !== "culqi" && (
+                    <Modal.Footer className="">
+                        {/* validar pago y observar pago solo si no se valido el pago previamente */}
+                        {/* solo se mostraran los botones si el pago es reciente o el pago es corregido */}
+                        <Button color="blue" onClick={handleValidarPago}>
+                            Validar Pago
+                        </Button>
+                        <ModalObservarPago
+                            payment={payment}
+                            updateState={setOpenModal}
+                            updatePaymentStatusObs={updatePaymentStatus}
+                        />
+                        <Button
+                            color="success"
+                            onClick={() => setOpenModal(false)}
+                        >
+                            cerrar
+                        </Button>
+                    </Modal.Footer>
+                )}
             </Modal>
         </>
     );

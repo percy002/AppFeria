@@ -60,7 +60,16 @@ se maneja 3 estados en la base de datos , en proceso, evaluado, aprobado , desap
 
 
 ---requisitos panel de administracion rol admin
-crear usuario
-editar usuario
-desabilitar usuario
+panel de usuario
+deshabilitar usuario
+
+ver todos los mapas
+
+ver los reportes 
+ventas diarias, semanales, mensuales
+formula de crecimiento de ventas
+
+cierre de operaciones
+cierre de caja ?
+modulo de ventas en punto de venta
 

@@ -48,12 +48,23 @@ export default function ClientRegister() {
         };
     }, []);
 
+    // useEffect(() => {
+    //     if (Object.keys(errors).length > 0) {
+    //         let errorMessage = "";
+    //         for (let key in errors) {
+    //             errorMessage += `${errors[key]} `;
+    //         }
+
+    //         Swal.fire("Error", errorMessage, "error");
+    //         console.log(errors);
+    //     }
+    // }, [errors]);
+
     const submit = (e) => {
         e.preventDefault();
-        
-        axios
-            .post(route("client.register"),data)
-            .then((response) => {
+        post(route("client.register"), {
+            data: data,
+            onSuccess: () => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -62,11 +73,36 @@ export default function ClientRegister() {
                     timer: 1500,
                 });
                 router.get(`/`);
-            })
-            .catch((error) => {
-                Swal("Error", "Registration failed", "error");
-            });
+            },
+            onError: (errors) => {
+                let errorMessage = "";
+                for (let key in errors) {
+                    errorMessage += `${errors[key]} `;
+                }
+                Swal.fire("Error", errorMessage, "error");
+            },
+        });
     };
+    // const submit = (e) => {
+    //     e.preventDefault();
+
+    //     axios
+    //         .post(route("client.register"),data)
+    //         .then((response) => {
+    //             Swal.fire({
+    //                 position: "center",
+    //                 icon: "success",
+    //                 title: "Registrado con éxito",
+    //                 showConfirmButton: false,
+    //                 timer: 1500,
+    //             });
+    //             router.get(`/`);
+    //         })
+    //         .catch((error) => {
+    //             Swal.fire("Error", error.response.data.message, "error");
+    //             console.log(error.response.data);
+    //         });
+    // };
 
     const handleTypeChange = (event) => {
         const { value } = event.target;

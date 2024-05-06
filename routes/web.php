@@ -27,7 +27,7 @@ Route::get('/', function () {
 });
 Route::get('/login', function () {
     return Inertia::render('Auth/Login');
-});
+})->name('login');
 // Route::get('/dashboard', function () {
 //     return Inertia::render('Dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -48,9 +48,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::group(['prefix' => 'cliente'], function () {
-    Route::get('/', function () {
-        return Inertia::render('Client/ClientLogin');
-    })->name('client.login');
+    // Route::get('/', function () {
+    //     return Inertia::render('Client/ClientLogin');
+    // })->name('client.login');
 
     Route::post('login', function () {
         // Lógica para manejar el inicio de sesión del cliente

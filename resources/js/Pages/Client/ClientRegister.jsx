@@ -72,7 +72,7 @@ export default function ClientRegister() {
                     showConfirmButton: false,
                     timer: 1500,
                 });
-                router.get(`/`);
+                router.get(`/login`);
             },
             onError: (errors) => {
                 let errorMessage = "";
@@ -120,81 +120,149 @@ export default function ClientRegister() {
             password: "",
             password_confirmation: "",
         });
-        // setData("selectedType", value);
     };
 
     return (
-        <GuestLayout>
-            <Head title="Registro" />
+        <div className="bg-gray-400">
+            <GuestLayout type={"register"}>
+                <Head title="Registro" />
 
-            <form onSubmit={submit}>
-                <div className="flex gap-6 my-2">
-                    <div className="">
-                        <input
-                            type="radio"
-                            id="personaJuridica"
-                            name="identificationType"
-                            value="personaJuridica"
-                            checked={data.selectedType === "personaJuridica"}
-                            onChange={handleTypeChange}
-                            className="mx-1"
+                <form onSubmit={submit} className="">
+                    <div className="flex justify-around my-2">
+                        <div className="">
+                            <input
+                                type="radio"
+                                id="personaJuridica"
+                                name="identificationType"
+                                value="personaJuridica"
+                                checked={
+                                    data.selectedType === "personaJuridica"
+                                }
+                                onChange={handleTypeChange}
+                                className="mx-1"
+                            />
+                            <label htmlFor="personaJuridica">
+                                Persona Juridica
+                            </label>
+                        </div>
+                        <div className="">
+                            <input
+                                type="radio"
+                                id="personaNatural"
+                                name="identificationType"
+                                value="personaNatural"
+                                checked={data.selectedType === "personaNatural"}
+                                onChange={handleTypeChange}
+                                className="mx-1"
+                            />
+                            <label htmlFor="personaNatural">
+                                Persona Natural
+                            </label>
+                        </div>
+                    </div>
+
+                    <div className="mt-4">
+                        <InputLabel htmlFor="category_id" value="Categoria" />
+                        <div className="w-1/2">
+                            <Select
+                                id="category_id"
+                                name="category_id"
+                                value={data.category}
+                                onChange={(e) =>
+                                    setData("category_id", e.target.value)
+                                }
+                                className="mt-1 block w-full"
+                                required
+                            >
+                                <option value="">
+                                    Selecciona una categoria
+                                </option>
+                                {categories &&
+                                    categories.map((cat, index) => (
+                                        <option key={index} value={cat.id}>
+                                            {cat.name}
+                                        </option>
+                                    ))}
+                            </Select>
+                        </div>
+
+                        <InputError
+                            message={errors.category_id}
+                            className="mt-2"
                         />
-                        <label htmlFor="personaJuridica">
-                            Persona Juridica
-                        </label>
                     </div>
-                    <div className="">
-                        <input
-                            type="radio"
-                            id="personaNatural"
-                            name="identificationType"
-                            value="personaNatural"
-                            checked={data.selectedType === "personaNatural"}
-                            onChange={handleTypeChange}
-                            className="mx-1"
-                        />
-                        <label htmlFor="personaNatural">Persona Natural</label>
-                    </div>
-                </div>
+                    {data.selectedType == "personaJuridica" && (
+                        <>
+                            <div className="flex gap-4 mt-4">
+                                <div className="flex-1">
+                                    <InputLabel htmlFor="ruc" value="RUC" />
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="category_id" value="Categoria" />
-                    <div className="max-w-md">
-                        <Select
-                            id="category_id"
-                            name="category_id"
-                            value={data.category}
-                            onChange={(e) =>
-                                setData("category_id", e.target.value)
-                            }
-                            className="mt-1 block w-full"
-                            required
-                        >
-                            <option value="">Selecciona una categoria</option>
-                            {categories &&
-                                categories.map((cat, index) => (
-                                    <option key={index} value={cat.id}>
-                                        {cat.name}
-                                    </option>
-                                ))}
-                        </Select>
-                    </div>
+                                    <TextInput
+                                        id="ruc"
+                                        name="ruc"
+                                        value={data.ruc}
+                                        className="mt-1 block w-full"
+                                        autoComplete="ruc"
+                                        isFocused={true}
+                                        onChange={(e) =>
+                                            setData("ruc", e.target.value)
+                                        }
+                                        required
+                                    />
 
-                    <InputError message={errors.category_id} className="mt-2" />
-                </div>
-                {data.selectedType == "personaJuridica" && (
-                    <>
-                        <div className="mt-4">
-                            <InputLabel htmlFor="ruc" value="RUC" />
+                                    <InputError
+                                        message={errors.name}
+                                        className="mt-2"
+                                    />
+                                </div>
+
+                                <div className="flex-1">
+                                    <InputLabel
+                                        htmlFor="company_name"
+                                        value="Razón Social"
+                                    />
+
+                                    <TextInput
+                                        id="company_name"
+                                        name="company_name"
+                                        value={data.company_name}
+                                        className="mt-1 block w-full"
+                                        autoComplete="company_name"
+                                        onChange={(e) =>
+                                            setData(
+                                                "company_name",
+                                                e.target.value
+                                            )
+                                        }
+                                        required
+                                    />
+
+                                    <InputError
+                                        message={errors.company_name}
+                                        className="mt-2"
+                                    />
+                                </div>
+                            </div>
+                            <p className="text-center mt-4">
+                                Persona Registrante
+                            </p>
+                        </>
+                    )}
+
+                    <div className="flex gap-4 mt-4">
+                        <div className="flex-1">
+                            <InputLabel htmlFor="name" value="Nombre(s)" />
 
                             <TextInput
-                                id="ruc"
-                                name="ruc"
-                                value={data.ruc}
-                                className="mt-1 block w-full"
-                                autoComplete="ruc"
-                                isFocused={true}
-                                onChange={(e) => setData("ruc", e.target.value)}
+                                id="name"
+                                name="name"
+                                value={data.name}
+                                className="w-full"
+                                isFocused={data.selectedType === "pNatural"}
+                                autoComplete="name"
+                                onChange={(e) =>
+                                    setData("name", e.target.value)
+                                }
                                 required
                             />
 
@@ -204,198 +272,188 @@ export default function ClientRegister() {
                             />
                         </div>
 
-                        <div>
-                            <InputLabel
-                                htmlFor="company_name"
-                                value="Razón Social"
-                            />
+                        <div className="flex-1">
+                            <InputLabel htmlFor="last_name" value="Apellidos" />
 
                             <TextInput
-                                id="company_name"
-                                name="company_name"
-                                value={data.company_name}
-                                className="mt-1 block w-full"
-                                autoComplete="company_name"
+                                id="last_name"
+                                name="last_name"
+                                value={data.last_name}
+                                className="w-full"
+                                autoComplete="last_name"
                                 onChange={(e) =>
-                                    setData("company_name", e.target.value)
+                                    setData("last_name", e.target.value)
                                 }
                                 required
                             />
 
                             <InputError
-                                message={errors.company_name}
+                                message={errors.last_name}
+                                className="mt-2"
+                            />
+                        </div>
+                    </div>
+
+                    <div className="flex mt-4 gap-4">
+                        <div className="flex-1">
+                            <InputLabel htmlFor="dni" value="DNI" />
+
+                            <TextInput
+                                id="dni"
+                                name="dni"
+                                value={data.dni}
+                                className={`${
+                                    data.selectedType !== "personaJuridica"
+                                        ? "w-1/2 pl-3"
+                                        : "w-full"
+                                }`}
+                                autoComplete="dni"
+                                onChange={(e) => setData("dni", e.target.value)}
+                                required
+                            />
+
+                            <InputError message={errors.dni} className="mt-2" />
+                        </div>
+                        {data.selectedType == "personaJuridica" && (
+                            <div className="flex-1">
+                                <InputLabel htmlFor="position" value="Cargo" />
+
+                                <TextInput
+                                    id="position"
+                                    name="position"
+                                    value={data.position}
+                                    className="w-full"
+                                    autoComplete="position"
+                                    onChange={(e) =>
+                                        setData("position", e.target.value)
+                                    }
+                                    required
+                                />
+
+                                <InputError
+                                    message={errors.position}
+                                    className="mt-2"
+                                />
+                            </div>
+                        )}
+                    </div>
+
+                    <div className="flex mt-4 gap-4">
+                        <div className="flex-1">
+                            <InputLabel
+                                htmlFor="phone_number"
+                                value="Celular"
+                            />
+
+                            <TextInput
+                                id="phone_number"
+                                name="phone_number"
+                                value={data.phone_number}
+                                className="w-full"
+                                autoComplete="phone_number"
+                                onChange={(e) =>
+                                    setData("phone_number", e.target.value)
+                                }
+                                required
+                            />
+
+                            <InputError
+                                message={errors.phone_number}
                                 className="mt-2"
                             />
                         </div>
 
-                        <p className="text-center mt-4">Persona Registrante</p>
-                    </>
-                )}
+                        <div className="flex-1">
+                            <InputLabel
+                                htmlFor="email"
+                                value="Correo Electrónico"
+                            />
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="name" value="Nombre(s)" />
+                            <TextInput
+                                id="email"
+                                type="email"
+                                name="email"
+                                value={data.email}
+                                className="w-full"
+                                autoComplete="email"
+                                onChange={(e) =>
+                                    setData("email", e.target.value)
+                                }
+                                required
+                            />
 
-                    <TextInput
-                        id="name"
-                        name="name"
-                        value={data.name}
-                        className="mt-1 block w-full"
-                        isFocused={data.selectedType === "pNatural"}
-                        autoComplete="name"
-                        onChange={(e) => setData("name", e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.name} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="last_name" value="Apellidos" />
-
-                    <TextInput
-                        id="last_name"
-                        name="last_name"
-                        value={data.last_name}
-                        className="mt-1 block w-full"
-                        autoComplete="last_name"
-                        onChange={(e) => setData("last_name", e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.last_name} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel htmlFor="dni" value="DNI" />
-
-                    <TextInput
-                        id="dni"
-                        name="dni"
-                        value={data.dni}
-                        className="mt-1 block w-full"
-                        autoComplete="dni"
-                        onChange={(e) => setData("dni", e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.dni} className="mt-2" />
-                </div>
-                {data.selectedType == "personaJuridica" && (
-                    <div className="mt-4">
-                        <InputLabel htmlFor="position" value="Cargo" />
-
-                        <TextInput
-                            id="position"
-                            name="position"
-                            value={data.position}
-                            className="mt-1 block w-full"
-                            autoComplete="position"
-                            onChange={(e) =>
-                                setData("position", e.target.value)
-                            }
-                            required
-                        />
-
-                        <InputError
-                            message={errors.position}
-                            className="mt-2"
-                        />
+                            <InputError
+                                message={errors.email}
+                                className="mt-2"
+                            />
+                        </div>
                     </div>
-                )}
+                    <div className="flex gap-4 mt-4">
+                        <div className="flex-1">
+                            <InputLabel htmlFor="password" value="Contraseña" />
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="phone_number" value="Celular" />
+                            <TextInput
+                                id="password"
+                                type="password"
+                                name="password"
+                                value={data.password}
+                                className="w-full"
+                                autoComplete="off"
+                                onChange={(e) =>
+                                    setData("password", e.target.value)
+                                }
+                                required
+                            />
 
-                    <TextInput
-                        id="phone_number"
-                        name="phone_number"
-                        value={data.phone_number}
-                        className="mt-1 block w-full"
-                        autoComplete="phone_number"
-                        onChange={(e) =>
-                            setData("phone_number", e.target.value)
-                        }
-                        required
-                    />
+                            <InputError
+                                message={errors.password}
+                                className="mt-2"
+                            />
+                        </div>
 
-                    <InputError
-                        message={errors.phone_number}
-                        className="mt-2"
-                    />
-                </div>
+                        <div className="flex-1">
+                            <InputLabel
+                                htmlFor="password_confirmation"
+                                value="Confirmar Contraseña"
+                            />
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Correo Electrónico" />
+                            <TextInput
+                                id="password_confirmation"
+                                type="password"
+                                name="password_confirmation"
+                                value={data.password_confirmation}
+                                className="w-full"
+                                autoComplete="off"
+                                onChange={(e) =>
+                                    setData(
+                                        "password_confirmation",
+                                        e.target.value
+                                    )
+                                }
+                                required
+                            />
 
-                    <TextInput
-                        id="email"
-                        type="email"
-                        name="email"
-                        value={data.email}
-                        className="mt-1 block w-full"
-                        autoComplete="email"
-                        onChange={(e) => setData("email", e.target.value)}
-                        required
-                    />
+                            <InputError
+                                message={errors.password_confirmation}
+                                className="mt-2"
+                            />
+                        </div>
+                    </div>
 
-                    <InputError message={errors.email} className="mt-2" />
-                </div>
+                    <div className="flex items-center justify-end mt-4">
+                        <Link
+                            href={route("login")}
+                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        >
+                            ¿Ya esta registrado ?
+                        </Link>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Contraseña" />
-
-                    <TextInput
-                        id="password"
-                        type="password"
-                        name="password"
-                        value={data.password}
-                        className="mt-1 block w-full"
-                        autoComplete="off"
-                        onChange={(e) => setData("password", e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.password} className="mt-2" />
-                </div>
-
-                <div className="mt-4">
-                    <InputLabel
-                        htmlFor="password_confirmation"
-                        value="Confirmar Contraseña"
-                    />
-
-                    <TextInput
-                        id="password_confirmation"
-                        type="password"
-                        name="password_confirmation"
-                        value={data.password_confirmation}
-                        className="mt-1 block w-full"
-                        autoComplete="off"
-                        onChange={(e) =>
-                            setData("password_confirmation", e.target.value)
-                        }
-                        required
-                    />
-
-                    <InputError
-                        message={errors.password_confirmation}
-                        className="mt-2"
-                    />
-                </div>
-
-                <div className="flex items-center justify-end mt-4">
-                    <Link
-                        href={route("client.login")}
-                        className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    >
-                        ¿Ya esta registrado ?
-                    </Link>
-
-                    <PrimaryButton className="ms-4" disabled={processing}>
-                        Registrar
-                    </PrimaryButton>
-                </div>
-            </form>
-        </GuestLayout>
+                        <PrimaryButton className="ms-4" disabled={processing}>
+                            Registrar
+                        </PrimaryButton>
+                    </div>
+                </form>
+            </GuestLayout>
+        </div>
     );
 }

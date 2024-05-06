@@ -6,7 +6,12 @@ const ModalPagoOnline = ({ data, updatePaymentState }) => {
         if (Culqi?.token) {
             // ¡Objeto Token creado exitosamente!
             const token = Culqi.token.id;
-            // Culqi.close();
+            console.log(token);
+            Swal.fire({
+                title: "Procesando...",
+                text: "Por favor espera",
+                allowOutsideClick: false,
+            });
             const dataPayment = {
                 token,
                 amount: data.amount,
@@ -14,40 +19,37 @@ const ModalPagoOnline = ({ data, updatePaymentState }) => {
                 reservationId: data.reservationId,
                 stands: data.stands,
             };
-            Culqi.close();
 
             axios
                 .post(route("culqui"), dataPayment)
                 .then((response) => {
-                    if (response.status == 201) {
-                        // Culqi.close();
-
+                    console.log(response);
+                    const message = response.data.message
+                    // console.log(message);
+                    Swal.close();
+                    
+                    Culqi.close();
+                    
+                    if (message.object == "error") {
+                        Swal.fire({
+                            icon: "error",
+                            title: "¡Error! " + message.code,
+                            text: message.user_message,
+                        });
+                        
+                    }else{
                         Swal.fire({
                             icon: "success",
                             title: "¡Éxito!",
                             text: "El pago se realizó correctamente",
                         });
-                        updatePaymentState(true)
-
-                        console.log(response);
-                    } 
-                    if (response.status == 200) {
-                        // Culqi.close();
-
-                        Swal.fire({
-                            icon: "success",
-                            title: "¡Éxito!",
-                            text: "El pago se realizó correctamente",
-                        });
-                        Culqi.close();
-                        console.log(response);
-                        let formattedResponse = JSON.stringify(JSON.parse(response.config.data), null, 2);
-                        updatePaymentState(true)
-
-                        console.log(formattedResponse);
+                        updatePaymentState(true);
                     }
                 })
                 .catch((error) => {
+                    Culqi.close();
+                    Swal.close();
+
                     Swal.fire({
                         icon: "error",
                         title: "Error",
@@ -55,7 +57,6 @@ const ModalPagoOnline = ({ data, updatePaymentState }) => {
                         footer: `<a href>${
                             error.response ? error.response.data.message : ""
                         }</a>`,
-
                     });
                     console.log(error);
                 });

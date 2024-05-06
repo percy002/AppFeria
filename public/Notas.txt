@@ -76,3 +76,4 @@ modulo de ventas en punto de venta
 pedir a linea grafica
 - logos 
 - imagenes
+- fuente

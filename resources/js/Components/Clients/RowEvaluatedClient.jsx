@@ -21,40 +21,40 @@ function RowEvaluatedClient({ cliente }) {
                 setEvaluatedClients(evaluatedClients.filter((client) => client.id != clienteId));
 
                 // setClients(clients.filter((client) => client.id != clienteId));
-                return "el cliente ah sido evaluad correctamente";
+                return "el cliente ah sido aprobado correctamente";
             } else {
                 console.error(
-                    "Error al cambiar el estado de evaluación del cliente:",
+                    "Error al cambiar el estado del cliente:",
                     response.statusText
                 );
                 return "Error al evaluar al cliente ".response.statusText;
             }
         } catch (error) {
             console.error(
-                "Error al cambiar el estado de evaluación del cliente:",
+                "Error al cambiar el estado del cliente:",
                 error
             );
-            return "Error al evaluar al cliente ".error;
+            return "Error al aprobar al cliente ".error;
         }
     };
     
 
     const toggleAprobacion = async (clienteId) => {
         Swal.fire({
-            title: "¿Esta seguro de evaluar a este cliente?",
-            text: "se cambiara el estado de este cliente a cliente evaluado",
+            title: "¿Esta seguro de aprobar a este cliente?",
+            text: "se cambiara el estado de este cliente a cliente aprobado",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Si, evaluar!",
+            confirmButtonText: "Si, aprobar!",
             cancelButtonText: "Cancelar",
         }).then(async (result) => {
             if (result.isConfirmed) {
                 const evaluar = await aprobarCliente(clienteId);
 
                 Swal.fire({
-                    title: "Cliente evaluado correctamente",
+                    title: "Cliente aprobado correctamente",
                     icon: "success",
                 });
             }

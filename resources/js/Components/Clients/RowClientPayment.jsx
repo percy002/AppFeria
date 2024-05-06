@@ -14,7 +14,7 @@ const RowClientPayment = ({ cliente }) => {
     function updatePaymentStatus(updates) {
         setPaymentStatus((prevStatus) => ({ ...prevStatus, ...updates }));
     }
-    
+    console.log(cliente);
     return (
         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
             {cliente ? (
@@ -29,7 +29,7 @@ const RowClientPayment = ({ cliente }) => {
                     <Table.Cell>{cliente.position}</Table.Cell>
                     <Table.Cell>{cliente.email}</Table.Cell>
                     <Table.Cell>
-                        {cliente.reservation && (
+                        {cliente.reservation && cliente.reservation.length > 0 && (
                             <ModalValidarPagos
                                 stands={cliente.reservation[0].stands}
                                 payment={cliente.reservation[0].payment}

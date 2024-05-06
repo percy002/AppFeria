@@ -1,4 +1,4 @@
-import DinamicCountDown from "@/Components/UI/DinamicCountDown";
+import DynamicCountDown from "@/Components/UI/DynamicCountDown";
 import { Button } from "flowbite-react";
 import React from "react";
 import { HiLocationMarker } from "react-icons/hi";
@@ -11,20 +11,22 @@ const Index = () => {
             <div
                 className="w-full h-full bg-cover bg-center absolute"
                 style={{
-                    backgroundImage: "url('/images/portada/huancaro.webp')",
+                    backgroundImage:
+                        "url('/images/portada/feria_Huancaro_portada.webp')",
                 }}
             >
-                <div className="w-full h-full bg-gray-800 bg-opacity-65 absolute">
+                <div className="w-full h-full absolute">
                     <div className="h-full flex flex-col justify-between pt-8 pb-4">
                         <div className="w-full flex justify-between px-4 md:px-14">
+
                             <img
-                                src="/images/logos/logo_gore_cusco_blanco.png"
+                                src="/images/logos/logo_gore2.png"
                                 alt="logo gobierno regional del cusco"
-                                className="w-32 md:w-[10rem]"
+                                className="w-32 md:w-[14rem]"
                             />
                             <img
-                                src="/images/logos/logo_gore_cusco_blanco.png"
-                                alt="logo gobierno regional del cusco"
+                                src="/images/logos/feria_huancaro.png"
+                                alt="logo feria de huancaro 2024"
                                 className="w-32 md:w-[10rem]"
                             />
                         </div>
@@ -62,7 +64,7 @@ const Index = () => {
                             </Link>
                         </div>
                         <div className="w-full px-2">
-                            <DinamicCountDown />
+                            <DynamicCountDown />
                         </div>
                     </div>
                 </div>

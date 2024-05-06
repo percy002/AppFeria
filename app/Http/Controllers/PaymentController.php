@@ -248,24 +248,41 @@ class PaymentController extends Controller
                 ]);
                 $body = $response->json();
 
-            $payment = new Payment;
-        
-            $payment->date = now();
-            $payment->total = $reservation->total;
-            $payment->reservation_id = $reservationId;
-            $payment->payment_method = 'culqi';
-        
-            if ($payment->save()) {
-                $paymentStatus = new PaymentStatus;
-                $paymentStatus->payment_id = $payment->id;
-                $paymentStatus->status = "aceptado";
-                $paymentStatus->date = now();
+                $transformBody = json_decode(json_encode($body));
 
-                $paymentStatus->user_id = $currentClient->id;    
-                $paymentStatus->save();
+                // var_dump($transformBody);
+            
+                if ($transformBody->object !== 'error') {
+                    if (isset($body->data->message->object)) {
+                        $error = $body->data->message->object;
+                    } else {
+                        $payment = new Payment;
+            
+                        $payment->date = now();
+                        $payment->total = $reservation->total;
+                        $payment->reservation_id = $reservationId;
+                        $payment->payment_method = 'culqi';
+                    
+                        if ($payment->save()) {
+                            $paymentStatus = new PaymentStatus;
+                            $paymentStatus->payment_id = $payment->id;
+                            $paymentStatus->status = "aceptado";
+                            $paymentStatus->date = now();
+            
+                            $paymentStatus->user_id = $currentClient->id;    
+                            $paymentStatus->save();
+            
+                        } 
+                    }
+                    return response()->json(['message' => $body, 'token' => $token]);
 
-                return response()->json(['message' => $body, 'token' => $token]);
-            }
+                }else{
+                    return response()->json(['message' => $body, 'token' => $token , 'tok' => "nada"]);
+                }
+                // dd($body);
+                // return response()->json(['message' => $body, 'token' => $token]);
+                
+            
                 
             } catch (\Throwable $th) {
                 return response()->json(['message' => 'Pago ', 'error' => $th->getMessage()], 500);  

@@ -47,7 +47,6 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus, clientId,name
             }
         });
     };
-    console.log(stands);
     return (
         <>
             <Button onClick={() => setOpenModal(true)}>Ver Pago</Button>
@@ -147,7 +146,7 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus, clientId,name
                         </div>
                     </div>
                 </Modal.Body>
-                {payment.payment_method !== "culqi" && (
+                {payment?.payment_method !== "culqi" && (
                     <Modal.Footer className="">
                         {/* validar pago y observar pago solo si no se valido el pago previamente */}
                         {/* solo se mostraran los botones si el pago es reciente o el pago es corregido */}

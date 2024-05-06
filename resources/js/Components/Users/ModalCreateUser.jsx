@@ -5,9 +5,10 @@ import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import InputError from "@/Components/InputError";
 import Swal from "sweetalert2";
-const ModalCreateUser = ({updateUsers}) => {
+import { useEffect } from "react";
+const ModalCreateUser = ({ updateUsers }) => {
     const [openModal, setOpenModal] = useState(false);
-    const { data, setData, post, processing, errors, reset } = useForm({
+    const { data, setData, post, processing, errors, clearErrors, reset } = useForm({
         name: "",
         last_name: "",
         dni: "",
@@ -15,15 +16,20 @@ const ModalCreateUser = ({updateUsers}) => {
         email: "",
         password: "",
         password_confirmation: "",
-        rol:"",
+        rol: "",
     });
+    
+    const closeModal = () =>{
+        setOpenModal(false)
+        clearErrors();
+        reset();
+    }
     const CreateUser = (e) => {
         e.preventDefault();
 
-        axios
-            .post(route("user.create"), data)
-            .then((response) => {
-                console.log(response.data);
+        post(route("user.create"), {
+            data: data,
+            onSuccess: (response) => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -31,17 +37,18 @@ const ModalCreateUser = ({updateUsers}) => {
                     showConfirmButton: false,
                     timer: 1500,
                 });
-                updateUsers((prev)=>[...prev,response.data.user])
+                updateUsers((prev) => [...prev, response.data.user]);
                 setOpenModal(false);
-            })
-            .catch((error) => {
-                Swal.fire({
-                    position: "center",
-                    icon: "error",
-                    title: "Ah ocurrido un error con el registro de usuario",
-                });
-                console.log(error);
-            });
+            },
+            onError: (errors) => {
+                let errorMessage = "";
+                for (let key in errors) {
+                    errorMessage += `${errors[key]} `;
+                }
+                Swal.fire("Error", errorMessage, "error");
+            },
+        });
+
     };
     return (
         <>
@@ -182,20 +189,14 @@ const ModalCreateUser = ({updateUsers}) => {
                             </div>
 
                             <div className="flex-1">
-                                <InputLabel
-                                    htmlFor="rol"
-                                    value="Rol"
-                                />
+                                <InputLabel htmlFor="rol" value="Rol" />
                                 <div className="max-w-md">
                                     <Select
                                         id="rol"
                                         name="rol"
                                         value={data.rol}
                                         onChange={(e) =>
-                                            setData(
-                                                "rol",
-                                                e.target.value
-                                            )
+                                            setData("rol", e.target.value)
                                         }
                                         className="mt-1 block w-full"
                                         required
@@ -206,15 +207,12 @@ const ModalCreateUser = ({updateUsers}) => {
                                         <option value="admin">
                                             Administrador
                                         </option>
-                                        <option value="user">
-                                            Usuario
-                                        </option>
-                                        
+                                        <option value="user">Usuario</option>
                                     </Select>
                                 </div>
 
                                 <InputError
-                                    message={errors.email}
+                                    message={errors.rol}
                                     className="mt-2"
                                 />
                             </div>
@@ -278,12 +276,12 @@ const ModalCreateUser = ({updateUsers}) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="flex justify-between w-full px-6">
-                        <Button color="success" onClick={CreateUser}>
+                        <Button color="success" onClick={CreateUser} disabled={processing}>
                             Crear Usuario
                         </Button>
                         <Button
                             color="failure"
-                            onClick={() => setOpenModal(false)}
+                            onClick={closeModal}
                         >
                             Cancelar
                         </Button>

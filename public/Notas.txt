@@ -22,12 +22,9 @@ como asegurarme de que es un gobierno local o regional
 
 se debe saber quien es el usuario que aprueba
 
-¿un cliente puede tener mas de una reserva pagada, es decir tener 2 reservaciones diferentes?
-¿Cuando un cliente ah creado su cuenta, podrá subir imágenes de los productos que venderá?
 
 ***bugs
 hay un bug cuando expira la sesión
-cuando expira la sesion 
 ***
 un cliente hace una reserva y lo paga, no puede volver a registrar un pago ni elegir stands
 
@@ -38,8 +35,6 @@ cuantos stands tiene comida regional ?
 el bloque "d" de comida continua del bloque "b" no tiene su propia numeración
 
 ***
-hacer validaciones en registro
-
 
 ***modificaciones
 agregar iconos a los botones

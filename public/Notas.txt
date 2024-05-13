@@ -31,10 +31,34 @@ un cliente hace una reserva y lo paga, no puede volver a registrar un pago ni el
 
 **** Errores en el mapa ****
 bloques f y g de mypes no tiene numero 3
+bloque I no tiene stand 10
 cuantos stands tiene comida regional ?
 el bloque "d" de comida continua del bloque "b" no tiene su propia numeración
 
-***
+zona de animales no esta en venta
+fecha limite para vender stands, o se podra vender hasta que termine la feria ?
+preveer si se libreraran bloques para la venta al publico
+habrá o no dimensiones ?
+las provincias tendrán un bloque predeterminado
+
+en la zona superior del mapa verificar si mypes y artesanias y juguetes se venderan o seran de un gobierno
+
+necesitamos los numeros de cuenta y titulares de la cuenta para usar esta info
+
+
+como usuario puedo crear un cliente ? 
+como usuario puedo modificar un cliente ?
+un cliente puede modificar sus datos ?
+
+
+**datos faltantes
+- solo podran poner dni o otro tipo de documento
+- digitos del ruc para hacer la validaciones
+- ya no habra pagos digitales ?
+- como se manejan los descuentos en el caso de compra de varios stands
+- que es contraprestacion
+
+    
 
 ***modificaciones
 agregar iconos a los botones

@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Cliente;
 use App\Models\Category;
+use App\Models\Subcategory;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesAndPermissionsSeeder::class);
         $this->createAdmin();
         $this->createCategories();
+        $this->createSubCategories();
         $this->call(StandSeeder::class);
         $this->createClientes();
         $this->createUsers('percy','percy@gmail.com','11522252','151515155');
@@ -63,7 +65,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'juan.perez@miempresa.com',
             'approved' => false,
             'evaluated' => false,
-            'category_id' => 1, // Asegúrate de que esta categoría exista en tu tabla de categorías
+            'category_id' => 1,
+            'subcategory_id' => 8,
         ]);
 
         $user1 = User::create([
@@ -89,7 +92,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'maria.lopez@otraempresa.com',
             'approved' => false,
             'evaluated' => false,
-            'category_id' => 2, // Make sure this category exists in your categories table
+            'category_id' => 1, // Make sure this category exists in your categories table
+            'subcategory_id' => 8,
+
         ]);
 
         $user2 = User::create([
@@ -119,6 +124,27 @@ class DatabaseSeeder extends Seeder
 
         foreach ($categories as $category) {
             Category::create($category);
+        }
+    }
+
+    private function createSubCategories(){
+        $subcategories = [
+            ['name' => 'Acomayo', 'category_id' => 1],
+            ['name' => 'Anta', 'category_id' => 1],
+            ['name' => 'Calca', 'category_id' => 1],
+            ['name' => 'Canas', 'category_id' => 1],
+            ['name' => 'Canchis', 'category_id' => 1],
+            ['name' => 'Chumbivilcas', 'category_id' => 1],
+            ['name' => 'Espinar', 'category_id' => 1],
+            ['name' => 'La Convencion', 'category_id' => 1],
+            ['name' => 'Paruro', 'category_id' => 1],
+            ['name' => 'Paucartambo', 'category_id' => 1],
+            ['name' => 'Quispicanchis', 'category_id' => 1],
+            ['name' => 'Urubamba', 'category_id' => 1],
+        ];
+
+        foreach ($subcategories as $subcategory) {
+            Subcategory::create($subcategory);
         }
     }
     

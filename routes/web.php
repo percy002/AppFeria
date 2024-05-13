@@ -88,6 +88,7 @@ Route::group(['prefix' => 'reservaciones'], function(){
 
 Route::group(['prefix' => 'categorias'], function(){
     Route::get('/getCategories', [CategoryController::class, 'getCategories'])->name('categorias.all');
+    Route::get('/getSubCategories', [CategoryController::class, 'getSubCategories'])->name('categorias.subCategories');
 })->middleware(['auth', 'verified'])
 ;
 

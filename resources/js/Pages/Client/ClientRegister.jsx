@@ -11,11 +11,13 @@ import Swal from "sweetalert2";
 
 export default function ClientRegister() {
     const [categories, setCategories] = useState();
+    const [subCategories, setSubCategories] = useState();
     const { data, setData, post, processing, errors, reset } = useForm({
         selectedType: "personaJuridica",
         ruc: "",
         company_name: "",
         category_id: "",
+        subCategory_id: "",
         name: "",
         last_name: "",
         dni: "",
@@ -40,6 +42,24 @@ export default function ClientRegister() {
         };
 
         getCategories();
+    }, []);
+
+    const getSubCategories = (category_id) => {
+        console.log(category_id);
+        axios
+            .get(route("categorias.subCategories"), {
+                params: { category_id: category_id },
+            })
+            .then((response) => {
+                const responseData = response.data;
+                setSubCategories(responseData.subcategorias);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+    useEffect(() => {
+        // getSubCategories();
     }, []);
 
     useEffect(() => {
@@ -83,26 +103,6 @@ export default function ClientRegister() {
             },
         });
     };
-    // const submit = (e) => {
-    //     e.preventDefault();
-
-    //     axios
-    //         .post(route("client.register"),data)
-    //         .then((response) => {
-    //             Swal.fire({
-    //                 position: "center",
-    //                 icon: "success",
-    //                 title: "Registrado con éxito",
-    //                 showConfirmButton: false,
-    //                 timer: 1500,
-    //             });
-    //             router.get(`/`);
-    //         })
-    //         .catch((error) => {
-    //             Swal.fire("Error", error.response.data.message, "error");
-    //             console.log(error.response.data);
-    //         });
-    // };
 
     const handleTypeChange = (event) => {
         const { value } = event.target;
@@ -111,6 +111,7 @@ export default function ClientRegister() {
             ruc: "",
             company_name: "",
             category_id: "",
+            subCategory_id: "",
             name: "",
             last_name: "",
             dni: "",
@@ -120,6 +121,13 @@ export default function ClientRegister() {
             password: "",
             password_confirmation: "",
         });
+    };
+
+    const handleSelectCategory = (event) => {
+        const { value } = event.target;
+        setData("category_id", value);
+        getSubCategories(value);
+        console.log(subCategories);
     };
 
     return (
@@ -168,9 +176,7 @@ export default function ClientRegister() {
                                 id="category_id"
                                 name="category_id"
                                 value={data.category}
-                                onChange={(e) =>
-                                    setData("category_id", e.target.value)
-                                }
+                                onChange={handleSelectCategory}
                                 className="mt-1 block w-full"
                                 required
                             >

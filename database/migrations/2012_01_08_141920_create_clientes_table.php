@@ -24,8 +24,10 @@ return new class extends Migration
             $table->boolean('approved')->default(false);
             $table->boolean('evaluated')->default(false);
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('subcategory_id')->nullable();
  
             $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('subcategory_id')->references('id')->on('subcategories');
             
             $table->timestamps();
         });

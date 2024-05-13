@@ -48,7 +48,7 @@ export default function Login({ status, canResetPassword }) {
                         <img
                             src="images/logos/logo_gore_blanco.png"
                             alt="logo gobierno regional del cusco"
-                            className="w-8/12"
+                            className="w-9/12 lg:w-1/2"
                         />
                     </div>
                     <div className="w-full sm:max-w-md lg:max-w-4xl bg-white shadow-md overflow-hidden rounded-lg md:rounded-l-none md:rounded-r-3xl sm:flex-1 lg:flex-[3]">

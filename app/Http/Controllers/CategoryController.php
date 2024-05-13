@@ -67,4 +67,14 @@ class CategoryController extends Controller
         return response()->json(['categorias' => $categorias]);
 
     }
+    public function getSubCategories(Request $request){
+        $category = Category::find($request->category_id);
+
+        if ($category === null) {
+            return response()->json(['error' => 'No se encontró la categoría','category' => $request->category_id], 404);
+        }
+
+        $subcategorias = $category->subcategories;
+        return response()->json(['subcategorias' => $subcategorias]);
+    }
 }

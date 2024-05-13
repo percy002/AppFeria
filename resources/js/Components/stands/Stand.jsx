@@ -1,10 +1,7 @@
 import { usePage } from "@inertiajs/react";
 import { Button } from "flowbite-react";
-import { useState } from "react";
 import StandsContext from "@/Contexts/StandContext";
-import { useContext } from "react";
-import { useEffect } from "react";
-
+import { useContext, useEffect, useState } from "react";
 const ButtonCustom = {
     color: {}
 }
@@ -13,6 +10,10 @@ export default function Stand({ numero, stand, color, size }) {
     const [colorBorder, setColorBorder] = useState(color);
     const [stateReservado, setStateReservado] = useState(false);
     const [stateSelected, setStateSelected] = useState(false);
+    const { auth } = usePage().props;
+
+    let subcategory = auth.cliente?.subcategory_id;
+    let standEnable = subcategory == stand.subcategory_id;
 
     const { reservedStands, setReservedStands } = useContext(StandsContext);
     useEffect(() => {
@@ -33,6 +34,14 @@ export default function Stand({ numero, stand, color, size }) {
                 setColorStand("gray");
                 
             }
+        }
+        if (!standEnable) {
+            setStateReservado(true);
+            // setColorBorder(color);
+            // setColorStand(color);
+            setColorBorder("gray");
+            setColorStand("gray");
+            
         }
     }, [stateReservado]);
 

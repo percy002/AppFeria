@@ -66,7 +66,7 @@ class DashboardController extends Controller
                 if ($letters[$i] != "kk") {
                     $blocks[] = $letters[$i] . $letters[$i];
                 }
-            }                  
+            }             
 
         }
         if($category_id == 6){

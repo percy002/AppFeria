@@ -22,7 +22,6 @@ como asegurarme de que es un gobierno local o regional
 
 se debe saber quien es el usuario que aprueba
 
-
 ***bugs
 hay un bug cuando expira la sesión
 ***
@@ -36,25 +35,28 @@ cuantos stands tiene comida regional ?
 el bloque "d" de comida continua del bloque "b" no tiene su propia numeración
 
 zona de animales no esta en venta
-fecha limite para vender stands, o se podra vender hasta que termine la feria ?
+fecha limite para vender stands, o se podra vender hasta que termine la feria ? anies de mayo
 preveer si se libreraran bloques para la venta al publico
-habrá o no dimensiones ?
-las provincias tendrán un bloque predeterminado
+no dimensiones
+Y Z son artesanias
 
-en la zona superior del mapa verificar si mypes y artesanias y juguetes se venderan o seran de un gobierno
+en la zona superior del mapa verificar si mypes y artesanías y juguetes se venderan o seran de un gobierno
 
-necesitamos los numeros de cuenta y titulares de la cuenta para usar esta info
+necesitamos los números de cuenta y titulares de la cuenta para usar esta info
 
 
-como usuario puedo crear un cliente ? 
+como usuario puedo crear un cliente ?
 como usuario puedo modificar un cliente ?
 un cliente puede modificar sus datos ?
 
+total 700000 soles en entradas
+general - 10 + 2
+estelar - 25 + 2
 
 **datos faltantes
-- solo podran poner dni o otro tipo de documento
-- digitos del ruc para hacer la validaciones
-- ya no habra pagos digitales ?
+- solo podrán poner dni o otro tipo de documento
+- dígitos del ruc para hacer la validaciones
+- ya no habrá pagos digitales ?
 - como se manejan los descuentos en el caso de compra de varios stands
 - que es contraprestacion
 

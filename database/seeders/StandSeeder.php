@@ -28,14 +28,14 @@ class StandSeeder extends Seeder
         // $this->createMultipleStands(2,1,'C',8000);
         
         // $this->createStand('Nombre del local','categoría','Bloque','precio','sub categoría');
-        $this->createStandsGobiernosLocalesBloque1('C');
-        $this->createStandsGobiernosLocalesBloque1('D');
-        $this->createStandsGobiernosLocalesBloque1('E');
-        $this->createStandsGobiernosLocalesBloque1('F');
-        $this->createStandsGobiernosLocalesBloque1('G');
-        $this->createStandsGobiernosLocalesBloque1('H');
-        $this->createStandsGobiernosLocalesBloque1('I');
-        $this->createStand('H-14',1,'H',800,8);
+        $this->createStandsGobiernosLocalesBloque1('C',8);
+        $this->createStandsGobiernosLocalesBloque1('D',7);
+        $this->createStandsGobiernosLocalesBloque1('E',6);
+        $this->createStandsGobiernosLocalesBloque1('F',5);
+        $this->createStandsGobiernosLocalesBloque1('G',4);
+        $this->createStandsGobiernosLocalesBloque1('H',1);
+        $this->createStandsGobiernosLocalesBloque1('I',2);
+        $this->createStand('I-14',1,'I',800,2);
 
         // $this->createStand('C-1',1,'C',800,8);
         // $this->createStand('C-2',1,'C',800,8);
@@ -131,20 +131,20 @@ class StandSeeder extends Seeder
         }
     }
 
-    private function createStandsGobiernosLocalesBloque1($block){
-        $this->createStand($block.'-1',1,$block,800,8);
-        $this->createStand($block.'-2',1,$block,800,8);
-        $this->createStand($block.'-3',1,$block,600,8);
-        $this->createStand($block.'-4',1,$block,600,8);
-        $this->createStand($block.'-5',1,$block,600,8);
-        $this->createStand($block.'-6',1,$block,600,8);
-        $this->createStand($block.'-7',1,$block,800,8);
-        $this->createStand($block.'-8',1,$block,800,8);
-        $this->createStand($block.'-9',1,$block,800,8);
-        $this->createStand($block.'-10',1,$block,600,8);
-        $this->createStand($block.'-11',1,$block,600,8);
-        $this->createStand($block.'-12',1,$block,800,8);
-        $this->createStand($block.'-13',1,$block,800,8);
+    private function createStandsGobiernosLocalesBloque1($block,$provincia){
+        $this->createStand($block.'-1',1,$block,800,$provincia);
+        $this->createStand($block.'-2',1,$block,800,$provincia);
+        $this->createStand($block.'-3',1,$block,600,$provincia);
+        $this->createStand($block.'-4',1,$block,600,$provincia);
+        $this->createStand($block.'-5',1,$block,600,$provincia);
+        $this->createStand($block.'-6',1,$block,600,$provincia);
+        $this->createStand($block.'-7',1,$block,800,$provincia);
+        $this->createStand($block.'-8',1,$block,800,$provincia);
+        $this->createStand($block.'-9',1,$block,800,$provincia);
+        $this->createStand($block.'-10',1,$block,600,$provincia);
+        $this->createStand($block.'-11',1,$block,600,$provincia);
+        $this->createStand($block.'-12',1,$block,800,$provincia);
+        $this->createStand($block.'-13',1,$block,800,$provincia);
         
     }
 }

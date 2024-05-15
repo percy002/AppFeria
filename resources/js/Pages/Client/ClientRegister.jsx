@@ -11,7 +11,7 @@ import Swal from "sweetalert2";
 
 export default function ClientRegister() {
     const [categories, setCategories] = useState();
-    const [subCategories, setSubCategories] = useState();
+    const [subCategories, setSubCategories] = useState([]);
     const { data, setData, post, processing, errors, reset } = useForm({
         selectedType: "personaJuridica",
         ruc: "",
@@ -126,6 +126,10 @@ export default function ClientRegister() {
     const handleSelectCategory = (event) => {
         const { value } = event.target;
         setData("category_id", value);
+        if (value === "0") {
+            setSubCategories([]);
+            return;
+        }
         getSubCategories(value);
         console.log(subCategories);
     };
@@ -169,33 +173,74 @@ export default function ClientRegister() {
                         </div>
                     </div>
 
-                    <div className="mt-4">
-                        <InputLabel htmlFor="category_id" value="Categoria" />
-                        <div className="w-1/2">
-                            <Select
-                                id="category_id"
-                                name="category_id"
-                                value={data.category}
-                                onChange={handleSelectCategory}
-                                className="mt-1 block w-full"
-                                required
-                            >
-                                <option value="">
-                                    Selecciona una categoria
-                                </option>
-                                {categories &&
-                                    categories.map((cat, index) => (
-                                        <option key={index} value={cat.id}>
-                                            {cat.name}
-                                        </option>
-                                    ))}
-                            </Select>
-                        </div>
+                    <div className="flex gap-4 mt-4">
+                        <div className="flex-1">
+                            <InputLabel
+                                htmlFor="category_id"
+                                value="Categoría"
+                            />
+                            <div className={`${subCategories && Array.isArray(subCategories) && subCategories.length == 0 ? "w-1/2" : ""}`}>
+                                <Select
+                                    id="category_id"
+                                    name="category_id"
+                                    value={data.category_id}
+                                    onChange={handleSelectCategory}
+                                    className="mt-1 block w-full"
+                                    required
+                                >
+                                    <option value="0">
+                                        Selecciona una categoría
+                                    </option>
+                                    {categories &&
+                                        categories.map((cat, index) => (
+                                            <option key={index} value={cat.id}>
+                                                {cat.name}
+                                            </option>
+                                        ))}
+                                </Select>
+                            </div>
 
-                        <InputError
-                            message={errors.category_id}
-                            className="mt-2"
-                        />
+                            <InputError
+                                message={errors.category_id}
+                                className="mt-2"
+                            />
+                        </div>
+                        {subCategories && Array.isArray(subCategories) && subCategories.length > 0 && (
+                            <div className="flex-1">
+                                <InputLabel
+                                    htmlFor="subCategory_id"
+                                    value="Provincia"
+                                />
+                                <div className="">
+                                    <Select
+                                        id="subCategory_id"
+                                        name="subCategory_id"
+                                        value={data.subCategory_id}
+                                        onChange={(e) => setData("subCategory_id", e.target.value)}
+                                        className="mt-1 block w-full"
+                                        required
+                                    >
+                                        <option value="">
+                                            Selecciona una Provincia
+                                        </option>
+                                        {subCategories &&
+                                            subCategories.map((cat, index) => (
+                                                <option
+                                                    key={index}
+                                                    value={cat.id}
+                                                >
+                                                    {cat.name}
+                                                </option>
+                                            ))}
+                                    </Select>
+                                </div>
+
+                                <InputError
+                                    message={errors.subCategory_id}
+                                    className="mt-2"
+                                />
+                            </div>
+                        )}
                     </div>
                     {data.selectedType == "personaJuridica" && (
                         <>

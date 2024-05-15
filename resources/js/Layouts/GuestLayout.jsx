@@ -7,7 +7,7 @@ export default function Guest({ children, type }) {
             <div>
                 <Link href="/">
                     <img
-                        src="../images/logos/feria_huancaro.png"
+                        src="../images/logos/logo_expoferia_2024.png"
                         alt="logo feria"
                         className="w-48"
                     />

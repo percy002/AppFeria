@@ -43,6 +43,7 @@ class ClienteController extends Controller
     {
       // Validar los datos del formulario
       $clientType = $request->selectedType;
+      $category = $request->category_id;
     //   dd($request->selectedType);
       $rules = [
         'dni' => 'required|string|size:8|unique:clientes',
@@ -57,6 +58,9 @@ class ClienteController extends Controller
         $rules['ruc'] = 'required|string|max:11|unique:clientes';
         $rules['company_name'] = 'required|string|max:255|unique:clientes';
         $rules['position'] = 'required|string|max:255';
+    }
+    if ($category == 1) {
+        $rules['subCategory_id'] = 'required|exists:subcategories,id';
     }
 
     $messages = [
@@ -98,6 +102,10 @@ class ClienteController extends Controller
         $messages['position.string'] = 'El campo cargo debe ser una cadena de texto.';
         $messages['position.max'] = 'El campo cargo no debe tener más de 255 caracteres.';
     }
+    if ($category == 1) {   
+        $messages['subCategory_id.required'] = 'El campo Provincia es obligatorio.';
+        $messages['subCategory_id.exists'] = 'La Provincia seleccionada no existe.';
+    }
     $validatedData = $request->validate($rules, $messages);
 
     // Crear un nuevo cliente
@@ -111,6 +119,7 @@ class ClienteController extends Controller
         'phone_number' => $validatedData['phone_number'],
         'email' => $validatedData['email'],
         'category_id' => $validatedData['category_id'],
+        'subcategory_id' => $request->subCategory_id,
     ]);
     
     $cliente->save();

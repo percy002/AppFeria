@@ -9,7 +9,7 @@ const DynamicCountDown = () => {
     // Function to calculate the countdown
     const calculateCountdown = () => {
         // Calculate the remaining time until the target date
-        const targetDate = new Date(2024,5,24);
+        const targetDate = new Date(2024,5,22);
         const now = new Date();
         const remainingTime = targetDate - now;
 

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -71,4 +72,271 @@ h5 {
 
 .swal2-popup-custom {
     z-index: 1000 !important;
+}
+
+
+/* css para pagina principal Elvis */
+
+:root{
+    --rojo:#9E0C26;
+    --sangre:#C20831;
+    --plomo:#706F6F;
+}
+
+*{
+    font-family: 'Oswald', sans-serif;
+    text-transform: capitalize;
+    text-decoration: none;
+    outline: none;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+}
+
+*::selection{
+    background: var(--rojo);
+    color: white;
+}
+
+html{
+    /* font-size: 62.5%; */
+    overflow-x: hidden;
+}
+
+body{
+    background: white;
+}
+/*seccion nosotros*/
+.nosotros{
+    background-image: url(images/paginaPrincipal/fondo_manto.png);
+    background-size: cover;
+    background-color: white;
+}
+
+
+.nosotros .row{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 85%;
+    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+}
+.nosotros .row .imagen img{
+    height: 70vh;
+    width: 50vw;
+    padding-right: 5rem;
+}
+.nosotros .row .content{
+    padding-left: 5rem;
+    padding-right: 5rem;
+    text-align: justify;
+}
+.nosotros .row .content h3{
+    font-size: 2rem;
+    color: var(--rojo);
+}
+.nosotros .row .content p{
+    font-size: 1.2rem;
+    color: #696464;
+    padding: 1rem 0;
+}
+.nosotros .row .content button{
+    height: 3.5rem;
+    width: 17rem;
+    background: var(--rojo);
+    color: white;
+    border: none;
+    border-radius: 5rem;
+    box-shadow: 0 .1rem 1rem rgba(0, 0, 0, .3);
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: .2s;
+}
+.nosotros .row .content button:hover{
+    letter-spacing: .2rem;
+    opacity: .8;
+}
+
+/*fin seccion nosotros*/
+
+.video{
+    background-image: url(images/paginaPrincipal/fondo_manto2.png);
+    background-size: cover;
+    background-color: white;
+}
+.video .row{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 85%;
+    margin: 20px auto;
+    justify-content: center;
+    align-items: center;
+}
+.video .row .imagen img{
+    height: 70vh;
+    width: 50vw;
+    padding: 5rem;
+    padding-left: 10rem;
+}
+.video .row .content{
+    padding-left: 5rem;
+    padding-right: 5rem;
+    text-align: justify;
+}
+.video .row .content h3{
+    font-size: 2rem;
+    color: var(--rojo);
+}
+.video .row .content p{
+    font-size: 1.2rem;
+    color: #696464;
+    padding: 1rem 0;
+}
+.video .row .content button{
+    height: 3.5rem;
+    width: 17rem;
+    background: var(--rojo);
+    color: white;
+    border: none;
+    border-radius: 5rem;
+    box-shadow: 0 .1rem 1rem rgba(0, 0, 0, .3);
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: .2s;
+}
+.video .row .content button:hover{
+    letter-spacing: .2rem;
+    opacity: .8;
+}
+/* noticias*/
+.noticias{
+    /*background-image: url(img/fondo_geo.png);
+    background-size: cover;*/
+}
+.conteiner{
+    width: 100%;
+}
+.blog-seccion{
+    width: 85%;
+    margin: 20px auto;
+}
+.blog-seccion .titulo{
+    width: 60%;
+    text-align: center;
+    margin: auto;
+}
+.blog-seccion .titulo h2{
+    font-size: 40px;
+    color: var(--rojo);
+}
+.cards{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+    margin: 25px auto;
+}
+.cards .card{
+    width: 100%;
+    position: relative;
+}
+.imagen-seccion img{
+    width: 100%;
+    height: auto;
+}
+.contenido{
+    padding: 15px 20px;
+}
+.contenido h4{
+    font-size: 2rem;
+    color: var(--sangre);
+}
+.contenido p{
+    color: var(--plomo);
+    font-size: 1.2rem;
+}
+.contenido a{
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+    margin-top: 12px;
+    display: inline-block;
+    background-color: var(--rojo);
+    padding: 8px 15px;
+}
+.card .dia{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    background-color: var(--rojo);
+    padding: 6px 15px;
+    color: white;
+}
+@media screen and (max-width: 992px){
+    .cards{
+        grid-template-columns: repeat(2, 1fr);
+    } 
+}
+@media screen and (max-width: 768px){
+    .cards{
+        grid-template-columns: 1fr;
+    } 
+}
+/*Footer*/
+footer{
+    position: relative;
+    width: 100%;
+    /*top: 100px;*/
+    background: var(--rojo);
+    /*background: #9E0C26;*/
+    min-height: 100px;
+    padding: 50px 50px;
+    justify-content: center;
+    align-items: center;
+}
+footer .social_icon{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+footer .social_icon li{
+    list-style: none;
+    font-size: 2rem;
+    color: white;
+    margin: 0 10px;
+    transition: 0.5s;
+}
+footer .social_icon li:hover{
+    transform: translateY(-10px);
+}
+footer .grupo-2 {
+    padding: 15px 10px;
+    text-align: center;
+    color: #fff;
+}
+footer .grupo-2 .par2{
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: var(--sangre);
+}
+
+footer .grupo-2 small {
+    font-size: 12px;
+}
+.logo_gore{
+    width: 280px;
+}
+#container_Logos_Gore{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
 }

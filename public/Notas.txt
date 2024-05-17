@@ -98,3 +98,12 @@ pedir a linea grafica
 - logos 
 - imagenes
 - fuente
+
+
+****** dominios en la feria huancaro
+expocuscohuancaro
+actividades cusco
+
+necesito acceso al terminal para hacer connexion con putty o crear mi enlace a github
+
+necesito que la version de php de ambas este en 8.3 o que me den aceso para poder cambiar la version de php

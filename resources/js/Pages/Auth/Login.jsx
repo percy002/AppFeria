@@ -1,13 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Checkbox from "@/Components/Checkbox";
 import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
 import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { Button, FloatingLabel } from "flowbite-react";
 
 export default function Login({ status, canResetPassword }) {
+    const [showPassword, setShowPassword] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
         email: "",
         password: "",
@@ -44,7 +45,6 @@ export default function Login({ status, canResetPassword }) {
                 )}
                 <div className="flex rounded-3xl px-5 sm:px-0 sm:mx-3 w-full sm:w-7/12">
                     <div className="bg-primary justify-center items-center hidden md:flex px-10 rounded-l-3xl sm:flex-1 lg:flex-[4]">
-
                         <img
                             src="images/logos/logo_gore_blanco.png"
                             alt="logo gobierno regional del cusco"
@@ -84,19 +84,49 @@ export default function Login({ status, canResetPassword }) {
                                 </div>
 
                                 <div className="mt-8">
-                                    <FloatingLabel
-                                        variant="standard"
-                                        label="Contraseña"
-                                        id="password"
-                                        type="password"
-                                        name="password"
-                                        value={data.password}
-                                        className="border-primary text-primary"
-                                        autoComplete="current-password"
-                                        onChange={(e) =>
-                                            setData("password", e.target.value)
-                                        }
-                                    />
+                                    <div className="flex justify-between relative ">
+                                        <div className="flex-grow ">
+                                            <FloatingLabel
+                                                variant="standard"
+                                                label="Contraseña"
+                                                id="password"
+                                                type={
+                                                    showPassword
+                                                        ? "text"
+                                                        : "password"
+                                                }
+                                                name="password"
+                                                value={data.password}
+                                                className="border-primary text-primary flex-grow"
+                                                autoComplete="current-password"
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "password",
+                                                        e.target.value
+                                                    )
+                                                }
+                                            />
+                                        </div>
+                                        {showPassword ? (
+                                            <HiOutlineEyeOff
+                                                className="text-primary w-8 h-8 absolute right-0 hover:cursor-pointer"
+                                                onClick={() =>
+                                                    setShowPassword(
+                                                        !showPassword
+                                                    )
+                                                }
+                                            />
+                                        ) : (
+                                            <HiOutlineEye
+                                                className="text-primary w-8 h-8 absolute right-0 hover:cursor-pointer"
+                                                onClick={() =>
+                                                    setShowPassword(
+                                                        !showPassword
+                                                    )
+                                                }
+                                            />
+                                        )}
+                                    </div>
 
                                     <InputError
                                         message={errors.password}

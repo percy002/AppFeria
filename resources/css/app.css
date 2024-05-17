@@ -85,7 +85,6 @@ h5 {
 
 *{
     font-family: 'Oswald', sans-serif;
-    text-transform: capitalize;
     text-decoration: none;
     outline: none;
     margin: 0; padding: 0;
@@ -107,7 +106,7 @@ body{
 }
 /*seccion nosotros*/
 .nosotros{
-    background-image: url(images/paginaPrincipal/fondo_manto.png);
+    background-image: url(/public/images/paginaPrincipal/fondo_manto.png);
     background-size: cover;
     background-color: white;
 }
@@ -160,7 +159,7 @@ body{
 /*fin seccion nosotros*/
 
 .video{
-    background-image: url(images/paginaPrincipal/fondo_manto2.png);
+    background-image: url(/public/images/paginaPrincipal/fondo_manto2.png);
     background-size: cover;
     background-color: white;
 }

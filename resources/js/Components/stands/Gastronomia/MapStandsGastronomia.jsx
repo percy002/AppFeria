@@ -8,12 +8,12 @@ export const MapStandsGastronomia = () => {
     const [mapState, setMapState] = useState(1)
     return (
         <Tabs aria-label="Tabs with underline" style="underline">
-            <Tabs.Item active title="PATIO DE COMIDAS 1">
+            <Tabs.Item active title="ZONA DE COMIDAD VIP">
                 {
                     mapState == 1 && <MapStandsGastronomiaZ1/>
                 }
             </Tabs.Item>
-            <Tabs.Item active title="PATIO DE COMIDAS 2">
+            <Tabs.Item active title="ZONA DE COMIDA REGIONAL">
                 {
                     mapState == 1 && <MapStandsGastronomiaZ2/>
                 }

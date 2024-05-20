@@ -22,7 +22,7 @@ const MapStandsMypesZonaInf = () => {
                                 a
                             </p>
                         </div>
-                        <div className="flex items-center mt-4">
+                        <div className="flex items-center mt-[1.3rem]">
                             <Stand color={"red"} stand={standsBloqueA[0]} numero={1} size={"high"}/>
                             <Stand color={"red"} stand={standsBloqueA[1]} numero={2} size={"high"}/>
                             <Stand color={"red"} stand={standsBloqueA[2]} numero={3} size={"high"}/>                            

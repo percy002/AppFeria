@@ -21,7 +21,7 @@ export const MapStandsMypesZona1 = () => {
                                 <div className="flex flex-col">
                                     <div className="">
                                         <p className="font-bold text-2xl text-center">
-                                            MYPES CUSQUEÑOS
+                                            GERCETUR ARTESANIAS
                                         </p>
                                     </div>
                                     <div className="flex">
@@ -47,7 +47,7 @@ export const MapStandsMypesZona1 = () => {
                                 <div className="flex flex-col">
                                     <div className="">
                                         <p className="font-bold text-2xl text-center">
-                                            MYPES CUSQUEÑOS
+                                            MYPES
                                         </p>
                                     </div>
                                     <GroupStands
@@ -67,7 +67,7 @@ export const MapStandsMypesZona1 = () => {
                                 <div className="flex flex-col">
                                     <div className="">
                                         <p className="font-bold text-2xl text-center">
-                                            ARTESANIAS
+                                            MYPES
                                         </p>
                                     </div>
                                     <GroupStands
@@ -90,7 +90,7 @@ export const MapStandsMypesZona1 = () => {
                                 {/* BLOQUE X */}
                                 <div className="">
                                     <p className="font-bold text-2xl pl-36">
-                                        MYPES JUGUETES
+                                        GERCETUR ARTESANIAS
                                     </p>
                                 </div>
                                 <div className="flex gap-8">
@@ -110,7 +110,7 @@ export const MapStandsMypesZona1 = () => {
                                         />
                                     </div>
                                     <GroupStands
-                                        cantidad={15}
+                                        cantidad={14}
                                         inicio={2}
                                         stands={standsBloqueX}
                                         color={"purple"}

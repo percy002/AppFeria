@@ -49,7 +49,7 @@ export const MapStandsGastronomiaZ1 = () => {
                             />
                         </div>
                     </div>
-                    <div className="bg-red-200 h-[300px] w-72 flex items-center justify-center">
+                    <div className="bg-red-200 h-[600px] w-72 flex items-center justify-center">
                         <p className="">PATIO DE COMIDAS</p>
                     </div>
                     <div className=" transform rotate-6">

@@ -4,8 +4,23 @@ export const MapStandsGastronomiaZ2 = () => {
     const { props } = usePage();
     const { standsBloques } = props;
     const standsBloqueCR = standsBloques["CR"];
-    const standsBloqueB = standsBloques["b"];
-    const standsBloqueD = standsBloques["d"];
+    
+    let standsBloqueB = [];
+    for (let i = 1; i <= 25; i++) {
+        standsBloqueB.push({
+            id: 611 + i,
+            name: "b-" + i,
+            block: "b",
+            category_id: 8,
+            subcategory_id: null,
+            reservations: [],
+            category: {
+                id: 4,
+                name: "Procompite"
+            },
+        });
+    }
+    console.log(standsBloqueB);
     return (
         <div className="p-2 mx-auto w-fit h-[480px]">
             <div className="flex flex-col gap-2">
@@ -38,23 +53,18 @@ export const MapStandsGastronomiaZ2 = () => {
                             </>
                         ))}
                     </div>
-                    {/* BLOQUE D */}
                     <div className="flex justify-end">
                         <div className="bg-green-200 flex-grow flex justify-center items-center">
                             <p className="font-bold text-2xl">
                                 PATIO DE COMIDAS
                             </p>
                         </div>
-                        <div className="flex items-center">
-                            <p className=" text-center font-bold text-base border-4 border-purple-600 rounded-full px-2">
-                                d
-                            </p>
-                        </div>
+                        
                         <GroupStands
-                            color={"purple"}
+                            color={"red"}
                             inicio={21}
                             cantidad={5}
-                            stands={standsBloqueD.slice(20, 25)}
+                            stands={standsBloqueB.slice(20, 25)}
                             direction={"col"}
                             size={"wide"}
                         />
@@ -84,8 +94,8 @@ export const MapStandsGastronomiaZ2 = () => {
                                 <GroupStands
                                     color={"green"}
                                     inicio={7}
-                                    cantidad={31}
-                                    stands={standsBloqueCR.slice(6, 37)}
+                                    cantidad={32}
+                                    stands={standsBloqueCR.slice(6, 38)}
                                     size={"high"}
                                 />
                             </div>

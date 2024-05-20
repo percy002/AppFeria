@@ -10,8 +10,8 @@ const MypesGroupStandDouble = ({ color, stands }) => {
             </div>
             <div className="flex">
                 {Array.from({ length: 16 }).map((_, i) => (
-                    <>
-                        <div key={i} className="flex flex-col">
+                    <div key={i} className="flex">
+                        <div  className="flex flex-col">
                             <GroupStands
                                 inicio={i * 2 + 4}
                                 cantidad={2}
@@ -26,7 +26,7 @@ const MypesGroupStandDouble = ({ color, stands }) => {
                                 <p>X</p>
                             </div>
                         )}
-                    </>
+                    </div>
                 ))}
             </div>
         </div>

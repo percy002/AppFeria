@@ -116,9 +116,12 @@ class DatabaseSeeder extends Seeder
         $categories = [
             ['name' => 'Gobiernos Locales'],
             ['name' => 'Ganaderia'],
-            ['name' => 'Mypes o Artesania'],
+            ['name' => 'Mypes'],
             ['name' => 'Gastronomia'],
             ['name' => 'Gobierno Regional'],
+            ['name' => 'Empresas'],
+            ['name' => 'GERCETUR'],
+            ['name' => 'Procompite'],
             ['name' => 'Otros'],
         ];
 
@@ -131,16 +134,17 @@ class DatabaseSeeder extends Seeder
         $subcategories = [
             ['name' => 'Acomayo', 'category_id' => 1],
             ['name' => 'Anta', 'category_id' => 1],
-            ['name' => 'Calca', 'category_id' => 1],
-            ['name' => 'Canas', 'category_id' => 1],
+            ['name' => 'Cusco', 'category_id' => 1],
             ['name' => 'Canchis', 'category_id' => 1],
             ['name' => 'Chumbivilcas', 'category_id' => 1],
-            ['name' => 'Espinar', 'category_id' => 1],
+            ['name' => 'Canas', 'category_id' => 1],
             ['name' => 'La Convencion', 'category_id' => 1],
-            ['name' => 'Paruro', 'category_id' => 1],
-            ['name' => 'Paucartambo', 'category_id' => 1],
-            ['name' => 'Quispicanchis', 'category_id' => 1],
+            ['name' => 'Calca', 'category_id' => 1],
             ['name' => 'Urubamba', 'category_id' => 1],
+            ['name' => 'Quispicanchis', 'category_id' => 1],
+            ['name' => 'Paucartambo', 'category_id' => 1],
+            ['name' => 'Paruro', 'category_id' => 1],
+            ['name' => 'Espinar', 'category_id' => 1],
         ];
 
         foreach ($subcategories as $subcategory) {

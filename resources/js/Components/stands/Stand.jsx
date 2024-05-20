@@ -12,8 +12,7 @@ export default function Stand({ numero, stand, color, size }) {
     const [stateSelected, setStateSelected] = useState(false);
     const { auth } = usePage().props;
 
-    let subcategory = auth.cliente?.subcategory_id;
-    let standEnable = subcategory == stand.subcategory_id;
+    
 
     const { reservedStands, setReservedStands } = useContext(StandsContext);
     useEffect(() => {
@@ -35,14 +34,21 @@ export default function Stand({ numero, stand, color, size }) {
                 
             }
         }
-        if (!standEnable) {
+        let subcategory = auth.cliente?.subcategory_id;
+        let category = auth.cliente?.category_id;
+        
+        let standEnableSubcategory =  subcategory && subcategory == stand.subcategory_id;
+        let standEnableCategory = category && category == stand.category_id;
+
+        console.log(auth.cliente?.category_id);
+        if (!standEnableSubcategory && !standEnableCategory) {
             setStateReservado(true);
             // setColorBorder(color);
             // setColorStand(color);
             setColorBorder("gray");
-            setColorStand("gray");
-            
+            setColorStand("gray");            
         }
+
     }, [stateReservado]);
 
     const handleClick = () => {

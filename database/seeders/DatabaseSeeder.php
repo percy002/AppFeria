@@ -145,6 +145,24 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Paucartambo', 'category_id' => 1],
             ['name' => 'Paruro', 'category_id' => 1],
             ['name' => 'Espinar', 'category_id' => 1],
+            //GOBIERNO REGIONAL
+            ['name' => 'COPESCO', 'category_id' => 5],
+            ['name' => 'MERIS', 'category_id' => 5],
+            ['name' => 'IMA', 'category_id' => 5],
+            ['name' => 'TRANSPORTES', 'category_id' => 5],
+            ['name' => 'RECURSOS NATURALES', 'category_id' => 5],
+            ['name' => 'DESARROLLO SOCIAL', 'category_id' => 5],
+            ['name' => 'PROYECTOS', 'category_id' => 5],
+            ['name' => 'INFRAESTRUCTURA', 'category_id' => 5],
+            ['name' => 'TRABAJO', 'category_id' => 5],
+            ['name' => 'VIVIENDA Y CONSTRUCCION', 'category_id' => 5],
+            ['name' => 'GERCETUR', 'category_id' => 5],
+            ['name' => 'GERAGRI', 'category_id' => 5],
+            ['name' => 'ECONOMICO', 'category_id' => 5],
+            ['name' => 'PRODUCCION', 'category_id' => 5],
+            ['name' => 'EDUCACION', 'category_id' => 5],
+            ['name' => 'SEGURIDAD', 'category_id' => 5],
+            ['name' => 'SALUD', 'category_id' => 5],
         ];
 
         foreach ($subcategories as $subcategory) {

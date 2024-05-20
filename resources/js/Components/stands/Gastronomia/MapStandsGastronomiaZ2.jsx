@@ -20,7 +20,6 @@ export const MapStandsGastronomiaZ2 = () => {
             },
         });
     }
-    console.log(standsBloqueB);
     return (
         <div className="p-2 mx-auto w-fit h-[480px]">
             <div className="flex flex-col gap-2">

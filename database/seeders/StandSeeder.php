@@ -79,20 +79,23 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(38,4,'CR',2000);
 
         //CREAR STANDS DE GOBIERNO REGIONAL
-        $this->createMultipleStands(7,5,'aa',1000);
-        $this->createMultipleStands(7,5,'bb',1000);
-        $this->createMultipleStands(7,5,'cc',1000);
-        $this->createMultipleStands(14,5,'dd',1000);
-        $this->createMultipleStands(7,5,'ee',1000);
-        $this->createMultipleStands(7,5,'ff',1000);
-        $this->createMultipleStands(7,5,'gg',1000);
-        $this->createMultipleStands(7,5,'hh',1000);
-        $this->createMultipleStands(6,5,'ii',1000);
-        $this->createMultipleStands(6,5,'jj',1000);
-        $this->createMultipleStands(6,5,'ll',1000);
-        $this->createMultipleStands(6,5,'mm',1000);
-        $this->createMultipleStands(6,5,'nn',1000);
-        $this->createMultipleStands(12,5,'oo',1000);
+        $this->createMultipleStands(7,5,'aa',1000,14);//COPESCO
+        $this->createMultipleStands(7,5,'bb',1000,15);//MERISS
+        $this->createMultipleStands(7,5,'cc',1000,16);//IMA
+        $this->createMultipleStands(7,5,'dd',1000,17);//TRANSPORTES
+        $this->createMultipleStands(7,5,'ee',1000,18);//RECURSOS NATURALES
+        $this->createMultipleStands(7,5,'ff',1000,19);//DESARROLLO SOCIAL
+        $this->createMultipleStands(7,5,'gg',1000,20);//PROYECTOS Y MINAS
+        $this->createMultipleStands(7,5,'hh',1000,21);//INFRAESTRUCTURA
+        $this->createMultipleStands(6,5,'ii',1000,22);//TRABAJO
+        $this->createMultipleStands(6,5,'jj',1000,23);//VIVIENDA Y CONSTRUCCION Y GERCETUR
+        $this->createMultipleStands(6,5,'ll',1000,24);//GERAGRI
+        $this->createMultipleStands(6,5,'mm',1000,25);//GERAGRI
+        $this->createMultipleStands(6,5,'nn',1000,26);//ECONOMICO
+        $this->createMultipleStands(5,5,'oo',1000,27);//PRODUCCION
+        $this->createMultipleStands(7,5,'pp',1000,28);//EDUCACION
+        $this->createMultipleStands(3,5,'qq',1000,29);//SEGURIDAD
+        $this->createMultipleStands(3,5,'rr',1000,30);//SALUD
 
         //CREAR STANDS CATEGORIA OTROS
         $this->createMultipleStands(13,9,'A',1000);
@@ -111,10 +114,10 @@ class StandSeeder extends Seeder
 
     }
 
-    private function createMultipleStands($number,$category,$block,$price){
+    private function createMultipleStands($number,$category,$block,$price, $subcategory = null){
         for ($i=1; $i <= $number; $i++) { 
             $name = $block.'-'.$i;
-            $this->createStand($name,$category,$block,$price);
+            $this->createStand($name,$category,$block,$price,$subcategory);
         }
     }
 

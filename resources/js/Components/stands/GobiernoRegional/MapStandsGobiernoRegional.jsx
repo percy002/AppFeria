@@ -19,6 +19,9 @@ export const MapStandsGobiernoRegional = () => {
     const standsBloqueMM = standsBloques["mm"];
     const standsBloqueNN = standsBloques["nn"];
     const standsBloqueOO = standsBloques["oo"];
+    const standsBloquePP = standsBloques["pp"];
+    const standsBloqueQQ = standsBloques["qq"];
+    const standsBloqueRR = standsBloques["rr"];
 
     return (
         <div className="h-[480px] w-[1000px]">
@@ -34,7 +37,7 @@ export const MapStandsGobiernoRegional = () => {
                             <div className="flex">
                                 <div className="flex justify-center mx-2">
                                     <p className=" text-center w-fit font-bold text-base border-4 border-red-600 rounded-full px-2">
-                                        A
+                                        aa
                                     </p>
                                 </div>
                                 <GroupStands
@@ -49,7 +52,7 @@ export const MapStandsGobiernoRegional = () => {
                             <div className="flex">
                                 <div className="flex justify-center mx-2">
                                     <p className=" text-center w-fit font-bold text-base border-4 border-red-600 rounded-full px-2">
-                                        B
+                                        bb
                                     </p>
                                 </div>
                                 <GroupStands
@@ -64,7 +67,7 @@ export const MapStandsGobiernoRegional = () => {
                             <div className="flex">
                                 <div className="flex justify-center mx-2">
                                     <p className=" text-center w-fit font-bold text-base border-4 border-red-600 rounded-full px-2">
-                                        C
+                                        cc
                                     </p>
                                 </div>
                                 <GroupStands
@@ -77,9 +80,12 @@ export const MapStandsGobiernoRegional = () => {
                             </div>
                             {/* BLOQUE D */}
                             <div className="flex">
-                                <div className="flex items-center mx-2">
+                                <div className="flex flex-col justify-center mx-2">
                                     <p className=" text-center h-fit font-bold text-base border-4 border-red-600 rounded-full px-2">
-                                        D
+                                        dd
+                                    </p>
+                                    <p className=" text-center h-fit font-bold text-base border-4 border-red-600 rounded-full px-2">
+                                        ee
                                     </p>
                                 </div>
                                 <div className="flex flex-col">
@@ -87,14 +93,14 @@ export const MapStandsGobiernoRegional = () => {
                                         color={"red"}
                                         inicio={1}
                                         cantidad={7}
-                                        stands={standsBloqueDD.slice(0, 7)}
+                                        stands={standsBloqueDD}
                                         size={"wide"}
                                     />
                                     <GroupStands
                                         color={"red"}
-                                        inicio={8}
+                                        inicio={1}
                                         cantidad={7}
-                                        stands={standsBloqueDD.slice(7, 14)}
+                                        stands={standsBloqueEE}
                                         size={"wide"}
                                     />
                                 </div>
@@ -284,43 +290,49 @@ export const MapStandsGobiernoRegional = () => {
                     <div className="flex">
                         <div className="flex flex-col gap-3">
                             <div className="">
-                                <p className="text-center font-bold">Salud y Seguridad</p>
+                                <p className="text-center font-bold">SS</p>
                             </div>
-                            <Button.Group>
                                 <Button color="dark" disabled>
                                     &#9632;
                                 </Button>
-                                <Button color="dark" disabled>
-                                    &#9632;
-                                </Button>
-                                <Button color="dark" disabled>
-                                    &#9632;
-                                </Button>
-                                <Button color="dark" disabled>
-                                    &#9632;
-                                </Button>
-                                <Button color="dark" disabled>
-                                    &#9632;
-                                </Button>
-                                <Button color="dark" disabled>
-                                    &#9632;
-                                </Button>
-                                <Button color="dark" disabled>
-                                    &#9632;
-                                </Button>
-                            </Button.Group>
                         </div>
                         <div className="flex flex-col gap-1">
                             <div className="flex justify-center">
                                 <p className=" text-center w-fit font-bold text-base border-4 border-blue-600 rounded-full px-2">
-                                    ee
+                                    rr
+                                </p>
+                            </div>
+                            <GroupStands
+                                color={"blue"}
+                                inicio={1}
+                                cantidad={3}
+                                stands={standsBloqueRR}
+                            />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                            <div className="flex justify-center">
+                                <p className=" text-center w-fit font-bold text-base border-4 border-pink-600 rounded-full px-2">
+                                    qq
+                                </p>
+                            </div>
+                            <GroupStands
+                                color={"pink"}
+                                inicio={1}
+                                cantidad={3}
+                                stands={standsBloqueQQ}
+                            />
+                        </div>
+                        <div className="flex flex-col gap-1">
+                            <div className="flex justify-center">
+                                <p className=" text-center w-fit font-bold text-base border-4 border-blue-600 rounded-full px-2">
+                                    pp
                                 </p>
                             </div>
                             <GroupStands
                                 color={"blue"}
                                 inicio={1}
                                 cantidad={7}
-                                stands={standsBloqueEE}
+                                stands={standsBloquePP}
                             />
                         </div>
                         <div className="flex flex-col justify-end ">
@@ -336,9 +348,9 @@ export const MapStandsGobiernoRegional = () => {
                             </div>
                             <GroupStands
                                 color={"blue"}
-                                inicio={8}
+                                inicio={1}
                                 cantidad={5}
-                                stands={standsBloqueOO.slice(7, 12)}
+                                stands={standsBloqueOO}
                             />
                         </div>
                     </div>

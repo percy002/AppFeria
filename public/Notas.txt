@@ -59,7 +59,9 @@ estelar - 25 + 2
 - ya no habrá pagos digitales ?
 - como se manejan los descuentos en el caso de compra de varios stands
 - que es contraprestacion
-
+- falta precios para stands para otras regiones
+-falta precios para procompite
+- falta precios para mypes miscelaneas
     
 
 ***modificaciones
@@ -95,7 +97,7 @@ cierre de caja ?
 modulo de ventas en punto de venta
 
 pedir a linea grafica
-- logos 
+ 
 - imagenes
 - fuente
 

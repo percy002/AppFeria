@@ -59,7 +59,7 @@ class DashboardController extends Controller
 
         }
         if($category_id == 5){
-            $letters = range('a', 'o');
+            $letters = range('a', 'r');
             for ($i = 0; $i < count($letters); $i ++) {
                 if ($letters[$i] != "kk") {
                     $blocks[] = $letters[$i] . $letters[$i];

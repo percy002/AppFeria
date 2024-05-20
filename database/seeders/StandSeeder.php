@@ -21,11 +21,12 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(56,2,'E',800);
         $this->createMultipleStands(11,2,'F',800);
 
-        //CREAR STANDS DE ZONA DE GOBIERNOS LOCALES
-        $this->createMultipleStands(15,1,'A',2000);
-        $this->createMultipleStands(13,1,'B',2000);
-        $this->createMultipleStands(13,1,'C',2000);
+        //CREAR STANAS PARA LAS EMPRESAS CONSTRUCTORAS Y ESPONSORS 
+        $this->createMultipleStands(15,6,'A',2000);
+        $this->createMultipleStands(13,6,'B',2000);
+        $this->createMultipleStands(13,6,'C',2000);
         
+        //CREAR STANDS DE ZONA DE GOBIERNOS LOCALES
         // $this->createStand('Nombre del local','categoría','Bloque','precio','sub categoría');
         $this->createStandsGobiernosLocalesBloque1('D',1);//ACOMAYO
         $this->createStandsGobiernosLocalesBloque1('E',2);//ANTA
@@ -64,14 +65,14 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(16,3,'Z',800);
 
         //CREAR STANDS DE ZONA DE MYPES MISCELANEAS
-        $this->createMultipleStands(3,3,'a',800);
         $this->createMultipleStands(32,3,'b',800);
         $this->createMultipleStands(10,3,'e',800);
         $this->createMultipleStands(13,3,'f',800);
         $this->createMultipleStands(13,3,'g',800);
         $this->createMultipleStands(13,3,'h',800);
-
+        
         //PROCOMPITE
+        $this->createMultipleStands(3,8,'a',800);
         $this->createMultipleStands(25,8,'c',800);
 
         //CREAR STANDS DE ZONA DE GASTRONOMIA

@@ -5,10 +5,42 @@ export const MapStandsMypesZona1 = () => {
     const { props } = usePage();
 
     const { standsBloques } = props;
-    const standsBloqueX = standsBloques["X"];
+    // const standsBloqueX = standsBloques["X"];
     const standsBloqueY = standsBloques["Y"];
-    const standsBloqueW = standsBloques["W"];
+    // const standsBloqueW = standsBloques["W"];
     const standsBloqueZ = standsBloques["Z"];
+
+    let standsBloqueW = [];
+    let standsBloqueX = [];
+    for (let i = 1; i <= 13; i++) {        
+        standsBloqueW.push({
+            id: 1000 + i,
+            name: "W-" + i,
+            block: "W",
+            category_id: 7,
+            subcategory_id: null,
+            reservations: [],
+            category: {
+                id: 7,
+                name: "gercetur"
+            },
+        });        
+    }
+    for (let i = 0; i < 15; i++) {
+        standsBloqueX.push({
+            id: 2000 + i,
+            name: "X-" + i,
+            block: "X",
+            category_id: 7,
+            subcategory_id: null,
+            reservations: [],
+            category: {
+                id: 7,
+                name: "gercetur"
+            },
+        });
+        
+    }
 
     return (
         <div className="flex flex-col">

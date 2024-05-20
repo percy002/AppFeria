@@ -46,6 +46,7 @@ class DashboardController extends Controller
         }
         if($category_id == 3){
             $blocks = range('W', 'Z');
+            $blocks[] = 'b';
             $blocks[] = 'e';
             $blocks[] = 'f';
             $blocks[] = 'g';
@@ -53,7 +54,6 @@ class DashboardController extends Controller
 
         }
         if($category_id == 4){
-            $blocks[] = 'b';
             $blocks[] = 'CR';
             $blocks[] = 'CV';       
 
@@ -70,6 +70,13 @@ class DashboardController extends Controller
         if($category_id == 6){
             $blocks[] = 'A';       
             $blocks[] = 'B';       
+            $blocks[] = 'C';       
+
+        }
+        if($category_id == 7){
+            $blocks[] = 'A';       
+            $blocks[] = 'B';       
+            $blocks[] = 'C';       
 
         }
         if($category_id == 8){

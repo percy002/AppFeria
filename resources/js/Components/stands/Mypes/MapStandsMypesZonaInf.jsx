@@ -6,11 +6,25 @@ const MapStandsMypesZonaInf = () => {
     const { props } = usePage();
 
     const { standsBloques } = props;
-    const standsBloqueA = standsBloques["a"];
+    console.log(standsBloques);
+    const standsBloqueB = standsBloques["b"];
     const standsBloqueE = standsBloques["e"];
     const standsBloqueF = standsBloques["f"];
     const standsBloqueG = standsBloques["g"];
     const standsBloqueH = standsBloques["h"];
+
+    const standsBloqueA = Array.from({ length: 15 }, (_, i) => ({
+        id: 2000 + i,
+        name: "a-" + i,
+        block: "a",
+        category_id: 8,
+        subcategory_id: null,
+        reservations: [],
+        category: {
+            id: 8,
+            name: "procompite",
+        },
+    }));
 
     return (
         <div className="">
@@ -23,14 +37,28 @@ const MapStandsMypesZonaInf = () => {
                             </p>
                         </div>
                         <div className="flex items-center mt-[1.3rem]">
-                            <Stand color={"red"} stand={standsBloqueA[0]} numero={1} size={"high"}/>
-                            <Stand color={"red"} stand={standsBloqueA[1]} numero={2} size={"high"}/>
-                            <Stand color={"red"} stand={standsBloqueA[2]} numero={3} size={"high"}/>                            
+                            <Stand
+                                color={"red"}
+                                stand={standsBloqueA[0]}
+                                numero={1}
+                                size={"high"}
+                            />
+                            <Stand
+                                color={"red"}
+                                stand={standsBloqueA[1]}
+                                numero={2}
+                                size={"high"}
+                            />
+                            <Stand
+                                color={"red"}
+                                stand={standsBloqueA[2]}
+                                numero={3}
+                                size={"high"}
+                            />
                         </div>
                         <MypesGroupStandDouble
                             color={"red"}
-                            stands={standsBloqueA.slice(3, 35)}
-                            
+                            stands={standsBloqueB}
                         />
                     </div>
                     {/* BLOQUE E - F - G*/}
@@ -76,28 +104,28 @@ const MapStandsMypesZonaInf = () => {
                             <div className="">
                                 <GroupStands
                                     color={"pink"}
-                                    inicio={13}
+                                    inicio={12}
                                     cantidad={2}
-                                    stands={standsBloqueF.slice(12, 14)}
+                                    stands={standsBloqueF.slice(11, 13)}
                                     size={"high"}
                                 />
                             </div>
                             <Stand
                                 color={"pink"}
-                                stand={standsBloqueF[11]}
+                                stand={standsBloqueF[10]}
                                 size={"wide"}
-                                numero={12}
+                                numero={11}
                             />
 
                             {Array.from({ length: 4 }).map((_, index) => (
                                 <div key={index}>
                                     <GroupStands
                                         color={"pink"}
-                                        inicio={10 - index * 2}
+                                        inicio={9 - index * 2}
                                         cantidad={2}
                                         stands={standsBloqueF.slice(
-                                            10 - index * 2,
-                                            12 - index * 2
+                                            8 - index * 2,
+                                            10 - index * 2
                                         )}
                                         size={"high"}
                                     />
@@ -123,28 +151,28 @@ const MapStandsMypesZonaInf = () => {
                             <div className="">
                                 <GroupStands
                                     color={"green"}
-                                    inicio={13}
+                                    inicio={12}
                                     cantidad={2}
-                                    stands={standsBloqueG.slice(12, 14)}
+                                    stands={standsBloqueG.slice(11, 13)}
                                     size={"high"}
                                 />
                             </div>
                             <Stand
                                 color={"green"}
-                                stand={standsBloqueG[11]}
+                                stand={standsBloqueG[10]}
                                 size={"wide"}
-                                numero={12}
+                                numero={11}
                             />
 
                             {Array.from({ length: 4 }).map((_, index) => (
                                 <div key={index}>
                                     <GroupStands
                                         color={"green"}
-                                        inicio={10 - index * 2}
+                                        inicio={9 - index * 2}
                                         cantidad={2}
                                         stands={standsBloqueG.slice(
-                                            10 - index * 2,
-                                            12 - index * 2
+                                            8 - index * 2,
+                                            10 - index * 2
                                         )}
                                         size={"high"}
                                     />

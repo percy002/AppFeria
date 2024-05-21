@@ -10,6 +10,8 @@ import { MapStandsGobiernoRegional } from "../GobiernoRegional/MapStandsGobierno
 import { MapStandsOtros } from "../Otros/MapStandsOtros";
 import ModalMap from "./ModalMap";
 import CompanyStandsMap from "../Company/CompanyStandsMap";
+import ProcompiteMap from "../Procompite/ProcompiteMap";
+import GerceturMap from "../Gercetur/GerceturMap";
 export const FeriaHuancaroMap = () => {
     const [reservedStands, setReservedStands] = useState([]);
     const divRef = useRef(null);
@@ -53,6 +55,8 @@ export const FeriaHuancaroMap = () => {
                             {category === 4 && <MapStandsGastronomia />}
                             {category == 5 && <MapStandsGobiernoRegional />}
                             {category == 6 && <CompanyStandsMap />}
+                            {category == 7 && <GerceturMap/> }
+                            {category == 8 && <ProcompiteMap />}
                             {category == 9 && <MapStandsOtros />}
                         </div>
 

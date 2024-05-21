@@ -5,6 +5,7 @@ export const MapStandsOtros = () => {
     const { props } = usePage();
     const { standsBloques } = props;
 
+    console.log(standsBloques);
     const standsBloqueA = standsBloques["A"];
     const standsBloqueB = standsBloques["B"];
 

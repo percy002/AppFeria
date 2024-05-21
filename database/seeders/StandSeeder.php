@@ -57,8 +57,8 @@ class StandSeeder extends Seeder
         }
 
         //GERCETUR
-        $this->createMultipleStands(15,3,'X',800);
-        $this->createMultipleStands(13,3,'W',800);
+        $this->createMultipleStands(15,7,'X',800);
+        $this->createMultipleStands(13,7,'W',800);
 
         //MYPES
         $this->createMultipleStands(17,3,'Y',800);

@@ -22,7 +22,7 @@ const MapStandsGobiernosLocalesZ2 = () => {
             <div className="flex gap-x-16">                
                 
                 <div className="flex items-end gap-8">                    
-                    <GobLocalGroupStandDouble
+                    {/* <GobLocalGroupStandDouble
                         stands={standsBloqueL}
                         color={"green"}
                         bloque={"L"}
@@ -36,7 +36,7 @@ const MapStandsGobiernosLocalesZ2 = () => {
                         stands={standsBloqueN}
                         color={"green"}
                         bloque={"N"}
-                    />
+                    /> */}
                     <GobLocalGroupStandDouble
                         stands={standsBloqueO}
                         color={"green"}

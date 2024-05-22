@@ -5,6 +5,8 @@ import { HiLocationMarker } from "react-icons/hi";
 import { FaStore } from "react-icons/fa6";
 import { Link } from "@inertiajs/react";
 import ContentIndex from "@/Components/UI/ContentIndex";
+import CarouselMain from "@/Components/UI/CarouselMain";
+import ContentIndex2 from "@/Components/UI/ContentIndex2";
 
 const Index = () => {
     return (
@@ -72,6 +74,8 @@ const Index = () => {
                     {/* Content */}
                 </div>
             </div>
+            <CarouselMain/>
+            {/* <ContentIndex2/> */}
             <ContentIndex/>
         </>
     );

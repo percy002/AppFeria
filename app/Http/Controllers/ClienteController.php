@@ -120,6 +120,8 @@ class ClienteController extends Controller
         'email' => $validatedData['email'],
         'category_id' => $validatedData['category_id'],
         'subcategory_id' => $request->subCategory_id,
+        'approved' => true,
+        'evaluated' => true,
     ]);
     
     $cliente->save();

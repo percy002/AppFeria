@@ -5,6 +5,7 @@ const MapStandsGobiernosLocalesZ1 = () => {
     const { props } = usePage();
 
     const { standsBloques } = props;
+    console.log(standsBloques);
     const standsBloqueA = standsBloques["A"];
     const standsBloqueB = standsBloques["B"];
     const standsBloqueC = standsBloques["C"];
@@ -17,10 +18,13 @@ const MapStandsGobiernosLocalesZ1 = () => {
 
     const standsBloqueJ = standsBloques["J"];
     const standsBloqueK = standsBloques["K"];
+    const standsBloqueL = standsBloques["L"];
+    const standsBloqueM = standsBloques["M"];
+    const standsBloqueN = standsBloques["N"];
     return (
         <div className="p-4 origin-top transform scale-90">
             <div className="flex gap-x-16">
-                <div className="flex flex-col justify-end">
+                {/* <div className="flex flex-col justify-end">
                     <GroupStands
                         cantidad={15}
                         inicio={15}
@@ -35,9 +39,9 @@ const MapStandsGobiernosLocalesZ1 = () => {
                     >
                         A
                     </p>
-                </div>
+                </div> */}
                 <div className="flex items-end gap-8">
-                    <GobLocalGroupStandDouble
+                    {/* <GobLocalGroupStandDouble
                         stands={standsBloqueB}
                         color={"blue"}
                         bloque={"B"}
@@ -46,7 +50,7 @@ const MapStandsGobiernosLocalesZ1 = () => {
                         stands={standsBloqueC}
                         color={"blue"}
                         bloque={"C"}
-                    />
+                    /> */}
                     <GobLocalGroupStandDouble
                         stands={standsBloqueD}
                         color={"blue"}
@@ -88,6 +92,21 @@ const MapStandsGobiernosLocalesZ1 = () => {
                         stands={standsBloqueK}
                         color={"green"}
                         bloque={"K"}
+                    />
+                    <GobLocalGroupStandDouble
+                        stands={standsBloqueL}
+                        color={"green"}
+                        bloque={"L"}
+                    />
+                    <GobLocalGroupStandDouble
+                        stands={standsBloqueM}
+                        color={"green"}
+                        bloque={"M"}
+                    />
+                    <GobLocalGroupStandDouble
+                        stands={standsBloqueN}
+                        color={"green"}
+                        bloque={"N"}
                     />
                     
                 </div>

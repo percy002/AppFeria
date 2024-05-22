@@ -15,6 +15,8 @@ export default {
         extend: {
             fontFamily: {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
+                midnight: ['"Midnight"', ...defaultTheme.fontFamily.sans],
+
             },
             scale: {
                 '70': '.70',
@@ -22,7 +24,12 @@ export default {
             colors:{
                 primary: '#9E0B26',
                 secondary: '#C9C4C0',
-            }
+            },
+            backgroundImage: theme => ({
+                'background-image': "url('/images/portada/feria_Huancaro_portada.webp')",
+                'manto': "url('/public/images/paginaPrincipal/fondo_manto.png')",
+
+              })
         },
     },
 

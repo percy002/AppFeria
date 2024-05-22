@@ -45,7 +45,6 @@ export default function ClientRegister() {
     }, []);
 
     const getSubCategories = (category_id) => {
-        console.log(category_id);
         axios
             .get(route("categorias.subCategories"), {
                 params: { category_id: category_id },
@@ -295,7 +294,7 @@ export default function ClientRegister() {
                                 </div>
                             </div>
                             <p className="text-center mt-4">
-                                Persona Registrante
+                                Datos del Representante
                             </p>
                         </>
                     )}

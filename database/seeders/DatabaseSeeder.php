@@ -56,7 +56,9 @@ class DatabaseSeeder extends Seeder
     {
         $Cliente = Cliente::create([
             'ruc' => '12345678901',
-            'company_name' => 'Mi Empresa',
+            'company_name' => 'Mi Empresa S.A.C',
+            'trade_name' => 'Mi Empresa',
+            'address' => 'Av. Los Incas 123',
             'dni' => '12345678',
             'name' => 'Juan',
             'last_name' => 'Perez',
@@ -84,6 +86,8 @@ class DatabaseSeeder extends Seeder
         $cliente2 = Cliente::create([
             'ruc' => '98765432109',
             'company_name' => 'Otra Empresa',
+            'trade_name' => 'Mi Empresa',
+            'address' => 'Av. Los Incas 123',
             'dni' => '87654321',
             'name' => 'Maria',
             'last_name' => 'Lopez',

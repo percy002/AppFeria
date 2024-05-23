@@ -40,12 +40,16 @@ class ClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-      // Validar los datos del formulario
-      $clientType = $request->selectedType;
+    {        
+      
       $category = $request->category_id;
-    //   dd($request->selectedType);
+    //   dd($request);
       $rules = [
+        'ruc' => 'required|string|max:11|unique:clientes',
+        'company_name' => 'required|string|max:255|unique:clientes',
+        'trade_name' => 'required|string|max:255',
+        'address' => 'required|string|max:255',
+        'position' => 'required|string|max:255',
         'dni' => 'required|string|size:8|unique:clientes',
         'name' => 'required|string|max:255',
         'last_name' => 'required|string|max:255',
@@ -53,12 +57,13 @@ class ClienteController extends Controller
         'email' => 'required|string|email|max:255|unique:clientes',
         'password' => 'required|string|max:255',
         'category_id' => 'required|exists:categories,id',
+        'ficha_ruc' => 'required|file'
     ];
-    if($clientType == 'personaJuridica'){
-        $rules['ruc'] = 'required|string|max:11|unique:clientes';
-        $rules['company_name'] = 'required|string|max:255|unique:clientes';
-        $rules['position'] = 'required|string|max:255';
-    }
+    // if($clientType == 'personaJuridica'){
+    //     $rules['ruc'] = 'required|string|max:11|unique:clientes';
+    //     $rules['company_name'] = 'required|string|max:255|unique:clientes';
+    //     $rules['position'] = 'required|string|max:255';
+    // }
     if ($category == 1) {
         $rules['subCategory_id'] = 'required|exists:subcategories,id';
     }
@@ -88,8 +93,9 @@ class ClienteController extends Controller
         'password.max' => 'El campo contraseña no debe tener más de 255 caracteres.',
         'category_id.required' => 'El campo categoría es obligatorio.',
         'category_id.exists' => 'La categoría seleccionada no existe.',
+        'ficha_ruc.required' => 'El campo ficha RUC es obligatorio.',
+        'ficha_ruc.file' => 'El campo ficha RUC debe ser un archivo.',
     ];
-    if($clientType == 'personaJuridica'){
         $messages['ruc.required'] = 'El campo RUC es obligatorio.';
         $messages['ruc.string'] = 'El campo RUC debe ser una cadena de texto.';
         $messages['ruc.max'] = 'El campo RUC no debe tener más de 11 dígitos.';
@@ -98,25 +104,41 @@ class ClienteController extends Controller
         $messages['company_name.string'] = 'El campo nombre de la empresa debe ser una cadena de texto.';
         $messages['company_name.max'] = 'El campo nombre de la empresa no debe tener más de 255 caracteres.';
         $messages['company_name.unique'] = 'El nombre de la empresa ya está en uso.';
+
+        $messages['trade_name.required'] = 'El campo nombre de la comercial es obligatorio.';
+        $messages['trade_name.string'] = 'El campo nombre de la comercial debe ser una cadena de texto.';
+        $messages['trade_name.max'] = 'El campo nombre de la comercial no debe tener más de 255 caracteres.';
+
+        $messages['address.required'] = 'El campo Direccion fiscal es obligatorio.';
+        $messages['address.string'] = 'El campo Direccion fiscal debe ser una cadena de texto.';
+        $messages['address.max'] = 'El campo Direccion fiscal no debe tener más de 255 caracteres.';
+
         $messages['position.required'] = 'El campo cargo es obligatorio.';
         $messages['position.string'] = 'El campo cargo debe ser una cadena de texto.';
         $messages['position.max'] = 'El campo cargo no debe tener más de 255 caracteres.';
-    }
+    
     if ($category == 1) {   
         $messages['subCategory_id.required'] = 'El campo Provincia es obligatorio.';
         $messages['subCategory_id.exists'] = 'La Provincia seleccionada no existe.';
     }
     $validatedData = $request->validate($rules, $messages);
 
+    // Validar los datos del formulario
+    if ($request->hasFile('ficha_ruc')) {
+        $imagePath = $request->file('ficha_ruc')->store('ficha_ruc', 'public');
+    }
     // Crear un nuevo cliente
     $cliente = Cliente::create([
         'ruc' => $request->ruc,
         'company_name' => $request->company_name,
+        'trade_name' => $request->trade_name,
         'dni' => $validatedData['dni'],
+        'address' => $validatedData['address'],
         'name' => $validatedData['name'],
         'last_name' => $validatedData['last_name'],
         'position' => $request->position,
         'phone_number' => $validatedData['phone_number'],
+        'ficha_ruc' => $imagePath,
         'email' => $validatedData['email'],
         'category_id' => $validatedData['category_id'],
         'subcategory_id' => $request->subCategory_id,

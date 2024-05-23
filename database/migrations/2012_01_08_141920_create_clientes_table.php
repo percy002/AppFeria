@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string('ruc', 11)->unique()->nullable(); 
-            $table->string('company_name')->unique()->nullable(); 
+            $table->string('company_name')->unique(); 
+            $table->string('trade_name')->nullable(); 
             $table->string('dni', 8)->unique(); 
-            $table->string('name');
-            $table->string('last_name');
+            $table->string('name',100);
+            $table->string('last_name',100);
+            $table->string('address');
+            $table->string('ficha_ruc')->nullable();
             $table->string('position')->nullable();
             $table->string('email')->unique();
             $table->string('phone_number', 9)->unique();

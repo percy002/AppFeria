@@ -6,16 +6,18 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm, usePage, router } from "@inertiajs/react";
 import { useState } from "react";
-import { Select } from "flowbite-react";
+import { Button, Select, Label, FileInput, Checkbox } from "flowbite-react";
 import Swal from "sweetalert2";
 
 export default function ClientRegister() {
     const [categories, setCategories] = useState();
     const [subCategories, setSubCategories] = useState([]);
+    const [termsAndConditions, setTermsAndConditions] = useState(false);
     const { data, setData, post, processing, errors, reset } = useForm({
-        selectedType: "personaJuridica",
         ruc: "",
         company_name: "",
+        address: "",
+        trade_name: "",
         category_id: "",
         subCategory_id: "",
         name: "",
@@ -24,6 +26,7 @@ export default function ClientRegister() {
         position: "",
         phone_number: "",
         email: "",
+        ficha_ruc: null,
         password: "",
         password_confirmation: "",
     });
@@ -67,20 +70,9 @@ export default function ClientRegister() {
         };
     }, []);
 
-    // useEffect(() => {
-    //     if (Object.keys(errors).length > 0) {
-    //         let errorMessage = "";
-    //         for (let key in errors) {
-    //             errorMessage += `${errors[key]} `;
-    //         }
-
-    //         Swal.fire("Error", errorMessage, "error");
-    //         console.log(errors);
-    //     }
-    // }, [errors]);
-
     const submit = (e) => {
         e.preventDefault();
+        console.log(data);
         post(route("client.register"), {
             data: data,
             onSuccess: () => {
@@ -103,25 +95,6 @@ export default function ClientRegister() {
         });
     };
 
-    const handleTypeChange = (event) => {
-        const { value } = event.target;
-        setData({
-            selectedType: value,
-            ruc: "",
-            company_name: "",
-            category_id: "",
-            subCategory_id: "",
-            name: "",
-            last_name: "",
-            dni: "",
-            position: "",
-            phone_number: "",
-            email: "",
-            password: "",
-            password_confirmation: "",
-        });
-    };
-
     const handleSelectCategory = (event) => {
         const { value } = event.target;
         setData("category_id", value);
@@ -137,48 +110,25 @@ export default function ClientRegister() {
         <div className="bg-gray-400">
             <GuestLayout type={"register"}>
                 <Head title="Registro" />
-
+                <h3 className="text-4xl text-gray-700">
+                    Datos de la Empresa o Institución
+                </h3>
                 <form onSubmit={submit} className="">
-                    <div className="flex justify-around my-2">
-                        <div className="">
-                            <input
-                                type="radio"
-                                id="personaJuridica"
-                                name="identificationType"
-                                value="personaJuridica"
-                                checked={
-                                    data.selectedType === "personaJuridica"
-                                }
-                                onChange={handleTypeChange}
-                                className="mx-1"
-                            />
-                            <label htmlFor="personaJuridica">
-                                Persona Juridica
-                            </label>
-                        </div>
-                        <div className="">
-                            <input
-                                type="radio"
-                                id="personaNatural"
-                                name="identificationType"
-                                value="personaNatural"
-                                checked={data.selectedType === "personaNatural"}
-                                onChange={handleTypeChange}
-                                className="mx-1"
-                            />
-                            <label htmlFor="personaNatural">
-                                Persona Natural
-                            </label>
-                        </div>
-                    </div>
-
                     <div className="flex gap-4 mt-4">
                         <div className="flex-1">
                             <InputLabel
                                 htmlFor="category_id"
-                                value="Categoría"
+                                value="Categoría *"
                             />
-                            <div className={`${subCategories && Array.isArray(subCategories) && subCategories.length == 0 ? "w-1/2" : ""}`}>
+                            <div
+                                className={`${
+                                    subCategories &&
+                                    Array.isArray(subCategories) &&
+                                    subCategories.length == 0
+                                        ? "w-1/2"
+                                        : ""
+                                }`}
+                            >
                                 <Select
                                     id="category_id"
                                     name="category_id"
@@ -204,104 +154,165 @@ export default function ClientRegister() {
                                 className="mt-2"
                             />
                         </div>
-                        {subCategories && Array.isArray(subCategories) && subCategories.length > 0 && (
-                            <div className="flex-1">
-                                <InputLabel
-                                    htmlFor="subCategory_id"
-                                    value="Provincia"
-                                />
-                                <div className="">
-                                    <Select
-                                        id="subCategory_id"
-                                        name="subCategory_id"
-                                        value={data.subCategory_id}
-                                        onChange={(e) => setData("subCategory_id", e.target.value)}
-                                        className="mt-1 block w-full"
-                                        required
-                                    >
-                                        <option value="">
-                                            Selecciona una Provincia
-                                        </option>
-                                        {subCategories &&
-                                            subCategories.map((cat, index) => (
-                                                <option
-                                                    key={index}
-                                                    value={cat.id}
-                                                >
-                                                    {cat.name}
-                                                </option>
-                                            ))}
-                                    </Select>
-                                </div>
-
-                                <InputError
-                                    message={errors.subCategory_id}
-                                    className="mt-2"
-                                />
-                            </div>
-                        )}
-                    </div>
-                    {data.selectedType == "personaJuridica" && (
-                        <>
-                            <div className="flex gap-4 mt-4">
-                                <div className="flex-1">
-                                    <InputLabel htmlFor="ruc" value="RUC" />
-
-                                    <TextInput
-                                        id="ruc"
-                                        name="ruc"
-                                        value={data.ruc}
-                                        className="mt-1 block w-full"
-                                        autoComplete="ruc"
-                                        isFocused={true}
-                                        onChange={(e) =>
-                                            setData("ruc", e.target.value)
-                                        }
-                                        required
-                                    />
-
-                                    <InputError
-                                        message={errors.name}
-                                        className="mt-2"
-                                    />
-                                </div>
-
+                        {subCategories &&
+                            Array.isArray(subCategories) &&
+                            subCategories.length > 0 && (
                                 <div className="flex-1">
                                     <InputLabel
-                                        htmlFor="company_name"
-                                        value="Razón Social"
+                                        htmlFor="subCategory_id"
+                                        value="Provincia"
                                     />
-
-                                    <TextInput
-                                        id="company_name"
-                                        name="company_name"
-                                        value={data.company_name}
-                                        className="mt-1 block w-full"
-                                        autoComplete="company_name"
-                                        onChange={(e) =>
-                                            setData(
-                                                "company_name",
-                                                e.target.value
-                                            )
-                                        }
-                                        required
-                                    />
+                                    <div className="">
+                                        <Select
+                                            id="subCategory_id"
+                                            name="subCategory_id"
+                                            value={data.subCategory_id}
+                                            onChange={(e) =>
+                                                setData(
+                                                    "subCategory_id",
+                                                    e.target.value
+                                                )
+                                            }
+                                            className="mt-1 block w-full"
+                                            required
+                                        >
+                                            <option value="">
+                                                Selecciona una Provincia
+                                            </option>
+                                            {subCategories &&
+                                                subCategories.map(
+                                                    (cat, index) => (
+                                                        <option
+                                                            key={index}
+                                                            value={cat.id}
+                                                        >
+                                                            {cat.name}
+                                                        </option>
+                                                    )
+                                                )}
+                                        </Select>
+                                    </div>
 
                                     <InputError
-                                        message={errors.company_name}
+                                        message={errors.subCategory_id}
                                         className="mt-2"
                                     />
                                 </div>
-                            </div>
-                            <p className="text-center mt-4">
-                                Datos del Representante
-                            </p>
-                        </>
-                    )}
+                            )}
+                    </div>
+                    <div className="flex gap-4 mt-4">
+                        <div className="flex-1">
+                            <InputLabel
+                                htmlFor="company_name"
+                                value="Institución/Empresa/Persona Natural *"
+                            />
+
+                            <TextInput
+                                id="company_name"
+                                name="company_name"
+                                value={data.company_name}
+                                className="mt-1 block w-full"
+                                isFocused={true}
+                                onChange={(e) =>
+                                    setData("company_name", e.target.value)
+                                }
+                                required
+                            />
+
+                            <InputError
+                                message={errors.name}
+                                className="mt-2"
+                            />
+                        </div>
+
+                        <div className="flex-1">
+                            <InputLabel
+                                htmlFor="trade_name"
+                                value="Nombre Comercial *"
+                            />
+
+                            <TextInput
+                                id="trade_name"
+                                name="trade_name"
+                                value={data.trade_name}
+                                className="mt-1 block w-full"
+                                autoComplete="trade_name"
+                                onChange={(e) =>
+                                    setData("trade_name", e.target.value)
+                                }
+                                required
+                            />
+
+                            <InputError
+                                message={errors.trade_name}
+                                className="mt-2"
+                            />
+                        </div>
+                    </div>
 
                     <div className="flex gap-4 mt-4">
                         <div className="flex-1">
-                            <InputLabel htmlFor="name" value="Nombre(s)" />
+                            <InputLabel htmlFor="ruc" value="RUC *" />
+
+                            <TextInput
+                                id="ruc"
+                                name="ruc"
+                                value={data.ruc}
+                                className="mt-1 block w-full"
+                                autoComplete="ruc"
+                                isFocused={true}
+                                onChange={(e) => setData("ruc", e.target.value)}
+                                required
+                            />
+
+                            <InputError
+                                message={errors.name}
+                                className="mt-2"
+                            />
+                        </div>
+
+                        <div className="flex-1">
+                            <InputLabel
+                                htmlFor="address"
+                                value="Dirección Fiscal"
+                            />
+
+                            <TextInput
+                                id="address"
+                                name="address"
+                                value={data.address}
+                                className="mt-1 block w-full"
+                                autoComplete="address"
+                                onChange={(e) =>
+                                    setData("address", e.target.value)
+                                }
+                                
+                            />
+
+                            <InputError
+                                message={errors.address}
+                                className="mt-2"
+                            />
+                        </div>
+                    </div>
+                    <div
+                        id="fileUpload"
+                        className="mt-8 flex gap-5 items-center"
+                    >
+                        <div className="mb-2">
+                            <Label htmlFor="file" value="Ficha RUC *" />
+                        </div>
+                        
+                        <FileInput id="file" required className="" onChange={e => setData('ficha_ruc', e.target.files[0])}  />
+                    </div>
+
+                    <p className="text-center mt-4 text-2xl font-bold text-gray-600">
+                        Datos del Contacto
+                    </p>
+
+                    <div className="flex gap-4 mt-4">
+                        <div className="flex-1">
+                            <InputLabel htmlFor="name" value="Nombre(s) *" />
 
                             <TextInput
                                 id="name"
@@ -323,7 +334,7 @@ export default function ClientRegister() {
                         </div>
 
                         <div className="flex-1">
-                            <InputLabel htmlFor="last_name" value="Apellidos" />
+                            <InputLabel htmlFor="last_name" value="Apellidos *" />
 
                             <TextInput
                                 id="last_name"
@@ -346,7 +357,7 @@ export default function ClientRegister() {
 
                     <div className="flex mt-4 gap-4">
                         <div className="flex-1">
-                            <InputLabel htmlFor="dni" value="DNI" />
+                            <InputLabel htmlFor="dni" value="DNI *" />
 
                             <TextInput
                                 id="dni"
@@ -364,35 +375,34 @@ export default function ClientRegister() {
 
                             <InputError message={errors.dni} className="mt-2" />
                         </div>
-                        {data.selectedType == "personaJuridica" && (
-                            <div className="flex-1">
-                                <InputLabel htmlFor="position" value="Cargo" />
 
-                                <TextInput
-                                    id="position"
-                                    name="position"
-                                    value={data.position}
-                                    className="w-full"
-                                    autoComplete="position"
-                                    onChange={(e) =>
-                                        setData("position", e.target.value)
-                                    }
-                                    required
-                                />
+                        <div className="flex-1">
+                            <InputLabel htmlFor="position" value="Cargo *" />
 
-                                <InputError
-                                    message={errors.position}
-                                    className="mt-2"
-                                />
-                            </div>
-                        )}
+                            <TextInput
+                                id="position"
+                                name="position"
+                                value={data.position}
+                                className="w-full"
+                                autoComplete="position"
+                                onChange={(e) =>
+                                    setData("position", e.target.value)
+                                }
+                                required
+                            />
+
+                            <InputError
+                                message={errors.position}
+                                className="mt-2"
+                            />
+                        </div>
                     </div>
 
                     <div className="flex mt-4 gap-4">
                         <div className="flex-1">
                             <InputLabel
                                 htmlFor="phone_number"
-                                value="Celular"
+                                value="Celular *"
                             />
 
                             <TextInput
@@ -416,7 +426,7 @@ export default function ClientRegister() {
                         <div className="flex-1">
                             <InputLabel
                                 htmlFor="email"
-                                value="Correo Electrónico"
+                                value="Correo Electrónico *"
                             />
 
                             <TextInput
@@ -440,7 +450,7 @@ export default function ClientRegister() {
                     </div>
                     <div className="flex gap-4 mt-4">
                         <div className="flex-1">
-                            <InputLabel htmlFor="password" value="Contraseña" />
+                            <InputLabel htmlFor="password" value="Contraseña *" />
 
                             <TextInput
                                 id="password"
@@ -464,7 +474,7 @@ export default function ClientRegister() {
                         <div className="flex-1">
                             <InputLabel
                                 htmlFor="password_confirmation"
-                                value="Confirmar Contraseña"
+                                value="Confirmar Contraseña *"
                             />
 
                             <TextInput
@@ -489,18 +499,40 @@ export default function ClientRegister() {
                             />
                         </div>
                     </div>
+                    
+                    <div className="w-full border-b-4 text-gray-500 my-6"></div>
+                    <ul className="text-gray-600 flex flex-col gap-2">
+                        <li>
+                            Nota: La aprobación de su cuenta tendrá un plazo no
+                            mayor a 24 hrs
+                        </li>
+                        <li>"*" señala los campos obligatorios</li>
+                        <div className="flex items-center gap-2">
+                            <Checkbox id="accept" onChange={() => setTermsAndConditions(!termsAndConditions)} />
+                            <Label htmlFor="accept" className="flex">
+                                Estoy de acuerdo con los &nbsp;
+                                <a
+                                    href="#"
+                                    className="text-cyan-600 hover:underline dark:text-cyan-500"
+                                >
+                                    términos y condiciones
+                                </a>
+                            </Label>
+                        </div>
+                    </ul>
 
-                    <div className="flex items-center justify-end mt-4">
+                    <div className="flex gap-8 items-center justify-end mt-4">
                         <Link
                             href={route("login")}
-                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="underline text-md font-bold text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            ¿Ya esta registrado ?
+                            Volver a iniciar sesión
                         </Link>
 
-                        <PrimaryButton className="ms-4" disabled={processing}>
+                        <Button type="submit" className="bg-primary text-xl text-white rounded-full" disabled={processing || !termsAndConditions}>
                             Registrar
-                        </PrimaryButton>
+                        </Button>
+                
                     </div>
                 </form>
             </GuestLayout>

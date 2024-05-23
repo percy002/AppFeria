@@ -87,7 +87,7 @@ h5 {
 }
 
 *{
-    font-family: 'Oswald', sans-serif;
+    /* font-family: 'Oswald', sans-serif; */
     text-decoration: none;
     outline: none;
     margin: 0; padding: 0;

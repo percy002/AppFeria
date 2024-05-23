@@ -28,6 +28,8 @@ export default {
             backgroundImage: theme => ({
                 'background-image': "url('/images/portada/feria_Huancaro_portada.webp')",
                 'manto': "url('/public/images/paginaPrincipal/fondo_manto.png')",
+                'concrete': "url('/public/images/paginaPrincipal/concrete_bg.jpg')",
+                'concrete-50': "url('/public/images/paginaPrincipal/concrete-50.png')",
 
               })
         },

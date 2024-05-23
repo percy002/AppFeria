@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -83,11 +85,13 @@ h5 {
 :root{
     --rojo:#9E0C26;
     --sangre:#C20831;
-    --plomo:#706F6F;
+    --plomo:rgb(55 65 81 / var(--tw-text-opacity));;
 }
 
 *{
-    /* font-family: 'Oswald', sans-serif; */
+    font-family: 'Inter', sans-serif;
+    font-optical-sizing: auto;
+
     text-decoration: none;
     outline: none;
     margin: 0; padding: 0;
@@ -253,8 +257,8 @@ body{
     color: var(--sangre);
 }
 .contenido p{
-    color: var(--plomo);
-    font-size: 1.2rem;
+    color: rgb(55 65 81 / var(--tw-text-opacity));
+    font-size: 1.125rem;
 }
 .contenido a{
     font-size: 1.2rem;

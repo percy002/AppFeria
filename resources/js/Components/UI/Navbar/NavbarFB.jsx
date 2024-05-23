@@ -1,19 +1,26 @@
-
 "use client";
 
-import Link from "next/link";
-import { Navbar } from "flowbite-react";
+import { Button, Navbar } from "flowbite-react";
+import { Link } from "@inertiajs/react";
+import DefaultButton from "../DefaultButton";
+import { HiHome } from "react-icons/hi";
 
 function NavbarFB() {
-  return (
-    <Navbar fluid rounded>
-      <Navbar.Brand as={Link} href="https://flowbite-react.com">
-        <img src="/favicon.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Flowbite React</span>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-      <Navbar.Collapse>
-        <Navbar.Link href="#" active>
+    return (
+        <Navbar fluid className="bg-primary z-100">
+            <Navbar.Brand as={Link} href="/">
+                <HiHome className="h-10 w-10 text-white" />
+            </Navbar.Brand>
+            <Navbar.Toggle className="text-white hover:bg-transparent"/>
+            <Navbar.Collapse>
+                <div className="bg-white text-primary py-1 px-4 sm:rounded-full font-bold text-base">
+                    <Link href="/login" className="text-center">Iniciar Sesion</Link>
+                </div>
+                <div className="bg-white text-primary py-1 px-4 sm:rounded-full font-bold text-base">
+                    <Link href="/cliente/registro">Registrarse</Link>
+                </div>
+                {/* <Link href="/cliente/registro">Registrarse</Link> */}
+                {/* <Navbar.Link href="#" active>
           Home
         </Navbar.Link>
         <Navbar.Link as={Link} href="#">
@@ -21,9 +28,9 @@ function NavbarFB() {
         </Navbar.Link>
         <Navbar.Link href="#">Services</Navbar.Link>
         <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Contact</Navbar.Link>
-      </Navbar.Collapse>
-    </Navbar>
-  );
+        <Navbar.Link href="#">Contact</Navbar.Link> */}
+            </Navbar.Collapse>
+        </Navbar>
+    );
 }
 export default NavbarFB;

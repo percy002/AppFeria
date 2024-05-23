@@ -112,4 +112,8 @@ Route::group(['prefix' => 'usuarios'],function(){
 
 });
 
+Route::get('/reseña', function () {
+    return Inertia::render('Reseña');
+});
+
 require __DIR__.'/auth.php';

@@ -7,10 +7,11 @@ import { Link } from "@inertiajs/react";
 import ContentIndex from "@/Components/UI/ContentIndex";
 import CarouselMain from "@/Components/UI/CarouselMain";
 import ContentIndex2 from "@/Components/UI/ContentIndex2";
-
+import NavbarFB from "@/Components/UI/Navbar/NavbarFB";
 const Index = () => {
     return (
         <>
+        <NavbarFB/>
             <div className="w-full h-screen relative">
                 <div
                     className="w-full h-full bg-cover bg-center absolute"
@@ -75,8 +76,8 @@ const Index = () => {
                 </div>
             </div>
             <CarouselMain/>
-            {/* <ContentIndex2/> */}
-            <ContentIndex/>
+            <ContentIndex2/> 
+            {/* <ContentIndex/> */}
         </>
     );
 };

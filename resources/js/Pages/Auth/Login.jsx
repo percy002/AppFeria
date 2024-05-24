@@ -32,7 +32,7 @@ export default function Login({ status, canResetPassword }) {
             className="bg-cover bg-center"
             style={{
                 backgroundImage:
-                    "url('/images/portada/feria_Huancaro_portada.webp')",
+                    "url('/images/portada/feria_huancaro_portada.webp')",
             }}
         >
             <GuestLayout>

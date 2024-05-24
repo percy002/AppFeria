@@ -26,7 +26,7 @@ export default {
                 secondary: '#C9C4C0',
             },
             backgroundImage: theme => ({
-                'background-image': "url('/images/portada/feria_Huancaro_portada.webp')",
+                'background-image': "url('/public/images/portada/feria_huancaro_portada.webp')",
                 'manto': "url('/public/images/paginaPrincipal/fondo_manto.png')",
                 'concrete': "url('/public/images/paginaPrincipal/concrete_bg.jpg')",
                 'concrete-50': "url('/public/images/paginaPrincipal/concrete-50.png')",

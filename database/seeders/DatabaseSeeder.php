@@ -150,23 +150,23 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Paruro', 'category_id' => 1],
             ['name' => 'Espinar', 'category_id' => 1],
             //GOBIERNO REGIONAL
-            ['name' => 'COPESCO', 'category_id' => 5],
-            ['name' => 'MERIS', 'category_id' => 5],
-            ['name' => 'IMA', 'category_id' => 5],
-            ['name' => 'TRANSPORTES', 'category_id' => 5],
-            ['name' => 'RECURSOS NATURALES', 'category_id' => 5],
-            ['name' => 'DESARROLLO SOCIAL', 'category_id' => 5],
-            ['name' => 'PROYECTOS', 'category_id' => 5],
-            ['name' => 'INFRAESTRUCTURA', 'category_id' => 5],
-            ['name' => 'TRABAJO', 'category_id' => 5],
-            ['name' => 'VIVIENDA Y CONSTRUCCION', 'category_id' => 5],
-            ['name' => 'GERCETUR', 'category_id' => 5],
-            ['name' => 'GERAGRI', 'category_id' => 5],
-            ['name' => 'ECONOMICO', 'category_id' => 5],
-            ['name' => 'PRODUCCION', 'category_id' => 5],
-            ['name' => 'EDUCACION', 'category_id' => 5],
-            ['name' => 'SEGURIDAD', 'category_id' => 5],
-            ['name' => 'SALUD', 'category_id' => 5],
+            ['name' => 'COPESCO', 'category_id' => 5],//14
+            ['name' => 'MERIS', 'category_id' => 5],//15
+            ['name' => 'IMA', 'category_id' => 5],//16
+            ['name' => 'TRANSPORTES', 'category_id' => 5],//17
+            ['name' => 'RECURSOS NATURALES', 'category_id' => 5],//18
+            ['name' => 'GRGII', 'category_id' => 5],//19
+            ['name' => 'SGPI', 'category_id' => 5],//20
+            ['name' => 'MINAS', 'category_id' => 5],//21
+            ['name' => 'GERAGRI', 'category_id' => 5],//22
+            ['name' => 'VIVIENDA Y CONSTRUCCION', 'category_id' => 5],//23
+            ['name' => 'DESARROLLO SOCIAL', 'category_id' => 5],//24
+            ['name' => 'PRODUCCION', 'category_id' => 5],//25
+            ['name' => 'DESARROLLO ECONOMICO', 'category_id' => 5],//26
+            ['name' => 'TRABAJO', 'category_id' => 5],//27
+            ['name' => 'EDUCACION', 'category_id' => 5],//28
+            ['name' => 'SEGURIDAD', 'category_id' => 5],//29
+            ['name' => 'SALUD', 'category_id' => 5],//30
             //Regiones Invitadas
 
         ];

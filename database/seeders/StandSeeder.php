@@ -57,10 +57,12 @@ class StandSeeder extends Seeder
         }
 
         //GERCETUR
-        $this->createMultipleStands(15,7,'X',800);
-        $this->createMultipleStands(13,7,'W',800);
+        $this->createMultipleStands(13,7,'A',800);
+        $this->createMultipleStands(13,7,'B',800);
 
         //MYPES
+        $this->createMultipleStands(15,3,'X',800);
+        $this->createMultipleStands(13,3,'W',800);
         $this->createMultipleStands(17,3,'Y',800);
         $this->createMultipleStands(16,3,'Z',800);
 
@@ -86,21 +88,28 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(7,5,'dd',1000,17);//TRANSPORTES
         $this->createMultipleStands(7,5,'ee',1000,18);//RECURSOS NATURALES
         $this->createMultipleStands(7,5,'ff',1000,19);//GRGII
-        $this->createMultipleStands(7,5,'gg',1000,20);//SGPI Y MINAS
-        $this->createMultipleStands(7,5,'hh',1000,21);//GERAGRI
-        $this->createMultipleStands(6,5,'ii',1000,22);//GERAGRI y VIVIENDA Y CONSTRUCCION
-        $this->createMultipleStands(6,5,'jj',1000,23);//VIVIENDA Y CONSTRUCCION Y GERCETUR
-        $this->createMultipleStands(6,5,'ll',1000,24);//GERAGRI
-        $this->createMultipleStands(6,5,'mm',1000,25);//GERAGRI
-        $this->createMultipleStands(6,5,'nn',1000,26);//ECONOMICO
-        $this->createMultipleStands(5,5,'oo',1000,27);//PRODUCCION
+        $this->createMultipleStands(3,5,'gg',1000,21);//MINAS
+        $this->createMultipleStands(4,5,'gg',1000,20);//SGPI 
+        $this->createMultipleStands(7,5,'hh',1000,22);//GERAGRI
+
+        $this->createStand('ii-1',5,'ii',1000,22);//GERAGRI
+        $this->createStand('ii-3',5,'ii',1000,22);//GERAGRI
+        $this->createStand('ii-5',5,'ii',1000,22);//GERAGRI
+        $this->createStand('ii-2',5,'ii',1000,23);//GERAGRI
+        $this->createStand('ii-4',5,'ii',1000,23);//GERAGRI
+        $this->createStand('ii-6',5,'ii',1000,23);//GERAGRI
+        // $this->createMultipleStands(3,5,'ii',1000,23);//VIVIENDA Y CONSTRUCCION
+        $this->createMultipleStands(6,5,'jj',1000,24);//DESARROLLO SOCIAL
+        $this->createMultipleStands(6,5,'ll',1000,25);//PRODUCCION
+        $this->createMultipleStands(6,5,'mm',1000,25);//PRODUCCION
+        $this->createMultipleStands(6,5,'nn',1000,26);//DESARROLLO ECONOMICO
+        $this->createMultipleStands(5,5,'oo',1000,27);//TRABAJO
         $this->createMultipleStands(7,5,'pp',1000,28);//EDUCACION
         $this->createMultipleStands(3,5,'qq',1000,29);//SEGURIDAD
         $this->createMultipleStands(3,5,'rr',1000,30);//SALUD
 
         //CREAR STANDS CATEGORIA OTROS
-        $this->createMultipleStands(13,9,'A',1000);
-        $this->createMultipleStands(13,9,'B',1000);
+        
     }
 
     private function createStand($name,$category,$block,$price, $subcategory = null)

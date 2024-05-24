@@ -1,6 +1,7 @@
 import { usePage } from "@inertiajs/react";
 import GroupStands from "../GroupStands";
 import { Button } from "flowbite-react";
+import Stand from "../Stand";
 
 export const MapStandsGobiernoRegional = () => {
     const { props } = usePage();
@@ -159,21 +160,48 @@ export const MapStandsGobiernoRegional = () => {
                             {/* BLOQUE I */}
                             <div className="flex flex-col gap-1">
                                 <div className="flex flex-col">
-                                    {Array.from(
-                                        { length: 3 },
-                                        (_, i) => i * 2
-                                    ).map((i) => (
-                                        <GroupStands
-                                            color={"purple"}
-                                            inicio={i + 1}
-                                            cantidad={2}
-                                            stands={standsBloqueII.slice(
-                                                i,
-                                                i + 2
-                                            )}
-                                            size={"very high"}
-                                        />
-                                    ))}
+                                        <div className="flex">
+                                            <Stand
+                                                numero={1}
+                                                stand={standsBloqueII[0]}
+                                                color={"purple"}
+                                                size={"very high"}
+                                            />
+                                            <Stand
+                                                numero={2}
+                                                stand={standsBloqueII[3]}
+                                                color={"purple"}
+                                                size={"very high"}
+                                            />
+                                        </div>
+                                        <div className="flex">
+                                            <Stand
+                                                numero={3}
+                                                stand={standsBloqueII[1]}
+                                                color={"purple"}
+                                                size={"very high"}
+                                            />
+                                            <Stand
+                                                numero={4}
+                                                stand={standsBloqueII[4]}
+                                                color={"purple"}
+                                                size={"very high"}
+                                            />
+                                        </div>
+                                        <div className="flex">
+                                            <Stand
+                                                numero={5}
+                                                stand={standsBloqueII[2]}
+                                                color={"purple"}
+                                                size={"very high"}
+                                            />
+                                            <Stand
+                                                numero={6}
+                                                stand={standsBloqueII[5]}
+                                                color={"purple"}
+                                                size={"very high"}
+                                            />
+                                        </div>
                                 </div>
                                 <div className="flex justify-center">
                                     <p className=" text-center w-fit font-bold text-base border-4 border-purple-600 rounded-full px-2">
@@ -189,6 +217,7 @@ export const MapStandsGobiernoRegional = () => {
                                         (_, i) => i * 2
                                     ).map((i) => (
                                         <GroupStands
+                                            key={i}
                                             color={"purple"}
                                             inicio={i + 1}
                                             cantidad={2}
@@ -214,6 +243,7 @@ export const MapStandsGobiernoRegional = () => {
                                         (_, i) => i * 2
                                     ).map((i) => (
                                         <GroupStands
+                                            key={i}
                                             color={"purple"}
                                             inicio={i + 1}
                                             cantidad={2}
@@ -239,6 +269,7 @@ export const MapStandsGobiernoRegional = () => {
                                         (_, i) => i * 2
                                     ).map((i) => (
                                         <GroupStands
+                                            key={i}
                                             color={"purple"}
                                             inicio={i + 1}
                                             cantidad={2}
@@ -264,6 +295,7 @@ export const MapStandsGobiernoRegional = () => {
                                         (_, i) => i * 2
                                     ).map((i) => (
                                         <GroupStands
+                                            key={i}
                                             color={"purple"}
                                             inicio={i + 1}
                                             cantidad={2}
@@ -292,9 +324,9 @@ export const MapStandsGobiernoRegional = () => {
                             <div className="">
                                 <p className="text-center font-bold">SS</p>
                             </div>
-                                <Button color="dark" disabled>
-                                    &#9632;
-                                </Button>
+                            <Button color="dark" disabled>
+                                &#9632;
+                            </Button>
                         </div>
                         <div className="flex flex-col gap-1">
                             <div className="flex justify-center">

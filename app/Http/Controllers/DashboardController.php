@@ -74,8 +74,8 @@ class DashboardController extends Controller
 
         }
         if($category_id == 7){
-            $blocks[] = 'X';       
-            $blocks[] = 'W';       
+            $blocks[] = 'A';       
+            $blocks[] = 'B';       
 
         }
         if($category_id == 8){

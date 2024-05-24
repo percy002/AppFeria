@@ -8,17 +8,14 @@ stands caducados deben ser liberados y aparecer disponibles en el mapa
 
 
 crear buscador y pagination para clientes
-mostrar todos los mapas al usuario
+mostrar todos los mapas al usuario admin
+
 **** backend
 borrar updated at y created at de la respuesta que envía dashboard controller
 
 hacer las validaciones de rutas, solo autenticados y redirecciones
 
-modificar el seeder de stands para crear en intervalos
-
 hacer la validación de no reservar stands reservados
-
-como asegurarme de que es un gobierno local o regional
 
 se debe saber quien es el usuario que aprueba
 
@@ -26,7 +23,6 @@ se debe saber quien es el usuario que aprueba
 hay un bug cuando expira la sesión
 ***
 un cliente hace una reserva y lo paga, no puede volver a registrar un pago ni elegir stands
-
 
 **** Errores en el mapa ****
 bloques f y g de mypes no tiene numero 3

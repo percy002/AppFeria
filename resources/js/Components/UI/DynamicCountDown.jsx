@@ -44,7 +44,7 @@ const DynamicCountDown = () => {
 
     return (
         <div className="flex gap-2 lg:gap-10 justify-center items-center flex-wrap">
-            <span className="text-4xl lg:text-6xl font-bold text-white">Solo Falta</span>
+            <span className="text-2xl lg:text-6xl font-bold text-white">Solo Falta</span>
             <div className="flex gap-4 md:gap-6 items-center">
                 <TimeBox value={days} unit={"Dias"} />
                 

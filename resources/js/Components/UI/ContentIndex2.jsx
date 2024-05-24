@@ -4,6 +4,7 @@ import { useState } from "react";
 import ContentIndex from "./ContentIndex";
 import Footer from "./Footer";
 import MunisLogos from "./MunisLogos";
+import { Link } from "@inertiajs/react";
 const ContentIndex2 = () => {
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -23,10 +24,10 @@ const ContentIndex2 = () => {
                             regional, nacional e internacional, la misma que se
                             desarrolla en el mes de junio.
                         </p>
-                        <DefaultButton text={"Leer Mas"} url={"/reseña"} />
-                        {/* <a href="#">
-                            <button>Leer Mas</button>
-                        </a> */}
+                        <Link href="/informacion_general" className="bg-primary rounded-full text-white w-fit mt-4 px-4 py-1 border-4 hover:border-primary hover:bg-white hover:text-primary">
+                            Leer Mas
+                        </Link>
+                        
                     </div>
                     <div className="flex-1">
                         <div className="flex justify-center">

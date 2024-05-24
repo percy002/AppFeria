@@ -1,7 +1,7 @@
 import MunisLogos from "@/Components/UI/MunisLogos";
 import GuestLayout from "@/Layouts/GuestLayout";
 
-const Reseña = () => {
+const InfoGeneral = () => {
     return (
         <GuestLayout type={"reseña"}>
             <div className="">
@@ -118,4 +118,4 @@ const Reseña = () => {
         </GuestLayout>
     );
 };
-export default Reseña;
+export default InfoGeneral;

@@ -85,10 +85,10 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(7,5,'cc',1000,16);//IMA
         $this->createMultipleStands(7,5,'dd',1000,17);//TRANSPORTES
         $this->createMultipleStands(7,5,'ee',1000,18);//RECURSOS NATURALES
-        $this->createMultipleStands(7,5,'ff',1000,19);//DESARROLLO SOCIAL
-        $this->createMultipleStands(7,5,'gg',1000,20);//PROYECTOS Y MINAS
-        $this->createMultipleStands(7,5,'hh',1000,21);//INFRAESTRUCTURA
-        $this->createMultipleStands(6,5,'ii',1000,22);//TRABAJO
+        $this->createMultipleStands(7,5,'ff',1000,19);//GRGII
+        $this->createMultipleStands(7,5,'gg',1000,20);//SGPI Y MINAS
+        $this->createMultipleStands(7,5,'hh',1000,21);//GERAGRI
+        $this->createMultipleStands(6,5,'ii',1000,22);//GERAGRI y VIVIENDA Y CONSTRUCCION
         $this->createMultipleStands(6,5,'jj',1000,23);//VIVIENDA Y CONSTRUCCION Y GERCETUR
         $this->createMultipleStands(6,5,'ll',1000,24);//GERAGRI
         $this->createMultipleStands(6,5,'mm',1000,25);//GERAGRI

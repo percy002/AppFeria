@@ -28,29 +28,14 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return Inertia::render('Auth/Login');
 })->name('login');
-// Route::get('/dashboard', function () {
-//     return Inertia::render('Dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-// Route::get('/dashboard', [DashboardController::class, 'index'])
-//     ->middleware(['auth', 'verified'])
-//     ->name('dashboard');
 
 Route::get('/dashboard/{any?}', [DashboardController::class, 'index'])
 ->where('any', '.*')    
 ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
 Route::group(['prefix' => 'cliente'], function () {
-    // Route::get('/', function () {
-    //     return Inertia::render('Client/ClientLogin');
-    // })->name('client.login');
+
 
     Route::post('login', function () {
         // Lógica para manejar el inicio de sesión del cliente
@@ -112,8 +97,8 @@ Route::group(['prefix' => 'usuarios'],function(){
 
 });
 
-Route::get('/reseña', function () {
-    return Inertia::render('Reseña');
+Route::get('/informacion_general', function () {
+    return Inertia::render('InfoGeneral');
 });
 
 require __DIR__.'/auth.php';

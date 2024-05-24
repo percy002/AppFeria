@@ -1,18 +1,22 @@
 import DynamicCountDown from "@/Components/UI/DynamicCountDown";
 import { Button } from "flowbite-react";
 import React from "react";
-import { HiLocationMarker } from "react-icons/hi";
 import { FaStore } from "react-icons/fa6";
 import { Link } from "@inertiajs/react";
 import ContentIndex from "@/Components/UI/ContentIndex";
 import CarouselMain from "@/Components/UI/CarouselMain";
 import ContentIndex2 from "@/Components/UI/ContentIndex2";
 import NavbarFB from "@/Components/UI/Navbar/NavbarFB";
+import { Head } from '@inertiajs/react'
+import PdfOpenModal from "@/Components/UI/PdfOpenModal";
+
 const Index = () => {
     return (
         <>
+        <Head title="Inicio" />
+
         <NavbarFB/>
-            <div className="w-full h-screen relative">
+            <div className="w-full h-[85vh] md:h-[90vh] relative">
                 <div
                     className="w-full h-full bg-cover bg-center absolute"
                     style={{
@@ -35,18 +39,10 @@ const Index = () => {
                                 />
                             </div>
                             <div className="flex w-full justify-center">
-                                <Button
-                                    size={"xs"}
-                                    className="pt-0 px-4 bg-secondary rounded-full text-primary font-bold text-xl hover:bg-primary enabled:hover:bg-primary hover:text-white"
-                                >
-                                    <HiLocationMarker className="h-6 w-6 mr-2" />
-                                    <span className="text-lg">
-                                        Feria Huancaro, Cusco
-                                    </span>
-                                </Button>
+                                <PdfOpenModal/>
                             </div>
-                            <div className="w-full flex justify-center">
-                                <h1 className="text-white text-center text-5xl lg:text-7xl font-bold">
+                            <div className="w-full flex justify-center px-2 md:px-10">
+                                <h1 className="text-white text-center text-3xl lg:text-6xl font-bold">
                                     53° Expo Feria Internacional Huancaro
                                 </h1>
                             </div>

@@ -126,7 +126,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Empresas'],
             ['name' => 'GERCETUR'],
             ['name' => 'Procompite'],
-            ['name' => 'Otros'],
+            ['name' => 'Regiones invitadas'],
         ];
 
         foreach ($categories as $category) {
@@ -167,6 +167,8 @@ class DatabaseSeeder extends Seeder
             ['name' => 'EDUCACION', 'category_id' => 5],
             ['name' => 'SEGURIDAD', 'category_id' => 5],
             ['name' => 'SALUD', 'category_id' => 5],
+            //Regiones Invitadas
+
         ];
 
         foreach ($subcategories as $subcategory) {

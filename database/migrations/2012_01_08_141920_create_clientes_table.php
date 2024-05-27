@@ -19,13 +19,12 @@ return new class extends Migration
             $table->string('dni', 8)->unique(); 
             $table->string('name',100);
             $table->string('last_name',100);
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('ficha_ruc')->nullable();
             $table->string('position')->nullable();
             $table->string('email')->unique();
             $table->string('phone_number', 9)->unique();
-            $table->boolean('approved')->default(false);
-            $table->boolean('evaluated')->default(false);
+            $table->string('status')->default('pending');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('subcategory_id')->nullable();
  

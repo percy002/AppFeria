@@ -3,6 +3,9 @@ import { Table } from "flowbite-react";
 import approvedClientContext from "@/Contexts/approvedClientContext";
 import ClientsEvaluatedContext from "@/Contexts/ClientEvaluatedContext";
 import Swal from "sweetalert2";
+import ModalVerPDF from "../UI/ModalVerPDF";
+import PdfOpenModal from "../UI/PdfOpenModal";
+import FichaRucModal from "../UI/FichaRucModal";
 function RowEvaluatedClient({ cliente }) {
     const [approved, setApproved] = useState(cliente.approved);
     const { approvedClients, setApprovedClients } = useContext(approvedClientContext);
@@ -11,8 +14,8 @@ function RowEvaluatedClient({ cliente }) {
     const aprobarCliente = async (clienteId) => {
         try {
             const response = await axios.put(
-                `/cliente/${clienteId}/aprobar`,
-                null
+                `/cliente/${clienteId}/evaluar`,
+                {'status': 'approved'}
             );
             if (response.status === 200) {
                 const data = response.data;
@@ -75,6 +78,7 @@ function RowEvaluatedClient({ cliente }) {
                     <Table.Cell>{cliente.dni}</Table.Cell>
                     <Table.Cell>{cliente.position}</Table.Cell>
                     <Table.Cell>{cliente.email}</Table.Cell>
+                    <Table.Cell><FichaRucModal pdf={`/storage/${cliente.ficha_ruc}`} text="ver documento"/></Table.Cell>
                     
                     <Table.Cell>
                         <input

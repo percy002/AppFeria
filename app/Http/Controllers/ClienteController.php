@@ -45,10 +45,10 @@ class ClienteController extends Controller
       $category = $request->category_id;
     //   dd($request);
       $rules = [
-        'ruc' => 'required|string|max:11|unique:clientes',
+        'ruc' => 'required|string|size:11|unique:clientes',
         'company_name' => 'required|string|max:255|unique:clientes',
         'trade_name' => 'required|string|max:255',
-        'address' => 'required|string|max:255',
+        'address' => 'max:255',
         'position' => 'required|string|max:255',
         'dni' => 'required|string|size:8|unique:clientes',
         'name' => 'required|string|max:255',
@@ -98,7 +98,7 @@ class ClienteController extends Controller
     ];
         $messages['ruc.required'] = 'El campo RUC es obligatorio.';
         $messages['ruc.string'] = 'El campo RUC debe ser una cadena de texto.';
-        $messages['ruc.max'] = 'El campo RUC no debe tener más de 11 dígitos.';
+        $messages['ruc.size'] = 'El campo RUC debe tener 11 dígitos.';
         $messages['ruc.unique'] = 'El RUC ingresado ya está registrado.';
         $messages['company_name.required'] = 'El campo nombre de la empresa es obligatorio.';
         $messages['company_name.string'] = 'El campo nombre de la empresa debe ser una cadena de texto.';
@@ -109,8 +109,6 @@ class ClienteController extends Controller
         $messages['trade_name.string'] = 'El campo nombre de la comercial debe ser una cadena de texto.';
         $messages['trade_name.max'] = 'El campo nombre de la comercial no debe tener más de 255 caracteres.';
 
-        $messages['address.required'] = 'El campo Direccion fiscal es obligatorio.';
-        $messages['address.string'] = 'El campo Direccion fiscal debe ser una cadena de texto.';
         $messages['address.max'] = 'El campo Direccion fiscal no debe tener más de 255 caracteres.';
 
         $messages['position.required'] = 'El campo cargo es obligatorio.';
@@ -220,9 +218,18 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         // Alternar el estado de aprobación del cliente
-        $cliente->update(['approved' => !$cliente->approved]);
+        $cliente->update(['status' => 'approved']);
 
-        $clientes = Cliente::all();
+        // $clientes = Cliente::all();
+        return response()->json(['approved' => $cliente->approved]);
+    }
+    public function reject($id)
+    {
+        $cliente = Cliente::find($id);
+        // Alternar el estado de aprobación del cliente
+        $cliente->update(['status' => 'approved']);
+
+        // $clientes = Cliente::all();
         return response()->json(['approved' => $cliente->approved]);
     }
 
@@ -230,9 +237,9 @@ class ClienteController extends Controller
     {
         $cliente = Cliente::find($id);
         // Alternar el estado de aprobación del cliente
-        $cliente->update(['evaluated' => !$cliente->evaluated]);
+        $cliente->update(['status' => 'evaluated']);
 
-        $clientes = Cliente::all();
+        // $clientes = Cliente::all();
         return response()->json(['approved' => $cliente->evaluated]);
     }
 
@@ -245,41 +252,33 @@ class ClienteController extends Controller
         $clientesPagos = Cliente::with(['category','reservation' => function ($query) {
             $query->whereHas('payment');
         },'reservation.payment.PaymentStatus','reservation.stands'])
-            ->where('approved', 1)->whereHas('reservation.payment')
+            ->where('status', 'approved')->whereHas('reservation.payment')
             ->get();
         // dd($clientesPagos);
         return Inertia::render('Clients', ['clientes' => $clientes,'clientesPagos' => $clientesPagos]);
     }
 
     public function evaluatedClients(){
-        $clientes = Cliente::with('category')->get();
 
-        $evaluatedClients = Cliente::with(['category'])->where('evaluated', 1)->where('approved',0)->get();
+        $evaluatedClients = Cliente::with(['category'])->where('status', 'evaluated')->get();
 
-        // dd($evaluatedClient);
-        // return response()->json(['evaluatedClients' => ["nada"]]);
+     
 
         
         return response()->json(['evaluatedClients' => $evaluatedClients]);
     }
     public function registeredClients(){
-        $clientes = Cliente::with('category')->get();
 
-        $registeredClients = Cliente::with(['category'])->where('evaluated', 0)->where('approved',0)->get();
+        $registeredClients = Cliente::with(['category'])->where('status', 'pending')->get();
 
-        // dd($evaluatedClient);
-        // return response()->json(['registeredClients' => ["nada"]]);
 
         
         return response()->json(['registeredClients' => $registeredClients]);
     }
     public function approvedClients(){
-        $clientes = Cliente::with('category')->get();
 
-        $approvedClients = Cliente::with(['category'])->where('evaluated', 1)->where('approved',1)->get();
+        $approvedClients = Cliente::with(['category'])->where('status', 'approved')->get();
 
-        // dd($evaluatedClient);
-        // return response()->json(['approvedClients' => ["nada"]]);
 
         
         return response()->json(['approvedClients' => $approvedClients]);

@@ -9,6 +9,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClientApprovalController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -51,7 +52,7 @@ Route::group(['prefix' => 'cliente'], function () {
     
     Route::put('/{cliente}/aprobar', [ClienteController::class, 'aprobar'])->name('clientes.aprobar');
     
-    Route::put('/{cliente}/evaluar', [ClienteController::class, 'evaluar'])->name('clientes.evaluar');
+    Route::put('/{cliente}/evaluar', [ClientApprovalController::class, 'approveClient'])->name('clientes.evaluar');
 
     Route::get('registeredClients', [ClienteController::class,'registeredClients'])->name('clientes.registrados');
     Route::get('evaluatedClients', [ClienteController::class,'evaluatedClients'])->name('clientes.evaluados');
@@ -95,6 +96,10 @@ Route::group(['prefix' => 'usuarios'],function(){
     Route::post('create',[UserController::class, 'store'])->name("user.create");
     Route::post('update',[UserController::class, 'update'])->name("user.update");
 
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('/clients/{clientId}/approve', [ClientApprovalController::class, 'approveClient']);
 });
 
 Route::get('/informacion_general', function () {

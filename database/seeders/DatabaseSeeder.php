@@ -65,8 +65,6 @@ class DatabaseSeeder extends Seeder
             'position' => 'Gerente',
             'phone_number' => '958565897',
             'email' => 'juan.perez@miempresa.com',
-            'approved' => false,
-            'evaluated' => false,
             'category_id' => 1,
             'subcategory_id' => 8,
         ]);
@@ -94,9 +92,7 @@ class DatabaseSeeder extends Seeder
             'position' => 'Gerente',
             'phone_number' => '958565894',
             'email' => 'maria.lopez@otraempresa.com',
-            'approved' => false,
-            'evaluated' => false,
-            'category_id' => 1, // Make sure this category exists in your categories table
+            'category_id' => 1, 
             'subcategory_id' => 8,
 
         ]);

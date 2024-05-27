@@ -10,7 +10,7 @@ class Cliente extends Model
     use HasFactory;
 
 
-    protected $fillable = ['ruc', 'company_name', 'trade_name', 'address', 'ficha_ruc', 'dni', 'name', 'last_name', 'position', 'phone_number', 'email', 'category_id', 'subcategory_id', 'approved', 'evaluated'];
+    protected $fillable = ['ruc', 'company_name', 'trade_name', 'address', 'ficha_ruc', 'dni', 'name', 'last_name', 'position', 'phone_number', 'email', 'category_id', 'subcategory_id', 'status'];
 
     public function category()
     {
@@ -20,5 +20,10 @@ class Cliente extends Model
     public function reservation()
     {
         return $this->hasMany(Reservation::class);
+    }
+
+    public function approvals()
+    {
+        return $this->hasMany(ClientApproval::class);
     }
 }

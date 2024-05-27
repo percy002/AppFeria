@@ -3,7 +3,7 @@ import { useState } from "react";
 import { HiLocationMarker } from "react-icons/hi";
 
 
-function PdfOpenModal({pdf = "/pdf/plano_huancaro.pdf", text = "Feria Huancaro, Cusco"}) {
+function FichaRucModal({pdf = "/pdf/plano_huancaro.pdf", text = "Feria Huancaro, Cusco"}) {
     const [openModal, setOpenModal] = useState(false);
 
     return (
@@ -13,8 +13,7 @@ function PdfOpenModal({pdf = "/pdf/plano_huancaro.pdf", text = "Feria Huancaro, 
                 size={"xs"}
                 className="pt-0 px-4 bg-secondary rounded-full text-primary font-bold text-xl hover:bg-primary enabled:hover:bg-primary hover:text-white"
             >
-                <HiLocationMarker className="h-6 w-6 mr-2" />
-                <span className="text-lg">{text}</span>
+                <span className="">{text}</span>
             </Button>
             <Modal
                 dismissible
@@ -22,7 +21,7 @@ function PdfOpenModal({pdf = "/pdf/plano_huancaro.pdf", text = "Feria Huancaro, 
                 onClose={() => setOpenModal(false)}
                 size={"7xl"}
             >
-                <Modal.Header className="h-fit p-0"></Modal.Header>
+                <Modal.Header className="h-fit p-0">{pdf}</Modal.Header>
                 <Modal.Body>
                     <iframe src={pdf} className="w-full h-[75vh]"></iframe>
                 </Modal.Body>
@@ -30,4 +29,4 @@ function PdfOpenModal({pdf = "/pdf/plano_huancaro.pdf", text = "Feria Huancaro, 
         </>
     );
 }
-export default PdfOpenModal;
+export default FichaRucModal;

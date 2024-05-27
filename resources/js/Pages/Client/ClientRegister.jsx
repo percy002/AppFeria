@@ -103,7 +103,6 @@ export default function ClientRegister() {
             return;
         }
         getSubCategories(value);
-        console.log(subCategories);
     };
 
     return (

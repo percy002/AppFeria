@@ -17,7 +17,8 @@ export default function TableEvaluatedClients() {
                     <Table.HeadCell>DNI</Table.HeadCell>
                     <Table.HeadCell>Cargo</Table.HeadCell>
                     <Table.HeadCell>Email</Table.HeadCell>
-                    <Table.HeadCell>Estado</Table.HeadCell>
+                    <Table.HeadCell>Ficha Ruc</Table.HeadCell>
+                    <Table.HeadCell>Aprobar Cliente</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">
                     {

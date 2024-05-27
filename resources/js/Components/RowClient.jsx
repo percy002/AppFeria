@@ -20,7 +20,7 @@ function RowClient({ cliente }) {
         try {
             const response = await axios.put(
                 `/cliente/${clienteId}/evaluar`,
-                null
+                {'status': 'evaluated'},
             );
             if (response.status === 200) {
                 const data = response.data;

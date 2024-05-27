@@ -1,10 +1,6 @@
-import ApplicationLogo from "@/Components/ApplicationLogo";
 import Footer from "@/Components/UI/Footer";
 import NavbarFB from "@/Components/UI/Navbar/NavbarFB";
-// import NavbarFB from "@/Components/UI/Navbar/NavbarFB";
 import { Link } from "@inertiajs/react";
-import { Navbar } from "flowbite-react";
-import { FaFacebook, FaYoutube } from "react-icons/fa";
 
 export default function Guest({ children, type }) {
     return (

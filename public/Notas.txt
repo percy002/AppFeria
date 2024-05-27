@@ -1,8 +1,6 @@
 
 ****frontend
-agregar ver mapa al dentro del mapa 
 
-agregar botón para mover el mapa
 
 stands caducados deben ser liberados y aparecer disponibles en el mapa
 
@@ -15,9 +13,6 @@ borrar updated at y created at de la respuesta que envía dashboard controller
 
 hacer las validaciones de rutas, solo autenticados y redirecciones
 
-hacer la validación de no reservar stands reservados
-
-se debe saber quien es el usuario que aprueba
 
 ***bugs
 hay un bug cuando expira la sesión
@@ -25,18 +20,11 @@ hay un bug cuando expira la sesión
 un cliente hace una reserva y lo paga, no puede volver a registrar un pago ni elegir stands
 
 **** Errores en el mapa ****
-bloques f y g de mypes no tiene numero 3
-bloque I no tiene stand 10
-cuantos stands tiene comida regional ?
-el bloque "d" de comida continua del bloque "b" no tiene su propia numeración
 
 zona de animales no esta en venta
 fecha limite para vender stands, o se podra vender hasta que termine la feria ? anies de mayo
 preveer si se libreraran bloques para la venta al publico
-no dimensiones
-Y Z son artesanias
 
-en la zona superior del mapa verificar si mypes y artesanías y juguetes se venderan o seran de un gobierno
 
 necesitamos los números de cuenta y titulares de la cuenta para usar esta info
 
@@ -52,9 +40,7 @@ estelar - 25 + 2
 **datos faltantes
 - solo podrán poner dni o otro tipo de documento
 - dígitos del ruc para hacer la validaciones
-- ya no habrá pagos digitales ?
 - como se manejan los descuentos en el caso de compra de varios stands
-- que es contraprestacion
 - falta precios para stands para otras regiones
 -falta precios para procompite
 - falta precios para mypes miscelaneas
@@ -62,18 +48,13 @@ estelar - 25 + 2
 
 ***modificaciones
 agregar iconos a los botones
-los stands probablemente tengan dimensiones
 
 en el caso de que se desapurebe un cliente debe aparecer un mensaje con el motivo de su desaprobacion
 crear una lista de desaprobados y poder eliminar un cliente para poder registrarse otra vez
 
-separar artesanias de mypes
-
 agregar sweet alert a todos los mensajes
-leer sobre el sistema antifraude y realizar las modificaciones
 
 --
-se debe evaluar y registrar a un cliente y su estado debe cambiar, tambien se registra la persona que evaluo y aprobo a esta persona
 se maneja 3 estados en la base de datos , en proceso, evaluado, aprobado , desaprobado, el estado desaprobado debe tener una descripcion
 
 
@@ -91,17 +72,3 @@ formula de crecimiento de ventas
 cierre de operaciones
 cierre de caja ?
 modulo de ventas en punto de venta
-
-pedir a linea grafica
- 
-- imagenes
-- fuente
-
-
-****** dominios en la feria huancaro
-expocuscohuancaro
-actividades cusco
-
-necesito acceso al terminal para hacer connexion con putty o crear mi enlace a github
-
-necesito que la version de php de ambas este en 8.3 o que me den aceso para poder cambiar la version de php

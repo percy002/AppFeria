@@ -27,6 +27,7 @@ h3 {
     margin-top: 0.8rem;
     margin-bottom: 0.8rem;
     font-weight: bold;
+    flex-grow: 1;
 }
 
 h4 {

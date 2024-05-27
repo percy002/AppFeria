@@ -9,6 +9,7 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus, clientId,name
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
 
+    console.log(payment);
     const handleValidarPago = () => {
         const data = {
             payment_id: payment.id,
@@ -99,7 +100,7 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus, clientId,name
                             {payment && (
                                 <div className="">
                                     <p>pagado</p>
-                                    {payment.payment_method != "culqi" &&
+                                    {payment.payment_method != "culqi" && payment.file &&
                                         (() => {
                                             const fileExtension = payment.file
                                                 .split(".")

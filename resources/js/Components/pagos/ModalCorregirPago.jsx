@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FileInput, Label } from "flowbite-react";
 import { useRef } from "react";
 import Countdown from "../Countdown";
+import HeaderModal from "../UI/HeaderModal";
 
 function ModalCorregirPago({
     stands,
@@ -48,14 +49,20 @@ function ModalCorregirPago({
 
     return (
         <>
-            <Button onClick={() => setOpenModal(true)}>Corregir Pago</Button>
+            <Button
+                onClick={() => setOpenModal(true)}
+                className="bg-primary text-white enabled:hover:bg-primary"
+            >
+                Corregir Pago
+            </Button>
             <Modal
                 dismissible
                 show={openModal}
                 onClose={() => setOpenModal(false)}
                 size="4xl"
             >
-                <Modal.Header>
+                <Modal.Header className="text-center">
+                    <HeaderModal />
                     Estás a punto de corregir este pago. Por favor, confirma que
                     todos los detalles son correctos antes de proceder.
                 </Modal.Header>
@@ -103,7 +110,7 @@ function ModalCorregirPago({
                                     <h2>Bancos</h2>
                                     <ul className="flex justify-between">
                                         <li>
-                                            Banco de la Nación:
+                                            Caja Cusco
                                             <ul>
                                                 <li>
                                                     Número de cuenta: 1234567890
@@ -114,23 +121,11 @@ function ModalCorregirPago({
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li>
-                                            Banco Interbank:
-                                            <ul>
-                                                <li>
-                                                    Número de cuenta: 0987654321
-                                                </li>
-                                                <li>
-                                                    Código de cuenta
-                                                    interbancario (CCI): XYZ456
-                                                </li>
-                                            </ul>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
                             <div className="">
-                                <Countdown time={2} />
+                                {/* <Countdown time={2} /> */}
                             </div>
 
                             <div className="mt-2">
@@ -139,7 +134,9 @@ function ModalCorregirPago({
                                         htmlFor="file-upload"
                                         value="Adjunte el voucher de pago"
                                     />
-                                    <span className="text-red-600">(Solo PDF y JPG permitidos)</span>
+                                    <span className="text-red-600">
+                                        (Solo PDF y JPG permitidos)
+                                    </span>
                                 </div>
                                 <FileInput id="file-upload" ref={fileInput} />
                             </div>
@@ -147,11 +144,17 @@ function ModalCorregirPago({
                     )}
                 </Modal.Body>
                 {!message && (
-                    <Modal.Footer className="">
-                        <Button onClick={handleClickCorregirPago}>Pagar</Button>
+                    <Modal.Footer className="flex justify-center gap-16 w-full">
+                        <div className="flex justify-center"></div>
                         <Button
-                            color="gray"
+                            onClick={handleClickCorregirPago}
+                            className="bg-primary text-white enabled:hover:bg-primary"
+                        >
+                            Pagar
+                        </Button>
+                        <Button
                             onClick={() => setOpenModal(false)}
+                            className="bg-primary text-white enabled:hover:bg-primary"
                         >
                             Cancelar
                         </Button>

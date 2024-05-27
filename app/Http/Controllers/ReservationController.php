@@ -28,7 +28,9 @@ class ReservationController extends Controller
             $query->where('cliente_id', $clientId);
         })->get();
 
-        $reservations = Reservation::where('cliente_id', $clientId)->with(['stands.category','payment.PaymentStatus'])->get();
+        $reservations = Reservation::where('cliente_id', $clientId)->with(['stands.category','payment.PaymentStatus'])
+        ->orderBy('id', 'desc')
+        ->get();
 
         return Inertia::render('Reservations/Reservation', [
             'reservations' => $reservations
@@ -71,10 +73,26 @@ class ReservationController extends Controller
         if (count($stands)>=5) {
             return response()->json(['message' => 'Puedes reservar 5 locales como máximo'], 409);
         }
+
+
+
         DB::beginTransaction();
         try {
             $total = 0;
             foreach ($stands as $stand) {
+                // Buscar si el stand ya tiene una reserva activa
+                
+                $standToReserve = Stand::lockForUpdate()->find($stand["id"]);
+
+                // Buscar si el stand ya tiene una reserva activa
+                $standWithActiveReservation = Stand::whereHas('reservations', function ($query) {
+                    $query->where('enable', true);
+                })->where('id', $standToReserve->id)->first();
+        
+                // Si el stand ya tiene una reserva activa, retornar un error
+                if ($standWithActiveReservation) {
+                    return response()->json(['message' => 'El stand ' . $standToReserve->name . ' ya tiene una reserva activa'], 409);
+                }
                 $total += $stand["price"];
             }
             $reservation = new Reservation();

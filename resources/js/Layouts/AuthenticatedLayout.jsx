@@ -4,6 +4,7 @@ import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link } from "@inertiajs/react";
+import NavbarFB from "@/Components/UI/Navbar/NavbarFB";
 
 export default function Authenticated({ user, header, children, client }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
@@ -11,21 +12,40 @@ export default function Authenticated({ user, header, children, client }) {
 
     return (
         <div className="min-h-screen bg-gray-100">
+            <div>
+                <NavbarFB />
+
+                <div
+                    className={` flex justify-between w-screen md:px-16 px-4 pt-4 ${
+                        "bg-background-image bg-center bg-cover"
+                    } `}
+                >
+                    <Link href="/">
+                        <img
+                            src="../images/logos/logo_gore2.png"
+                            alt="logo feria"
+                            className="w-48"
+                        />
+                    </Link>
+                    <Link href="/">
+                        <img
+                            src="../images/logos/logo_expoferia_2024.png"
+                            alt="logo feria"
+                            className="w-48"
+                        />
+                    </Link>
+                </div>
+            </div>
             <nav className="bg-white border-b border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16 ">
-                        <div className="flex">
-                            <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    <img src="/images/logo_Gerepro.svg" alt="logo gerepro" />
-                                    {/* <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" /> */}
-                                </Link>
-                            </div>
+                    <div className="flex justify-center h-12 mt-4 ">
+                        <div className="flex">                            
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                            <div className="sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
                                     href={route("dashboard")}
                                     active={route().current("dashboard")}
+                                    className="text-white rounded-l-full"
                                 >
                                     Inicio
                                 </NavLink>
@@ -33,6 +53,8 @@ export default function Authenticated({ user, header, children, client }) {
                                     <NavLink
                                         href={route("clientes")}
                                         active={route().current("clientes")}
+                                        className="text-white rounded-r-full"
+
                                     >
                                         Clientes
                                     </NavLink>
@@ -43,6 +65,8 @@ export default function Authenticated({ user, header, children, client }) {
                                         href={route("reservaciones.index", {
                                             id: client.id,
                                         })}
+                                        className="text-white rounded-r-full"
+
                                         active={route().current(
                                             "reservaciones.index"
                                         )}
@@ -53,7 +77,7 @@ export default function Authenticated({ user, header, children, client }) {
                             </div>
                         </div>
 
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
+                        {/* <div className="hidden sm:flex sm:items-center sm:ms-6">
                             <div className="ms-3 relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -81,24 +105,19 @@ export default function Authenticated({ user, header, children, client }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        {/* <Dropdown.Link
-                                            href={route("profile.edit")}
-                                        >
-                                            Perfil
-                                        </Dropdown.Link> */}
                                         <Dropdown.Link
                                             href={route("logout")}
                                             method="post"
                                             as="button"
                                         >
-                                            Cerrar sesion
+                                            Cerrar Sesión
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className="-me-2 flex items-center sm:hidden">
+                        {/* <div className="-me-2 flex items-center sm:hidden">
                             <button
                                 onClick={() =>
                                     setShowingNavigationDropdown(
@@ -137,11 +156,11 @@ export default function Authenticated({ user, header, children, client }) {
                                     />
                                 </svg>
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
-                <div
+                {/* <div
                     className={
                         (showingNavigationDropdown ? "block" : "hidden") +
                         " sm:hidden"
@@ -152,7 +171,7 @@ export default function Authenticated({ user, header, children, client }) {
                             href={route("dashboard")}
                             active={route().current("dashboard")}
                         >
-                            Dashboard
+                            Inicio
                         </ResponsiveNavLink>
                     </div>
 
@@ -166,20 +185,17 @@ export default function Authenticated({ user, header, children, client }) {
                             </div>
                         </div>
 
-                        <div className="mt-3 space-y-1">
-                            {/* <ResponsiveNavLink href={route("profile.edit")}>
-                                Profile
-                            </ResponsiveNavLink> */}
+                        <div className="mt-3 space-y-1">                            
                             <ResponsiveNavLink
                                 method="post"
                                 href={route("logout")}
                                 as="button"
                             >
-                                Log Out
+                                Cerrar Sesión
                             </ResponsiveNavLink>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </nav>
 
             {header && (

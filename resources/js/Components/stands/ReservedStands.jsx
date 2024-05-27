@@ -16,7 +16,10 @@ export default function ReservedStands({ stands }) {
         <div className="flex flex-col w-3/4 lg:w-full mx-auto">
             {stands.length > 0 &&
                 stands.map((stand, index) => (
-                    <Card className={`m-1 card_padding px-1 border-4 border-${stand.color}-600`} key={index}>
+                    <Card
+                        className={`m-1 card_padding px-1 border-4 border-${stand.color}-600`}
+                        key={index}
+                    >
                         <div className="p-1" key={index}>
                             <div className="flex justify-between">
                                 <p>Stand : {stand.name}</p>
@@ -25,16 +28,18 @@ export default function ReservedStands({ stands }) {
                             </div>
                             <p>bloque : {stand.block}</p>
                             <p>Categoria : {stand.category}</p>
-                            <Button
-                                onClick={() => handleDelete(index)}
-                                color="failure"
-                                className="p-0"
-                            >
-                                <HiTrash className="text-white h-5 w-5" />
-                                <span className="text-base font-bold">
-                                    Cancelar
-                                </span>
-                            </Button>
+                            <div className="flex justify-center">
+                                <Button
+                                    onClick={() => handleDelete(index)}
+                                    color="failure"
+                                    className="p-0"
+                                >
+                                    <HiTrash className="text-white h-5 w-5" />
+                                    <span className="text-base font-bold">
+                                        Cancelar
+                                    </span>
+                                </Button>
+                            </div>
                         </div>
                     </Card>
                 ))}
@@ -56,11 +61,8 @@ export default function ReservedStands({ stands }) {
                 </div>
             )}
             {reservedStands.length > 0 && (
-                <div className="flex justify-center">
-                    {/* <Button color="success" className="text-xl font-bold">
-                        <span className="text-xl font-bold">Reservar</span>
-                    </Button> */}
-                    <ModalReserva stands={reservedStands}/>
+                <div className="flex justify-center">                    
+                    <ModalReserva stands={reservedStands} />
                 </div>
             )}
         </div>

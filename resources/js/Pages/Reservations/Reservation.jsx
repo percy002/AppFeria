@@ -11,11 +11,12 @@ function Reservation({ auth, reservations }) {
                     <Table.Head>
                         <Table.HeadCell>fecha</Table.HeadCell>
                         <Table.HeadCell>total</Table.HeadCell>
+                        <Table.HeadCell align="center">Estado del Pago</Table.HeadCell>
+                        <Table.HeadCell align="center">Documentos</Table.HeadCell>
+
                         <Table.HeadCell className="flex justify-center">
                             Opciones
                         </Table.HeadCell>
-                        <Table.HeadCell align="center">Estado del Pago</Table.HeadCell>
-                        <Table.HeadCell align="center">Documentos</Table.HeadCell>
                     </Table.Head>
                     <Table.Body className="divide-y">
                         {reservations &&

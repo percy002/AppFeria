@@ -4,6 +4,8 @@ import ModalPagos from "../pagos/ModalPagos";
 import { useState } from "react";
 import ModalCorregirPago from "../pagos/ModalCorregirPago";
 import ModalObservacionesPago from "../pagos/ModalObservacionesPago";
+import { HiTrash } from "react-icons/hi";
+
 const RowReserva = ({ reservation }) => {
     const [reservationState, setReservationState] = useState(
         reservation.enable ? true : false
@@ -37,71 +39,59 @@ const RowReserva = ({ reservation }) => {
                 log(error);
             });
     };
-    
+
     return (
         <Table.Row
             key={reservation.id}
-            className="bg-white dark:border-gray-700 dark:bg-gray-800"
+            className="bg-white dark:border-gray-700 dark:bg-gray-800 font-bold"
         >
             <Table.Cell>{reservation.date}</Table.Cell>
-            <Table.Cell>{reservation.total}</Table.Cell>
-            <Table.Cell>
-                <div className="flex justify-center gap-5">
-                    {
-                        <ModalVerReserva
-                            stands={reservation.stands}
-                            payment={payment}
-                        />
-                    }
-                    {!paymentState && reservationState && (
-                        <ModalPagos
-                            stands={reservation.stands}
-                            reservationId={reservation.id}
-                            updatePaymentState={setPaymentState}
-                        />
-                    )}
-                    {!paymentState && reservationState && (
-                        <Button
-                            color="failure"
-                            onClick={HandleButtonAnularReserva}
-                        >
-                            Anular Reserva
-                        </Button>
+            <Table.Cell className="flex gap-2 items-center h-full">
+                S/. {reservation.total}.00
+                {
+                    <ModalVerReserva
+                        stands={reservation.stands}
+                        payment={payment}
+                    />
+                }
+            </Table.Cell>
+            <Table.Cell
+                align="center"
+                className="text-lg text-primary font-bold"
+            >
+                <div className="flex flex-col gap-1 items-center">
+                    {paymentState ? (
+                        paymentVerified == "aceptado" ? (
+                            <span className="text-green-500">Aceptado</span>
+                        ) : paymentVerified == "observado" ? (
+                            <div className="flex flex-col gap-1">
+                                <span className="text-red-800">Observado</span>
+                                <ModalObservacionesPago
+                                    paymentStatus={
+                                        payment.payment_status[
+                                            payment.payment_status.length - 1
+                                        ]
+                                    }
+                                />
+                                <ModalCorregirPago
+                                    stands={reservation.stands}
+                                    reservationId={reservation.id}
+                                    updatePaymentState={setPaymentState}
+                                    updatePayment={updatePayment}
+                                    updatePaymentVerified={setPaymentVerified}
+                                />
+                            </div>
+                        ) : (
+                            <span className="text-green-500 text-xl">
+                                {paymentVerified}
+                            </span>
+                        )
+                    ) : !reservationState ? (
+                        "Reserva Anulada"
+                    ) : (
+                        "pendiente de pago"
                     )}
                 </div>
-            </Table.Cell>
-            <Table.Cell align="center">
-                {paymentState ? (
-                    paymentVerified == "aceptado" ? (
-                        <span className="text-green-500">Aceptado</span>
-                    ) : paymentVerified == "observado" ? (
-                        <div className="">
-                            <span className="text-red-800">Observado</span>
-                            <ModalObservacionesPago
-                                paymentStatus={
-                                    payment.payment_status[
-                                        payment.payment_status.length - 1
-                                    ]
-                                }
-                            />
-                            <ModalCorregirPago
-                                stands={reservation.stands}
-                                reservationId={reservation.id}
-                                updatePaymentState={setPaymentState}
-                                updatePayment={updatePayment}
-                                updatePaymentVerified={setPaymentVerified}
-                            />
-                        </div>
-                    ) : (
-                        <span className="text-green-500">
-                            {paymentVerified}
-                        </span>
-                    )
-                ) : !reservationState ? (
-                    "Reserva Anulada"
-                ) : (
-                    "pendiente de pago"
-                )}
             </Table.Cell>
             <Table.Cell align="center">
                 <div className="flex flex-col gap-2">
@@ -114,7 +104,7 @@ const RowReserva = ({ reservation }) => {
                                 })}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                variant="primary"
+                                className="bg-primary text-white enabled:hover:bg-primary"
                             >
                                 Credenciales
                             </Button>
@@ -126,7 +116,7 @@ const RowReserva = ({ reservation }) => {
                                 })}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                variant="primary"
+                                className="bg-primary text-white enabled:hover:bg-primary"
                             >
                                 Recibo
                             </Button>
@@ -140,9 +130,28 @@ const RowReserva = ({ reservation }) => {
                             })}
                             target="_blank"
                             rel="noopener noreferrer"
-                            variant="primary"
+                            className="bg-primary text-white enabled:hover:bg-primary"
                         >
                             Contrato
+                        </Button>
+                    )}
+                </div>
+            </Table.Cell>
+            <Table.Cell>
+                <div className="flex justify-center gap-5">
+                    {!paymentState && reservationState && (
+                        <ModalPagos
+                            stands={reservation.stands}
+                            reservationId={reservation.id}
+                            updatePaymentState={setPaymentState}
+                        />
+                    )}
+                    {!paymentState && reservationState && (
+                        <Button
+                            color="failure"
+                            onClick={HandleButtonAnularReserva}
+                        >
+                            <HiTrash className="h-6 w-6" />
                         </Button>
                     )}
                 </div>

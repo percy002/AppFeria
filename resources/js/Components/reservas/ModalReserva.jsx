@@ -1,7 +1,8 @@
-import { usePage,router } from "@inertiajs/react";
+import { usePage, router } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
 import { useState } from "react";
 import swal from "sweetalert2";
+import HeaderModal from "../UI/HeaderModal";
 function ModalReserva({ stands }) {
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
@@ -17,47 +18,56 @@ function ModalReserva({ stands }) {
                     setTimeout(() => {
                         setOpenModal(false);
                         setMessage("");
-                        router.get(`/reservaciones/`+idCliente);
+                        router.get(`/reservaciones/` + idCliente);
                     }, 1500);
                 } else {
                     swal.fire({
                         title: "Error!",
                         text: "Ha ocurrido un error al intentar reservar, por favor intente nuevamente.",
-                        icon: "error"
-                    })
+                        icon: "error",
+                    });
                 }
             })
             .catch((error) => {
                 swal.fire({
                     title: "Error!",
                     text: error.response.data.message,
-                    icon: "error"
-                })
+                    icon: "error",
+                });
             });
     };
 
     return (
         <>
-            <Button onClick={() => setOpenModal(true)}>Reservar</Button>
+            <Button onClick={() => setOpenModal(true)} className="bg-primary tet-white">Reservar</Button>
             <Modal
                 dismissible
                 show={openModal}
                 onClose={() => setOpenModal(false)}
             >
-                <Modal.Header>
-                    Estás a punto de reservar Por favor, confirma que
-                    todos los detalles son correctos antes de proceder.
+                <Modal.Header className="flex-grow text-gray-700 font-bold text-center">
+                    <HeaderModal />
+                    Estás a punto de reservar Por favor, confirma que todos los
+                    detalles son correctos antes de proceder.
                 </Modal.Header>
                 <Modal.Body>
                     {message && <p>{message}</p>}
                     {!message && (
                         <>
-                            <div className="space-y-6">
+                            <div className="flex justify-between mb-2">
                                 <p>
-                                    usuario: {auth.cliente.name}
+                                    <span className="text-primary font-bold">
+                                        usuario:{" "}
+                                    </span>
+                                    {auth.cliente.name}
                                     {auth.cliente.last_name}
                                 </p>
-                                <p>Categoria: {stands[0].category}</p>
+                                <p>
+                                    <span className="text-primary font-bold">
+                                        Categoria:{" "}
+                                    </span>
+                                    {stands[0].category}
+                                </p>
                             </div>
                             {stands &&
                                 stands.map((stand) => (
@@ -91,10 +101,15 @@ function ModalReserva({ stands }) {
                     )}
                 </Modal.Body>
                 {!message && (
-                    <Modal.Footer className="">
-                        <Button onClick={handleClickReserva}>Aceptar</Button>
+                    <Modal.Footer className="flex justify-center gap-8">
                         <Button
-                            color="gray"
+                            onClick={handleClickReserva}
+                            className="bg-primary text-white"
+                        >
+                            Aceptar
+                        </Button>
+                        <Button
+                            className="bg-primary text-white"
                             onClick={() => setOpenModal(false)}
                         >
                             Cancelar

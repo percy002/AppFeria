@@ -6,7 +6,7 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Head, Link, useForm, usePage, router } from "@inertiajs/react";
 import { useState } from "react";
-import { Button, Select, Label, FileInput, Checkbox } from "flowbite-react";
+import { Button, Select, Label, FileInput, Checkbox, Card } from "flowbite-react";
 import Swal from "sweetalert2";
 
 export default function ClientRegister() {
@@ -109,11 +109,13 @@ export default function ClientRegister() {
         <div className="bg-gray-400">
             <GuestLayout type={"register"}>
                 <Head title="Registro" />
-                <h3 className="text-4xl text-gray-700">
+                <h3 className="text-3xl md:text-4xl text-gray-700">
                     Datos de la Empresa o Institución
                 </h3>
+                <Card className="p-4">
+
                 <form onSubmit={submit} className="">
-                    <div className="flex gap-4 mt-4">
+                    <div className="flex flex-col md:flex-row gap-4 mt-4">
                         <div className="flex-1">
                             <InputLabel
                                 htmlFor="category_id"
@@ -199,7 +201,7 @@ export default function ClientRegister() {
                                 </div>
                             )}
                     </div>
-                    <div className="flex gap-4 mt-4">
+                    <div className="flex flex-col md:flex-row gap-4 mt-4">
                         <div className="flex-1">
                             <InputLabel
                                 htmlFor="company_name"
@@ -249,7 +251,7 @@ export default function ClientRegister() {
                         </div>
                     </div>
 
-                    <div className="flex gap-4 mt-4">
+                    <div className="flex flex-col md:flex-row gap-4 mt-4">
                         <div className="flex-1">
                             <InputLabel htmlFor="ruc" value="RUC *" />
 
@@ -309,7 +311,7 @@ export default function ClientRegister() {
                         Datos del Contacto
                     </p>
 
-                    <div className="flex gap-4 mt-4">
+                    <div className="flex flex-col md:flex-row gap-4 mt-4">
                         <div className="flex-1">
                             <InputLabel htmlFor="name" value="Nombre(s) *" />
 
@@ -354,7 +356,7 @@ export default function ClientRegister() {
                         </div>
                     </div>
 
-                    <div className="flex mt-4 gap-4">
+                    <div className="flex flex-col md:flex-row mt-4 gap-4">
                         <div className="flex-1">
                             <InputLabel htmlFor="dni" value="DNI *" />
 
@@ -397,7 +399,7 @@ export default function ClientRegister() {
                         </div>
                     </div>
 
-                    <div className="flex mt-4 gap-4">
+                    <div className="flex flex-col md:flex-row mt-4 gap-4">
                         <div className="flex-1">
                             <InputLabel
                                 htmlFor="phone_number"
@@ -447,7 +449,7 @@ export default function ClientRegister() {
                             />
                         </div>
                     </div>
-                    <div className="flex gap-4 mt-4">
+                    <div className="flex flex-col md:flex-row gap-4 mt-4">
                         <div className="flex-1">
                             <InputLabel htmlFor="password" value="Contraseña *" />
 
@@ -534,6 +536,7 @@ export default function ClientRegister() {
                 
                     </div>
                 </form>
+                </Card>
             </GuestLayout>
         </div>
     );

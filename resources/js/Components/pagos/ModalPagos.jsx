@@ -7,7 +7,7 @@ import Countdown from "../Countdown";
 import ModalPagoOnline from "./ModalPagoOnline";
 import { useEffect } from "react";
 import ModalPaymentByTransfer from "./ModalPaymentByTransfer";
-
+import HeaderModal from "../UI/HeaderModal";
 function ModalPagos({ stands, reservationId, updatePaymentState }) {
     const fileInput = useRef();
     const contractFileUpload = useRef();
@@ -19,8 +19,6 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
     const [dataPayment, setDataPayment] = useState({});
 
     useEffect(() => {
-        // Inicializa dataPayment como un objeto vacío
-        // console.log(auth);
         const cliente = auth.cliente;
         const paymentAmount = stands.reduce(
             (sum, stand) => sum + stand.price,
@@ -77,7 +75,6 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                 );
             });
     };
-    // useEffect(() => {}, []);
     return (
         <>
             <Button onClick={() => setOpenModal(true)}>Pagar</Button>
@@ -89,7 +86,8 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                 }}
                 size="7xl"
             >
-                <Modal.Header>
+                <Modal.Header className="flex-grow text-center text-gray-700 text-lg">
+                    <HeaderModal />
                     Estás a punto de pagar por este stand. Por favor, confirma
                     que todos los detalles son correctos antes de proceder.
                 </Modal.Header>
@@ -186,10 +184,12 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                                     </p>
                                     <div className="w-full flex justify-center">
                                         <div className="flex justify-center gap-8">
-                                            <ModalPagoOnline
+                                            {/* <ModalPagoOnline
                                                 data={dataPayment}
-                                                updatePaymentState = {updatePaymentState}
-                                            />
+                                                updatePaymentState={
+                                                    updatePaymentState
+                                                }
+                                            /> */}
                                             <ModalPaymentByTransfer
                                                 contractFile={
                                                     selectedContractFile

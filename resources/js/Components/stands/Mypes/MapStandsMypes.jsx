@@ -16,6 +16,11 @@ export const MapStandsMypes = () => {
                     mapState == 1 && <MapStandsMypesZonaInf/>
                 }
             </Tabs.Item>
+            <Tabs.Item active title="Ver Mapa">
+                {
+                    <MapaPDF/>
+                }
+            </Tabs.Item>
             
         </Tabs>
     );

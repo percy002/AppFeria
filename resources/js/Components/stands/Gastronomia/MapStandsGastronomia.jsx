@@ -4,6 +4,7 @@ import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
 import { MapStandsGastronomiaZ1 } from "./MapStandsGastronomiaZ1";
 import { MapStandsGastronomiaZ2 } from "./MapStandsGastronomiaZ2";
+import MapaPDF from "@/Components/UI/MapaPDF";
 export const MapStandsGastronomia = () => {
     const [mapState, setMapState] = useState(1)
     return (
@@ -16,6 +17,11 @@ export const MapStandsGastronomia = () => {
             <Tabs.Item active title="ZONA DE COMIDA REGIONAL">
                 {
                     mapState == 1 && <MapStandsGastronomiaZ2/>
+                }
+            </Tabs.Item>
+            <Tabs.Item active title="Ver Mapa">
+                {
+                    <MapaPDF/>
                 }
             </Tabs.Item>
             

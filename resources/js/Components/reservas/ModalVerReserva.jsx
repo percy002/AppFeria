@@ -1,27 +1,31 @@
 import { usePage, router } from "@inertiajs/react";
 import { Button, Card, Modal } from "flowbite-react";
-import { useEffect } from "react";
 import { useState } from "react";
+import HeaderModal from "../UI/HeaderModal";
 function ModalVerReserva({ stands, payment }) {
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
-    
+
     return (
         <>
-            <Button onClick={() => setOpenModal(true)}>Ver</Button>
+            <Button onClick={() => setOpenModal(true)} className="bg-primary text-white">Ver</Button>
             <Modal
                 dismissible
                 show={openModal}
                 onClose={() => setOpenModal(false)}
             >
-                <Modal.Header>Stands Reservados</Modal.Header>
+                <Modal.Header className="flex-grow text-gray-700 font-bold text-center">
+                    <HeaderModal />
+                    Stands Reservados
+                </Modal.Header>
                 <Modal.Body>
-                    <div className="space-y-6">
+                    <div className="flex justify-between mb-2">
                         <p>
-                            usuario: {auth.cliente.name}{" "}
+                            <span className="text-primary font-bold">Usuario: </span>
+                            {auth.cliente.name}{" "}
                             {auth.cliente.last_name}
                         </p>
-                        <p>Categoría: {stands[0]?.category?.name}</p>
+                        <p><span className="text-primary font-bold">Categoría:</span> {stands[0]?.category?.name}</p>
                     </div>
                     {stands &&
                         stands.map((stand) => (
@@ -68,7 +72,7 @@ function ModalVerReserva({ stands, payment }) {
                                     // Es una imagen
                                     return (
                                         <img
-                                            src={`http://localhost:8000/storage/${payment.file}`}
+                                            src={`public/storage/${payment.file}`}
                                             alt="Payment"
                                         />
                                     );
@@ -76,7 +80,7 @@ function ModalVerReserva({ stands, payment }) {
                                     // Es un PDF
                                     return (
                                         <embed
-                                            src={`http://localhost:8000/storage/${payment.file}`}
+                                            src={`public/storage/${payment.file}`}
                                             type="application/pdf"
                                             width="100%"
                                             height="600px"
@@ -90,8 +94,8 @@ function ModalVerReserva({ stands, payment }) {
                         </div>
                     )}
                 </Modal.Body>
-                <Modal.Footer className="">
-                    <Button color="gray" onClick={() => setOpenModal(false)}>
+                <Modal.Footer className="flex justify-center">
+                    <Button className="bg-primary text-white" onClick={() => setOpenModal(false)}>
                         cerrar
                     </Button>
                 </Modal.Footer>

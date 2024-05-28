@@ -8,20 +8,25 @@ import PdfOpenModal from "../UI/PdfOpenModal";
 import FichaRucModal from "../UI/FichaRucModal";
 function RowEvaluatedClient({ cliente }) {
     const [approved, setApproved] = useState(cliente.approved);
-    const { approvedClients, setApprovedClients } = useContext(approvedClientContext);
-    const { evaluatedClients, setEvaluatedClients} = useContext(ClientsEvaluatedContext)
+    const { approvedClients, setApprovedClients } = useContext(
+        approvedClientContext
+    );
+    const { evaluatedClients, setEvaluatedClients } = useContext(
+        ClientsEvaluatedContext
+    );
 
     const aprobarCliente = async (clienteId) => {
         try {
-            const response = await axios.put(
-                `/cliente/${clienteId}/evaluar`,
-                {'status': 'approved'}
-            );
+            const response = await axios.put(`/cliente/${clienteId}/evaluar`, {
+                status: "approved",
+            });
             if (response.status === 200) {
                 const data = response.data;
                 setApprovedClients((prev) => [...prev, cliente]);
                 setApproved(data.approved);
-                setEvaluatedClients(evaluatedClients.filter((client) => client.id != clienteId));
+                setEvaluatedClients(
+                    evaluatedClients.filter((client) => client.id != clienteId)
+                );
 
                 // setClients(clients.filter((client) => client.id != clienteId));
                 return "el cliente ah sido aprobado correctamente";
@@ -33,14 +38,36 @@ function RowEvaluatedClient({ cliente }) {
                 return "Error al evaluar al cliente ".response.statusText;
             }
         } catch (error) {
-            console.error(
-                "Error al cambiar el estado del cliente:",
-                error
-            );
+            console.error("Error al cambiar el estado del cliente:", error);
             return "Error al aprobar al cliente ".error;
         }
     };
-    
+
+    const rechazarCliente = async (clienteId) => {
+        try {
+            const response = await axios.put(`/cliente/${clienteId}/evaluar`, {
+                status: "rejected",
+            });
+            if (response.status === 200) {
+                const data = response.data;
+                setEvaluatedClients(
+                    evaluatedClients.filter((client) => client.id != clienteId)
+                );
+
+                // setClients(clients.filter((client) => client.id != clienteId));
+                return "el cliente ah sido rechazado";
+            } else {
+                console.error(
+                    "Error al cambiar el estado del cliente:",
+                    response.statusText
+                );
+                return "Error al rechazar al cliente ".response.statusText;
+            }
+        } catch (error) {
+            console.error("Error al cambiar el estado del cliente:", error);
+            return "Error al aprobar al cliente ".error;
+        }
+    }
 
     const toggleAprobacion = async (clienteId) => {
         Swal.fire({
@@ -48,9 +75,12 @@ function RowEvaluatedClient({ cliente }) {
             text: "se cambiara el estado de este cliente a cliente aprobado",
             icon: "warning",
             showCancelButton: true,
+            showDenyButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
+            denyButtonColor: "#800080",
             confirmButtonText: "Si, aprobar!",
+            denyButtonText: `Rechazar`,
             cancelButtonText: "Cancelar",
         }).then(async (result) => {
             if (result.isConfirmed) {
@@ -60,11 +90,24 @@ function RowEvaluatedClient({ cliente }) {
                     title: "Cliente aprobado correctamente",
                     icon: "success",
                 });
-            }
+            }else if (result.isDenied) {
+                Swal.fire({
+                    input: "text",
+                    inputLabel: "Motivo de rechazo",
+                    inputPlaceholder: "Motivo de rechazo",
+                    showCancelButton: true,
+                    confirmButtonText: "Enviar",
+                    showLoaderOnConfirm: true,
+                    preConfirm: () => {
+                        return rechazarCliente(clienteId);
+                        
+                    },
+                
+                });
+              }
         });
-    }
+    };
 
-    
     return (
         <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
             {cliente ? (
@@ -78,8 +121,14 @@ function RowEvaluatedClient({ cliente }) {
                     <Table.Cell>{cliente.dni}</Table.Cell>
                     <Table.Cell>{cliente.position}</Table.Cell>
                     <Table.Cell>{cliente.email}</Table.Cell>
-                    <Table.Cell><FichaRucModal pdf={`/storage/${cliente.ficha_ruc}`} text="ver documento"/></Table.Cell>
-                    
+                    <Table.Cell>{cliente.phone_number}</Table.Cell>
+                    <Table.Cell>
+                        <FichaRucModal
+                            pdf={`/storage/${cliente.ficha_ruc}`}
+                            text="ver documento"
+                        />
+                    </Table.Cell>
+
                     <Table.Cell>
                         <input
                             type="checkbox"
@@ -95,7 +144,6 @@ function RowEvaluatedClient({ cliente }) {
                 <Table.Cell colSpan="8">Cargando...</Table.Cell>
             )}
         </Table.Row>
-        
     );
 }
 export default RowEvaluatedClient;

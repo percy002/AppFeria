@@ -2,6 +2,7 @@ import { Tabs } from "flowbite-react";
 import { useState } from "react";
 import { MapStandsMypesZona1 } from "./MapStandsMypesZona1";
 import MapStandsMypesZonaInf from "./MapStandsMypesZonaInf";
+import MapaPDF from "@/Components/UI/MapaPDF";
 export const MapStandsMypes = () => {
     const [mapState, setMapState] = useState(1)
     return (

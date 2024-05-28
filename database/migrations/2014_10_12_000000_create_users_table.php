@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('dni',8)->unique();
             $table->string('email')->unique();
-            $table->string('phone_number', 9)->unique();
+            $table->string('phone_number', 9);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->unsignedBigInteger('cliente_id')->nullable();

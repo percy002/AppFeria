@@ -3,14 +3,10 @@ import { Table } from "flowbite-react";
 import ClientsEvaluatedContext from "@/Contexts/ClientEvaluatedContext";
 import ClientsContext from "@/Contexts/ClientContext";
 import Swal from "sweetalert2";
-
+import FichaRucModal from "./UI/FichaRucModal";
 function RowClient({ cliente }) {
-    const [approved, setApproved] = useState(cliente.approved);
     const [evaluated, setEvaluated] = useState(cliente.evaluated);
 
-    // useEffect(() => {
-    //     setevaluated(cliente.evaluated);
-    // }, [cliente]);
     const { evaluatedClients, setEvaluatedClients } = useContext(
         ClientsEvaluatedContext
     );
@@ -78,6 +74,8 @@ function RowClient({ cliente }) {
                     <Table.Cell>{cliente.dni}</Table.Cell>
                     <Table.Cell>{cliente.position}</Table.Cell>
                     <Table.Cell>{cliente.email}</Table.Cell>
+                    <Table.Cell>{cliente.phone_number}</Table.Cell>
+                    <Table.Cell><FichaRucModal pdf={`/storage/${cliente.ficha_ruc}`} text="ver documento"/></Table.Cell>
                     <Table.Cell>
                         <input
                             type="checkbox"

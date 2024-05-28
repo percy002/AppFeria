@@ -67,7 +67,7 @@ const Contrato = () => (
             <View>
                 <View style={styles.header}>
                     <Image
-                        src={"../images/logo_gerepro.png"}
+                        src={"../images/feria_huancaro.png"}
                         style={styles.logo}
                     />
                 </View>

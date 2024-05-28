@@ -22,7 +22,7 @@ un cliente hace una reserva y lo paga, no puede volver a registrar un pago ni el
 **** Errores en el mapa ****
 
 zona de animales no esta en venta
-fecha limite para vender stands, o se podra vender hasta que termine la feria ? anies de mayo
+fecha limite para vender stands, o se podrá vender hasta que termine la feria ? anies de mayo
 preveer si se libreraran bloques para la venta al publico
 
 

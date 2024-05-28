@@ -364,11 +364,7 @@ export default function ClientRegister() {
                                 id="dni"
                                 name="dni"
                                 value={data.dni}
-                                className={`${
-                                    data.selectedType !== "personaJuridica"
-                                        ? "w-1/2 pl-3"
-                                        : "w-full"
-                                }`}
+                                className="w-full"
                                 autoComplete="dni"
                                 onChange={(e) => setData("dni", e.target.value)}
                                 required

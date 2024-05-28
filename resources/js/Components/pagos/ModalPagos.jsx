@@ -77,7 +77,7 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
     };
     return (
         <>
-            <Button onClick={() => setOpenModal(true)}>Pagar</Button>
+            <Button onClick={() => setOpenModal(true)} className="bg-primary text-white enabled:hover:bg-primary">Pagar</Button>
             <Modal
                 dismissible
                 show={openModal}

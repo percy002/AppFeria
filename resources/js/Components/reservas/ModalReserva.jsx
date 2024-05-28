@@ -14,10 +14,12 @@ function ModalReserva({ stands }) {
             .post(route("reservaciones.crear"), { stands, idCliente })
             .then((response) => {
                 if (response.status == 201) {
-                    setMessage("Reservado con éxito");
+                    swal.fire(
+                        "Reservado con éxito",
+                        "success"
+                    );
                     setTimeout(() => {
                         setOpenModal(false);
-                        setMessage("");
                         router.get(`/reservaciones/` + idCliente);
                     }, 1500);
                 } else {
@@ -39,7 +41,12 @@ function ModalReserva({ stands }) {
 
     return (
         <>
-            <Button onClick={() => setOpenModal(true)} className="bg-primary tet-white">Reservar</Button>
+            <Button
+                onClick={() => setOpenModal(true)}
+                className="bg-primary tet-white"
+            >
+                Reservar
+            </Button>
             <Modal
                 dismissible
                 show={openModal}

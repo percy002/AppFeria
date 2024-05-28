@@ -12,6 +12,8 @@ export default function TableClients({clientes}) {
                     <Table.HeadCell>DNI</Table.HeadCell>
                     <Table.HeadCell>Cargo</Table.HeadCell>
                     <Table.HeadCell>Email</Table.HeadCell>
+                    <Table.HeadCell>Celular</Table.HeadCell>
+                    <Table.HeadCell>Ficha RUC</Table.HeadCell>
                     <Table.HeadCell>En Evaluación</Table.HeadCell>
                 </Table.Head>
                 <Table.Body className="divide-y">

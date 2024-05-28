@@ -5,7 +5,7 @@ import { useState } from "react";
 import ModalCorregirPago from "../pagos/ModalCorregirPago";
 import ModalObservacionesPago from "../pagos/ModalObservacionesPago";
 import { HiTrash } from "react-icons/hi";
-
+import Swal from "sweetalert2";
 const RowReserva = ({ reservation }) => {
     const [reservationState, setReservationState] = useState(
         reservation.enable ? true : false
@@ -26,19 +26,36 @@ const RowReserva = ({ reservation }) => {
         setPayment((prev) => ({ ...prev, ...updates }));
     };
     const HandleButtonAnularReserva = () => {
-        axios
-            .delete(route("reservaciones.eliminar"), {
-                data: { id: reservation.id },
-            })
-            .then((response) => {
-                if (response.status == 200) {
-                    setReservationState(false);
-                }
-            })
-            .catch((error) => {
-                log(error);
-            });
-    };
+    Swal.fire({
+        title: '¿Estás seguro que desea eliminar esta reserva?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: '¡Sí, eliminar reserva!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            axios
+                .delete(route("reservaciones.eliminar"), {
+                    data: { id: reservation.id },
+                })
+                .then((response) => {
+                    if (response.status == 200) {
+                        setReservationState(false);
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'Tu reserva ha sido eliminada.',
+                            'success'
+                        )
+                    }
+                })
+                .catch((error) => {
+                    log(error);
+                });
+        }
+    })
+};
 
     return (
         <Table.Row
@@ -148,8 +165,8 @@ const RowReserva = ({ reservation }) => {
                     )}
                     {!paymentState && reservationState && (
                         <Button
-                            color="failure"
                             onClick={HandleButtonAnularReserva}
+                            className="bg-gray-500 text-white enabled:hover:bg-gray-600"
                         >
                             <HiTrash className="h-6 w-6" />
                         </Button>

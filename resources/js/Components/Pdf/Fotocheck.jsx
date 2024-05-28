@@ -18,33 +18,39 @@ const styles = StyleSheet.create({
         backgroundColor: "#A60D29",
         flexDirection: "col",
         alignItems: "center",
+        paddingTop: 10,
     },
     header: {
         flexDirection: "row",
         justifyContent: "center",
-        backgroundColor: "white",
         width: "70%",
     },
     logo: {
         width: "90%",
-        padding: 15,
-        marginTop: 10
+        paddingHorizontal: 10,
+        marginTop: 5,
     },
     body: {
         flexDirection: "col",
-        alignItems: "center"
+        alignItems: "center",
+        width: "100%",
     },
     name: {
-        marginTop: 15,
-        marginBottom: 15,
-        color: "white",
+        width: "70%",
+        marginVertical: 12,
+        backgroundColor: "white",
+        color: "#A60D29",
         textAlign: "center",
+        paddingHorizontal: 5,
+        paddingVertical: 5,
+        borderRadius: 10,
+        fontSize: 20,
+        fontWeight: "bold",
     },
 
     fotocheckRev: {
         width: "50%",
         height: "50%",
-        backgroundColor: "#A60D29",
         flexDirection: "col",
         alignItems: "center",
         justifyContent: "center",
@@ -52,15 +58,27 @@ const styles = StyleSheet.create({
     bodyRev: {
         flexDirection: "col",
         alignItems: "center",
+        width: "100%",
     },
     headerRev: {
         flexDirection: "row",
         justifyContent: "center",
     },
     qr: {
-        width: "180rem",
-        marginTop: 20
+        width: "160rem",
+        marginTop: 8,
     },
+    title: {
+        fontSize: 18,
+        textAlign: "center",
+        marginVertical: 10,
+        color: "#A60D29",
+    },
+    base:{
+        fontSize: 15,
+        marginVertical: 5,
+        color: "#545C63",
+    }
 });
 
 // Create Document Component
@@ -70,20 +88,23 @@ const Fotocheck = ({ cliente }) => (
             <View style={styles.fotocheck}>
                 <View style={styles.header}>
                     <Image
-                        src={"../images/logo_gerepro.png"}
+                        src={"../images/logos/logo_expoferia_2024.png"}
                         style={styles.logo}
                     />
                 </View>
                 <View style={styles.body}>
+                    <View>
+                        <Image src={"../images/cod_QR.png"} style={styles.qr} />
+                    </View>
                     <Text style={styles.name}>
                         {cliente.company_name
                             ? cliente.company_name
                             : cliente.name + " " + cliente.last_name}
                     </Text>
-                    <View>
+                    <View style={styles.header}>
                         <Image
-                            src={"../images/cod_QR.png"}
-                            style={styles.qr}
+                            src={"../images/logos/logo_gore2.png"}
+                            style={styles.logo}
                         />
                     </View>
                 </View>
@@ -91,15 +112,24 @@ const Fotocheck = ({ cliente }) => (
             <View style={styles.fotocheckRev}>
                 <View style={styles.headerRev}>
                     <Image
-                        src={"../images/logo_gerepro.png"}
+                        src={"../images/logos/logo_expoferia_2024.png"}
                         style={styles.qr}
                     />
                 </View>
                 <View style={styles.bodyRev}>
-                    <Text style={styles.name}>Organización</Text>
-                    <Text style={styles.name}>Feria</Text>
-                    <Text style={styles.name}># Edición</Text>
-                    <Text style={styles.name}>Gore Gerepro Mypes</Text>
+                    <Text style={styles.title}>Categoría</Text>
+                    <Text style={styles.base}>Gobierno Regional</Text>
+                    <Text style={styles.title}>Usuario</Text>
+                    <Text style={styles.base}>Gobierno Reginal</Text>
+                    <Text style={styles.base}>Bloque: II</Text>
+                    <Text style={styles.base}>Stand: II-A</Text>
+                    
+                    <View style={styles.header}>
+                        <Image
+                            src={"../images/logos/logo_gore_cusco.png"}
+                            style={styles.logo}
+                        />
+                    </View>
                 </View>
             </View>
         </Page>

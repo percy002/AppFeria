@@ -35,20 +35,14 @@ Route::get('/dashboard/{any?}', [DashboardController::class, 'index'])
 ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-Route::group(['prefix' => 'cliente'], function () {
+Route::get('cliente/registro', function () {
+    return Inertia::render('Client/ClientRegister');
+})->name('client.register');
 
+Route::post('cliente/registro', [ClienteController::class, 'store'])->name('client.register');
 
-    Route::post('login', function () {
-        // Lógica para manejar el inicio de sesión del cliente
-    });
-
-    Route::get('registro', function () {
-        return Inertia::render('Client/ClientRegister');
-    })->name('client.register');
-
-    Route::get('clientes', [ClienteController::class,'all'])->name('clientes');
-    
-    Route::post('registro', [ClienteController::class, 'store'])->name('client.register');
+Route::prefix('cliente')->middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('clientes', [ClienteController::class,'all'])->name('clientes');    
     
     Route::put('/{cliente}/aprobar', [ClienteController::class, 'aprobar'])->name('clientes.aprobar');
     
@@ -57,41 +51,32 @@ Route::group(['prefix' => 'cliente'], function () {
     Route::get('registeredClients', [ClienteController::class,'registeredClients'])->name('clientes.registrados');
     Route::get('evaluatedClients', [ClienteController::class,'evaluatedClients'])->name('clientes.evaluados');
     Route::get('approvedClients', [ClienteController::class,'approvedClients'])->name('clientes.aprobados');
-})->middleware(['auth', 'verified'])
-;
+});
 
-Route::group(['prefix' => 'stands'], function(){
+Route::prefix('stands')->middleware(['auth'])->group(function () {
     Route::get('getStands', [StandController::class, 'allStands'])->name('stands.all');
-})->middleware(['auth', 'verified'])
-;
+});
 
-Route::group(['prefix' => 'reservaciones'], function(){
+Route::prefix('reservaciones')->middleware(['auth'])->group(function () {
     Route::get('/{id}', [ReservationController::class, 'index'])->name('reservaciones.index');
     Route::post('/reservar', [ReservationController::class, 'store'])->name('reservaciones.crear');
     Route::delete('/eliminar', [ReservationController::class, 'destroy'])->name('reservaciones.eliminar');
-})->middleware(['auth', 'verified'])
-;
+});
 
-Route::group(['prefix' => 'categorias'], function(){
-    Route::get('/getCategories', [CategoryController::class, 'getCategories'])->name('categorias.all');
-    Route::get('/getSubCategories', [CategoryController::class, 'getSubCategories'])->name('categorias.subCategories');
-})->middleware(['auth', 'verified'])
-;
+Route::get('/getCategories', [CategoryController::class, 'getCategories'])->name('categorias.all');
+Route::get('/getSubCategories', [CategoryController::class, 'getSubCategories'])->name('categorias.subCategories');
 
-Route::group(['prefix' => 'pagos'],function(){
+
+Route::prefix('pagos')->middleware(['auth'])->group(function () {
     Route::post('/pagar',[PaymentController::class, 'store'])->name("pagar");
     Route::post('/update',[PaymentController::class, 'update'])->name("payment.update");
     Route::post('/validar',[PaymentController::class, 'validar'])->name("validarPago");
     Route::post('/observar',[PaymentController::class, 'observar'])->name("observarPago");
     Route::post('/culqui',[PaymentController::class, 'culqui'])->name("culqui");
 
-})->middleware(['auth', 'verified']);
+});
 
-Route::get('invoicePDF', [PdfController::class, 'invoicePDF'])->name('generateInvoicePDF');
-Route::get('fotoCheckPDF/{clientId}', [PdfController::class, 'fotocheckPDF'])->name('generateFotoCheckPDF');
-Route::get('contractPDF/{clientId}', [PdfController::class, 'contractPDF'])->name('generateContractPDF');
-
-Route::group(['prefix' => 'usuarios'],function(){
+Route::prefix('usuarios')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/',[UserController::class, 'listUsers'])->name("users.listUsers");
     Route::post('create',[UserController::class, 'store'])->name("user.create");
     Route::post('update',[UserController::class, 'update'])->name("user.update");
@@ -100,6 +85,9 @@ Route::group(['prefix' => 'usuarios'],function(){
 
 Route::middleware('auth')->group(function () {
     Route::post('/clients/{clientId}/approve', [ClientApprovalController::class, 'approveClient']);
+    Route::get('invoicePDF', [PdfController::class, 'invoicePDF'])->name('generateInvoicePDF');
+    Route::get('fotoCheckPDF/{clientId}', [PdfController::class, 'fotocheckPDF'])->name('generateFotoCheckPDF');
+    Route::get('contractPDF/{clientId}', [PdfController::class, 'contractPDF'])->name('generateContractPDF');
 });
 
 Route::get('/informacion_general', function () {

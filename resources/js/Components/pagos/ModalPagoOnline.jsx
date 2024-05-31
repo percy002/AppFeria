@@ -1,12 +1,10 @@
 import { useEffect } from "react"; // Importa useEffect
 import Swal from "sweetalert2";
 const ModalPagoOnline = ({ data, updatePaymentState }) => {
-    // console.log(data);
     const handleCulqiAction = (Culqi, data) => {
         if (Culqi?.token) {
             // ¡Objeto Token creado exitosamente!
             const token = Culqi.token.id;
-            console.log(token);
             Swal.fire({
                 title: "Procesando...",
                 text: "Por favor espera",
@@ -23,9 +21,7 @@ const ModalPagoOnline = ({ data, updatePaymentState }) => {
             axios
                 .post(route("culqui"), dataPayment)
                 .then((response) => {
-                    console.log(response);
                     const message = response.data.message
-                    // console.log(message);
                     Swal.close();
                     
                     Culqi.close();
@@ -58,13 +54,11 @@ const ModalPagoOnline = ({ data, updatePaymentState }) => {
                             error.response ? error.response.data.message : ""
                         }</a>`,
                     });
-                    console.log(error);
                 });
         } else if (Culqi.order) {
             // ¡Objeto Order creado exitosamente!
             const order = Culqi.order;
         } else {
-            console.log("Error : ", Culqi.error);
         }
     };
 
@@ -322,9 +316,7 @@ const ModalPagoOnline = ({ data, updatePaymentState }) => {
         const Culqi = new CulqiCheckout(publicKey, config);
         Culqi.culqi = () => handleCulqiAction(Culqi, data);
 
-        // console.log(Culqi.settings);
         Culqi.open();
-        // e.preventDefault();
     };
 
     return (

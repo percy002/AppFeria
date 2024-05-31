@@ -40,7 +40,6 @@ const ModalPaymentByTransfer = ({
             .post(route("pagar"), data)
             .then((response) => {
                 if (response.status == 200) {
-                    // console.log(response.data);
                     Swal.fire({
                         position: "center",
                         icon: "success",

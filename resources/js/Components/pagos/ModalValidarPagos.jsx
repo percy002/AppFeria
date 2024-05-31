@@ -9,7 +9,6 @@ function ModalValidarPagos({ stands, payment, updatePaymentStatus, clientId,name
     const [openModal, setOpenModal] = useState(false);
     const { auth } = usePage().props;
 
-    console.log(payment);
     const handleValidarPago = () => {
         const data = {
             payment_id: payment.id,

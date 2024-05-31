@@ -6,7 +6,7 @@ const InfoGeneral = () => {
         <GuestLayout type={"reseña"}>
             <div className="">
                 <section className="container mx-auto ">
-                    <div className="flex flex-col sm:flex-row sm:items-center">
+                    <div className="flex flex-col lg:flex-row sm:items-center">
                         <div className="flex-1">
                             <img
                                 src="/images/resenas/promocion_huancaro.png"
@@ -15,7 +15,7 @@ const InfoGeneral = () => {
                             />
                         </div>
                         <div className="flex-1">
-                            <h1 className="text-primary">
+                            <h1 className="text-primary text-center">
                                 Expo Cusco Huancaro 2024
                             </h1>
                             <p className="text-justify text-lg px-2 sm:px-0">

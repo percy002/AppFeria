@@ -38,7 +38,6 @@ general - 10 + 2
 estelar - 25 + 2
 
 **datos faltantes
-- solo podrán poner dni o otro tipo de documento
 - dígitos del ruc para hacer la validaciones
 - como se manejan los descuentos en el caso de compra de varios stands
 - falta precios para stands para otras regiones
@@ -55,10 +54,6 @@ crear una lista de desaprobados y poder eliminar un cliente para poder registrar
 agregar sweet alert a todos los mensajes
 
 --
-se maneja 3 estados en la base de datos , en proceso, evaluado, aprobado , desaprobado, el estado desaprobado debe tener una descripcion
-
-
-
 ---requisitos panel de administracion rol admin
 panel de usuario
 deshabilitar usuario
@@ -70,5 +65,3 @@ ventas diarias, semanales, mensuales
 formula de crecimiento de ventas
 
 cierre de operaciones
-cierre de caja ?
-modulo de ventas en punto de venta

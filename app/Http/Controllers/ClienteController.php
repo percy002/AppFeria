@@ -55,7 +55,7 @@ class ClienteController extends Controller
         'last_name' => 'required|string|max:255',
         'phone_number' => 'required|string|max:9|unique:clientes',
         'email' => 'required|string|email|max:255|unique:clientes',
-        'password' => 'required|string|max:255',
+        'password' => 'required|string|max:255|confirmed',
         'category_id' => 'required|exists:categories,id',
         'ficha_ruc' => 'required|file'
     ];
@@ -91,6 +91,7 @@ class ClienteController extends Controller
         'password.required' => 'El campo contraseña es obligatorio.',
         'password.string' => 'El campo contraseña debe ser una cadena de texto.',
         'password.max' => 'El campo contraseña no debe tener más de 255 caracteres.',
+        'password.confirmed' => 'La confirmación de la contraseña no coincide.',
         'category_id.required' => 'El campo categoría es obligatorio.',
         'category_id.exists' => 'La categoría seleccionada no existe.',
         'ficha_ruc.required' => 'El campo ficha RUC es obligatorio.',

@@ -5,7 +5,6 @@ import { useContext } from "react";
 
 export default function TableEvaluatedClients() {
     const { evaluatedClients, setEvaluatedClients } = useContext(ClientsEvaluatedContext);
-    console.log(evaluatedClients);
     return (
         <div className="overflow-x-auto">
             <Table striped>

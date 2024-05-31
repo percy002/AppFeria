@@ -6,7 +6,6 @@ const MapStandsMypesZonaInf = () => {
     const { props } = usePage();
 
     const { standsBloques } = props;
-    console.log(standsBloques);
     const standsBloqueB = standsBloques["b"];
     const standsBloqueE = standsBloques["e"];
     const standsBloqueF = standsBloques["f"];

@@ -8,7 +8,6 @@ const ProcompiteMap = () => {
     const { props } = usePage();
 
     const { standsBloques } = props;
-    console.log(standsBloques);
     const standsBloqueA = standsBloques["a"];
     const standsBloqueC = standsBloques["c"];
     const standsBloqueB = Array.from({ length: 32 }, (_, i) => ({

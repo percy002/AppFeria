@@ -28,7 +28,6 @@ async function getEvaluatedClients() {
 }
 async function getApprovedClients() {
     const response = await axios.get(route("clientes.aprobados"));
-    console.log(response.data);
     return response.data.approvedClients;
 }
 const Clients = ({ auth, clientes, clientesPagos }) => {
@@ -40,7 +39,6 @@ const Clients = ({ auth, clientes, clientesPagos }) => {
         getClients().then(setClients);
         getEvaluatedClients().then(setEvaluatedClients);
         getApprovedClients().then(setApprovedClients);
-        console.log(clients);
     }, []);
 
     return (

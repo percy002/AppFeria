@@ -37,7 +37,7 @@ function NavbarFB() {
                                     </span>
                                 )}
                             >
-                                <Dropdown.Item>
+                                <Dropdown.Item as="div">
                                     <Link
                                         method="post"
                                         href={route("logout")}
@@ -66,7 +66,7 @@ function NavbarFB() {
                                         className="text-white flex justify-center"
                                     >
                                         <span className="text-center">
-                                            Cerrar Sesion
+                                            Cerrar Sesion2
                                         </span>
                                     </button>
                                 </form>

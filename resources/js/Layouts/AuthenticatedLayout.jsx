@@ -11,7 +11,7 @@ export default function Authenticated({ user, header, children, client }) {
         useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen bg-transparent">
             <div>
                 <NavbarFB />
 

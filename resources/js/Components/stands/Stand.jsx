@@ -40,7 +40,6 @@ export default function Stand({ numero, stand, color, size }) {
             subcategory && subcategory == stand.subcategory_id;
         let standEnableCategory = category && category == stand.category_id;
 
-        // console.log(stand);
 
         if (
             !standEnableCategory ||

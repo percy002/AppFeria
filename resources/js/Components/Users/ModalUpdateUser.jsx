@@ -23,7 +23,6 @@ const ModalUpdateUser = ({user,updateUsers}) => {
         axios
             .post(route("user.update"), {...data,userId:user.id})
             .then((response) => {
-                console.log(response.data);
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -40,7 +39,6 @@ const ModalUpdateUser = ({user,updateUsers}) => {
                     icon: "error",
                     title: "Ah ocurrido un error al actualizar el usuario",
                 });
-                console.log(error);
             });
     };
     return (

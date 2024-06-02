@@ -9,7 +9,24 @@ const MypesGroupStandDouble = ({ color, stands }) => {
                 </p>
             </div>
             <div className="flex">
-                {Array.from({ length: 16 }).map((_, i) => (
+                <div className="flex flex-col">
+                    <GroupStands
+                        inicio={1}
+                        cantidad={10}
+                        stands={stands.slice(0, 10)}
+                        color={color}
+                        size={"small"}
+                    />
+                    <GroupStands
+                        inicio={1}
+                        cantidad={10}
+                        stands={stands.slice(23, 32)}
+                        color={color}
+                        size={"small"}
+                        orden={'desc'}
+                    />
+                </div>
+                {/* {Array.from({ length: 16 }).map((_, i) => (
                     <div key={i} className="flex">
                         <div  className="flex flex-col">
                             <GroupStands
@@ -27,7 +44,7 @@ const MypesGroupStandDouble = ({ color, stands }) => {
                             </div>
                         )}
                     </div>
-                ))}
+                ))} */}
             </div>
         </div>
     );

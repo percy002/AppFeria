@@ -67,6 +67,7 @@ class StandSeeder extends Seeder
         $this->createMultipleStands(16,3,'Z',800);
 
         //CREAR STANDS DE ZONA DE MYPES MISCELANEAS
+        $this->createMultipleStands(3,3,'8',800);
         $this->createMultipleStands(32,3,'b',800);
         $this->createMultipleStands(10,3,'e',800);
         $this->createMultipleStands(13,3,'f',800);

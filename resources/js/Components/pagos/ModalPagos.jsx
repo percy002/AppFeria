@@ -1,13 +1,14 @@
 import { usePage } from "@inertiajs/react";
-import { Button, Card, Modal } from "flowbite-react";
+import { Modal } from "flowbite-react";
 import { useState } from "react";
-import { FileInput, Label, Table, Radio } from "flowbite-react";
+import { FileInput, Label, Table, Button } from "flowbite-react";
 import { useRef } from "react";
 import Countdown from "../Countdown";
 import ModalPagoOnline from "./ModalPagoOnline";
 import { useEffect } from "react";
 import ModalPaymentByTransfer from "./ModalPaymentByTransfer";
 import HeaderModal from "../UI/HeaderModal";
+import Swal from "sweetalert2";
 function ModalPagos({ stands, reservationId, updatePaymentState }) {
     const fileInput = useRef();
     const contractFileUpload = useRef();
@@ -15,6 +16,7 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
     const { auth } = usePage().props;
     const [message, setMessage] = useState(null);
     const [selectedContractFile, setSelectedContractFile] = useState(null);
+    const [errorFile, setErrorFile] = useState("");
 
     const [dataPayment, setDataPayment] = useState({});
 
@@ -55,29 +57,45 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
         data.append("reservationId", reservationId);
 
         const file = fileInput.current.files[0];
+        // cont contractFile = 
+        if (!file) {
+            setErrorFile("Debe adjuntar un archivo para continuar con el pago");
+            return;
+        }
         data.append("file", file);
+
+        data.append("contractFile", selectedContractFile);
 
         axios
             .post(route("pagar"), data)
             .then((response) => {
                 if (response.status == 200) {
-                    setMessage("Pagado con éxito");
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: response.data.mensaje,
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
                     updatePaymentState(true);
                     setOpenModal(false);
+                    setOpenModalPayment(false);
                 } else {
                     console.error("Ah ocurrido un error al pagar:", response);
                 }
             })
             .catch((error) => {
-                console.error(
-                    "No se recibió ninguna respuesta:",
-                    error.request
-                );
+                console.error("No se recibió ninguna respuesta:", error);
             });
     };
     return (
         <>
-            <Button onClick={() => setOpenModal(true)} className="bg-primary text-white enabled:hover:bg-primary">Pagar</Button>
+            <Button
+                onClick={() => setOpenModal(true)}
+                className="bg-primary text-white enabled:hover:bg-primary"
+            >
+                Pagar
+            </Button>
             <Modal
                 dismissible
                 show={openModal}
@@ -160,10 +178,11 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                             {/* ADJUNTAR PRUEBA PARA VER MÉTODOS DE PAGO */}
                             <div className="">
                                 <div className="mt-2">
-                                    <div className="my-2 block">
+                                    <div className="my-2 block text-xl">
                                         <Label
                                             htmlFor="file-voucher_upload"
                                             value="Adjunte el contrato firmado "
+                                            className="text-xl"
                                         />
                                         <span className="text-red-600">
                                             (Solo PDF y JPG permitidos)
@@ -180,16 +199,58 @@ function ModalPagos({ stands, reservationId, updatePaymentState }) {
                             {selectedContractFile && (
                                 <div className="justify-around mt-4">
                                     <p className="mb-4 font-bold text-xl">
-                                        Elija el método de pago
+                                        Pago por deposito o transferencia
                                     </p>
+                                    <div className="flex gap-2">
+                                        <img
+                                            src="/images/logos/caja_cusco_negro.png"
+                                            alt="logos bancos"
+                                            className="h-16"
+                                        />
+                                        <div className="">
+                                            <ul className="flex justify-between font-bold">
+                                                <li>
+                                                    <ul>
+                                                        <li>
+                                                            Número de cuenta:
+                                                            12345XXXX
+                                                        </li>
+                                                        <li>
+                                                            Código de cuenta
+                                                            interbancario (CCI):
+                                                            ABC123
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="mt-2">
+                                        <div className="my-2 block">
+                                            <Label
+                                                htmlFor="file-upload"
+                                                value="Adjunte el voucher de pago"
+                                            />
+                                            <span className="text-red-600">
+                                                (Solo PDF y JPG permitidos)
+                                            </span>
+                                        </div>
+                                        <FileInput
+                                            id="file-upload"
+                                            ref={fileInput}
+                                            accept=".pdf,.jpg"
+
+                                            required
+                                        />
+                                        <span>{errorFile}</span>
+                                    </div>
+                                    <div className="mt-4 flex justify-center">
+                                        <Button onClick={handleClickPagar} className="bg-primary text-white enabled:hover:bg-primary px-8">
+                                            Pagar
+                                        </Button>
+                                    </div>
                                     <div className="w-full flex justify-center">
                                         <div className="flex justify-center gap-8">
-                                            {/* <ModalPagoOnline
-                                                data={dataPayment}
-                                                updatePaymentState={
-                                                    updatePaymentState
-                                                }
-                                            /> */}
                                             <ModalPaymentByTransfer
                                                 contractFile={
                                                     selectedContractFile

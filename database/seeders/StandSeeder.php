@@ -52,7 +52,7 @@ class StandSeeder extends Seeder
         
         //REGIONES INVITADAS
         for ($i=0; $i < 20; $i++) { 
-            $this->createStand('U-'.$i ,1,'U',2000,1);
+            $this->createStand('U-'.$i ,9,'U',2000);
             
         }
 

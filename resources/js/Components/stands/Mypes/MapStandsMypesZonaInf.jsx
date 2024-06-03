@@ -2,6 +2,7 @@ import { usePage } from "@inertiajs/react";
 import GroupStands from "../GroupStands";
 import Stand from "../Stand";
 import MypesGroupStandDouble from "./MypesGroupStandDouble";
+import MypesMiscelaneaMap from "./MypesMiscelaneaMap";
 const MapStandsMypesZonaInf = () => {
     const { props } = usePage();
 
@@ -11,6 +12,7 @@ const MapStandsMypesZonaInf = () => {
     const standsBloqueF = standsBloques["f"];
     const standsBloqueG = standsBloques["g"];
     const standsBloqueH = standsBloques["h"];
+    // console.log([...standsBloqueH].reverse());
 
     const standsBloqueA = Array.from({ length: 15 }, (_, i) => ({
         id: 2000 + i,
@@ -29,9 +31,9 @@ const MapStandsMypesZonaInf = () => {
         <div className="">
             <div className="p-4">
                 <div className="flex gap-x-16 xl:h-[65vh]">
-                    <div className="flex h-fit">
+                    <div className="flex h-fit items-center">
                         <div className="flex justify-center mt-1 items-center mx-1">
-                            <p className=" text-center w-fit font-bold text-xl border-4 border-red-600 rounded-full px-2 h-fit text-red-600">
+                            <p className=" text-center w-fit font-bold text-xl border-4 border-gray-600 rounded-full px-2 h-fit text-gray-600">
                                 a
                             </p>
                         </div>
@@ -55,10 +57,16 @@ const MapStandsMypesZonaInf = () => {
                                 size={"high"}
                             />
                         </div>
-                        <MypesGroupStandDouble
+                        <MypesMiscelaneaMap
                             color={"red"}
                             stands={standsBloqueB}
                         />
+                        <div className="flex justify-center mt-3 ml-2">
+                            <p className=" text-center w-fit font-bold text-xl border-4 border-red-600 rounded-full px-2 h-fit text-red-600">
+                                b
+                            </p>
+                        </div>
+                        
                     </div>
                     {/* BLOQUE E - F - G*/}
                     <div className="flex gap-10">
@@ -195,15 +203,16 @@ const MapStandsMypesZonaInf = () => {
 
                         {/* BLOQUE H */}
                         <div className="flex flex-col">
-                            <GroupStands
-                                color={"purple"}
-                                inicio={13}
-                                cantidad={13}
-                                stands={standsBloqueH}
-                                direction={"col"}
-                                orden={"desc"}
-                                size={"wide"}
-                            />
+                            {[...standsBloqueH]
+                                .reverse()
+                                .map((stand, index) => (
+                                    <Stand
+                                        color={"purple"}
+                                        stand={stand}
+                                        size={"wide"}
+                                        numero={13 - index}
+                                    />
+                                ))}
                             <div className="flex justify-center mt-1">
                                 <p className=" text-center w-fit font-bold text-xl border-4 border-purple-600 rounded-full px-2 h-fit text-purple-600">
                                     h

@@ -83,6 +83,8 @@ export default function ClientRegister() {
 
     const submit = (e) => {
         e.preventDefault();
+        console.log(data);
+        return;
         post(route("client.register"), {
             data: data,
             onSuccess: () => {
@@ -106,13 +108,35 @@ export default function ClientRegister() {
     };
 
     const handleSelectCategory = (event) => {
+        // reset("subCategory_id");
         const { value } = event.target;
-        setData("category_id", value);
+        setData({
+            category_id: value,
+            subCategory_id: "",
+        });
+        console.log(data);
+
         if (value === "0") {
             setSubCategories([]);
             return;
         }
         getSubCategories(value);
+    };
+    const handleChangeText = (field, event) => {
+        const value = event.target.value;
+        const regex = /^[a-zA-Z0-9_]*$/;
+
+        if (regex.test(value)) {
+            setData(field, value);
+        }
+    };
+    const handleChangeEmail = (event) => {
+        const value = event.target.value;
+        const regex = /^[a-zA-Z0-9._%+-@]*$/;
+
+        if (regex.test(value)) {
+            setData("email", value);
+        }
     };
 
     return (
@@ -130,15 +154,7 @@ export default function ClientRegister() {
                                     htmlFor="category_id"
                                     value="Categoría *"
                                 />
-                                <div
-                                    className={`${
-                                        subCategories &&
-                                        Array.isArray(subCategories) &&
-                                        subCategories.length == 0
-                                            ? "w-1/2"
-                                            : ""
-                                    }`}
-                                >
+                                <div className={``}>
                                     <Select
                                         id="category_id"
                                         name="category_id"
@@ -226,8 +242,8 @@ export default function ClientRegister() {
                                     value={data.company_name}
                                     className="mt-1 block w-full"
                                     isFocused={true}
-                                    onChange={(e) =>
-                                        setData("company_name", e.target.value)
+                                    onChange={(event) =>
+                                        handleChangeText("company_name", event)
                                     }
                                     required
                                 />
@@ -250,10 +266,9 @@ export default function ClientRegister() {
                                     value={data.trade_name}
                                     className="mt-1 block w-full"
                                     autoComplete="trade_name"
-                                    onChange={(e) =>
-                                        setData("trade_name", e.target.value)
+                                    onChange={(event) =>
+                                        handleChangeText("trade_name", event)
                                     }
-                                    required
                                 />
 
                                 <InputError
@@ -304,8 +319,8 @@ export default function ClientRegister() {
                                     value={data.address}
                                     className="mt-1 block w-full"
                                     autoComplete="address"
-                                    onChange={(e) =>
-                                        setData("address", e.target.value)
+                                    onChange={(event) =>
+                                        handleChangeText("address", event)
                                     }
                                 />
 
@@ -317,10 +332,13 @@ export default function ClientRegister() {
                         </div>
                         <div
                             id="fileUpload"
-                            className="mt-8 flex gap-5 items-center"
+                            className="mt-8 flex flex-col sm:flex-row gap-x-5 sm:items-center"
                         >
                             <div className="mb-2">
-                                <Label htmlFor="file" value="Ficha RUC *" />
+                                <Label
+                                    htmlFor="file"
+                                    value="Subir FICHA RUC actual *"
+                                />
                             </div>
 
                             <FileInput
@@ -351,8 +369,8 @@ export default function ClientRegister() {
                                     className="w-full"
                                     isFocused={data.selectedType === "pNatural"}
                                     autoComplete="name"
-                                    onChange={(e) =>
-                                        setData("name", e.target.value)
+                                    onChange={(event) =>
+                                        handleChangeText("name", event)
                                     }
                                     required
                                 />
@@ -375,8 +393,8 @@ export default function ClientRegister() {
                                     value={data.last_name}
                                     className="w-full"
                                     autoComplete="last_name"
-                                    onChange={(e) =>
-                                        setData("last_name", e.target.value)
+                                    onChange={(event) =>
+                                        handleChangeText("last_name", event)
                                     }
                                     required
                                 />
@@ -428,8 +446,8 @@ export default function ClientRegister() {
                                     value={data.position}
                                     className="w-full"
                                     autoComplete="position"
-                                    onChange={(e) =>
-                                        setData("position", e.target.value)
+                                    onChange={(event) =>
+                                        handleChangeText("position", event)
                                     }
                                     required
                                 />
@@ -455,8 +473,8 @@ export default function ClientRegister() {
                                     value={data.phone_number}
                                     className="w-full"
                                     autoComplete="phone_number"
-                                    onChange={(e) =>
-                                        setData("phone_number", e.target.value)
+                                    onChange={(event) =>
+                                        handleChangeText("phone_number", event)
                                     }
                                     required
                                 />
@@ -480,10 +498,7 @@ export default function ClientRegister() {
                                     value={data.email}
                                     className="w-full"
                                     autoComplete="username"
-                                    onChange={(e) =>
-                                        setData("email", e.target.value)
-                                    }
-                                    required
+                                    onChange={handleChangeEmail}
                                 />
 
                                 <InputError
@@ -512,10 +527,10 @@ export default function ClientRegister() {
                                             value={data.password}
                                             className="w-full"
                                             autoComplete="off"
-                                            onChange={(e) =>
-                                                setData(
+                                            onChange={(event) =>
+                                                handleChangeText(
                                                     "password",
-                                                    e.target.value
+                                                    event
                                                 )
                                             }
                                             required
@@ -562,10 +577,10 @@ export default function ClientRegister() {
                                             value={data.password_confirmation}
                                             className="w-full"
                                             autoComplete="off"
-                                            onChange={(e) =>
-                                                setData(
+                                            onChange={(event) =>
+                                                handleChangeText(
                                                     "password_confirmation",
-                                                    e.target.value
+                                                    event
                                                 )
                                             }
                                             required
@@ -597,6 +612,12 @@ export default function ClientRegister() {
                                     className="mt-2"
                                 />
                             </div>
+                        </div>
+                        <div className="text-primary font-bold">
+                            <p>
+                                La contraseña solo puede contener letras y
+                                números.
+                            </p>
                         </div>
 
                         <div className="w-full border-b-4 text-gray-500 my-6"></div>

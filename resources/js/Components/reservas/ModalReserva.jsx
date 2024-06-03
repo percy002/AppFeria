@@ -16,7 +16,6 @@ function ModalReserva({ stands }) {
                 if (response.status == 201) {
                     swal.fire(
                         "Reservado con éxito",
-                        "success"
                     );
                     setTimeout(() => {
                         setOpenModal(false);
@@ -28,6 +27,7 @@ function ModalReserva({ stands }) {
                         text: "Ha ocurrido un error al intentar reservar, por favor intente nuevamente.",
                         icon: "error",
                     });
+                    console.log(response);
                 }
             })
             .catch((error) => {

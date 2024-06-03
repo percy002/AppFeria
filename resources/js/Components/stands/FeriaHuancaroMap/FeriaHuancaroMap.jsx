@@ -12,6 +12,7 @@ import ModalMap from "./ModalMap";
 import CompanyStandsMap from "../Company/CompanyStandsMap";
 import ProcompiteMap from "../Procompite/ProcompiteMap";
 import GerceturMap from "../Gercetur/GerceturMap";
+import RegionesInvitadasMap from "../RegionesInvitadas/RegionesInvitadasMap";
 export const FeriaHuancaroMap = () => {
     const [reservedStands, setReservedStands] = useState([]);
     const { props } = usePage();
@@ -59,7 +60,7 @@ export const FeriaHuancaroMap = () => {
                             onMouseLeave={handleMouseLeave}
                             onMouseUp={handleMouseUp}
                             onMouseMove={handleMouseMove}
-                            style={{ cursor: isDragging ? "grabbing" : "grab" }}
+                            style={{ cursor: isDragging ? "grabbing" : "grab" , userSelect: "none" }}
                             // ref={divRef}
                             // onMouseEnter={() => setIsMouseOver(true)}
                             // onMouseLeave={() => setIsMouseOver(false)}
@@ -72,7 +73,7 @@ export const FeriaHuancaroMap = () => {
                             {category == 6 && <CompanyStandsMap />}
                             {category == 7 && <GerceturMap />}
                             {category == 8 && <ProcompiteMap />}
-                            {category == 9 && <MapStandsOtros />}
+                            {category == 9 && <RegionesInvitadasMap />}
                         </div>
 
                         <div className="w-full lg:w-3/12 xl:h-[80vh] border-l-2 border-gray-300">

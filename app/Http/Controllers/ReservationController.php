@@ -68,9 +68,10 @@ class ReservationController extends Controller
 
             return response()->json(['message' => 'Ya tienes una reservación activa'], 409);
         }
+        // return response()->json(['message' => $findCliente]);
         $stands = $request->stands;
 
-        if (count($stands)>=5) {
+        if ($findCliente->category_id == 3 && count($stands)>=5) {
             return response()->json(['message' => 'Puedes reservar 5 locales como máximo'], 409);
         }
 
